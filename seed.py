@@ -35,7 +35,7 @@ def seeds():
             username='nana_banana',
             full_name='Nana Shin',
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/67ee2fcb215d4060aef0204a9384c987.jpeg',
-            email='choiboi@goodestdoge.com',
+            email='nanaBanana@goodestdoge.com',
             password='password'
         ),
 
