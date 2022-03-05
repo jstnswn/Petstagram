@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, Post, Comment, Follow, Like, db
+from app.models import User, Post, Comment, db
 
 post_routes = Blueprint('post', __name__)
 
@@ -26,10 +26,10 @@ def get_posts():
 
         # query likes for post, get's like user_id and appends them to a list
         # and appends that list to post obj
-        likes = Like.query.filter(Like.post_id == post_id).all()
-        list = []
-        for like in likes:
-            list.append(like['user_id'])
-        post['likers'] = list
+        # likes = Like.query.filter(Like.post_id == post_id).all()
+        # list = []
+        # for like in likes:
+        #     list.append(like['user_id'])
+        # post['likers'] = list
 
     return { 'posts': post_list }
