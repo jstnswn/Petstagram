@@ -424,10 +424,42 @@ def seed_posts():
             caption="New haircut, who dis",
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/0123259acdcb412c845fedee404ee01a.jpg',
         ),
+        Post(
+            user_id=12,
+            caption="Daydreaming about food...",
+            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/55eb4943e3dd47a7b53819f8d8ccca6b.png',
+        ),
+        Post(
+            user_id=12,
+            caption="CPO - Chief Pawduct Officer oversees the acquisition of all treats!",
+            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/df3a0c062cc8476688cbc9f482efb290.jpg',
+        ),
+        Post(
+            user_id=12,
+            caption="Hello human, why are you upside down?",
+            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/6f765caf93684c1a9e043e59359bfbbe.jpg',
+        ),
+        Post(
+            user_id=12,
+            caption="One is naughty one is nice, guess which is which?",
+            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/d17cd7a942e842348eaf419f14fad1b1.jpg',
+        ),
+        Post(
+            user_id=12,
+            caption="She disapproves of a camera so close to her face",
+            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/378bc6ef35ec43f68b73f001edc79a81.jpg',
+        ),
+        Post(
+            user_id=12,
+            caption="Sleeping next to my best friend",
+            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/8e5696df514f412a9a1faf2eb8f41fab.jpg',
+        ),
     ]
 
     for post in posts:
         db.session.add(post)
+
+    db.session.commit()
 
 
 def undo_posts():

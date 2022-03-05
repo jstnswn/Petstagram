@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     posts = db.relationship('Post', back_populates='user')
-    comments = db.relationship('Post', back_populates='user')
+    comments = db.relationship('Comment', back_populates='user')
     liked_posts = db.relationship('Post', back_populates='likers', secondary=likes)
 
     followers = db.relationship(

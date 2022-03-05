@@ -1,8 +1,8 @@
 """Create User, Post, Comment, Like, and Follow migration
 
-Revision ID: 195a320bf6fe
+Revision ID: 44dd07be9965
 Revises: 
-Create Date: 2022-03-05 11:37:02.923279
+Create Date: 2022-03-05 11:43:56.322870
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '195a320bf6fe'
+revision = '44dd07be9965'
 down_revision = None
 branch_labels = None
 depends_on = None

@@ -80,7 +80,14 @@ def seed_users():
             email='mrmoo@dogmail.com',
             password='password',
             image_url=' http://ig-clone-bucket.s3.amazonaws.com/seeds/694089c066544ffbaf7aaf8602037c76.jpg'
-        )
+        ),
+        User(
+            username='AnonymousCorgi',
+            full_name='Corgi Lover',
+            email='corgi@dogmail.com',
+            password='password',
+            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/420b786cc70748c7af21934a913c30fd.jpg'
+        ),
     ]
 
     for user in users:

@@ -11,7 +11,7 @@ class Post(db.Model):
     image_url = db.Column(db.String(255), nullable=False)
 
     user = db.relationship('User', back_populates='posts')
-    comments = db.relationship('Comment', back_populates='posts')
+    comments = db.relationship('Comment', back_populates='post')
     likers = db.relationship('User', back_populates='liked_posts', secondary=likes)
 
     def to_dict(self):
