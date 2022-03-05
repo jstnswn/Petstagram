@@ -58,7 +58,7 @@ def seeds():
 
         Post(
             user_id=2,
-            caption="It's Christmas time, but this bird has my intrest",
+            caption="It's Christmas time, but this bird has my interest",
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/5e288da868f343b995c168aa9b7eb972.jpg',
         ),
 
