@@ -29,15 +29,6 @@ class User(db.Model, UserMixin):
         lazy='dynamic'
     )
 
-    following = db.relationship(
-        'User',
-        secondary=follows,
-        primaryjoin=(follows.c.followed_id == id),
-        secondaryjoin=(follows.c.follower_id == id),
-        backref=db.backref('followed', lazy='dynamic'),
-        lazy='dynamic'
-    )
-
     @property
     def password(self):
         return self.hashed_password
@@ -57,5 +48,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'image_url': self.image_url,
             'created_at': self.created_at,
-            'following': [user.to_dict() for user in self.following]
+            'following': [user.to_dict() for user in self.following],
+            'followers': [user.to_dict() for user in self.followers],
         }

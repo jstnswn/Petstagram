@@ -1,11 +1,15 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import User, Post, Comment, db
+from flask_login import current_user
 
 post_routes = Blueprint('post', __name__)
 
 
 @post_routes.route('/')
 def get_posts():
+    user = current_user
+    print('-------------',current_user)
+
     posts = Post.query.all()
     post_list = [post.to_dict() for post in posts]
 
@@ -23,13 +27,5 @@ def get_posts():
         # query user for post and appends user dict to post obj
         user = User.query.get(user_id)
         post['user'] = user.to_dict()
-
-        # query likes for post, get's like user_id and appends them to a list
-        # and appends that list to post obj
-        # likes = Like.query.filter(Like.post_id == post_id).all()
-        # list = []
-        # for like in likes:
-        #     list.append(like['user_id'])
-        # post['likers'] = list
 
     return { 'posts': post_list }
