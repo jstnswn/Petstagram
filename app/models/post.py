@@ -1,10 +1,6 @@
 from .db import db
+from .like import likes
 
-likes = db.Table(
-    'likes',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('post_id', db.Integer, db.ForeignKey('posts.id'), primary_key=True)
-)
 
 class Post(db.Model):
     __tablename__ = 'posts'
