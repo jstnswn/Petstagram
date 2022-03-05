@@ -21,15 +21,15 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
-    posts = db.relationhip('Post', back_populates='user')
-    comments = db.relationhip('Post', back_populates='user')
-    liked_posts = db.relationhip('Post', back_populates='likers', secondary=likes)
+    posts = db.relationship('Post', back_populates='user')
+    comments = db.relationship('Post', back_populates='user')
+    liked_posts = db.relationship('Post', back_populates='likers', secondary=likes)
 
     followers = db.relationship(
         'User',
         secondary=follows,
-        primaryjoin=(follows.c.follwer_id == id),
-        secondaryjoin=(follows.c.follwer_id == id),
+        primaryjoin=(follows.c.follower_id == id),
+        secondaryjoin=(follows.c.follower_id == id),
         backref=db.backref('following', lazy='dynamic'),
         lazy='dynamic'
     )
