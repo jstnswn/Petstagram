@@ -38,7 +38,13 @@ def seeds():
             email='nanaBanana@goodestdoge.com',
             password='password'
         ),
-
+        User(
+            username='shelbytheblack',
+            full_name='Šelbi Demijan Šelbić',
+            email='shelby@shelby.com',
+            password='password',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/5029525edd384d9391b5510317bd1935.jpg'
+        ),
 
     ]
 
@@ -329,6 +335,36 @@ def seeds():
             user_id=5,
             caption='Bad hair day',
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/c4ba394a24684bf3a2f812adf6f1c054.jpeg',
+        ),
+        Post(
+            user_id=6,
+            caption='Get up already I need someone to completely ignore today',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/5e27829d803b48ef834c4256c1f87890.jpg',
+        ),
+        Post(
+            user_id=6,
+            caption='One year ago I was this fabulous',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/c8c8f290a0414145a9cfcfbc98122c71.jpg',
+        ),
+        Post(
+            user_id=6,
+            caption='When @missdhaze is super annoying but she gives you food and shelter so you just -.-',
+            image_url='hhttp://ig-clone-bucket.s3.amazonaws.com/seeds/8849f56107114fd0b712753d61359943.jpg',
+        ),
+        Post(
+            user_id=6,
+            caption='Favorite place to chill - the fridge',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/2ec6b176849c46928c79e98967abb85a.jpg',
+        ),
+        Post(
+            user_id=6,
+            caption='Hear me roar',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/0e09a08e113b4ee1a318dfcd45ccde28.jpg',
+        ),
+        Post(
+            user_id=6,
+            caption='Nap time',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/fade0dc7a5254e569cbe4f6ecf0115d4.jpg',
         ),
     ]
 
