@@ -52,6 +52,35 @@ def seeds():
             password='password',
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/73e32be727ed4c5d811ce7269fa7468d.jpg'
         ),
+        User(
+            username='harry_berry',
+            full_name='Harry Pham',
+            email='harryberry@dogmail.com',
+            password='password',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/bc3254d81e1e47ae832dd70bfe201e8d.jpg'
+        ),
+        User(
+            username='OliThePoodle',
+            full_name='Oliver Pham',
+            email='olithepoodle@dogmail.com',
+            password='password',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/d9fa4c00270646dbb62965cd4574537a.jpg'
+        ),
+        User(
+            username='PrincessHarper',
+            full_name='Harper Lee',
+            email='princessharper@dogmail.com',
+            password='password',
+            image_url=' http://ig-clone-bucket.s3.amazonaws.com/seeds/bf682a026a0f443b9a808895d2661b41.jpg'
+        ),
+        User(
+            username='MrMoo',
+            full_name='Maru Lee',
+            email='mrmoo@dogmail.com',
+            password='password',
+            image_url=' http://ig-clone-bucket.s3.amazonaws.com/seeds/694089c066544ffbaf7aaf8602037c76.jpg'
+        ),
+        
 
     ]
 
@@ -402,6 +431,81 @@ def seeds():
             user_id=7,
             caption="Stop working, human. It's my dinner time!",
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/a6115896c5eb491cbe674184a2e1d2f0.jpg',
+        ),
+        Post(
+            user_id=8,
+            caption="Dinner is my favorite time of day!",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/bf5c09a7ac634019a8dc90318eee8864.jpg',
+        ),
+        Post(
+            user_id=8,
+            caption="What happens behind the scenes",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/8f47ee3e45b640e3999439f6620ea2c2.jpg',
+        ),
+        Post(
+            user_id=8,
+            caption="Nap time",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/bc3254d81e1e47ae832dd70bfe201e8d.jpg',
+        ),
+        Post(
+            user_id=9,
+            caption="With my best friend, Harry!",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/c489ba87a5ea47ecaaa46665f895b682.jpg',
+        ),
+        Post(
+            user_id=9,
+            caption="Dont wake me up",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/d9fa4c00270646dbb62965cd4574537a.jpg',
+        ),
+        Post(
+            user_id=9,
+            caption="Hi my name is Oliver",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/bc490595733e447b9449508d701f4a05.jpg',
+        ),
+        Post(
+            user_id=10,
+            caption="Mr. Moo and I",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/8cda5b956a614bba9ed13232b04f387a.jpg',
+        ),
+        Post(
+            user_id=10,
+            caption="Say cheese!",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/0bbfdc28ffc14ba4bdb87d47b58d45e0.jpg',
+        ),
+        Post(
+            user_id=10,
+            caption="You will always find us together",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/0ec05035d63041fa96d9f06cda91eebb.jpg',
+        ),
+        Post(
+            user_id=10,
+            caption="Soft pillows are my favorite",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/bf682a026a0f443b9a808895d2661b41.jpg',
+        ),
+        Post(
+            user_id=11,
+            caption="Why does she always follow me",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/e43f9c752427441882103a1ec0f1bf09.jpg',
+        ),
+        Post(
+            user_id=11,
+            caption="Hey, I was here first!",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/d82f449bbd364a12b4df474e23608fb8.jpg',
+        ),
+        Post(
+            user_id=11,
+            caption="Play with me! I'm bored.",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/b19d12a11b9a496280703cab5260abe7.jpg',
+        ),
+        Post(
+            user_id=11,
+            caption="No makeup shot",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/11aa51b2521644fab881ec4cc6ba19be.jpg',
+        ),
+        Post(
+            user_id=11,
+            caption="New haircut, who dis",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/0123259acdcb412c845fedee404ee01a.jpg',
         ),
     ]
 
