@@ -45,6 +45,13 @@ def seeds():
             password='password',
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/5029525edd384d9391b5510317bd1935.jpg'
         ),
+        User(
+            username='kingbenjarino',
+            full_name='Benji',
+            email='benji@benji.com',
+            password='password',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/73e32be727ed4c5d811ce7269fa7468d.jpg'
+        ),
 
     ]
 
@@ -365,6 +372,36 @@ def seeds():
             user_id=6,
             caption='Nap time',
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/fade0dc7a5254e569cbe4f6ecf0115d4.jpg',
+        ),
+        Post(
+            user_id=7,
+            caption='Checking his work',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/3b18328813b04027a123df2c9efd62c8.jpg',
+        ),
+        Post(
+            user_id=7,
+            caption='Ooh, warm dryer!',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/89867e9c0f80491cac39a0ece752bac6.jpg',
+        ),
+        Post(
+            user_id=7,
+            caption='I can see the bottom of my bowl. I am starving to death. Fix it, human.',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/f9cd786e87cf4caeb11b4420a4e4a48f.jpg',
+        ),
+        Post(
+            user_id=7,
+            caption='Protecting the balcony.',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/73727599db8545d2b1192b161814f4f5.jpg',
+        ),
+        Post(
+            user_id=7,
+            caption="Who doesn't love a good bag?!?",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/33819e4aa687425bbca9f563e11b3693.jpg',
+        ),
+        Post(
+            user_id=7,
+            caption="Stop working, human. It's my dinner time!",
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/a6115896c5eb491cbe674184a2e1d2f0.jpg',
         ),
     ]
 
