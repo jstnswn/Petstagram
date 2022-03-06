@@ -1,0 +1,15 @@
+#dashboard-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feed-container {
+    width: 614px;
+    /* border: red 1px solid; */
+    display: flex;
+    /* justify-self: center; */
+    /* align-self: center; */
+}

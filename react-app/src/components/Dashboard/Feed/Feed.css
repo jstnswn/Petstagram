@@ -1,0 +1,30 @@
+.feed-body {
+    width: 100px;
+}
+
+.post-container {
+    max-height: 955px;
+    border: red 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 614px;
+}
+
+.post-header {
+    height: 72px;
+}
+
+.post-footer {
+    height: 221px;
+}
+
+.post-image {
+    max-height: 727px;
+    min-height: 614px;
+
+    width: 100%;
+    object-fit: cover;
+    border: rgb(76, 0, 255) 1px solid;
+
+}
