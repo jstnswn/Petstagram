@@ -26,7 +26,7 @@ class Post(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
+            'user': self.user.f_to_dict(),
             'image_url': self.image_url,
             'caption': self.caption,
             'likers': [liker.to_dict() for liker in self.likers],
