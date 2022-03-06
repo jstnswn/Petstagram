@@ -25,7 +25,6 @@ class User(db.Model, UserMixin):
         secondary=follows,
         primaryjoin=(follows.c.follower_id == id),
         secondaryjoin=(follows.c.followed_id == id),
-
         backref=db.backref('following', lazy='dynamic'),
         lazy='dynamic'
     )
@@ -47,10 +46,9 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'full_name': self.full_name,
             'email': self.email,
-            'image_url': self.image_url
+            'image_url': self.image_url,
             'created_at': self.created_at,
             'following': [user.to_dict() for user in self.following],
             'followers': [user.to_dict() for user in self.followers],
             'created_at': self.created_at
-
         }

@@ -1,6 +1,5 @@
 from app.models import db, User
 
-
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     users = [
@@ -91,6 +90,12 @@ def seed_users():
     ]
 
     for user in users:
+        # Have all seed users follow each other
+        for follower in users:
+            if follower.username == user.username:
+                continue
+            user.followers.append(follower)
+
         db.session.add(user)
 
     db.session.commit()
