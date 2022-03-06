@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getFeedPosts } from '../../store/feed'
+import './Dashboard.css'
 import Feed from './Feed'
 
 export default function Dashboard() {
@@ -13,9 +14,11 @@ export default function Dashboard() {
   }, [dispatch])
 
   return isLoaded && (
-    <>
+    <div id='dashboard-container'>
       <div>Welcome to Petstagram</div>
-      <Feed />
-    </>
+      <div className='feed-container'>
+        <Feed />
+      </div>
+    </div>
   )
 }
