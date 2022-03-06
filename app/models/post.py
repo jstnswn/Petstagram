@@ -27,7 +27,10 @@ class Post(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'image_url': self.image_url,
             'caption': self.caption,
             'likers': [liker.to_dict() for liker in self.likers],
             'comments': [comment.to_dict() for comment in self.comments]
         }
+
+    # added static method, dict comments, and dict image_url
