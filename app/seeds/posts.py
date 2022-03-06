@@ -302,7 +302,7 @@ def seed_posts():
         Post(
             user_id=6,
             caption='When @missdhaze is super annoying but she gives you food and shelter so you just -.-',
-            image_url='hhttp://ig-clone-bucket.s3.amazonaws.com/seeds/8849f56107114fd0b712753d61359943.jpg',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/8849f56107114fd0b712753d61359943.jpg',
         ),
         Post(
             user_id=6,
