@@ -33,5 +33,5 @@ post_routes = Blueprint('post', __name__)
 @post_routes.route('/')
 def get_posts():
     current_user_id = current_user.get_id()
-    posts = Post.get_all_following_posts(1)
+    posts = Post.get_posts_by_following(1)
     return {'posts': posts}

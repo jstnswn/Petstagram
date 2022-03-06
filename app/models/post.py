@@ -15,7 +15,7 @@ class Post(db.Model):
     likers = db.relationship('User', back_populates='liked_posts', secondary=likes)
 
     @staticmethod
-    def get_all_following_posts(current_user_id):
+    def get_posts_by_following(current_user_id):
         current_user = User.query.get(current_user_id)
         following = current_user.following
         following_ids = [user.id for user in following]
