@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: white;
 }
 
 .post-header {
@@ -31,7 +32,9 @@
 }
 
 .post-footer {
-    height: 221px;
+    max-height: 221px;
+    width: 100%;
+    padding: 0 10px;
 }
 
 .post-image {
