@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux'
 import { getFeedPostsArray } from '../../../store/feed';
+import Post from '../../Post';
 
 import './Feed.css'
 
@@ -31,14 +32,9 @@ export default function Feed() {
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
         endMessage={<h4 style={{textAlign: 'center'}}>You've reached the end of your feed!</h4>}
-
       >
         {posts.map(post => (
-          <div key={post.id} className='post-container'>
-            <div className='post-header'>post header</div>
-            <img className='post-image' src={post.image_url} alt='post content'/>
-            <div className='post-footer'>post footer</div>
-          </div>
+          <Post key={post.id} post={post}/>
           ))}
       </InfiniteScroll>
       </div>
