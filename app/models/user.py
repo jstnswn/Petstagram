@@ -40,6 +40,14 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    # Follower_to_dict to avoid recursive calling of to_dict
+    def f_to_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'image_url': self.image_url,
+        }
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -48,7 +56,6 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'image_url': self.image_url,
             'created_at': self.created_at,
-            'following': [user.to_dict() for user in self.following],
-            'followers': [user.to_dict() for user in self.followers],
-            'created_at': self.created_at
+            'following': [user.f_to_dict() for user in self.following],
+            'followers': [user.f_to_dict() for user in self.followers],
         }
