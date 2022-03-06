@@ -32,6 +32,7 @@ export default function Feed() {
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
         endMessage={<h4 style={{textAlign: 'center'}}>You've reached the end of your feed!</h4>}
+        style={{overflow: 'hidden'}}
       >
         {posts.map(post => (
           <Post key={post.id} post={post}/>
