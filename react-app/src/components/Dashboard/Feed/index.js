@@ -13,8 +13,6 @@ export default function Feed() {
   const [hasMore, setHasMore] = useState(true);
 
   const loadMorePosts = () => {
-    console.log('posts', posts)
-    console.log('index', index)
     if (index >= allPosts.length) {
       setHasMore(false);
       return;
