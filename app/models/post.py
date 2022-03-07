@@ -1,3 +1,5 @@
+from datetime import datetime
+from sqlalchemy import desc, asc
 from .db import db
 from .like import likes
 from .user import User
@@ -9,6 +11,7 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     caption = db.Column(db.String(2200))
     image_url = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now())
 
     user = db.relationship('User', back_populates='posts')
     comments = db.relationship('Comment', back_populates='post')
@@ -19,7 +22,7 @@ class Post(db.Model):
         current_user = User.query.get(current_user_id)
         following = current_user.following
         following_ids = [user.id for user in following]
-        posts = Post.query.filter(Post.user_id.in_(following_ids)).all()
+        posts = Post.query.filter(Post.user_id.in_(following_ids)).order_by(asc(Post.created_at)).all()
 
         return [post.to_dict() for post in posts]
 
@@ -30,7 +33,9 @@ class Post(db.Model):
             'image_url': self.image_url,
             'caption': self.caption,
             'likers': [liker.to_dict() for liker in self.likers],
-            'comments': [comment.to_dict() for comment in self.comments]
+            'comments': [comment.to_dict() for comment in self.comments],
+            'created_at': self.created_at
         }
 
     # added static method, dict comments, and dict image_url
+    # added created_at so posts can be ordered
