@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
+import picture from '../../assets/login-pic.png'
+
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -36,47 +38,56 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
+  if (email !== '' && password !== '') {
+    const button = document.querySelector('#login-btn')
+    button.style.backgroundColor = '#0095f6'
+  }
+
   return (
-    <div id="signup-form-page">
-    <div className='form-container'>
-    <form onSubmit={onLogin} className='login-form'>
-      <h1 className='form-heading'>Instagram</h1>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div id='login-form-page'>
+      <div className='right-col'>
+        <div className='right'>
+          <div className='login-form-container'>
+            <div id='login-form-title'>Petstagram</div>
+            <form onSubmit={onLogin}>
+              <div>
+                {errors.map((error, ind) => (
+                  <div key={ind}>{error}</div>
+                ))}
+              </div>
+              <div>
+                <input
+                  className='login-form-field'
+                  name='email'
+                  type='text'
+                  placeholder='Email or username'
+                  value={email}
+                  onChange={updateEmail}
+                />
+              </div>
+              <div>
+                <input
+                  className='login-form-field'
+                  name='password'
+                  type='password'
+                  placeholder='Password'
+                  value={password}
+                  onChange={updatePassword}
+                />
+                <button id='login-btn' type='submit'>Log In</button>
+              </div>
+            </form>
+          </div>
+          <div className='login-form-container' id='have-account'>Don't have an account?<a href='' id='login-link'>Sign up</a></div>
+        </div>
       </div>
-      <div>
-        <label htmlFor='email'></label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email or username'
-          value={email}
-          onChange={updateEmail}
-        />
+      <div className='left-col'>
+        <div className='left'>
+          <img id='img' src={picture}></img>
+        </div>
       </div>
-      <div>
-        <label htmlFor='password'></label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-      </div>
-        <button type='submit' className='login-button'>Log In</button>
-    </form>
-      <div>
-    <div className='sign-up-container'>
-        Don't have an account?
-        <a href='' className='sign-up-link'>Sign up</a>
     </div>
-      </div>
-        {/* TODO Picture */}
-      </div>
-      </div>
+
   );
 };
 
