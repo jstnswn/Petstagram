@@ -29,14 +29,14 @@
 .fa-solid {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin: 0px 20px 0px 5px;
 }
 
 .names {
     padding: 3px 0px;
 }
 
-#about-us-list {
+#about-us-list, .names > a:visited {
     position: absolute;
     background-color: rgb(94, 94, 94);
     border-radius: 5px;

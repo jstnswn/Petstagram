@@ -34,14 +34,14 @@ export default function Footer() {
                 <li className='list-item'>AWS</li>
             </ul>
             <div id='footer-bottom'>
-                <div id='about-us-dropdown' onClick={setShowAboutUs}>About Us</div><i class="fa-solid fa-angle-down"></i>
+                <div id='about-us-dropdown' onClick={setShowAboutUs}>About Us<i class="fa-solid fa-angle-down"></i></div>
                 {showAboutUs && (
                     <ul id='about-us-list'>
-                        <li className='names'>Justin Chau</li>
-                        <li className='names'>David Lee</li>
-                        <li className='names'>Justin Sweeney</li>
-                        <li className='names'>Srdan Vorkapic</li>
-                        <li className='names'>Chris Young</li>
+                        <li className='names'><a href='https://github.com/jchau-623'>Justin Chau</a></li>
+                        <li className='names'><a href='https://github.com/davigravi'>David Lee</a></li>
+                        <li className='names'><a href='https://github.com/jstnswn'>Justin Sweeney</a></li>
+                        <li className='names'><a href='https://github.com/srvorkap'>Srdan Vorkapic</a></li>
+                        <li className='names'><a href='https://github.com/Noslepr'>Chris Young</a></li>
                     </ul>
                 )}
                 <p>© 2022 Petstagram an Instagram Clone</p>
