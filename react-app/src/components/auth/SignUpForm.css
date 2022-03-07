@@ -72,6 +72,7 @@
 }
 
 #login-link, #login-link:visited{
+    padding-left: 5px;
     text-decoration: none;
     color: #0095F6;
 }

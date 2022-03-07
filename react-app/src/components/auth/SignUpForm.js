@@ -30,7 +30,6 @@ const SignUpForm = () => {
   };
 
   const updateFullName = (e) => {
-    // console.log(e.target.value)
     setFullName(e.target.value);
   }
 
@@ -51,7 +50,8 @@ const SignUpForm = () => {
   }
 
   if (username !== '' && fullName !== '' && email !== '' && password !== '') {
-    console.log('good to go')
+    const button = document.querySelector('#signup-btn')
+    button.style.backgroundColor = '#0095f6'
   }
 
   return (
@@ -66,7 +66,6 @@ const SignUpForm = () => {
             ))}
           </div>
           <div>
-            {/* <label className='label'>Email</label> */}
             <input
               className='form-field'
               placeholder='Email'
@@ -78,35 +77,35 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div>
-            {/* <label>Full Name</label> */}
             <input
               className='form-field'
               placeholder='Full Name'
               type='text'
               name='fullName'
               onChange={updateFullName}
+              required='required'
               value={fullName}
             ></input>
           </div>
           <div>
-            {/* <label>User Name</label> */}
             <input
               className='form-field'
               placeholder='Username'
               type='text'
               name='username'
               onChange={updateUsername}
+              required='required'
               value={username}
             ></input>
           </div>
           <div>
-            {/* <label>Password</label> */}
             <input
               className='form-field'
               placeholder='Password'
               type='password'
               name='password'
               onChange={updatePassword}
+              required='required'
               value={password}
             ></input>
           </div>
