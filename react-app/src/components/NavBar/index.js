@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import LogoutButton from '../auth/LogoutButton'
 import ProfileButton from './ProfileButton'
 import './NavBar.css';
+import UploadModal from '../UploadModal';
 
 export default function NavBar() {
   return (
@@ -11,6 +12,7 @@ export default function NavBar() {
         Petstagram
       </NavLink>
       {/* <LogoutButton /> */}
+      <UploadModal />
       <ProfileButton />
     </nav>
   )
