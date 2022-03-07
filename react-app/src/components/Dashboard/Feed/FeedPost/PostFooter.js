@@ -27,7 +27,7 @@ export default function PostFooter({ post }) {
       </div>
       {/* <div className='add-comment-container'>add comment...</div> */}
       <div className='add-comment-container'>
-        <CommentForm/>
+        <CommentForm post={post}/>
       </div>
     </div>
   )
