@@ -3,7 +3,7 @@ import PostHeader from './PostHeader'
 import './Post.css';
 import PostFooter from './PostFooter';
 
-export default function Post({ post }) {
+export default function FeedPost({ post }) {
   return (
     <div className='post-container'>
       <PostHeader post={post}/>

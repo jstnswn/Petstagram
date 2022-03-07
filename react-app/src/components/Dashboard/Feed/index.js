@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux'
 import { getFeedPostsArray } from '../../../store/feed';
-import Post from '../../Post';
+import FeedPost from './FeedPost';
 
 import './Feed.css'
 
@@ -33,7 +33,7 @@ export default function Feed() {
         style={{overflow: 'hidden'}}
       >
         {posts.map(post => (
-          <Post key={post.id} post={post}/>
+          <FeedPost key={post.id} post={post}/>
           ))}
       </InfiniteScroll>
       </div>
