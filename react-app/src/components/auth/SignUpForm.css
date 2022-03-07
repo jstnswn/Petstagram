@@ -64,6 +64,7 @@
 
 #have-account {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color: #3b3b3b;
     font-size: 14px;
     flex-direction: row;
     justify-content: center;

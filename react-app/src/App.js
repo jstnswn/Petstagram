@@ -10,6 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Dashboard from './components/Dashboard';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer'
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Dashboard />
         </ProtectedRoute>
       </Switch>
+      {!user && <Footer />}
     </BrowserRouter>
   );
 }
