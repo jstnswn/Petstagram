@@ -37,7 +37,7 @@ def seed_posts():
          Post(
             user_id=2,
             caption="I found the secret stash!! Hope my human doesn't find out",
-            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/13a7b0948479481ca0300e954b2e380a.jpeg',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/34a164253e674b5ca02b1b95e3f1a8b1.jpeg',
         ),
         Post(
             user_id=1,
@@ -109,7 +109,7 @@ def seed_posts():
         Post(
             user_id=2,
             caption="Such a cosy blanket.....Only $25.99 at target.com",
-            image_url="http://ig-clone-bucket.s3.amazonaws.com/seeds/0ee29acf09654a2e88ba48d0b9721159.jpeg"
+            image_url="http://ig-clone-bucket.s3.amazonaws.com/seeds/917ec04399754aba8a5f64d5377b00aa.jpeg"
         ),
         Post(
             user_id=4,
@@ -144,7 +144,7 @@ def seed_posts():
         Post(
             user_id=2,
             caption="I don't know what this creature is, but it's terrifying!!!",
-            image_url="http://ig-clone-bucket.s3.amazonaws.com/seeds/157da78b5025437689f6949b632fe3d3.jpeg"
+            image_url="http://ig-clone-bucket.s3.amazonaws.com/seeds/97826a9b53f74c22aa609a04cd44fc28.jpeg"
         ),
         Post(
             user_id=4,
@@ -403,7 +403,7 @@ def seed_posts():
         Post(
             user_id=1,
             caption="Just me and my friend chillin' on the deck",
-            image_url="http://ig-clone-bucket.s3.amazonaws.com/seeds/0a2c506a141743708c5fc25b19669c62.png"
+            image_url="http://ig-clone-bucket.s3.amazonaws.com/seeds/3c3e908ec5d345ca9e6dbf712d04e8dd.png"
         ),
 
         Post(
