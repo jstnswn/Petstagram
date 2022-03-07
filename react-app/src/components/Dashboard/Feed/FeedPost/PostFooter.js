@@ -1,5 +1,6 @@
 import React from 'react'
 import './PostFooter.css';
+import CommentForm from './CommentForm';
 
 export default function PostFooter({ post }) {
   return (
@@ -24,7 +25,10 @@ export default function PostFooter({ post }) {
         <p className='caption'><span className='caption-username'>{post.user.username}</span>{post.caption}</p>
         <div>comments...</div>
       </div>
-      <div className='add-comment-container'>add comment</div>
+      {/* <div className='add-comment-container'>add comment...</div> */}
+      <div className='add-comment-container'>
+        <CommentForm/>
+      </div>
     </div>
   )
 }
