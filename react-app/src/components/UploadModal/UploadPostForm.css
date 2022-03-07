@@ -1,0 +1,42 @@
+.upload-post-form {
+    display: flex;
+    flex-direction: column;
+    padding: 27px 0px;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.upload-post-form h2 {
+    text-align: center;
+}
+
+.upload-post-form label {
+    padding: 10px 30px;
+}
+
+.upload-post-form input,
+.upload-post-form textarea,
+.upload-post-form button {
+    height: 45px;
+    margin: 0 30px;
+    border-radius: 6px;
+    border: 1px solid var(--border-gray);
+}
+
+.upload-post-form textarea {
+    padding: 10px;
+}
+
+.upload-post-form input {
+    padding-left: 10px;
+}
+
+.form button {
+    cursor: pointer;
+    margin: 35px 0;
+    width: 170px;
+    height: 36px;
+    border-radius: 5px;
+    border: none;
+    align-self: center;
+}
