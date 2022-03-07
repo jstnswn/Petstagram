@@ -15,7 +15,6 @@ export default function Dashboard() {
 
   return isLoaded && (
     <div id='dashboard-container'>
-      <div>Petstagram</div>
       <div className='feed-container'>
         <Feed />
       </div>

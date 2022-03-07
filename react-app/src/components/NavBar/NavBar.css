@@ -1,0 +1,29 @@
+#nav-bar {
+    height: 60px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 30px;
+    background-color: white;
+    border: 1px solid var(--border-gray);
+}
+
+.profile-button-container {
+    position: relative;
+}
+
+.profile-button {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+}
+
+.nav-dropdown {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    /* border: 1px solid red; */
+    border-radius: 6px;
+    box-shadow: .1px .1px 3px 1px rgba(0, 0, 0, 0.137);
+}

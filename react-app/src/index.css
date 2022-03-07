@@ -11,5 +11,10 @@
 }
 
 body {
-    background-color: var(--main-background-color)
+    background-color: var(--main-background-color);
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
 }
