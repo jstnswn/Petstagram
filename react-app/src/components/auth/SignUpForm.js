@@ -50,6 +50,10 @@ const SignUpForm = () => {
     return <Redirect to='/' />;
   }
 
+  if (username !== '' && fullName !== '' && email !== '' && password !== '') {
+    console.log('good to go')
+  }
+
   return (
     <div id='signup-form-page'>
       <div className='form-container'>
@@ -69,6 +73,7 @@ const SignUpForm = () => {
               type='text'
               name='email'
               onChange={updateEmail}
+              required='required'
               value={email}
             ></input>
           </div>
