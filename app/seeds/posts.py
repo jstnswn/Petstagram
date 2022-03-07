@@ -57,7 +57,7 @@ def seed_posts():
         Post(
             user_id=12,
             caption="CPO - Chief Pawduct Officer oversees the acquisition of all treats!",
-            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/df3a0c062cc8476688cbc9f482efb290.jpg',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/e160dc4e5d7b4f998ad11d152784699c.jpg',
         ),
         Post(
             user_id=1,
@@ -119,7 +119,7 @@ def seed_posts():
         Post(
             user_id=12,
             caption="She disapproves of a camera so close to her face",
-            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/378bc6ef35ec43f68b73f001edc79a81.jpg',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/b7c9d18e77f44f348667863d0e95fd91.jpg',
         ),
          Post(
             user_id=3,
@@ -242,7 +242,7 @@ def seed_posts():
         Post(
             user_id=12,
             caption="Hello human, why are you upside down?",
-            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/6f765caf93684c1a9e043e59359bfbbe.jpg',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/0a74ebe940fe4dc7bf2207975b66c399.jpg',
         ),
         Post(
             user_id=7,
@@ -383,7 +383,7 @@ def seed_posts():
         Post(
             user_id=12,
             caption="Daydreaming about food...",
-            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/55eb4943e3dd47a7b53819f8d8ccca6b.png',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/c4e9618f81e34ddea0dbad8e445ee375.png',
         ),
         Post(
             user_id=2,
@@ -409,7 +409,7 @@ def seed_posts():
         Post(
             user_id=12,
             caption="One is naughty one is nice, guess which is which?",
-            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/d17cd7a942e842348eaf419f14fad1b1.jpg',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/4762e656fec74d558cfb48aaf83cfbd2.jpg',
         ),
          Post(
             user_id=1,
@@ -425,7 +425,7 @@ def seed_posts():
         Post(
             user_id=12,
             caption="Sleeping next to my best friend",
-            image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/8e5696df514f412a9a1faf2eb8f41fab.jpg',
+            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/116938a17b8a4f09a2a24cfe62c63853.jpg',
         ),
     ]
 
