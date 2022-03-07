@@ -1,4 +1,4 @@
-import { normalizePosts } from "./utils";
+import { normalizePosts, orderPostIds } from "./utils";
 
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
@@ -48,33 +48,45 @@ export const createPost = (payload) => async dispatch => {
     dispatch(loadPost(data));
   } else {
     const errors = await res.json();
-    console.log(errors);
+    return errors.errors;
   }
 };
 
-
 // Helper Functions
-export const getFeedPostsArray = (state) => Object.values(state.feed.posts);
-
+// export const getFeedPostsArray = (state) => Object.values(state.feed.posts);
+export const getFeedPostsArray = (state) => {
+  const orderedIds = state.feed.posts.order;
+  return orderedIds.map(id => state.feed.posts.byId[id]);
+}
 
 const initialState = {
-  posts: null,
+  posts: {
+    byId: {},
+    ordered: []
+  }
 };
 
 export default function reducer(state = initialState, action) {
   switch(action.type) {
     case LOAD_POSTS:
       const posts = normalizePosts(action.data.posts);
+      const orderedIds = orderPostIds(action.data.posts)
       return {
         ...state,
-        posts: posts
+        posts: {
+          byId: posts,
+          order: orderedIds
+        }
       }
     case LOAD_POST:
       return {
         ...state,
         posts: {
-          ...state.posts,
-          [action.data.post.id]: action.data.post
+          order: [action.data.post.id, ...state.posts.order],
+          byId: {
+            ...state.posts.byId,
+            [action.data.post.id] : action.data.post
+          }
         }
       }
     default:

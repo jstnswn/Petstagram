@@ -5,3 +5,5 @@ export const normalizePosts = (posts) => {
     return acc;
   }, {});
 };
+
+export const orderPostIds = (posts) => posts.map(post => post.id);
