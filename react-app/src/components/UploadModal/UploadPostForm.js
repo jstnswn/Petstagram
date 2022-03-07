@@ -7,13 +7,14 @@ export default function UploadPostForm() {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState('');
+  const [errors, setErrors] = useState([]);
 
   const handleFileInput = (e) => {
     const file = e.target.files[0];
     setImage(file);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     const payload = {
@@ -22,7 +23,10 @@ export default function UploadPostForm() {
     };
 
     // TODO error handling
-    dispatch(createPost(payload))
+    const data = await dispatch(createPost(payload))
+      if (data) {
+        setErrors([data]);
+      }
   };
 
   return (
@@ -31,12 +35,17 @@ export default function UploadPostForm() {
       onSubmit={handleSubmit}
     >
       <h2>Select an image to upload</h2>
+      <ul>
+        {errors && (
+          errors.map((error, idx) => <li key={idx}>{error}</li>)
+      )}
+      </ul>
       <label>Image</label>
       <input
         type='file'
         onChange={handleFileInput}
       />
-      <label>Caption</label>
+      <label>Caption (optional)</label>
       <textarea
         type='text'
         value={caption}

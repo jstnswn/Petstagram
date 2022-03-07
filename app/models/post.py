@@ -22,7 +22,7 @@ class Post(db.Model):
         current_user = User.query.get(current_user_id)
         following = current_user.following
         following_ids = [user.id for user in following]
-        posts = Post.query.filter(Post.user_id.in_(following_ids)).order_by(asc(Post.created_at)).all()
+        posts = Post.query.filter(Post.user_id.in_(following_ids)).order_by(Post.id.desc()).all()
 
         return [post.to_dict() for post in posts]
 
