@@ -21,7 +21,7 @@
     width: 350px;
     height: 250px;
     grid-area: right;
-    margin: 40px 0px 10px;
+    margin:0 0 10px;
 }
 .sign-up-container {
     display: flex;
