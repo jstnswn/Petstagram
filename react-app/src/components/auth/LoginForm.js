@@ -70,8 +70,8 @@ const LoginForm = () => {
     </form>
       <div>
     <div className='sign-up-container'>
-      <h2>Don't have an account? </h2>
-      <h2>Sign up</h2>
+        Don't have an account?
+        <a href='' className='sign-up-link'>Sign up</a>
     </div>
       </div>
         {/* TODO Picture */}

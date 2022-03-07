@@ -34,7 +34,7 @@
     height: 60px;
     grid-area: right;
     margin: 40px 0px 10px;
-    font-size:10px;
+    font-size:14px;
     padding:10px;
 }
 .form-heading {
@@ -57,4 +57,8 @@
 .login-button:hover {
     cursor: pointer;
     background-color:#0095f6;
+}
+
+.sign-up-link {
+    text-decoration:none;
 }
