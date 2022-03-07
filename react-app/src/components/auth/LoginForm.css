@@ -1,0 +1,60 @@
+#signup-form-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    align-items: center;
+    border: 1px solid rgba(219,219,219);
+    border-radius: 1px;
+    width: 350px;
+    height: 250px;
+    grid-area: right;
+    margin: 40px 0px 10px;
+}
+.sign-up-container {
+    display: flex;
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(219,219,219);
+    border-radius: 1px;
+    width: 350px;
+    height: 60px;
+    grid-area: right;
+    margin: 40px 0px 10px;
+    font-size:10px;
+    padding:10px;
+}
+.form-heading {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 36px;
+    color: #262626;
+    font-style: italic;
+}
+
+.login-button {
+    color:white;
+    background-color: rgb(160,218,249);
+    font-weight: 600;
+    color: #FFFFFF;
+    font-size: 14px;
+    border-radius: 4px;
+    width:180px;
+}
+
+.login-button:hover {
+    cursor: pointer;
+    background-color:#0095f6;
+}
