@@ -55,13 +55,13 @@ export const createPost = (payload) => async dispatch => {
 // Helper Functions
 // export const getFeedPostsArray = (state) => Object.values(state.feed.posts);
 export const getFeedPostsArray = (state) => {
-  const orderedIds = state.feed.posts.order;
-  return orderedIds.map(id => state.feed.posts.byId[id]);
+  const orderedIds = state.dashboard.feed.order;
+  return orderedIds.map(id => state.dashboard.feed.postIds[id]);
 }
 
 const initialState = {
-  posts: {
-    byId: {},
+  feed: {
+    postIds: {},
     ordered: []
   }
 };
@@ -73,18 +73,18 @@ export default function reducer(state = initialState, action) {
       const orderedIds = orderPostIds(action.data.posts)
       return {
         ...state,
-        posts: {
-          byId: posts,
+        feed: {
+          postIds: posts,
           order: orderedIds
         }
       }
     case LOAD_POST:
       return {
         ...state,
-        posts: {
-          order: [action.data.post.id, ...state.posts.order],
-          byId: {
-            ...state.posts.byId,
+        feed: {
+          order: [action.data.post.id, ...state.feed.order],
+          postIds: {
+            ...state.feed.postIds,
             [action.data.post.id] : action.data.post
           }
         }

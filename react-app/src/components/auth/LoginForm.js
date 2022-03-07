@@ -5,10 +5,12 @@ import { login } from '../../store/session';
 import './LoginForm.css'
 import picture from '../../assets/login-pic.png'
 
+
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -19,6 +21,10 @@ const LoginForm = () => {
       setErrors(data);
     }
   };
+
+  const updateFullName = (e) => {
+    setFullName(e.target.value)
+  }
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -81,6 +87,7 @@ const LoginForm = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

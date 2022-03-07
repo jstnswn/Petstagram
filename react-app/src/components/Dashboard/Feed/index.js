@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux'
 import { getFeedPostsArray } from '../../../store/feed';
@@ -7,19 +7,19 @@ import FeedPost from './FeedPost';
 import './Feed.css'
 
 export default function Feed() {
-  ////////////
-  ///////////
-  //////////
   const allPosts = useSelector(getFeedPostsArray);
-  // const test = useSelector(({ feed }) => feed)
-  // const allPosts = test.posts.order.map(id => test.posts.byId[id])
-  console.log('Post Desc', allPosts)
-  // const postsDesc = [...allPosts].reverse();
-  const [posts, setPosts] = useState(allPosts.slice(0, 5))
+
   const [index, setIndex] = useState(5);
   const [hasMore, setHasMore] = useState(true);
+  const [posts, setPosts] = useState(allPosts.slice(0, 5));
+  const [initialLength, setInitialLength] = useState(allPosts.length);
 
-  // let posts = allPosts.slice(0, 5);
+  useEffect(() => {
+    if (allPosts.length > initialLength) {
+      setPosts(prev => [allPosts[0], ...prev]);
+    }
+    setInitialLength(allPosts.length);
+  }, [allPosts, initialLength])
 
   const loadMorePosts = () => {
     if (index >= allPosts.length) {
@@ -27,13 +27,10 @@ export default function Feed() {
       setHasMore(false);
       return;
     }
-    console.log("go")
+
     setPosts(prev => [...prev, ...allPosts.slice(index, index + 5)]);
-    // posts = [...posts, ...allPosts.slice(index, index + 5)]
     setIndex(prev => prev + 5);
   };
-
-  console.log("POSTS: ", posts)
 
   return (
     <div className='feed-body'>
