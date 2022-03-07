@@ -32,7 +32,7 @@ class Post(db.Model):
             'user': self.user.f_to_dict(),
             'image_url': self.image_url,
             'caption': self.caption,
-            'likers': [liker.to_dict() for liker in self.likers],
+            'likers': [liker.f_to_dict() for liker in self.likers],
             'comments': [comment.to_dict() for comment in self.comments],
             'created_at': self.created_at
         }
