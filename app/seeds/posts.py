@@ -3,11 +3,6 @@ from app.models import db, Post
 def seed_posts():
     posts = [
         # ----------------Posts
-
-
-
-
-
         Post(
             user_id=2,
             caption="I'm a bag kitty!",
