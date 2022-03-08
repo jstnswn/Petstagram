@@ -57,7 +57,7 @@ export const createPost = (payload) => async dispatch => {
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
   return orderedIds.map(id => state.dashboard.feed.postIds[id]);
-}
+};
 
 const initialState = {
   feed: {
@@ -82,7 +82,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         feed: {
-          order: [action.data.post.id, ...state.feed.order],
+          // order: [action.data.post.id, ...state.feed.order],
           postIds: {
             ...state.feed.postIds,
             [action.data.post.id] : action.data.post
