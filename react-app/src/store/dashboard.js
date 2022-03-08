@@ -2,6 +2,8 @@ import { normalizePosts, orderPostIds } from "./utils";
 
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
+const POST_LIKE = 'feed/POST_LIKE' // Post like action type
+const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
 const ADD_COMMENT = 'comment/ADD_COMMENT';
 
@@ -20,11 +22,20 @@ const loadPost = (data) => {
   }
 }
 
+
 const addComment = (data) => {
   return{
       type: ADD_COMMENT,
       data
   }
+
+export const postLikeActionCreator = (user, postId) => { // Post like action creator
+  return { type: POST_LIKE, user, postId }
+}
+
+export const deleteLikeActionCreator = like => { // Delete like action creator
+  return { type: DELETE_LIKE, like }
+
 }
 
 // Thunks
@@ -61,6 +72,7 @@ export const createPost = (payload) => async dispatch => {
   }
 };
 
+
 export const createComment = (payload) => async dispatch => {
 
   const res = await fetch('/api/comments/', {
@@ -83,6 +95,24 @@ export const createComment = (payload) => async dispatch => {
       const errors = await res.json();
       return errors.errors;
     }
+
+// Post like thunk creator
+export const postLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
+
+  if (res.ok) {
+    dispatch(postLikeActionCreator(data.user, payload.postId))
+  } else {
+    throw res
+  }
+  return data
+
 }
 
 // Helper Functions
@@ -124,13 +154,24 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
+
     case ADD_COMMENT:
       stateCopy = {...state}
       const post = stateCopy.feed.postIds[action.data.comment.post_id]
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
 
+
+      // post like
+      case POST_LIKE:
+        stateCopy = {...state}
+        const post = stateCopy.feed.postIds[action.postId]
+        post.likers.push(action.user)
+        console.log('postId', action.postId)
+        return stateCopy
+
     default:
       return state
   }
+
 };

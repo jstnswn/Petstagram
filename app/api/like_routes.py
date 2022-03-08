@@ -10,15 +10,15 @@ like_routes = Blueprint('like', __name__)
 @like_routes.route('/', methods=['POST'])
 def create_like():
     user_id = current_user.get_id()
-    user = User.query.get(user_id)
     data = request.json
+    user = User.query.get(user_id)
     post_id = data['post_id']
 
     post = Post.query.get(post_id)
     post.likers.append(user)
 
     db.session.commit()
-    return {'post': post.to_dict()}, 200
+    return {'user': user.f_to_dict()}, 200
 
 
 @like_routes.route('/', methods=['DELETE'])

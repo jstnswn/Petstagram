@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -9,44 +9,80 @@ import petstagram from '../../assets/petstagram.png'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    if (emailOrUsername.includes('@')) {
+      let email = emailOrUsername
+      let username = ''
+      const data = await dispatch(login(email, username, password));
+      if (data) {
+        setErrors(data);
+      }
+    } else {
+      let email = ''
+      let username = emailOrUsername
+      const data = await dispatch(login(email, username, password))
+      if (data) {
+        setErrors(data);
+      }
     }
   };
 
   const demoLogin = (e) => {
     e.preventDefault();
-    dispatch(login('Mango@Voisin.com', 'password'))
+    let email = 'Mango@Voisin.com'
+    let username = 'Mango'
+    let password = 'password'
+    dispatch(login(email, username, password))
   }
 
-  const updateFullName = (e) => {
-    setFullName(e.target.value)
-  }
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
+  const updateEmailOrUsername = (e) => {
+    setEmailOrUsername(e.target.value);
   };
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    const emailField = document.querySelector('.email')
+    const emailPlaceholder = document.querySelector('#email-placeholder')
+
+    const passwordField = document.querySelector('.password')
+    const passwordPlaceholder = document.querySelector('#password-placeholder')
+
+    if (emailOrUsername === '') {
+      emailPlaceholder.style.opacity = 0
+      emailField.style.padding = '0px 10px'
+    } else {
+      emailPlaceholder.style.opacity = 1
+      emailField.style.padding = '14px 0 2px 8px'
+    }
+
+    if (password === '') {
+      passwordPlaceholder.style.opacity = 0
+      passwordField.style.padding = '0px 10px'
+    } else {
+      passwordPlaceholder.style.opacity = 1
+      passwordField.style.padding = '14px 0 2px 8px'
+    }
+  }, [emailOrUsername, password])
+
   if (user) {
     return <Redirect to='/' />;
   }
-
-  if (email !== '' && password !== '') {
-    const button = document.querySelector('#login-btn')
-    button.style.backgroundColor = '#0095f6'
+  const button = document.querySelector('#login-btn')
+  if (button) {
+    if (emailOrUsername !== '' && password !== '') {
+      button.style.backgroundColor = '#0095f6'
+    } else {
+      button.style.backgroundColor = 'rgb(160,218,249)'
+    }
   }
 
   return (
@@ -61,20 +97,22 @@ const LoginForm = () => {
                   <div key={ind}>{error}</div>
                 ))}
               </div>
-              <div>
+              <div className='field-container'>
+                <span id='email-placeholder'>Username or Email</span>
                 <input
-                  className='login-form-field'
-                  name='email'
+                  className='login-form-field email'
+                  name='emailOrUsername'
                   type='text'
-                  placeholder='Email or username'
-                  value={email}
+                  placeholder='Username or Email'
+                  value={emailOrUsername}
                   required='required'
-                  onChange={updateEmail}
+                  onChange={updateEmailOrUsername}
                 />
               </div>
-              <div>
+              <div className='field-container'>
+                <span id='password-placeholder'>Password</span>
                 <input
-                  className='login-form-field'
+                  className='login-form-field password'
                   name='password'
                   type='password'
                   placeholder='Password'
