@@ -22,9 +22,9 @@ export default function PostFooter({ post }) {
       <div className='footer-likes'>likes</div>
       <div className='comment-container'>
         <p className='caption'><span className='caption-username'>{post.user.username}</span>{post.caption}</p>
-        <div>comments...</div>
+        <div>View all comments</div>
       </div>
-      <div className='add-comment-container'>add comment</div>
+      <div className='add-comment-container'>Add a comment</div>
     </div>
   )
 }

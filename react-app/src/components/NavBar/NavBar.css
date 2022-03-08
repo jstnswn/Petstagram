@@ -19,6 +19,10 @@
     border-radius: 50%;
 }
 
+.profile-button {
+    cursor: pointer;
+}
+
 .nav-dropdown {
     position: absolute;
     right: 0;
