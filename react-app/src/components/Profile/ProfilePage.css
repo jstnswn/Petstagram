@@ -28,6 +28,8 @@
 
 
 .profile-grid-item {
-    height: 19rem;
-    width: 19rem;
+    height: 19em;
+    width: 19em;
+    object-fit: cover;
+    padding: 12px;
 }

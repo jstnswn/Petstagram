@@ -35,9 +35,15 @@ post_routes = Blueprint('post', __name__)
 
 @post_routes.route('/')
 def get_posts():
+    print('😬')
     current_user_id = current_user.get_id()
     posts = Post.get_posts_by_following(current_user_id)
-    test = [post for post in posts]
+    return {'posts': posts}
+
+@post_routes.route('/<int:user_id>')
+def get_profile_posts(user_id):
+    user = User.query.get(user_id)
+    posts = [post.to_dict() for post in user.posts]
     return {'posts': posts}
 
 @post_routes.route('/', methods=['POST'])
