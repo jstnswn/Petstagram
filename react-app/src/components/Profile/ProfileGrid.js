@@ -28,7 +28,7 @@ export default function ProfileGrid() {
 
           {showIdx == idx && (
             <Modal onClose={closeModal}>
-              <PostView post={post}/>
+              <PostView post={post} closeModal={closeModal}/>
             </Modal>
           )}
         </div>

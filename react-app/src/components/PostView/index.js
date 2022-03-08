@@ -3,7 +3,7 @@ import { Modal } from '../../context/Modal';
 import PostMenu from './PostMenu';
 import './PostView.css';
 
-export default function PostView({ post, option }) {
+export default function PostView({ post, option, closeModal }) {
   const [showMenu, setShowMenu] = useState(false);
 
   let headerInfo;
@@ -53,7 +53,7 @@ export default function PostView({ post, option }) {
 
       {showMenu && (
         <Modal onClose={closeMenu}>
-          <PostMenu closeMenu={closeMenu}/>
+          <PostMenu closeMenu={closeMenu} closeModal={closeModal} post={post}/>
         </Modal>
       )}
     </div>
