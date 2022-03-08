@@ -1,7 +1,7 @@
 import React from 'react'
 import './PostFooter.css';
 import { useDispatch, useSelector } from 'react-redux'
-import { postLike } from '../../../../store/feed';
+import { postLike } from '../../../../store/dashboard';
 
 export default function PostFooter({ post }) {
   const sessionUser = useSelector(state => state?.session?.user)

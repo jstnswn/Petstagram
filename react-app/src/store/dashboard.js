@@ -19,8 +19,8 @@ const loadPost = (data) => {
   }
 }
 
-export const postLikeActionCreator = user => { // Post like action creator
-  return { type: POST_LIKE, user }
+export const postLikeActionCreator = (user, postId) => { // Post like action creator
+  return { type: POST_LIKE, user, postId }
 }
 
 // Thunks
@@ -66,13 +66,9 @@ export const postLike = payload => async dispatch => {
     body: JSON.stringify({post_id})
   })
   const data = await res.json()
-  // const a = JSON.stringify(data)
-  // const aa = JSON.parse(a)
-  // console.log(aa)
-  console.log(3, 'data', data)
 
   if (res.ok) {
-    dispatch(postLikeActionCreator(data.user))
+    dispatch(postLikeActionCreator(data.user, payload.postId))
   } else {
     throw res
   }
@@ -95,6 +91,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  let stateCopy;
   switch(action.type) {
     case LOAD_POSTS:
       const posts = normalizePosts(action.data.posts);
@@ -119,8 +116,11 @@ export default function reducer(state = initialState, action) {
       }
       // post like
       case POST_LIKE:
-
-        
+        stateCopy = {...state}
+        const post = stateCopy.feed.postIds[action.postId]
+        post.likers.push(action.user)
+        console.log('postId', action.postId)
+        return stateCopy
     default:
       return state
   }
