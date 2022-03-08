@@ -27,9 +27,10 @@ def create_comment():
             post_id = data["post_id"],
             comment = data["comment"],
             created_at = now,
+
         )
 
         db.session.add(comment)
         db.session.commit()
 
-        return comment.to_dict()
+        return {"comment": comment.to_dict()}

@@ -3,6 +3,8 @@ import { normalizePosts, orderPostIds } from "./utils";
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
 
+const ADD_COMMENT = 'comment/ADD_COMMENT';
+
 // Action Creators
 const loadPosts = (data) => {
   return {
@@ -15,6 +17,13 @@ const loadPost = (data) => {
   return {
     type: LOAD_POST,
     data
+  }
+}
+
+const addComment = (data) => {
+  return{
+      type: ADD_COMMENT,
+      data
   }
 }
 
@@ -52,6 +61,30 @@ export const createPost = (payload) => async dispatch => {
   }
 };
 
+export const createComment = (payload) => async dispatch => {
+
+  const res = await fetch('/api/comments/', {
+      method: 'POST',
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          user_id: payload.user_id,
+          post_id: payload.post_id,
+          comment: payload.comment,
+      })
+  })
+
+  if (res.ok) {
+      const data = await res.json()
+      console.log(data, "data")
+      dispatch(addComment(data));
+    } else {
+      const errors = await res.json();
+      return errors.errors;
+    }
+}
+
 // Helper Functions
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
@@ -68,6 +101,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  let stateCopy;
   switch(action.type) {
     case LOAD_POSTS:
       const posts = normalizePosts(action.data.posts);
@@ -90,6 +124,12 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
+    case ADD_COMMENT:
+      stateCopy = {...state}
+      const post = stateCopy.feed.postIds[action.data.comment.post_id]
+      post.comments[action.data.comment.id] = action.data.comment
+      return stateCopy
+
     default:
       return state
   }
