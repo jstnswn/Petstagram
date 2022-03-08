@@ -3,6 +3,7 @@ import { normalizePosts, orderPostIds } from "./utils";
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
 const POST_LIKE = 'feed/POST_LIKE' // Post like action type
+const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
 // Action Creators
 const loadPosts = (data) => {
@@ -21,6 +22,10 @@ const loadPost = (data) => {
 
 export const postLikeActionCreator = (user, postId) => { // Post like action creator
   return { type: POST_LIKE, user, postId }
+}
+
+export const deleteLikeActionCreator = like => { // Delete like action creator
+  return { type: DELETE_LIKE, like }
 }
 
 // Thunks
