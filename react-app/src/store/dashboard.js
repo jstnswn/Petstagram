@@ -2,6 +2,8 @@ import { normalizePosts, orderPostIds } from "./utils";
 
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
+const POST_LIKE = 'feed/POST_LIKE' // Post like action type
+const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
 // Action Creators
 const loadPosts = (data) => {
@@ -16,6 +18,14 @@ const loadPost = (data) => {
     type: LOAD_POST,
     data
   }
+}
+
+export const postLikeActionCreator = (user, postId) => { // Post like action creator
+  return { type: POST_LIKE, user, postId }
+}
+
+export const deleteLikeActionCreator = like => { // Delete like action creator
+  return { type: DELETE_LIKE, like }
 }
 
 // Thunks
@@ -52,6 +62,24 @@ export const createPost = (payload) => async dispatch => {
   }
 };
 
+// Post like thunk creator
+export const postLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
+
+  if (res.ok) {
+    dispatch(postLikeActionCreator(data.user, payload.postId))
+  } else {
+    throw res
+  }
+  return data
+}
+
 // Helper Functions
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
@@ -68,6 +96,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  let stateCopy;
   switch(action.type) {
     case LOAD_POSTS:
       const posts = normalizePosts(action.data.posts);
@@ -90,7 +119,15 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
+      // post like
+      case POST_LIKE:
+        stateCopy = {...state}
+        const post = stateCopy.feed.postIds[action.postId]
+        post.likers.push(action.user)
+        console.log('postId', action.postId)
+        return stateCopy
     default:
       return state
   }
+
 };
