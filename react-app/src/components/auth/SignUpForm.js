@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import petstagram from '../../assets/petstagram.png'
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -57,7 +58,7 @@ const SignUpForm = () => {
   return (
     <div id='signup-form-page'>
       <div className='form-container'>
-        <div id='signup-form-title'>Petstagram</div>
+        <img className='title' src={petstagram}></img>
         <div className='signup-form-heading'>Sign up to see photos and videos from your friends.</div>
         <form onSubmit={onSignUp}>
           <div>
@@ -123,7 +124,7 @@ const SignUpForm = () => {
         </form>
         <div className='signup-form-heading' id='signup-form-footing'>By signing up, you agree to view many cute photos of pets.</div>
       </div>
-      <div className='form-container' id='have-account'>Have an account?<a href='' id='login-link'>Log in</a></div>
+      <div className='form-container' id='have-account'>Have an account?<a href='/login' id='login-link'>Log in</a></div>
     </div>
   );
 };
