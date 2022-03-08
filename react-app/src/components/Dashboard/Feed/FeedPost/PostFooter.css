@@ -54,3 +54,8 @@ span i {
 .caption {
     font-size: 14px;
 }
+
+#like {
+    border: none;
+    background-color: white;
+}

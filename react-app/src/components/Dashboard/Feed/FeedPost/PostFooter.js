@@ -1,12 +1,24 @@
 import React from 'react'
 import './PostFooter.css';
 
+// import { useHistory } from 'react-router-dom'
+
 export default function PostFooter({ post }) {
+
+  // const history = useHistory()
+
+  const onClick = (e) => {
+    e.preventDefault()
+    // history.push('/srkica')
+  }
+
   return (
     <div className='post-footer'>
       <div className='footer-icons'>
         <span>
-          <i className='fa-regular fa-heart post-icon'></i>
+          <button id='like' onClick={onClick}>
+            <i className='fa-regular fa-heart post-icon'></i>
+          </button>
         </span>
         <span>
           <i className='fa-regular fa-comment post-icon' ></i>
