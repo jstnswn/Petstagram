@@ -10,7 +10,8 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Dashboard from './components/Dashboard';
 import NavBar from './components/NavBar';
-
+import ProfilePage from './components/Profile';
+import Footer from './components/Footer'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +51,11 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <Dashboard />
         </ProtectedRoute>
+        <ProtectedRoute path='/:username' exact={true} >
+          <ProfilePage />
+        </ProtectedRoute>
       </Switch>
+      {!user && <Footer />}
     </BrowserRouter>
   );
 }
