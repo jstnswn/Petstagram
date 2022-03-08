@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import Comment
+from app.models import Comment, db
 from app.forms.comment_form import CommentForm
 
 from datetime import datetime
@@ -26,7 +26,7 @@ def create_comment():
             user_id = data["user_id"],
             post_id = data["post_id"],
             comment = data["comment"],
-            created_at = current_time,
+            created_at = now,
         )
 
         db.session.add(comment)
