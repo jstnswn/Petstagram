@@ -74,3 +74,12 @@ def create_post():
     db.session.add(new_post)
     db.session.commit()
     return {'post': new_post.to_dict()}, 200
+
+@post_routes.route('/<int:post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return {'response': 'Post Deleted'}, 204

@@ -11,6 +11,15 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route('/usernames/<username>')
+@login_required
+def fetch_user_by_username(username):
+    #TODO error handling for no user found
+    user = User.query.filter(User.username==username).one()
+
+    return {'user': user.f_to_dict()}, 200
+
+
 
 @user_routes.route('/<int:id>')
 @login_required
