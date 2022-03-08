@@ -1,9 +1,10 @@
 
 #post-form-container {
-    width: 855px;
-    height: 855px;
+    width: 755px;
+    height: 755px;
     display: flex;
     flex-direction: column;
+    border-radius:  7px;
 }
 
 .upload-post-form {
@@ -18,15 +19,36 @@
     height: 100%;
 }
 
-#post-form-container h3 {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    border-bottom: 1px solid var(--border-gray);
+.upload-post.header {
     height: 42px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 18px;
+    align-items: center;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.upload-post .fa-arrow-left {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.upload-post .next-button {
+    color: var(--button-blue);
+    cursor: pointer;
+}
+
+#post-form-container .upload-image {
+    height: 100%;
+    object-fit: cover;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+#post-form-container h3 {
     font-weight: normal;
+    text-align: center;
+    width: 100%;
 }
 
 .upload-post-form label {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FileUploader } from 'react-drag-drop-files';
 import { useDispatch } from 'react-redux'
 import { createPost } from '../../store/dashboard';
@@ -7,6 +7,8 @@ import './UploadPostForm.css'
 export default function UploadPostForm() {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [showTextForm, setShowTextForm] = useState(false);
   const [caption, setCaption] = useState('');
   const [errors, setErrors] = useState([]);
 
@@ -38,20 +40,50 @@ export default function UploadPostForm() {
     setImage(file);
   };
 
-  return (
-    <div id='post-form-container'>
+  useEffect(() => {
+    if (!image) return;
+
+    const formData = new FormData();
+    formData.append('image', image);
+
+    (async () => {
+      const response = await fetch('/api/posts/upload-image', {
+        method: 'POST',
+        body: formData
+      })
+
+      const data = await response.json();
+      setImageUrl(data.url);
+    })();
+
+  }, [image])
+
+  let headerContent;
+  if (!imageUrl) {
+    headerContent = (
       <h3>Create new post</h3>
+    )
+  }
+  if (imageUrl) {
+    headerContent = (
+      <>
+        <i className='fal fa-arrow-left' onClick={() => setImageUrl(null)}></i>
+        <h3>Placeholder</h3>
+        <p className='next-button' onClick={() => setShowTextForm(true)}>Next</p>
+      </>
+    )
+  }
+
+  let formContent;
+  if (!imageUrl) {
+    formContent = (
       <form
         className='upload-post-form form'
         onSubmit={handleSubmit}
       >
-        <ul>
-          {errors && (
-            errors.map((error, idx) => <li key={idx}>{error}</li>)
-          )}
-        </ul>
+
         <FileUploader
-          handleChange={(file) => setImage(file) }
+          handleChange={(file) => setImage(file)}
           name='image'
           types={fileTypes}
         />
@@ -65,14 +97,37 @@ export default function UploadPostForm() {
           type='file'
           ref={hiddenInputRef}
           onChange={handleFileChange}
-          style={{display: 'none'}}
+          style={{ display: 'none' }}
         />
-
       </form>
+    )
+  }
+
+  if (imageUrl) {
+    formContent = (
+      <img
+        alt='post content'
+        className='upload-image'
+        src={imageUrl}
+      />
+    );
+  }
+
+  return (
+    <div id='post-form-container'>
+      <div className='upload-post header'>
+        {headerContent}
+      </div>
+      {formContent}
     </div>
   )
 }
 
+{/* <ul>
+  {errors && (
+    errors.map((error, idx) => <li key={idx}>{error}</li>)
+  )}
+</ul> */}
         // <label>Caption (optional)</label>
         // <textarea
         //   type='text'
