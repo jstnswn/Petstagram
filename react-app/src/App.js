@@ -11,7 +11,7 @@ import { authenticate } from './store/session';
 import Dashboard from './components/Dashboard';
 import NavBar from './components/NavBar';
 import ProfilePage from './components/Profile';
-
+import Footer from './components/Footer'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,6 +55,7 @@ function App() {
           <ProfilePage user={user}/>
         </ProtectedRoute>
       </Switch>
+      {!user && <Footer />}
     </BrowserRouter>
   );
 }
