@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux"
 import { useState } from "react";
 import "./CommentForm.css"
-import { createComment } from "../../../../store/dashboard";
+import { createComment } from "../../store/dashboard";
 
 function CommentForm({post}){
     const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function CommentForm({post}){
             comment,
         }
 
-    
+
         let newComment = await dispatch(createComment(payload))
         // .catch(async(res)=>{
         //     const data = await res.json();

@@ -1,6 +1,7 @@
 import React from 'react'
 import './PostFooter.css';
-import CommentForm from './CommentForm';
+// import CommentForm from '../../../CommentForm';
+import CommentForm from '../../../CommentForm/CommentForm'
 
 export default function PostFooter({ post }) {
   return (
