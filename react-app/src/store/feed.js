@@ -19,8 +19,8 @@ const loadPost = (data) => {
   }
 }
 
-export const postLikeActionCreator = like => { // Post like action creator
-  return { type: POST_LIKE, like }
+export const postLikeActionCreator = user => { // Post like action creator
+  return { type: POST_LIKE, user }
 }
 
 // Thunks
@@ -58,19 +58,21 @@ export const createPost = (payload) => async dispatch => {
 };
 
 // Post like thunk creator
-export const postLike = like => async dispatch => {
-  const res = await fetch('/api/likes', {
+export const postLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
     method: 'POST',
     headers: { "Content-Type": "application/json"},
-    body: JSON.stringify(like)
+    body: JSON.stringify({post_id})
   })
   const data = await res.json()
   // const a = JSON.stringify(data)
   // const aa = JSON.parse(a)
   // console.log(aa)
+  console.log(3, 'data', data)
 
   if (res.ok) {
-    dispatch(postLikeActionCreator(data))
+    dispatch(postLikeActionCreator(data.user))
   } else {
     throw res
   }
@@ -116,15 +118,8 @@ export default function reducer(state = initialState, action) {
       }
       // post like
       case POST_LIKE:
-        console.log('srkica')
-        return {
-          ...state,
-          feed: {
-            postIds: {
-              ...state.feed.postIds, [action.likes.post_id]: [...state.feed.postIds.likers, action.likes.user]
-            }
-          }
-        }
+
+        
     default:
       return state
   }

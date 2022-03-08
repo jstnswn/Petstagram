@@ -9,14 +9,11 @@ export default function PostFooter({ post }) {
 
   const onClick = async e => {
     e.preventDefault()
-  //   const like = {
-  //     user_id: sessionUser.id,
-  //     post_id: post.id
-  //   }
-  //   const data = await dispatch(postLike(like))
-  const res = await fetch('/api/likes')
-  const data = await res.json()
-  console.log(data)
+    const payload = {
+      userId: sessionUser.id,
+      postId: post.id
+    }
+    const data = await dispatch(postLike(payload))
   }
 
 
