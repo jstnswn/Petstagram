@@ -9,37 +9,46 @@ import petstagram from '../../assets/petstagram.png'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    if (emailOrUsername.includes('@')) {
+      let email = emailOrUsername
+      let username = ''
+      const data = await dispatch(login(email, username, password));
+      if (data) {
+        setErrors(data);
+      }
+    } else {
+      let email = ''
+      let username = emailOrUsername
+      const data = await dispatch(login(email, username, password))
+      if (data) {
+        setErrors(data);
+      }
     }
   };
 
   const demoLogin = (e) => {
     e.preventDefault();
-    dispatch(login('Mango@Voisin.com', 'password'))
+    let email = 'Mango@Voisin.com'
+    let username = 'Mango'
+    let password = 'password'
+    dispatch(login(email, username, password))
   }
 
-  const updateFullName = (e) => {
-    setFullName(e.target.value)
-  }
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
+  const updateEmailOrUsername = (e) => {
+    setEmailOrUsername(e.target.value);
   };
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
-  
+
   useEffect(() => {
     const emailField = document.querySelector('.email')
     const emailPlaceholder = document.querySelector('#email-placeholder')
@@ -47,7 +56,7 @@ const LoginForm = () => {
     const passwordField = document.querySelector('.password')
     const passwordPlaceholder = document.querySelector('#password-placeholder')
 
-    if (email === '') {
+    if (emailOrUsername === '') {
       emailPlaceholder.style.opacity = 0
       emailField.style.padding = '0px 10px'
     } else {
@@ -62,14 +71,14 @@ const LoginForm = () => {
       passwordPlaceholder.style.opacity = 1
       passwordField.style.padding = '14px 0 2px 8px'
     }
-  }, [email, password])
+  }, [emailOrUsername, password])
 
   if (user) {
     return <Redirect to='/' />;
   }
   const button = document.querySelector('#login-btn')
   if (button) {
-    if (email !== '' && password !== '') {
+    if (emailOrUsername !== '' && password !== '') {
       button.style.backgroundColor = '#0095f6'
     } else {
       button.style.backgroundColor = 'rgb(160,218,249)'
@@ -92,12 +101,12 @@ const LoginForm = () => {
                 <span id='email-placeholder'>Username or Email</span>
                 <input
                   className='login-form-field email'
-                  name='email'
+                  name='emailOrUsername'
                   type='text'
                   placeholder='Username or Email'
-                  value={email}
+                  value={emailOrUsername}
                   required='required'
-                  onChange={updateEmail}
+                  onChange={updateEmailOrUsername}
                 />
               </div>
               <div className='field-container'>
