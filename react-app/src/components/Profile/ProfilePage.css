@@ -1,0 +1,33 @@
+
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header {
+    height: 485px;
+    border: red 1px solid;
+    width: 100%;
+}
+
+.profile-nav {
+    height: 56px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: rgb(119, 0, 255) 1px solid;
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-self: center;
+
+}
+
+
+.profile-grid-item {
+    height: 19rem;
+    width: 19rem;
+}
