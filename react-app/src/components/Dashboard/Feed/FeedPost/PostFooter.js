@@ -1,16 +1,24 @@
 import React from 'react'
 import './PostFooter.css';
-
-// import { useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { postLike } from '../../../../store/feed';
 
 export default function PostFooter({ post }) {
+  const sessionUser = useSelector(state => state?.session?.user)
+  const dispatch = useDispatch()
 
-  // const history = useHistory()
-
-  const onClick = (e) => {
+  const onClick = async e => {
     e.preventDefault()
-    // history.push('/srkica')
+  //   const like = {
+  //     user_id: sessionUser.id,
+  //     post_id: post.id
+  //   }
+  //   const data = await dispatch(postLike(like))
+  const res = await fetch('/api/likes')
+  const data = await res.json()
+  console.log(data)
   }
+
 
   return (
     <div className='post-footer'>

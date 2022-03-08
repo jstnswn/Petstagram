@@ -2,6 +2,7 @@ import { normalizePosts, orderPostIds } from "./utils";
 
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
+const POST_LIKE = 'feed/POST_LIKE' // Post like action type
 
 // Action Creators
 const loadPosts = (data) => {
@@ -16,6 +17,10 @@ const loadPost = (data) => {
     type: LOAD_POST,
     data
   }
+}
+
+export const postLikeActionCreator = like => { // Post like action creator
+  return { type: POST_LIKE, like }
 }
 
 // Thunks
@@ -51,6 +56,26 @@ export const createPost = (payload) => async dispatch => {
     return errors.errors;
   }
 };
+
+// Post like thunk creator
+export const postLike = like => async dispatch => {
+  const res = await fetch('/api/likes', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify(like)
+  })
+  const data = await res.json()
+  // const a = JSON.stringify(data)
+  // const aa = JSON.parse(a)
+  // console.log(aa)
+
+  if (res.ok) {
+    dispatch(postLikeActionCreator(data))
+  } else {
+    throw res
+  }
+  return data
+}
 
 // Helper Functions
 // export const getFeedPostsArray = (state) => Object.values(state.feed.posts);
@@ -89,7 +114,19 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
+      // post like
+      case POST_LIKE:
+        console.log('srkica')
+        return {
+          ...state,
+          feed: {
+            postIds: {
+              ...state.feed.postIds, [action.likes.post_id]: [...state.feed.postIds.likers, action.likes.user]
+            }
+          }
+        }
     default:
       return state
   }
+
 };

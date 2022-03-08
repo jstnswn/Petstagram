@@ -6,13 +6,18 @@ from app.forms.post_form import PostForm
 
 like_routes = Blueprint('like', __name__)
 
+@like_routes.route('/')
+def srki():
+    return {'srki': 1}, 200
+
 
 @like_routes.route('/', methods=['POST'])
 def create_like():
-    user_id = current_user.get_id()
-    user = User.query.get(user_id)
     data = request.json
+    user_id = data['user_id']
+    user = User.query.get(user_id)
     post_id = data['post_id']
+    print('\nsrkica', post_id)
 
     post = Post.query.get(post_id)
     post.likers.append(user)
