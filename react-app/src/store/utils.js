@@ -12,3 +12,4 @@ export const normalizePosts = (posts) => {
 };
 
 export const orderPostIds = (posts) => posts.map(post => post.id);
+

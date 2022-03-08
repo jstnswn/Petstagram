@@ -2,10 +2,13 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
 import dashboard from './dashboard';
+import profile from './profile';
+
 
 const rootReducer = combineReducers({
   session,
   dashboard,
+  profile
 });
 
 
