@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -49,13 +49,40 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
 
+  useEffect(() => {
+    const emailField = document.querySelector('.email')
+    const emailPlaceholder = document.querySelector('#email-placeholder')
+
+    const passwordField = document.querySelector('.password')
+    const passwordPlaceholder = document.querySelector('#password-placeholder')
+
+    if (emailOrUsername === '') {
+      emailPlaceholder.style.opacity = 0
+      emailField.style.padding = '0px 10px'
+    } else {
+      emailPlaceholder.style.opacity = 1
+      emailField.style.padding = '14px 0 2px 8px'
+    }
+
+    if (password === '') {
+      passwordPlaceholder.style.opacity = 0
+      passwordField.style.padding = '0px 10px'
+    } else {
+      passwordPlaceholder.style.opacity = 1
+      passwordField.style.padding = '14px 0 2px 8px'
+    }
+  }, [emailOrUsername, password])
+
   if (user) {
     return <Redirect to='/' />;
   }
-
-  if (emailOrUsername !== '' && password !== '') {
-    const button = document.querySelector('#login-btn')
-    button.style.backgroundColor = '#0095f6'
+  const button = document.querySelector('#login-btn')
+  if (button) {
+    if (emailOrUsername !== '' && password !== '') {
+      button.style.backgroundColor = '#0095f6'
+    } else {
+      button.style.backgroundColor = 'rgb(160,218,249)'
+    }
   }
 
   return (
@@ -70,20 +97,22 @@ const LoginForm = () => {
                   <div key={ind}>{error}</div>
                 ))}
               </div>
-              <div>
+              <div className='field-container'>
+                <span id='email-placeholder'>Username or Email</span>
                 <input
-                  className='login-form-field'
+                  className='login-form-field email'
                   name='emailOrUsername'
                   type='text'
-                  placeholder='Email or username'
+                  placeholder='Username or Email'
                   value={emailOrUsername}
                   required='required'
                   onChange={updateEmailOrUsername}
                 />
               </div>
-              <div>
+              <div className='field-container'>
+                <span id='password-placeholder'>Password</span>
                 <input
-                  className='login-form-field'
+                  className='login-form-field password'
                   name='password'
                   type='password'
                   placeholder='Password'

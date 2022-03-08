@@ -108,3 +108,14 @@
     height: 100%;
 
 }
+
+#email-placeholder, #password-placeholder {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    position: absolute;
+    font-size: 10px;
+    z-index: 1;
+    color: rgba(142,142,142);
+    left: 9px;
+    top: 6px;
+    opacity: 0;
+}
