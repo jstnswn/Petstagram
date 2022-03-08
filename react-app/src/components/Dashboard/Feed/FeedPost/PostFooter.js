@@ -17,12 +17,19 @@ export default function PostFooter({ post }) {
       postId: post.id
     }
     const data = await dispatch(postLike(payload))
+    const icon = document.querySelector('.fa-heart')
     if (isActive) {
       setIsActive(false)
+      icon.style.color = 'black'
+      icon.classList.add('fa-regular')
+      icon.classList.remove('fa-solid')
       console.log(isActive)
     }
     else {
       setIsActive(true)
+      icon.style.color = 'red'
+      icon.classList.add('fa-solid')
+      icon.classList.remove('fa-regular')
       console.log(isActive)
     }
   }
@@ -33,12 +40,11 @@ export default function PostFooter({ post }) {
     <div className='post-footer'>
       <div className='footer-icons'>
         <span>
-          <button id='like' onClick={onClick}>
-            <div className={isActive ? "red" : "white"}>
-              <i className='fa-regular fa-heart post-icon'></i>
-              <i class="fa-solid fa-heart red"></i>
-            </div>
-          </button>
+          {/* <button id='like' onClick={onClick}>
+            <div> */}
+              <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
+            {/* </div>
+          </button> */}
         </span>
         <span>
           <i className='fa-regular fa-comment post-icon'></i>
