@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -46,13 +46,61 @@ const SignUpForm = () => {
   //   setRepeatPassword(e.target.value);
   // };
 
+  useEffect(() => {
+    const emailField = document.querySelector('.email')
+    const emailPlaceholder = document.querySelector('.email-placeholder')
+    const nameField = document.querySelector('.name')
+    const namePlaceholder = document.querySelector('.name-placeholder')
+    const usernameField = document.querySelector('.username')
+    const usernamePlaceholder = document.querySelector('.username-placeholder')
+    const passwordField = document.querySelector('.password')
+    const passwordPlaceholder = document.querySelector('.password-placeholder')
+
+    if (email === '') {
+      emailPlaceholder.style.opacity = 0
+      emailField.style.padding = '0px 10px'
+    } else {
+      emailPlaceholder.style.opacity = 1
+      emailField.style.padding = '14px 0 2px 8px'
+    }
+
+    if (fullName === '') {
+      namePlaceholder.style.opacity = 0
+      nameField.style.padding = '0px 10px'
+    } else {
+      namePlaceholder.style.opacity = 1
+      nameField.style.padding = '14px 0 2px 8px'
+    }
+
+    if (username === '') {
+      usernamePlaceholder.style.opacity = 0
+      usernameField.style.padding = '0px 10px'
+    } else {
+      usernamePlaceholder.style.opacity = 1
+      usernameField.style.padding = '14px 0 2px 8px'
+    }
+
+    if (password === '') {
+      passwordPlaceholder.style.opacity = 0
+      passwordField.style.padding = '0px 10px'
+    } else {
+      passwordPlaceholder.style.opacity = 1
+      passwordField.style.padding = '14px 0 2px 8px'
+    }
+  }, [email, fullName, username, password])
+
   if (user) {
     return <Redirect to='/' />;
   }
+  const button = document.querySelector('#signup-btn')
 
-  if (username !== '' && fullName !== '' && email !== '' && password !== '') {
-    const button = document.querySelector('#signup-btn')
-    button.style.backgroundColor = '#0095f6'
+  if (button) {
+    if (username !== '' && fullName !== '' && email !== '' && password !== '') {
+      button.style.backgroundColor = '#0095f6'
+    } else {
+      button.style.backgroundColor = 'rgb(160,218,249)'
+    }
+
   }
 
   return (
@@ -66,9 +114,10 @@ const SignUpForm = () => {
               <div key={ind}>{error}</div>
             ))}
           </div>
-          <div>
+          <div className='field-container'>
+            <span class='email-placeholder'>Email</span>
             <input
-              className='form-field'
+              className='form-field email'
               placeholder='Email'
               type='text'
               name='email'
@@ -77,9 +126,10 @@ const SignUpForm = () => {
               value={email}
             ></input>
           </div>
-          <div>
+          <div className='field-container'>
+            <span class='name-placeholder'>Full Name</span>
             <input
-              className='form-field'
+              className='form-field name'
               placeholder='Full Name'
               type='text'
               name='fullName'
@@ -88,9 +138,10 @@ const SignUpForm = () => {
               value={fullName}
             ></input>
           </div>
-          <div>
+          <div className='field-container'>
+            <span class='username-placeholder'>Username</span>
             <input
-              className='form-field'
+              className='form-field username'
               placeholder='Username'
               type='text'
               name='username'
@@ -99,9 +150,10 @@ const SignUpForm = () => {
               value={username}
             ></input>
           </div>
-          <div>
+          <div className='field-container'>
+            <span class='password-placeholder'>Password</span>
             <input
-              className='form-field'
+              className='form-field password'
               placeholder='Password'
               type='password'
               name='password'
