@@ -16,7 +16,14 @@ const addComment = (data) => {
 export const createComment = (payload) => async dispatch => {
     const res = await fetch('/api/comments/', {
         method: 'POST',
-        body: payload
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            user_id: payload.user_id,
+            post_id: payload.post_id,
+            comment: payload.comment,
+        })
     })
 
     if (res.ok) {
@@ -29,13 +36,46 @@ export const createComment = (payload) => async dispatch => {
 }
 
 
-const initialState = {
 
+
+const initialState = {
+    feed: {
+        postIds: {},
+        ordered: []
+      },
+    comments: {
+        commentIds: {
+            commentId1 : {
+                userId: "user1",
+                postId: "post2",
+                comment: ".....",
+                createdAt: "date",
+            },
+            commentId2 : {
+                userId: "user1",
+                postId: "post2",
+                comment: ".....",
+                createdAt: "date",
+            }
+        }
+    }
 }
 
 
 
-
 export default function reducer(state = initialState, action) {
-        
+    switch (action.type) {
+        case ADD_COMMENT:
+            return {
+                ...state,
+                comments: {
+                    commentIds: {
+                        ...state.comments.commentIds,
+                        [action.data.comment.id] : action.data.comment
+                    }
+                }
+            }
+        default:
+          return state;
+      }
   };

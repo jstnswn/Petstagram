@@ -5,8 +5,13 @@ import { createComment } from "../../../../store/comment";
 
 function CommentForm({post}){
     const dispatch = useDispatch();
+
+    const currentUser = useSelector(state => state.session.user);
+
     const [comment, setComment] = useState("");
     const [errors, setErrors] = useState([]);
+
+    //useSelector on comments
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,7 +20,8 @@ function CommentForm({post}){
         console.log("hi", comment)
 
         const payload = {
-            postId,
+            user_id: currentUser.id,
+            post_id: postId,
             comment,
         }
 
