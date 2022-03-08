@@ -26,7 +26,7 @@ export default function ProfileGrid() {
             }}
           />
 
-          {showIdx == idx && (
+          {showIdx === idx && (
             <Modal onClose={closeModal}>
               <PostView post={post} closeModal={closeModal}/>
             </Modal>

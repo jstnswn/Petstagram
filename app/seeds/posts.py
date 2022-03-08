@@ -250,12 +250,6 @@ def seed_posts():
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/f9cd786e87cf4caeb11b4420a4e4a48f.jpg',
         ),
         Post(
-            user_id=3,
-            caption='Anyone want to go out for a puppiccino?',
-            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/571a1257bee34afc9fa6431475dbee47.png'
-        ),
-
-        Post(
             user_id=7,
             caption='Protecting the balcony.',
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/73727599db8545d2b1192b161814f4f5.jpg',

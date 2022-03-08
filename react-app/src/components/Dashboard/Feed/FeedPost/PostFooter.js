@@ -9,7 +9,7 @@ export default function PostFooter({ post }) {
           <i className='fa-regular fa-heart post-icon'></i>
         </span>
         <span>
-          <i className='fa-regular fa-comment post-icon' ></i>
+          <i className='fa-regular fa-comment post-icon'></i>
         </span>
         <span>
           <i className='fa-regular fa-paper-plane post-icon'></i>

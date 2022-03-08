@@ -8,7 +8,7 @@ export default function PostMenu({ closeMenu, closeModal, post }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const urlParam = history.location.pathname.slice(1);
+  const urlParam = history.location.pathname.slice(1).toLowerCase();
   const user = useSelector(({ session }) => session.user)
 
   const removePost = () => dispatch(deletePost(post.id))
@@ -18,7 +18,7 @@ export default function PostMenu({ closeMenu, closeModal, post }) {
 
   return (
     <div className='post-menu'>
-      {user.username.toLowerCase() == urlParam && (
+      {user.username.toLowerCase() === urlParam && (
         <div style={{color: 'red'}} onClick={removePost}>Delete</div>
       )}
       <div>Share to...</div>

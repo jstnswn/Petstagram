@@ -16,7 +16,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: rgb(119, 0, 255) 1px solid;
 }
 
 .profile-grid {
