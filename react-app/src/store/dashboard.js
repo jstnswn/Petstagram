@@ -28,6 +28,7 @@ const addComment = (data) => {
       type: ADD_COMMENT,
       data
   }
+}
 
 export const postLikeActionCreator = (user, postId) => { // Post like action creator
   return { type: POST_LIKE, user, postId }
@@ -95,7 +96,7 @@ export const createComment = (payload) => async dispatch => {
       const errors = await res.json();
       return errors.errors;
     }
-
+ }
 // Post like thunk creator
 export const postLike = payload => async dispatch => {
   const { postId: post_id } = payload
@@ -131,6 +132,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  let post;
   let stateCopy;
   switch(action.type) {
     case LOAD_POSTS:
@@ -157,21 +159,22 @@ export default function reducer(state = initialState, action) {
 
     case ADD_COMMENT:
       stateCopy = {...state}
-      const post = stateCopy.feed.postIds[action.data.comment.post_id]
+      post = stateCopy.feed.postIds[action.data.comment.post_id]
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
 
 
       // post like
-      case POST_LIKE:
-        stateCopy = {...state}
-        const post = stateCopy.feed.postIds[action.postId]
-        post.likers.push(action.user)
-        console.log('postId', action.postId)
-        return stateCopy
+    case POST_LIKE:
+      stateCopy = {...state}
+      post = stateCopy.feed.postIds[action.postId]
+      post.likers.push(action.user)
+      console.log('postId', action.postId)
+      return stateCopy
 
     default:
       return state
+
   }
 
 };
