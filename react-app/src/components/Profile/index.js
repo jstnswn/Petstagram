@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProfilePosts } from '../../store/profile';
 import ProfileGrid from './ProfileGrid';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
+  // const history = useHistory();
+  // const urlParam = history.location.pathname.slice(1);
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const user = useSelector(({ session }) => session.user)
+
   useEffect(() => {
-    dispatch((getProfilePosts(1)))
+    dispatch((getProfilePosts(user.id)))
       .then(() => setIsLoaded(true));
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   return isLoaded && (
     <div className='profile-page-container'>

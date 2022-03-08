@@ -51,7 +51,7 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <Dashboard />
         </ProtectedRoute>
-        <ProtectedRoute path='/:userName' exact={true} >
+        <ProtectedRoute path='/:username' exact={true} >
           <ProfilePage user={user}/>
         </ProtectedRoute>
       </Switch>
