@@ -1,36 +1,53 @@
 import React from 'react'
 import './PostFooter.css';
 import { useDispatch, useSelector } from 'react-redux'
-import { postLike } from '../../../../store/dashboard';
+import { postLike, deleteLike } from '../../../../store/dashboard';
 import { useState } from 'react';
 
 export default function PostFooter({ post }) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
+  // console.log('post---------------', post)
+  // console.log(sessionUser.id)
+  // console.log(post.likers)
 
   const [isActive, setIsActive] = useState(false);
 
   const onClick = async e => {
     e.preventDefault()
-    const payload = {
-      userId: sessionUser.id,
-      postId: post.id
+    let likers = []
+    post.likers.forEach((obj) => {
+      likers.push(obj.id)
+    })
+    if (likers.includes(sessionUser.id)) {
+      //dispatch delete like
+      console.log('already liked this post')
+      const payload = {
+        postId: post.id
+      }
+      const data = await dispatch(deleteLike(payload))
+    } else {
+      console.log('dispatching new like')
+      const payload = {
+        userId: sessionUser.id,
+        postId: post.id
+      }
+      const data = await dispatch(postLike(payload))
     }
-    const data = await dispatch(postLike(payload))
-    const icon = document.querySelector('.fa-heart')
-    if (isActive) {
-      setIsActive(false)
-      icon.style.color = 'black'
-      icon.classList.add('fa-regular')
-      icon.classList.remove('fa-solid')
-      console.log(isActive)
-    }
-    else {
-      setIsActive(true)
+
+
+    const icon = e.target
+    if (icon.classList.contains('fa-regular')) {
+      // setIsActive(true)
       icon.style.color = 'red'
       icon.classList.add('fa-solid')
       icon.classList.remove('fa-regular')
-      console.log(isActive)
+    }
+    else {
+      // setIsActive(false)
+      icon.style.color = 'black'
+      icon.classList.add('fa-regular')
+      icon.classList.remove('fa-solid')
     }
   }
 
@@ -40,11 +57,7 @@ export default function PostFooter({ post }) {
     <div className='post-footer'>
       <div className='footer-icons'>
         <span>
-          {/* <button id='like' onClick={onClick}>
-            <div> */}
-              <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
-            {/* </div>
-          </button> */}
+          <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
         </span>
         <span>
           <i className='fa-regular fa-comment post-icon'></i>

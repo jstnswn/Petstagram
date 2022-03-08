@@ -80,6 +80,24 @@ export const postLike = payload => async dispatch => {
   return data
 }
 
+export const deleteLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'DELETE',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
+
+  if (res.ok) {
+    console.log(data)
+    // dispatch(postLikeActionCreator(data.user, payload.postId))
+  } else {
+    throw res
+  }
+  return data
+}
+
 // Helper Functions
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
