@@ -9,31 +9,40 @@ import petstagram from '../../assets/petstagram.png'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      setErrors(data);
+    if (emailOrUsername.includes('@')) {
+      let email = emailOrUsername
+      let username = ''
+      const data = await dispatch(login(email, username, password));
+      if (data) {
+        setErrors(data);
+      }
+    } else {
+      let email = ''
+      let username = emailOrUsername
+      const data = await dispatch(login(email, username, password))
+      if (data) {
+        setErrors(data);
+      }
     }
   };
 
   const demoLogin = (e) => {
     e.preventDefault();
-    dispatch(login('Mango@Voisin.com', 'password'))
+    let email = 'Mango@Voisin.com'
+    let username = 'Mango'
+    let password = 'password'
+    dispatch(login(email, username, password))
   }
 
-  const updateFullName = (e) => {
-    setFullName(e.target.value)
-  }
-
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
+  const updateEmailOrUsername = (e) => {
+    setEmailOrUsername(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -44,7 +53,7 @@ const LoginForm = () => {
     return <Redirect to='/' />;
   }
 
-  if (email !== '' && password !== '') {
+  if (emailOrUsername !== '' && password !== '') {
     const button = document.querySelector('#login-btn')
     button.style.backgroundColor = '#0095f6'
   }
@@ -64,12 +73,12 @@ const LoginForm = () => {
               <div>
                 <input
                   className='login-form-field'
-                  name='email'
+                  name='emailOrUsername'
                   type='text'
                   placeholder='Email or username'
-                  value={email}
+                  value={emailOrUsername}
                   required='required'
-                  onChange={updateEmail}
+                  onChange={updateEmailOrUsername}
                 />
               </div>
               <div>

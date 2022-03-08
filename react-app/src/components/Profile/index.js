@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getProfilePosts } from '../../store/profile';
-import ProfileGrid from './ProfileGrid';
+import ProfileGrid from './ProfileGrid.js';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
