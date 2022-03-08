@@ -35,9 +35,15 @@ post_routes = Blueprint('post', __name__)
 
 @post_routes.route('/')
 def get_posts():
+    print('😬')
     current_user_id = current_user.get_id()
     posts = Post.get_posts_by_following(current_user_id)
-    test = [post for post in posts]
+    return {'posts': posts}
+
+@post_routes.route('/<int:user_id>')
+def get_profile_posts(user_id):
+    user = User.query.get(user_id)
+    posts = [post.to_dict() for post in user.posts]
     return {'posts': posts}
 
 @post_routes.route('/', methods=['POST'])
@@ -68,3 +74,12 @@ def create_post():
     db.session.add(new_post)
     db.session.commit()
     return {'post': new_post.to_dict()}, 200
+
+@post_routes.route('/<int:post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return {'response': 'Post Deleted'}, 204

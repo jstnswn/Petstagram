@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css'
 import picture from '../../assets/login-pic.png'
+import petstagram from '../../assets/petstagram.png'
 
 
 const LoginForm = () => {
@@ -21,6 +22,11 @@ const LoginForm = () => {
       setErrors(data);
     }
   };
+
+  const demoLogin = (e) => {
+    e.preventDefault();
+    dispatch(login('Mango@Voisin.com', 'password'))
+  }
 
   const updateFullName = (e) => {
     setFullName(e.target.value)
@@ -48,7 +54,7 @@ const LoginForm = () => {
       <div className='right-col'>
         <div className='right'>
           <div className='login-form-container'>
-            <div id='login-form-title'>Petstagram</div>
+            <img className='title' src={petstagram}></img>
             <form onSubmit={onLogin}>
               <div>
                 {errors.map((error, ind) => (
@@ -62,6 +68,7 @@ const LoginForm = () => {
                   type='text'
                   placeholder='Email or username'
                   value={email}
+                  required='required'
                   onChange={updateEmail}
                 />
               </div>
@@ -72,13 +79,15 @@ const LoginForm = () => {
                   type='password'
                   placeholder='Password'
                   value={password}
+                  required='required'
                   onChange={updatePassword}
                 />
                 <button id='login-btn' type='submit'>Log In</button>
               </div>
             </form>
+            <button id='demo-login' onClick={demoLogin}>Demo User</button>
           </div>
-          <div className='login-form-container' id='have-account'>Don't have an account?<a href='' id='login-link'>Sign up</a></div>
+          <div className='login-form-container' id='have-account'>Don't have an account?<a href='/sign-up' id='login-link'>Sign up</a></div>
         </div>
       </div>
       <div className='left-col'>

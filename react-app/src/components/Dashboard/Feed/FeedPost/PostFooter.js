@@ -26,7 +26,7 @@ export default function PostFooter({ post }) {
           </button>
         </span>
         <span>
-          <i className='fa-regular fa-comment post-icon' ></i>
+          <i className='fa-regular fa-comment post-icon'></i>
         </span>
         <span>
           <i className='fa-regular fa-paper-plane post-icon'></i>

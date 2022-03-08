@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useSelector } from 'react-redux'
-import { getFeedPostsArray } from '../../../store/feed';
+import { getFeedPostsArray } from '../../../store/dashboard';
 import FeedPost from './FeedPost';
 
 import './Feed.css'

@@ -14,8 +14,8 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     user = db.relationship('User', back_populates='posts')
-    comments = db.relationship('Comment', back_populates='post')
-    likers = db.relationship('User', back_populates='liked_posts', secondary=likes)
+    comments = db.relationship('Comment', back_populates='post', cascade='all, delete-orphan')
+    likers = db.relationship('User', back_populates='liked_posts', secondary=likes, cascade='all, delete-orphan', single_parent=True)
 
     @staticmethod
     def get_posts_by_following(current_user_id):

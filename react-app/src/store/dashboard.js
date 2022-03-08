@@ -32,7 +32,7 @@ export const getFeedPosts = () => async dispatch => {
     dispatch(loadPosts(data));
   } else {
     const errors = await res.json();
-    console.log(errors);
+    console.log(errors.errors);
   }
 };
 
@@ -80,12 +80,13 @@ export const postLike = payload => async dispatch => {
 }
 
 // Helper Functions
-// export const getFeedPostsArray = (state) => Object.values(state.feed.posts);
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
   return orderedIds.map(id => state.dashboard.feed.postIds[id]);
-}
+};
 
+
+// Reducer
 const initialState = {
   feed: {
     postIds: {},
