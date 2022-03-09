@@ -13,7 +13,7 @@ export default function UploadModal({ option }) {
       <i className='fa-regular fa-plus upload-button' onClick={openModal}></i>
       {showModal && (
         <Modal onClose={closeModal}>
-          <UploadPostForm />
+          <UploadPostForm closeModal={closeModal}/>
         </Modal>
       )}
     </>

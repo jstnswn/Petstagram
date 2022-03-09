@@ -34,7 +34,7 @@ export default function Footer() {
                 <li className='list-item'>AWS</li>
             </ul>
             <div id='footer-bottom'>
-                <div id='about-us-dropdown' onClick={setShowAboutUs}>About Us<i class="fa-solid fa-angle-down"></i></div>
+                <div id='about-us-dropdown' onClick={setShowAboutUs}>About Us<i class="fa-solid fa-angle-down down-caret"></i></div>
                 {showAboutUs && (
                     <ul id='about-us-list'>
                         <li className='names'><a href='https://github.com/jchau-623'>Justin Chau</a></li>

@@ -42,9 +42,8 @@ export const postLikeActionCreator = (user, postId) => { // Post like action cre
   return { type: POST_LIKE, user, postId }
 }
 
-export const deleteLikeActionCreator = like => { // Delete like action creator
-  return { type: DELETE_LIKE, like }
-
+export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+  return { type: DELETE_LIKE, userId, postId }
 }
 
 // Thunks
@@ -56,7 +55,6 @@ export const getFeedPosts = () => async dispatch => {
     dispatch(loadPosts(data));
   } else {
     const errors = await res.json();
-    console.log(errors.errors);
   }
 };
 
@@ -137,6 +135,24 @@ export const postLike = payload => async dispatch => {
 
 }
 
+// Delete like thunk creator
+export const deleteLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'DELETE',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
+
+  if (res.ok) {
+    dispatch(deleteLikeActionCreator(data.userId, data.postId))
+  } else {
+    throw res
+  }
+  return data
+}
+
 // Helper Functions
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
@@ -177,7 +193,6 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
-
     case ADD_COMMENT:
       stateCopy = {...state}
       post = stateCopy.feed.postIds[action.data.comment.post_id]
@@ -198,12 +213,18 @@ export default function reducer(state = initialState, action) {
       stateCopy = {...state}
       post = stateCopy.feed.postIds[action.postId]
       post.likers.push(action.user)
-      console.log('postId', action.postId)
+      return stateCopy
+
+      // delete like
+    case DELETE_LIKE:
+      stateCopy = {...state}
+      console.log(action)
+      let likers = stateCopy.feed.postIds[action.postId].likers
+      let newLikers = likers.filter(user => user.id != action.userId)
+      stateCopy.feed.postIds[action.postId].likers = newLikers
       return stateCopy
 
     default:
       return state
-
   }
-
 };
