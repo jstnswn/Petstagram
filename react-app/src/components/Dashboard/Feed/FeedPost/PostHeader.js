@@ -6,6 +6,8 @@ import PostMenu from '../../../PostView/PostMenu'
 export default function PostHeader({ post }) {
   const [showPostMenuModal, setShowPostMenuModal] = useState(false)
 
+  const postOwnerFollowers = post.user.followers
+
   const showPostModal = () => {
     setShowPostMenuModal(true)
   }
@@ -18,10 +20,11 @@ export default function PostHeader({ post }) {
     <div className='post-header'>
       <img className='profile-pic' alt='profile avatar' src={post.user.image_url}/>
         <Link className='post-username' to={`/${post.user.username}`}>{post.user.username}</Link>
+
       <i className='fa-solid fa-ellipsis' onClick={showPostModal}></i>
       {showPostMenuModal && (
         <Modal onClose={closePostModal}>
-          <PostMenu post={post}/>
+          <PostMenu post={post} setShowPostMenuModal={setShowPostMenuModal}/>
         </Modal>
       )}
     </div>

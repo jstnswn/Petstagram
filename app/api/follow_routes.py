@@ -28,10 +28,9 @@ def delete_follow():
     data = request.json
     follower = User.query.get(follower_id)
 
-    followed_id = data['user_id']
-    followed = User.query.get(followed_id)
-    followed.followers.remove(follower)
+    unfollowed_id = data['user_id']
+    unfollowed = User.query.get(unfollowed_id)
+    unfollowed.followers.remove(follower)
 
     db.session.commit()
-    return { 'follower': follower.to_dict(),
-            'followed': followed.to_dict() }
+    return { 'userId': unfollowed_id}

@@ -6,17 +6,20 @@ import { unfollow } from '../../store/dashboard';
 import './PostMenu.css';
 import '../Dashboard/Feed/FeedPost/PostFooter.css'
 
-export default function PostMenu({ closeMenu, closeModal, post }) {
+export default function PostMenu({ closeMenu, closeModal, post, setShowPostMenuModal }) {
   const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector(({ session }) => session.user)
 
-  const postOwnerFollowers = post.user.followers
+  // const postOwnerFollowers = post.user.followers
+  const userFollowing = user.following.map(user => user.id)
+  console.log(userFollowing)
 
   const urlParam = history.location.pathname.slice(1).toLowerCase();
-  
+
   const unfollowClick = () => {
     dispatch(unfollow(post.user.id))
+    setShowPostMenuModal(false)
   }
 
   const removePost = () => dispatch(deletePost(post.id))
@@ -29,7 +32,7 @@ export default function PostMenu({ closeMenu, closeModal, post }) {
       {user.username.toLowerCase() === urlParam && (
         <div style={{color: 'red'}} onClick={removePost}>Delete</div>
       )}
-      { postOwnerFollowers.includes(user.id) &&
+      { userFollowing.includes(post.user.id) &&
         <div className='red' onClick={unfollowClick}>Unfollow</div>
       }
       <div>Share to...</div>
