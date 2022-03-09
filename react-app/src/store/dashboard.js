@@ -110,9 +110,9 @@ export const removeComment = (payload) => async dispatch => {
   });
 
   if (res.ok){
-    const id = await res.json();
-    dispatch(deleteComment(+id));
-    return id;
+    const data = await res.json();
+    dispatch(deleteComment(data));
+    return data;
   }
 }
 
