@@ -1,13 +1,109 @@
+
+#post-form-container {
+    width: 755px;
+    height: 755px;
+    display: flex;
+    flex-direction: column;
+    border-radius:  7px;
+    background-color: white;
+    transition: .5s;
+}
+
+#post-form-container.final-form {
+    width: 941px;
+    height: 641px;
+
+}
+
 .upload-post-form {
+    /* justify-self: center; */
     display: flex;
     flex-direction: column;
     padding: 27px 0px;
     justify-content: center;
-    border-radius: 6px;
+    align-items: center;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
 }
 
-.upload-post-form h2 {
+.upload-post.header {
+    height: 42px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 18px;
+    align-items: center;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.upload-post .fa-arrow-left {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.upload-post .next-button {
+    color: var(--button-blue);
+    cursor: pointer;
+}
+
+#post-form-container .upload-image.view {
+    height: 100%;
+    object-fit: cover;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.upload-form-container.final {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+#post-form-container .image-container {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#post-form-container .upload-image.form {
+    /* width: 100%; */
+    /* height: 100%; */
+    flex-grow: 1;
+    object-fit: cover;
+}
+
+.upload-form.side-container {
+    width: 340px;
+}
+
+.post-form.user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-left: 15px;
+}
+
+.post-form.profile-picture {
+    height: 28px;
+    width: 28px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.post-form.username {
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+
+#post-form-container h3 {
+    font-weight: normal;
     text-align: center;
+    width: 100%;
 }
 
 .upload-post-form label {
@@ -23,8 +119,18 @@
     border: 1px solid var(--border-gray);
 }
 
-.upload-post-form textarea {
+.upload-form textarea {
     padding: 10px;
+    width: 340px;
+    height: 170px;
+    border: none;
+}
+
+.post-form.word-count {
+    font-size: 15px;
+    color: gray;
+    /* display: flex; */
+    /* align-self: flex-end; */
 }
 
 .upload-post-form input {
@@ -39,4 +145,14 @@
     border-radius: 5px;
     border: none;
     align-self: center;
+}
+
+.upload-image-button {
+    width: 166px;
+    height: 30px;
+    background-color: var(--button-blue);
+    color: white;
+    padding: 5px 9px;
+    font: 14px;
+    /* color: pink; */
 }
