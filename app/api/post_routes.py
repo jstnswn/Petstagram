@@ -35,7 +35,6 @@ post_routes = Blueprint('post', __name__)
 
 @post_routes.route('/')
 def get_posts():
-    print('😬')
     current_user_id = current_user.get_id()
     posts = Post.get_posts_by_following(current_user_id)
     return {'posts': posts}
@@ -74,6 +73,29 @@ def create_post():
     db.session.add(new_post)
     db.session.commit()
     return {'post': new_post.to_dict()}, 200
+
+@post_routes.route('/upload-image', methods=['POST'])
+def upload_image():
+    if 'image' not in request.files:
+        return {'errors': 'image required'}, 400
+
+    image = request.files['image']
+
+    if not allowed_file(image.filename):
+        return {'errors': 'file type not permitted'}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+        return upload, 400
+
+    url = upload['url']
+
+    #TODO delete temporary images
+
+    return {'url': url}, 200
 
 @post_routes.route('/<int:post_id>', methods=['DELETE'])
 def delete_post(post_id):

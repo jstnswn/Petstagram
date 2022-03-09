@@ -2,6 +2,10 @@ import { normalizePosts, orderPostIds } from "./utils";
 
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
+const POST_LIKE = 'feed/POST_LIKE' // Post like action type
+const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
+
+const ADD_COMMENT = 'comment/ADD_COMMENT';
 
 // Action Creators
 const loadPosts = (data) => {
@@ -18,6 +22,22 @@ const loadPost = (data) => {
   }
 }
 
+
+const addComment = (data) => {
+  return{
+      type: ADD_COMMENT,
+      data
+  }
+}
+
+export const postLikeActionCreator = (user, postId) => { // Post like action creator
+  return { type: POST_LIKE, user, postId }
+}
+
+export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+  return { type: DELETE_LIKE, userId, postId }
+}
+
 // Thunks
 export const getFeedPosts = () => async dispatch => {
   const res = await fetch('/api/posts/');
@@ -27,7 +47,6 @@ export const getFeedPosts = () => async dispatch => {
     dispatch(loadPosts(data));
   } else {
     const errors = await res.json();
-    console.log(errors.errors);
   }
 };
 
@@ -52,6 +71,67 @@ export const createPost = (payload) => async dispatch => {
   }
 };
 
+
+export const createComment = (payload) => async dispatch => {
+
+  const res = await fetch('/api/comments/', {
+      method: 'POST',
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          user_id: payload.user_id,
+          post_id: payload.post_id,
+          comment: payload.comment,
+      })
+  })
+
+  if (res.ok) {
+      const data = await res.json()
+      console.log(data, "data")
+      dispatch(addComment(data));
+    } else {
+      const errors = await res.json();
+      return errors.errors;
+    }
+ }
+// Post like thunk creator
+export const postLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
+
+  if (res.ok) {
+    dispatch(postLikeActionCreator(data.user, payload.postId))
+  } else {
+    throw res
+  }
+  return data
+
+}
+
+// Delete like thunk creator
+export const deleteLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'DELETE',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
+
+  if (res.ok) {
+    dispatch(deleteLikeActionCreator(data.userId, data.postId))
+  } else {
+    throw res
+  }
+  return data
+}
+
 // Helper Functions
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
@@ -68,6 +148,8 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  let post;
+  let stateCopy;
   switch(action.type) {
     case LOAD_POSTS:
       const posts = normalizePosts(action.data.posts);
@@ -90,6 +172,28 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
+    case ADD_COMMENT:
+      stateCopy = {...state}
+      post = stateCopy.feed.postIds[action.data.comment.post_id]
+      post.comments[action.data.comment.id] = action.data.comment
+      return stateCopy
+
+      // post like
+    case POST_LIKE:
+      stateCopy = {...state}
+      post = stateCopy.feed.postIds[action.postId]
+      post.likers.push(action.user)
+      return stateCopy
+
+      // delete like
+    case DELETE_LIKE:
+      stateCopy = {...state}
+      console.log(action)
+      let likers = stateCopy.feed.postIds[action.postId].likers
+      let newLikers = likers.filter(user => user.id != action.userId)
+      stateCopy.feed.postIds[action.postId].likers = newLikers
+      return stateCopy
+
     default:
       return state
   }
