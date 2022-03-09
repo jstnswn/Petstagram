@@ -156,6 +156,10 @@
     padding-right: 15px;
 }
 
+.post-form.word-count.active {
+    color: tomato;
+}
+
 .upload-post-form input {
     padding-left: 10px;
 }

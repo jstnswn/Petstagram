@@ -156,7 +156,9 @@ export default function UploadPostForm({ closeModal }) {
               value={caption}
               onChange={e => setCaption(e.target.value)}
             />
-            <p className='post-form word-count'>{`${caption.length}/2,200`}</p>
+            <p
+              className={`post-form word-count ${caption.length > 2200 ? 'active' : ''}`}
+            >{`${caption.length}/2,200`}</p>
           </div>
         </div>
       </>
