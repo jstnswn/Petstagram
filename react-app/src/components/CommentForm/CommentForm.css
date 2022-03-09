@@ -1,0 +1,24 @@
+.comment-button{
+    border:none;
+    align-items: center;
+    background-color: white;
+    font-weight:bold;
+    color:#0095f6;
+}
+
+
+.comment-form-textarea{
+    border:none;
+    resize:none;
+}
+
+.comment-form-textarea:focus{
+    overflow: hidden;
+    outline:none;
+
+}
+
+.comment-form-container{
+    display:flex;
+    /* border-top: 1px grey solid; */
+}
