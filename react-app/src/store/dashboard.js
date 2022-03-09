@@ -6,6 +6,7 @@ const POST_LIKE = 'feed/POST_LIKE' // Post like action type
 const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
 const ADD_COMMENT = 'comment/ADD_COMMENT';
+const DELETE_COMMENT = 'comment/DELETE_COMMENT';
 
 // Action Creators
 const loadPosts = (data) => {
@@ -27,6 +28,13 @@ const addComment = (data) => {
   return{
       type: ADD_COMMENT,
       data
+  }
+}
+
+const deleteComment = (data) => {
+  return {
+    type: DELETE_COMMENT,
+    data
   }
 }
 
@@ -63,7 +71,7 @@ export const createPost = (payload) => async dispatch => {
   });
 
   if (res.ok) {
-    const data = await res.json()
+    const data = await res.json();
     dispatch(loadPost(data));
   } else {
     const errors = await res.json();
@@ -84,17 +92,30 @@ export const createComment = (payload) => async dispatch => {
           post_id: payload.post_id,
           comment: payload.comment,
       })
-  })
+  });
 
   if (res.ok) {
-      const data = await res.json()
-      console.log(data, "data")
+      const data = await res.json();
+      console.log(data, "data");
       dispatch(addComment(data));
     } else {
       const errors = await res.json();
       return errors.errors;
     }
  }
+
+export const removeComment = (payload) => async dispatch => {
+  const res = await fetch('/api/comments/', {
+    method:'DELETE',
+  });
+
+  if (res.ok){
+    const data = await res.json();
+    dispatch(deleteComment(data));
+    return data;
+  }
+}
+
 // Post like thunk creator
 export const postLike = payload => async dispatch => {
   const { postId: post_id } = payload
@@ -177,6 +198,15 @@ export default function reducer(state = initialState, action) {
       post = stateCopy.feed.postIds[action.data.comment.post_id]
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
+
+    // case DELETE_COMMENT:
+    //   stateCopy = {...state}
+    //   const commentsObj = stateCopy.feed.postIds[action.data.comment.post_id].comments
+    //   // console.log("COMMENTOBJECT", commentsObj)
+    //   delete commentsObj[action.data.comment.id]
+    //   return stateCopy
+
+
 
       // post like
     case POST_LIKE:
