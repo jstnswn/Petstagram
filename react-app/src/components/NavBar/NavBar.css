@@ -31,3 +31,50 @@
 .title-logo {
     height: 50px;
 }
+
+#nav-bar .upload-button-container {
+    border: 2px solid rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    padding-top: 1px;
+    /* margin-bottom: 5px; */
+    height: 22px;
+    width: 22px;
+    margin: 0 9px;
+    margin-bottom: 2px;
+}
+
+
+
+#nav-bar .upload-button {
+    font-size: 17px;
+}
+
+#nav-bar .likes-dropdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: red 1px solid; */
+    height: 22px;
+    width: 22px;
+
+}
+
+.likes-dropdown-container .like-icon {
+    font-size: 23px;
+}
+
+.nav-bar.right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.nav-bar.right-section * {
+    margin: 0 6px;
+    cursor: pointer;
+}
