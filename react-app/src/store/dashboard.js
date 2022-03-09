@@ -23,7 +23,6 @@ const loadPost = (data) => {
   }
 }
 
-
 const addComment = (data) => {
   return{
       type: ADD_COMMENT,

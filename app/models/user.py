@@ -46,7 +46,8 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'image_url': self.image_url,
-            'full_name': self.full_name
+            'full_name': self.full_name,
+            'followers': [user.id for user in self.followers],
         }
 
     def to_dict(self):

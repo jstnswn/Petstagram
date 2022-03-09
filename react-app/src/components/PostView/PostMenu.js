@@ -3,13 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deletePost } from '../../store/profile';
 import './PostMenu.css';
+import '../Dashboard/Feed/FeedPost/PostFooter.css'
 
 export default function PostMenu({ closeMenu, closeModal, post }) {
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(({ session }) => session.user)
+
+  const postOwnerFollowers = post.user.followers
 
   const urlParam = history.location.pathname.slice(1).toLowerCase();
-  const user = useSelector(({ session }) => session.user)
+
+  const unfollow = () => {
+    dispatch()
+  }
 
   const removePost = () => dispatch(deletePost(post.id))
     .then(() => closeModal());
@@ -21,6 +28,9 @@ export default function PostMenu({ closeMenu, closeModal, post }) {
       {user.username.toLowerCase() === urlParam && (
         <div style={{color: 'red'}} onClick={removePost}>Delete</div>
       )}
+      { postOwnerFollowers.includes(user.id) &&
+        <div className='red' onClick={unfollow}>Unfollow</div>
+      }
       <div>Share to...</div>
       <div onClick={closeMenu}>Cancel</div>
     </div>
