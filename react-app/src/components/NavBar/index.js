@@ -14,6 +14,9 @@ export default function NavBar() {
       <img className='title-logo' alt='Logo' src={petstagram}></img>
       </NavLink>
       <div className='nav-bar right-section'>
+        <div className='home-icon-container'>
+          <i className='far fa-home-alt home-icon'></i>
+        </div>
         <UploadModal />
         <LikesDropdown />
         <ProfileButton />

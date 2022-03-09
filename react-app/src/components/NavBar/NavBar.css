@@ -42,7 +42,7 @@
     /* margin-bottom: 5px; */
     height: 22px;
     width: 22px;
-    margin: 0 9px;
+    /* margin: 0 9px; */
     margin-bottom: 2px;
 }
 
@@ -63,6 +63,18 @@
 }
 
 .likes-dropdown-container .like-icon {
+    font-size: 23px;
+}
+
+#nav-bar .home-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 22px;
+    width: 22px;
+}
+
+#nav-bar .home-icon-container .home-icon {
     font-size: 23px;
 }
 
