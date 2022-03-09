@@ -19,6 +19,7 @@ function CommentForm({post}){
 
 
         const payload = {
+
             user_id: currentUser.id,
             post_id: postId,
             comment,

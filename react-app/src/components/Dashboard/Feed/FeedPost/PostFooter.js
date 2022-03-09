@@ -3,6 +3,7 @@ import './PostFooter.css';
 
 
 import CommentForm from '../../../CommentForm/CommentForm'
+import ViewComments from './ViewComments'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { postLike } from '../../../../store/dashboard';
@@ -59,9 +60,8 @@ export default function PostFooter({ post }) {
       <div className='footer-likes'>likes</div>
       <div className='comment-container'>
         <p className='caption'><span className='caption-username'>{post.user.username}</span>{post.caption}</p>
-        <div>comments...</div>
+        <ViewComments post={post}/>
       </div>
-      {/* <div className='add-comment-container'>add comment...</div> */}
       <div className='add-comment-container'>
         <CommentForm post={post}/>
       </div>
