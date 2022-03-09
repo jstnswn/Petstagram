@@ -24,8 +24,8 @@ export const postLikeActionCreator = (user, postId) => { // Post like action cre
   return { type: POST_LIKE, user, postId }
 }
 
-export const deleteLikeActionCreator = like => { // Delete like action creator
-  return { type: DELETE_LIKE, like }
+export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+  return { type: DELETE_LIKE, userId, postId }
 }
 
 // Thunks
@@ -80,6 +80,7 @@ export const postLike = payload => async dispatch => {
   return data
 }
 
+// Delete like thunk creator
 export const deleteLike = payload => async dispatch => {
   const { postId: post_id } = payload
   const res = await fetch('/api/likes/', {
@@ -91,7 +92,7 @@ export const deleteLike = payload => async dispatch => {
 
   if (res.ok) {
     console.log(data)
-    // dispatch(postLikeActionCreator(data.user, payload.postId))
+    dispatch(deleteLikeActionCreator(data.userId, data.postId))
   } else {
     throw res
   }
@@ -138,12 +139,20 @@ export default function reducer(state = initialState, action) {
         }
       }
       // post like
-      case POST_LIKE:
-        stateCopy = {...state}
-        const post = stateCopy.feed.postIds[action.postId]
-        post.likers.push(action.user)
-        console.log('postId', action.postId)
-        return stateCopy
+    case POST_LIKE:
+      stateCopy = {...state}
+      const post = stateCopy.feed.postIds[action.postId]
+      post.likers.push(action.user)
+      console.log('postId', action.postId)
+      return stateCopy
+      // delete like
+    case DELETE_LIKE:
+      stateCopy = {...state}
+      console.log(action)
+      let likers = stateCopy.feed.postIds[action.postId].likers
+      let newLikers = likers.map(user => user.id != action.userId)
+      stateCopy.feed.postIds[action.postId].likers = newLikers
+      return stateCopy
     default:
       return state
   }
