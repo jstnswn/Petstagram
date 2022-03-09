@@ -11,9 +11,9 @@ def create_follow():
     data = request.json
     follower = User.query.get(follower_id)
 
-    followed = data['user_id']
+    followed_id = data['user_id']
 
-    followed = User.query.get(followed)
+    followed = User.query.get(followed_id)
     followed.followers.append(follower)
 
     db.session.commit()
@@ -23,4 +23,14 @@ def create_follow():
 
 @follow_routes.route('/', methods=['DELETE'])
 def delete_follow():
-    
+    follower_id = 3    #current_user.get_id()
+    data = request.json
+    follower = User.query.get(follower_id)
+
+    followed_id = data['user_id']
+    followed = User.query.get(followed_id)
+    followed.followers.remove(follower)
+
+    db.session.commit()
+    return { 'follower': follower.to_dict(),
+            'followed': followed.to_dict() }
