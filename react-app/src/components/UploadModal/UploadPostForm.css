@@ -25,6 +25,7 @@
     border-radius: 8px;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .upload-post.header {
@@ -34,6 +35,7 @@
     padding: 0 18px;
     align-items: center;
     border-bottom: 1px solid var(--border-gray);
+    font-family: 'lato', sans-serif;
 }
 
 .upload-post .fa-arrow-left {
@@ -70,14 +72,15 @@
 }
 
 #post-form-container .upload-image.form {
-    /* width: 100%; */
-    /* height: 100%; */
-    flex-grow: 1;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
 .upload-form.side-container {
     width: 340px;
+    display: flex;
+    flex-direction: column;
 }
 
 .post-form.user-info {
@@ -123,14 +126,34 @@
     padding: 10px;
     width: 340px;
     height: 170px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
     border: none;
+    outline: none;
+    resize: none;
+}
+
+
+.drag-and-drop {
+    margin-bottom: 110px;
+    justify-self: flex-end;
+}
+
+.sc-bdvvtL.iciELI {
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    z-index: 1;
+    cursor: default;
 }
 
 .post-form.word-count {
     font-size: 15px;
-    color: gray;
-    /* display: flex; */
-    /* align-self: flex-end; */
+    color: rgba(88, 87, 87, 0.363);
+    align-self: flex-end;
+    padding-right: 15px;
 }
 
 .upload-post-form input {
@@ -138,7 +161,6 @@
 }
 
 .form button {
-    cursor: pointer;
     margin: 35px 0;
     width: 170px;
     height: 36px;
@@ -147,12 +169,20 @@
     align-self: center;
 }
 
+
 .upload-image-button {
     width: 166px;
     height: 30px;
     background-color: var(--button-blue);
     color: white;
     padding: 5px 9px;
-    font: 14px;
+    font-size: 15px;
+    position: absolute;
+    bottom: 36.5%;
+    font-family: 'lato', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    z-index: 2;
+    /* top: 50px; */
     /* color: pink; */
 }

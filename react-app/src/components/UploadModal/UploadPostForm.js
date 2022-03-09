@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FileUploader } from 'react-drag-drop-files';
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost } from '../../store/dashboard';
+import dragAndDropImage from '../../assets/drag-and-drop.png'
 import './UploadPostForm.css'
 
 export default function UploadPostForm({ closeModal }) {
@@ -10,18 +11,25 @@ export default function UploadPostForm({ closeModal }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [showTextForm, setShowTextForm] = useState(false);
   const [caption, setCaption] = useState('');
-  const [errors, setErrors] = useState([]);
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [errors, setErrors] = useState(false);
 
   const user = useSelector(({ session }) => session.user);
+  const hiddenInputRef = useRef(null);
+
+  useEffect(() => {
+    if (caption.length > 2200) setDisableSubmit(true);
+    else setDisableSubmit(false);
+  }, [caption])
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    if (disableSubmit) return
+    setDisableSubmit(true);
 
     const payload = {
       image,
       caption
     };
-
     // TODO error handling
     const data = await dispatch(createPost(payload))
       .then(() => closeModal())
@@ -30,36 +38,25 @@ export default function UploadPostForm({ closeModal }) {
     }
   };
 
-  const fileTypes = ['PDF', 'PNG', 'JPG', 'JPEG'];
+  const setFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
 
-  const hiddenInputRef = useRef(null);
+    reader.onload = (e) => setImageUrl(e.target.result);
+    setImage(file);
+  };
 
-  const handleClick = (e) => {
+  const handleButton = (e) => {
+    e.preventDefault()
     hiddenInputRef.current.click();
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setImage(file);
+    setFile(file);
   };
 
-  useEffect(() => {
-    if (!image) return;
-
-    const formData = new FormData();
-    formData.append('image', image);
-
-    (async () => {
-      const response = await fetch('/api/posts/upload-image', {
-        method: 'POST',
-        body: formData
-      })
-
-      const data = await response.json();
-      setImageUrl(data.url);
-    })();
-
-  }, [image])
+  const fileTypes = ['PDF', 'PNG', 'JPG', 'JPEG'];
 
   let headerContent;
   if (!imageUrl) {
@@ -71,17 +68,27 @@ export default function UploadPostForm({ closeModal }) {
   } else if (imageUrl && !showTextForm) {
     headerContent = (
       <>
-        <i className='fal fa-arrow-left' onClick={() => setImageUrl(null)}></i>
-        <h3>Placeholder</h3>
+        <i className='fal fa-arrow-left' onClick={() => {
+          setImageUrl(null);
+
+        }}></i>
+        {/* <h3></h3> */}
         <p className='next-button' onClick={() => setShowTextForm(true)}>Next</p>
       </>
     )
   } else {
     headerContent = (
       <>
-        <i className='fal fa-arrow-left' onClick={() => setImageUrl(null)}></i>
+        <i className='fal fa-arrow-left' onClick={() => setShowTextForm(false)}></i>
         <h3>Create new post</h3>
-        <p className='next-button' onClick={handleSubmit}>Submit</p>
+        <p
+          className={`next-button `}
+          style={{
+            opacity: caption.length > 2200 ? '50%' : '100%',
+            cursor: caption.length > 2200 ? 'default' : 'pointer'
+          }}
+          onClick={handleSubmit}
+        >Submit</p>
       </>
     )
   }
@@ -93,14 +100,14 @@ export default function UploadPostForm({ closeModal }) {
         className='upload-post-form form'
       // onSubmit={handleSubmit}
       >
-
+        <img className='drag-and-drop' alt='drag and drop' src={dragAndDropImage}/>
         <FileUploader
-          handleChange={(file) => setImage(file)}
+          handleChange={(file) => setFile(file)}
           name='image'
           types={fileTypes}
         />
         <button
-          onClick={handleClick}
+          onClick={handleButton}
           className='upload-image-button'
         >
           Select from computer
@@ -115,11 +122,12 @@ export default function UploadPostForm({ closeModal }) {
     )
   } else if (imageUrl && !showTextForm) {
     formContent = (
-      <img
-        alt='post content'
-        className='upload-image view'
-        src={imageUrl}
-      />
+      // <img
+      //   alt='post content'
+      //   className='upload-image view'
+      //   src={imageUrl}
+      // />
+      <img alt='post content' className='upload-image view' src={imageUrl}/>
     );
   } else {
     formContent = (
@@ -144,11 +152,11 @@ export default function UploadPostForm({ closeModal }) {
             </div>
             <textarea
               className='comment-input'
-              placeholder='Write a caption'
+              placeholder='Write a caption...'
               value={caption}
               onChange={e => setCaption(e.target.value)}
             />
-          <p className='post-form word-count'>{`${caption.length}/2,200`}</p>
+            <p className='post-form word-count'>{`${caption.length}/2,200`}</p>
           </div>
         </div>
       </>
@@ -164,4 +172,3 @@ export default function UploadPostForm({ closeModal }) {
     </div>
   )
 }
-
