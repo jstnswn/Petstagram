@@ -1,11 +1,23 @@
 
 import './ViewComments.css'
 import {useSelector} from 'react-redux';
+import React, { useState } from 'react';
+
+
+
 import PostView from '../../../PostView';
+import PostMenu from '../../../PostView/PostMenu';
+import { Modal } from '../../../../context/Modal';
 
 
+function ViewComments ({post, option, closeModal}) {
 
-function ViewComments ({post}) {
+    const [showModal, setShowModal] = useState(false);
+
+    const hideForm = () => {
+        setShowModal(false)
+    }
+
 
     const id = post.id
 
@@ -14,24 +26,33 @@ function ViewComments ({post}) {
 
 
     //delete logic
-    const handleClick = async(e)=>{
-        e.preventDefault();
-        const postId = post.id;
-        console.log(e.target.value)
-        const commentId = commentsArr[commentsArr.length-2].id
-        console.log(commentId, 'hehehe')
+    // const handleClick = async(e)=>{
+    //     e.preventDefault();
+    //     const postId = post.id;
+    //     console.log(e.target.value)
+    //     const commentId = commentsArr[commentsArr.length-2].id
+    //     console.log(commentId, 'hehehe')
 
-        // const payload = {
+    // }
 
-        // }
-    }
 
 
     return  (
         <div className="view-comments-container">
 
 
-            {commentsArr.length > 2 ? <div className="expand-view-comments">View all {commentsArr.length} comments</div> : null}
+            {/* {commentsArr.length > 2 ? <div className="expand-view-comments">View all {commentsArr.length} comments</div> : null} */}
+
+
+            {commentsArr.length > 2 ?
+             <div>
+                <a className="view-all-anchor" onClick={() => setShowModal(true)}>View all {commentsArr.length} comments</a>
+                {showModal && (
+                    <Modal onClose={() => setShowModal(false)}>
+                        <PostView post={post} />
+                    </Modal>
+                )}
+            </div> : null}
 
 
 
