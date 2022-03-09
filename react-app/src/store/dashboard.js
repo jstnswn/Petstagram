@@ -37,7 +37,6 @@ export const getFeedPosts = () => async dispatch => {
     dispatch(loadPosts(data));
   } else {
     const errors = await res.json();
-    console.log(errors.errors);
   }
 };
 
@@ -91,7 +90,6 @@ export const deleteLike = payload => async dispatch => {
   const data = await res.json()
 
   if (res.ok) {
-    console.log(data)
     dispatch(deleteLikeActionCreator(data.userId, data.postId))
   } else {
     throw res
@@ -138,19 +136,20 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
+
       // post like
     case POST_LIKE:
       stateCopy = {...state}
       const post = stateCopy.feed.postIds[action.postId]
       post.likers.push(action.user)
-      console.log('postId', action.postId)
       return stateCopy
+
       // delete like
     case DELETE_LIKE:
       stateCopy = {...state}
       console.log(action)
       let likers = stateCopy.feed.postIds[action.postId].likers
-      let newLikers = likers.map(user => user.id != action.userId)
+      let newLikers = likers.filter(user => user.id != action.userId)
       stateCopy.feed.postIds[action.postId].likers = newLikers
       return stateCopy
     default:

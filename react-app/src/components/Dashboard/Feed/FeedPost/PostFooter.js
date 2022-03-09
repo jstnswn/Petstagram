@@ -7,11 +7,6 @@ import { useState } from 'react';
 export default function PostFooter({ post }) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
-  // console.log('post---------------', post)
-  // console.log(sessionUser.id)
-  // console.log(post.likers)
-
-  const [isActive, setIsActive] = useState(false);
 
   const onClick = async e => {
     e.preventDefault()
@@ -20,14 +15,11 @@ export default function PostFooter({ post }) {
       likers.push(obj.id)
     })
     if (likers.includes(sessionUser.id)) {
-      //dispatch delete like
-      console.log('already liked this post')
       const payload = {
         postId: post.id
       }
       const data = await dispatch(deleteLike(payload))
     } else {
-      console.log('dispatching new like')
       const payload = {
         userId: sessionUser.id,
         postId: post.id
@@ -38,20 +30,16 @@ export default function PostFooter({ post }) {
 
     const icon = e.target
     if (icon.classList.contains('fa-regular')) {
-      // setIsActive(true)
       icon.style.color = 'red'
       icon.classList.add('fa-solid')
       icon.classList.remove('fa-regular')
     }
     else {
-      // setIsActive(false)
       icon.style.color = 'black'
       icon.classList.add('fa-regular')
       icon.classList.remove('fa-solid')
     }
   }
-
-  // className={isActive ? "red" : "white"}
 
   return (
     <div className='post-footer'>
