@@ -8,6 +8,9 @@ export default function PostFooter({ post }) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
 
+  let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
+  // console.log(isLiked)
+
   const onClick = async e => {
     e.preventDefault()
     let likers = []
@@ -27,15 +30,15 @@ export default function PostFooter({ post }) {
       const data = await dispatch(postLike(payload))
     }
 
-
+    console.log('inside event listener',isLiked)
     const icon = e.target
-    if (icon.classList.contains('fa-regular')) {
-      icon.style.color = 'red'
+    if (!isLiked) {
+      icon.classList.add('red')
       icon.classList.add('fa-solid')
       icon.classList.remove('fa-regular')
     }
     else {
-      icon.style.color = 'black'
+      icon.classList.remove('red')
       icon.classList.add('fa-regular')
       icon.classList.remove('fa-solid')
     }
@@ -43,9 +46,13 @@ export default function PostFooter({ post }) {
 
   return (
     <div className='post-footer'>
+      <div>{post.id}</div>
       <div className='footer-icons'>
         <span>
-          <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
+          {isLiked ?
+            <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
+            : <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
+          }
         </span>
         <span>
           <i className='fa-regular fa-comment post-icon'></i>

@@ -60,11 +60,6 @@ span i {
     background-color: white;
 }
 
-.fa-heart {
-    padding-left: 0;
-    font-size: 23px;
-}
-
-.fa-solid {
-    margin: 100px;
+.red {
+    color: rgb(249,67,77);
 }
