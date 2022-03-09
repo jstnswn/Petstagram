@@ -5,7 +5,9 @@ import { getProfilePosts } from '../../store/profile';
 import ProfileGrid from './ProfileGrid.js';
 import './ProfilePage.css';
 import { Modal } from '../../context/Modal';
-import ProPicModal from '../UploadProPicModal';
+import ProPicModal from './Header/ProPicModal';
+import FollowerFormModal from './Header/FollowerModal';
+import FollowingFormModal from './Header/FollowingModal';
 
 export default function ProfilePage() {
   const history = useHistory();
@@ -26,37 +28,6 @@ export default function ProfilePage() {
   const [showFollowerModal, setShowFollowerModal] = useState(false)
   const openFollowerModal = () => setShowFollowerModal(true)
   const closeFollowerModal = () => setShowFollowerModal(false)
-
-
-  function FollowingFormModal() {
-    return (
-        <>
-            <h2>{user.following.map(user => (
-              <>
-              <img className='modal-img' src={user.image_url}></img>
-              <li className='modal-username'>{user.username}</li>
-              <li className='modal-fullname'>{user.full_name}</li>
-              </>
-            ))}
-            </h2>
-        </>
-    )
-}
-
-  function FollowerFormModal() {
-    return (
-      <>
-      <h2>{user.followers.map(follower => (
-        <>
-        <img className='modal-img' src={follower.image_url}></img>
-        <li className='modal-username'>{follower.username}</li>
-        <li className='modal-fullname'>{follower.full_name}</li>
-        </>
-      ))}
-      </h2>
-      </>
-    )
-  }
 
   const posts = useSelector(({profile}) => profile.posts?.order)
 
@@ -90,7 +61,7 @@ export default function ProfilePage() {
           />
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal />
+              <ProPicModal user={user}/>
             </Modal>
           )}
           <div className='all-info'>
@@ -104,13 +75,13 @@ export default function ProfilePage() {
           <div onClick={openFollowerModal} className='followers'>{user.followers.length} followers</div>
           {showFollowerModal && (
             <Modal onClose={closeFollowerModal}>
-              <FollowerFormModal />
+              <FollowerFormModal user={user} />
             </Modal>
           )}
           <div onClick={openFollowingModal} className='following'>{user.following.length} following</div>
           {showFollowingModal && (
             <Modal onClose={closeFollowingModal}>
-              <FollowingFormModal />
+              <FollowingFormModal user={user} />
             </Modal>
           )}
         </div>
