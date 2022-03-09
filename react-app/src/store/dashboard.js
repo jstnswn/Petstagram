@@ -152,6 +152,15 @@ export const deleteLike = payload => async dispatch => {
   return data
 }
 
+export const unfollow = payload => async dispatch => {
+  const res = await fetch('/api/follows/', {
+    method: 'DELETE',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({"user_id": payload})
+  })
+
+}
+
 // Helper Functions
 export const getFeedPostsArray = (state) => {
   const orderedIds = state.dashboard.feed.order;
