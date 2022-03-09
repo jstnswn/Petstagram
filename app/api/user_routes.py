@@ -17,7 +17,7 @@ def fetch_user_by_username(username):
     #TODO error handling for no user found
     user = User.query.filter(User.username==username).one()
 
-    return {'user': user.f_to_dict()}, 200
+    return {'user': user.to_dict()}, 200
 
 
 

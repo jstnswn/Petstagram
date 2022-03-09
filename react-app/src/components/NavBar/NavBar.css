@@ -17,13 +17,22 @@
     height: 24px;
     width: 24px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .nav-dropdown {
     position: absolute;
     right: 0;
     background-color: white;
-    /* border: 1px solid red; */
     border-radius: 6px;
     box-shadow: .1px .1px 3px 1px rgba(0, 0, 0, 0.137);
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+    width: 100%;
+}
+
+.title-logo {
+    height: 50px;
 }
