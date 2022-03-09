@@ -5,7 +5,7 @@ import './PostFooter.css';
 import CommentForm from '../../../CommentForm/CommentForm'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { postLike } from '../../../../store/dashboard';
+import { postLike, deleteLike } from '../../../../store/dashboard';
 import { useState } from 'react';
 
 
@@ -13,37 +13,51 @@ export default function PostFooter({ post }) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
 
-  const [isActive, setIsActive] = useState(false);
+  let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
+  // console.log(isLiked)
 
   const onClick = async e => {
     e.preventDefault()
-    const payload = {
-      userId: sessionUser.id,
-      postId: post.id
+    let likers = []
+    post.likers.forEach((obj) => {
+      likers.push(obj.id)
+    })
+    if (likers.includes(sessionUser.id)) {
+      const payload = {
+        postId: post.id
+      }
+      const data = await dispatch(deleteLike(payload))
+    } else {
+      const payload = {
+        userId: sessionUser.id,
+        postId: post.id
+      }
+      const data = await dispatch(postLike(payload))
     }
-    const data = await dispatch(postLike(payload))
-    if (isActive) {
-      setIsActive(false)
-      console.log(isActive)
+
+    console.log('inside event listener',isLiked)
+    const icon = e.target
+    if (!isLiked) {
+      icon.classList.add('red')
+      icon.classList.add('fa-solid')
+      icon.classList.remove('fa-regular')
     }
     else {
-      setIsActive(true)
-      console.log(isActive)
+      icon.classList.remove('red')
+      icon.classList.add('fa-regular')
+      icon.classList.remove('fa-solid')
     }
   }
 
-  // className={isActive ? "red" : "white"}
-
   return (
     <div className='post-footer'>
+      <div>{post.id}</div>
       <div className='footer-icons'>
         <span>
-          <button id='like' onClick={onClick}>
-            <div className={isActive ? "red" : "white"}>
-              <i className='fa-regular fa-heart post-icon'></i>
-              <i class="fa-solid fa-heart red"></i>
-            </div>
-          </button>
+          {isLiked ?
+            <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
+            : <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
+          }
         </span>
         <span>
           <i className='fa-regular fa-comment post-icon'></i>

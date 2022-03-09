@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user
-from app.models import User, Post, Comment, db
+from app.models import User, Post, Comment, db, likes
 from app.forms.post_form import PostForm
 
 
@@ -28,8 +28,9 @@ def delete_like():
     post_id = data['post_id']
 
     post = Post.query.get(post_id)
-    liker_to_delete = [x for x in post.likers if x.id == user_id][0]
+    liker_to_delete = [user for user in post.likers if int(user.id) == int(user_id)][0]
     post.likers.remove(liker_to_delete)
 
     db.session.commit()
-    return {'post': post.to_dict()}, 200
+
+    return { "userId": user_id, "postId": post_id }
