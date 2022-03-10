@@ -23,8 +23,8 @@ class User(db.Model, UserMixin):
     followers = db.relationship(
         'User',
         secondary=follows,
-        primaryjoin=(follows.c.follower_id == id),
-        secondaryjoin=(follows.c.followed_id == id),
+        primaryjoin=(follows.c.followed_id == id),
+        secondaryjoin=(follows.c.follower_id == id),
         backref=db.backref('following', lazy='dynamic'),
         lazy='dynamic'
     )
@@ -46,7 +46,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'image_url': self.image_url,
-            'full_name': self.full_name
+            'full_name': self.full_name,
         }
 
     def to_dict(self):

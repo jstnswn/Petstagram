@@ -9,16 +9,6 @@
     border: 1px solid var(--border-gray);
 }
 
-.profile-button-container {
-    position: relative;
-}
-
-.profile-button {
-    height: 24px;
-    width: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-}
 
 .nav-dropdown {
     position: absolute;
@@ -26,13 +16,70 @@
     background-color: white;
     border-radius: 6px;
     box-shadow: .1px .1px 3px 1px rgba(0, 0, 0, 0.137);
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
-    width: 100%;
 }
 
 .title-logo {
     height: 50px;
+}
+
+.nav-bar.right-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#nav-bar .home-icon-container,
+#nav-bar .likes-dropdown-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+    position: relative;
+}
+
+#nav-bar .upload-button-container {
+    border: 2px solid rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    padding-top: 1px;
+    height: 22px;
+    width: 22px;
+    margin-bottom: 2px;
+}
+
+.profile-button-container {
+    position: relative;
+    height: 24px;
+    width: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar.right-section > * {
+    margin: 0 12px;
+    cursor: pointer;
+}
+
+#nav-bar .upload-button {
+    font-size: 17px;
+}
+
+.likes-dropdown-container .like-icon {
+    font-size: 23px;
+}
+
+
+#nav-bar .home-icon-container .home-icon {
+    font-size: 23px;
+    color: black;
+}
+
+.profile-button {
+    height: 24px;
+    width: 24px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
 }

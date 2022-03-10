@@ -20,8 +20,8 @@ function ViewComments ({post, option, closeModal}) {
 
 
     const id = post.id
-
-    const comments = useSelector(state=>state.dashboard.feed.postIds[id].comments)
+    const comments = post.comments
+    // const comments = useSelector(state=>state.dashboard.feed.postIds[id].comments)
     const commentsArr = Object.values(comments)
 
 
