@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { follow } from '../../../store/dashboard'
 
 
-export default function FollowerFormModal({ user: profileUser, closeModal }) {
+export default function FollowerFormModal({ profileUser, closeModal }) {
     const dispatch = useDispatch()
     const user = useSelector(({ session }) => session.user);
     const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
@@ -29,7 +29,7 @@ export default function FollowerFormModal({ user: profileUser, closeModal }) {
                                     <Link onClick={closeModal} className='link' to={`/${follower.username}`}>
                                         {follower.username}
                                     </Link>
-                                    {!userFollowing.includes(follower.id) &&
+                                    {(!userFollowing.includes(follower.id) && !(follower.id === user.id)) &&
                                         <div className='modal-follow' onClick={() => {
                                         dispatch(follow(follower.id))
                                         setUserFollowing(prev => [...userFollowing, follower.id])
