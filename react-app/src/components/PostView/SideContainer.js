@@ -15,7 +15,6 @@ function SideContainer ({post, closeMenu, closePostView}) {
     //comments variables
     const id = post.id;
 
-    console.log(post, "post")
     const comments = post.comments;
 
     const commentsArr = Object.values(comments);
