@@ -8,11 +8,11 @@ export default function NavDropdown() {
 
   return (
     <ul className='nav-dropdown'>
-      <li>
+      <li id='profile-btn'>
         <Link to={`/${user.username}`}>Profile</Link>
         {/* <i class="fas fa-user-circle"></i> */}
       </li>
-      <li>
+      <li id='logout-btn'>
         <LogoutButton />
       </li>
     </ul>

@@ -11,11 +11,13 @@ export default function NavBar() {
   return (
     <nav id='nav-bar'>
       <NavLink to='/' exact={true} activeClassName='active'>
-      <img className='title-logo' alt='Logo' src={petstagram}></img>
+        <img className='title-logo' alt='Logo' src={petstagram}></img>
       </NavLink>
       <div className='nav-bar right-section'>
         <div className='home-icon-container'>
-          <i className='far fa-home-alt home-icon'></i>
+          <NavLink className='link' to='/' exact={true} activeClassName='active'>
+            <i className='far fa-home-alt home-icon'></i>
+          </NavLink>
         </div>
         <UploadModal />
         <LikesDropdown />
