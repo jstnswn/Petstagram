@@ -6,7 +6,7 @@ import { unfollow } from '../../store/dashboard';
 import './PostMenu.css';
 import '../Dashboard/Feed/FeedPost/PostFooter.css'
 
-export default function PostMenu({ closeMenu, closeModal, post, setShowPostMenuModal }) {
+export default function PostMenu({ closeMenu, closePostView, post, setShowPostMenuModal, openEdit, closeEdit }) {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -20,18 +20,25 @@ export default function PostMenu({ closeMenu, closeModal, post, setShowPostMenuM
   const unfollowClick = () => {
     dispatch(unfollow(post.user.id))
     setShowPostMenuModal(false)
-  }
-
+  };
 
   const removePost = () => dispatch(deletePost(post.id))
-    .then(() => closeModal());
+    .then(() => closePostView());
+
+  const openEditMenu = () => {
+    // closePostView()
+    openEdit()
+  }
 
   // TODO dispatch route to remove from feed
 
   return (
     <div className='post-menu'>
       {user.username.toLowerCase() === urlParam && (
-        <div style={{ color: 'red' }} onClick={removePost}>Delete</div>
+        <>
+          <div style={{ color: 'red' }} onClick={removePost}>Delete</div>
+          <div onClick={openEditMenu}>Edit</div>
+        </>
       )}
       {userFollowing.includes(post.user.id) &&
         <div className='red' onClick={unfollowClick}>Unfollow</div>
