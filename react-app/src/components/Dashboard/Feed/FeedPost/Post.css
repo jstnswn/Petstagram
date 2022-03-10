@@ -12,12 +12,48 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-right: 10px;
 }
 
 .post-header .post-username {
-    width: 500px;
+    color: black;
+}
+
+.post-username:visited {
+    color: black;
+}
+#post-header-left {
+    display: flex;
+    align-items: center;
+}
+
+#post-header-links {
+    display: flex;
+    align-items: center;
+}
+
+#post-header-follow {
+    display: list-item;
+    list-style-type: disc;
+    margin-left: 30px;
+    color: #0095F6;
+}
+#post-header-follow::marker {
+    color: black;
+}
+#post-header-follow:hover {
+    cursor: pointer
+}
+
+
+.feed-profile-pic {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin: 0px 20px 0px 10px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .post-header .profile-pic {

@@ -11,9 +11,7 @@ export default function PostMenu({ closeMenu, closeModal, post, setShowPostMenuM
   const dispatch = useDispatch();
   const user = useSelector(({ session }) => session.user)
 
-  // const postOwnerFollowers = post.user.followers
   const userFollowing = user.following.map(user => user.id)
-  console.log(userFollowing)
 
   const urlParam = history.location.pathname.slice(1).toLowerCase();
 

@@ -1,4 +1,6 @@
 import { normalizePosts, orderPostIds } from "./utils";
+import { unfollowActionCreator } from "./session";
+import { followActionCreator } from "./session";
 
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
@@ -7,8 +9,6 @@ const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
 const ADD_COMMENT = 'comment/ADD_COMMENT';
 const DELETE_COMMENT = 'comment/DELETE_COMMENT';
-
-const UNFOLLOW = 'follow/UNFOLLOW'
 
 // Action Creators
 const loadPosts = (data) => {
@@ -50,13 +50,6 @@ export const deleteLikeActionCreator = (userId, postId)=> { // Delete like actio
   return {
     type: DELETE_LIKE,
     userId, postId
-  }
-}
-
-export const unfollowActionCreator = (userId) => {    // Unfollow action creator
-  return {
-    type: UNFOLLOW,
-    userId
   }
 }
 
@@ -167,6 +160,24 @@ export const deleteLike = payload => async dispatch => {
   return data
 }
 
+export const follow = payload => async dispatch => {
+  const res = await fetch('/api/follows/', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({"user_id": payload})
+  })
+  const data = await res.json()
+
+  // console.log('data:', data)
+
+  if (res.ok) {
+    dispatch(followActionCreator(data.user))
+  } else {
+    throw res
+  }
+  return data
+}
+
 export const unfollow = payload => async dispatch => {
   const res = await fetch('/api/follows/', {
     method: 'DELETE',
@@ -195,7 +206,7 @@ const initialState = {
   feed: {
     postIds: {},
     ordered: []
-  }
+  },
 };
 
 export default function reducer(state = initialState, action) {
@@ -252,15 +263,15 @@ export default function reducer(state = initialState, action) {
       return stateCopy
 
       // unfollow
-    case UNFOLLOW:
-      stateCopy = {...state}
-      const filtered = Object.values(stateCopy.feed.postIds).filter(post => post.user.id !== action.userId)
-      const obj = {}
-      filtered.map(post => obj[post.id] = post)
-      stateCopy.feed.postIds = obj
-      const arr = Object.keys(obj)
-      stateCopy.feed.order = stateCopy.feed.order.filter(id => arr.includes(`${id}`))
-      return stateCopy
+    // case UNFOLLOW:
+    //   stateCopy = {...state}
+    //   const filtered = Object.values(stateCopy.feed.postIds).filter(post => post.user.id !== action.userId)
+    //   const obj = {}
+    //   filtered.map(post => obj[post.id] = post)
+    //   stateCopy.feed.postIds = obj
+    //   const arr = Object.keys(obj)
+    //   stateCopy.feed.order = stateCopy.feed.order.filter(id => arr.includes(`${id}`))
+    //   return stateCopy
     default:
       return state
   }
