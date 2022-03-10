@@ -91,10 +91,10 @@ def seed_users():
 
     for user in users:
         # Have all seed users follow each other
-        for follower in users:
-            if follower.username == user.username:
-                continue
-            user.followers.append(follower)
+        # for follower in users:
+        #     if follower.username == user.username:
+        #         continue
+        #     user.followers.append(follower)
 
         db.session.add(user)
 
