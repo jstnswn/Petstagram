@@ -6,3 +6,4 @@ from .like import likes
 from .follow import follows
 from .comment_notification import CommentNotification
 from .like_notification import LikeNotification
+# like_notifications

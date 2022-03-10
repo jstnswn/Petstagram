@@ -1,9 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function LikesDropdown() {
+  const likes = useSelector(({ session }) => session.user.notifications.likes)
+  console.log('likes', likes)
   return (
     <div className='likes-dropdown-container'>
-      <i class='far fa-heart like-icon'></i>
+      <i
+        className='far fa-heart like-icon'
+        style={{
+          color: likes.length ? 'red' : 'black'
+        }}
+      ></i>
 
     </div>
   )

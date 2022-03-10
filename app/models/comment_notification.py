@@ -12,3 +12,12 @@ class CommentNotification(db.Model):
 
     user = db.relationship('User', back_populates='comment_notifications')
     comment = db.relationship('Comment', back_populates='comment_notifications')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user': self.user.f_to_dict(),
+            'post_id': self.post_id,
+            'comment': self.comment,
+            'is_checked': self.is_checked
+        }

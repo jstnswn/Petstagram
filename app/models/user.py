@@ -1,9 +1,13 @@
+# from app.models import like_notifications
+from sqlalchemy import ForeignKey
 from .db import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .like import likes
 from .follow import follows
+from .like_notification import LikeNotification # like_notifications
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -22,7 +26,10 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', back_populates='user')
     liked_posts = db.relationship('Post', back_populates='likers', secondary=likes)
     comment_notifications = db.relationship('CommentNotification', back_populates='user')
-    like_notifications = db.relationship('LikeNotification', back_populates='user')
+
+    like_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_to_id', back_populates='from_user')
+    l_from_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_from_id', backref='l_to_notifications', lazy='dynamic')
+    l_to_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_to_id', backref='l_from_notifications', lazy='dynamic')
 
 
     followers = db.relationship(
@@ -67,4 +74,7 @@ class User(db.Model, UserMixin):
             'created_at': self.created_at,
             'following': [user.f_to_dict() for user in self.following],
             'followers': [user.f_to_dict() for user in self.followers],
+            'notifications': {
+                'likes': [like.to_dict() for like in self.l_to_notifications]
+            }
         }
