@@ -50,7 +50,6 @@ const updateComment = (data) => {
 
 
 export const postLikeActionCreator = (user, postId) => { // Post like action creator
-const postLikeActionCreator = (user, postId) => { // Post like action creator
   return {
     type: POST_LIKE,
     user, postId
