@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 
 export default function LikesDropdown() {
   const likes = useSelector(({ session }) => session.user.notifications.likes)
-  console.log('likes', likes)
   return (
     <div className='likes-dropdown-container'>
       <i

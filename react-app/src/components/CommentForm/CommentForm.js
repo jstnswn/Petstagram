@@ -14,7 +14,6 @@ function CommentForm({ post }) {
 
     //useSelector on comments
     const url = document.URL;
-    console.log(url, "this is url")
 
 
     const handleSubmitDashboard = async (e) => {
