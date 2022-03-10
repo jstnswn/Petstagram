@@ -38,5 +38,6 @@ class Post(db.Model):
             'created_at': self.created_at
         }
 
+
     # added static method, dict comments, and dict image_url
     # added created_at so posts can be ordered
