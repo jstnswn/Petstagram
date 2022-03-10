@@ -8,12 +8,12 @@ export default function Dashboard() {
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    dispatch(getFeedPosts())
-      .then(() => setIsLoaded(true))
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getFeedPosts())
+  //     .then(() => setIsLoaded(true))
+  // }, [dispatch])
 
-  return isLoaded && (
+  return (
     <div id='dashboard-container'>
       <div className='feed-container'>
         <Feed />

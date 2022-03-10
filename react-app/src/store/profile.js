@@ -1,12 +1,15 @@
 import { normalizePosts, orderPostIds } from "./utils";
 
 const LOAD_POSTS = 'profile/LOAD_POSTS';
+const LOAD_POST = 'profile/LOAD_POST';
 const REMOVE_POST = 'profile/REMOVE_POST';
-
+const UPDATE_POST = 'profile/UPDATE_POST';
 
 const ADD_COMMENT = 'profile/ADD_COMMENT';
 const DELETE_COMMENT = 'profile/DELETE_COMMENT';
 
+const PROFILE_POST_LIKE = 'profile/PROFILE_POST_LIKE' // Post like action type
+const PROFILE_DELETE_LIKE = 'profile/PROFILE_DELETE_LIKE'
 
 // Action Creators
 const loadPosts = (data) => {
@@ -16,13 +19,26 @@ const loadPosts = (data) => {
   };
 };
 
+const loadPost = (data) => {
+  return {
+    type: LOAD_POST,
+    data
+  }
+}
+
+const updatePost = (data) => {
+  return {
+    type: UPDATE_POST,
+    data
+  }
+}
+
 const removePost = (postId) => {
   return {
     type: REMOVE_POST,
     postId
   };
 };
-
 
 const addComment = (data) => {
   return{
@@ -35,6 +51,20 @@ const deleteComment = (data) => {
   return {
     type: DELETE_COMMENT,
     data
+  }
+}
+
+const profilePostLikeActionCreator = (user, postId) => { // Post like action creator
+  return {
+    type: PROFILE_POST_LIKE,
+    user, postId
+  }
+}
+
+const profileDeleteLikeActionCreator = (userId, postId) => { // Post like action creator
+  return {
+    type: PROFILE_DELETE_LIKE,
+    userId, postId
   }
 }
 
@@ -53,7 +83,6 @@ export const getProfilePosts = (userId) => async dispatch => {
   }
 };
 
-
 export const createCommentProfile = (payload) => async dispatch => {
 
   const res = await fetch('/api/comments/', {
@@ -70,7 +99,6 @@ export const createCommentProfile = (payload) => async dispatch => {
 
   if (res.ok) {
       const data = await res.json();
-      console.log(data, "data");
       dispatch(addComment(data));
     } else {
       const errors = await res.json();
@@ -78,8 +106,32 @@ export const createCommentProfile = (payload) => async dispatch => {
     }
  }
 
+export const patchPost = (payload) => async dispatch => {
+  const { caption, postId} = payload;
 
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({caption})
+  });
 
+  if (res.ok) {
+    const data = await res.json();
+
+    // await Promise.all([
+    //   dispatch(removePost(postId)),
+    //   dispatch(loadPost(data))
+    // ])
+
+    dispatch(updatePost(data));
+  } else {
+    const errors = await res.json();
+    return errors.errors;
+  }
+
+};
 
 export const removeCommentProfile = (payload) => async dispatch => {
   const res = await fetch('/api/comments/', {
@@ -114,8 +166,41 @@ export const deletePost = (postId) => async dispatch => {
 
 };
 
+export const profilePostLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
 
+  if (res.ok) {
+    dispatch(profilePostLikeActionCreator(data.user, payload.postId))
+  } else {
+    throw res
+  }
+  return data
 
+}
+
+// Delete like thunk creator
+export const profileDeleteLike = payload => async dispatch => {
+  const { postId: post_id } = payload
+  const res = await fetch('/api/likes/', {
+    method: 'DELETE',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({post_id})
+  })
+  const data = await res.json()
+
+  if (res.ok) {
+    dispatch(profileDeleteLikeActionCreator(data.userId, data.postId))
+  } else {
+    throw res
+  }
+  return data
+}
 
 // Helper Functions
 export const getProfilePostsArray = (state) => {
@@ -148,6 +233,26 @@ export default function reducer(state = initialState, action) {
           order: orderedIds
         }
       }
+    case LOAD_POST:
+      return {
+        ...state,
+        posts: {
+          postIds: {
+            ...state.posts.postIds,
+            [action.data.post.id]: action.data.post
+          },
+          order: [action.data.post.id, ...state.posts.order]
+        }
+      }
+
+    case UPDATE_POST:
+      stateCopy = {...state};
+      post = stateCopy.posts.postIds[action.data.post.id]
+      // order = stateCopy.posts.order
+      post.caption = action.data.post.caption
+
+      return stateCopy;
+
     case REMOVE_POST:
       stateCopy = {...state};
       const postsOrder = stateCopy.posts.order;
@@ -160,9 +265,7 @@ export default function reducer(state = initialState, action) {
 
     case ADD_COMMENT:
       stateCopy = {...state}
-      console.log("stateCopy", stateCopy)
       post = stateCopy.posts.postIds[action.data.comment.post_id]
-      console.log(post, "THIS IS POSTprofile")
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
 
@@ -170,6 +273,20 @@ export default function reducer(state = initialState, action) {
       stateCopy = {...state}
       const commentsObj = stateCopy.posts.postIds[action.data.postId].comments
       delete commentsObj[action.data.commentId]
+      return stateCopy
+
+    case PROFILE_POST_LIKE:
+      stateCopy = {...state}
+      stateCopy.posts.postIds[action.postId].likers.push(action.user)
+      return stateCopy
+
+    case PROFILE_DELETE_LIKE:
+      stateCopy = {...state}
+      const likers = stateCopy.posts.postIds[action.postId].likers
+      console.log('likers',likers)
+      console.log(action.userId)
+      const newLikers = likers.filter(user => user.id != action.userId)
+      stateCopy.posts.postIds[action.postId].likers = newLikers
       return stateCopy
 
     default:

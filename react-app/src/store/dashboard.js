@@ -50,13 +50,14 @@ const updateComment = (data) => {
 
 
 export const postLikeActionCreator = (user, postId) => { // Post like action creator
+const postLikeActionCreator = (user, postId) => { // Post like action creator
   return {
     type: POST_LIKE,
     user, postId
   }
 }
 
-export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
   return {
     type: DELETE_LIKE,
     userId, postId
@@ -297,16 +298,6 @@ export default function reducer(state = initialState, action) {
       stateCopy.feed.postIds[action.postId].likers = newLikers
       return stateCopy
 
-      // unfollow
-    // case UNFOLLOW:
-    //   stateCopy = {...state}
-    //   const filtered = Object.values(stateCopy.feed.postIds).filter(post => post.user.id !== action.userId)
-    //   const obj = {}
-    //   filtered.map(post => obj[post.id] = post)
-    //   stateCopy.feed.postIds = obj
-    //   const arr = Object.keys(obj)
-    //   stateCopy.feed.order = stateCopy.feed.order.filter(id => arr.includes(`${id}`))
-    //   return stateCopy
     default:
       return state
   }
