@@ -103,7 +103,6 @@ export const createCommentDashboard = (payload) => async dispatch => {
 
   if (res.ok) {
       const data = await res.json();
-      console.log(data, "data");
       dispatch(addComment(data));
     } else {
       const errors = await res.json();
@@ -116,13 +115,14 @@ export const removeCommentDashboard = (payload) => async dispatch => {
     method:'DELETE',
     headers: { "Content-Type": "application/json"},
     body: JSON.stringify({
-      user_id: payload.comment_id,
+      comment_id: payload.comment_id,
       post_id: payload.post_id,
   })
   });
 
   if (res.ok){
     const data = await res.json();
+    console.log(data, "this is data from delete comment thunk")
     dispatch(deleteComment(data));
     return data;
   }
@@ -247,12 +247,11 @@ export default function reducer(state = initialState, action) {
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
 
-    // case DELETE_COMMENT:
-    //   stateCopy = {...state}
-    //   const commentsObj = stateCopy.feed.postIds[action.data.comment.post_id].comments
-    //   // console.log("COMMENTOBJECT", commentsObj)
-    //   delete commentsObj[action.data.comment.id]
-    //   return stateCopy
+    case DELETE_COMMENT:
+      stateCopy = {...state}
+      const commentsObj = stateCopy.feed.postIds[action.data.postId].comments
+      delete commentsObj[action.data.commentId]
+      return stateCopy
 
       // post like
     case POST_LIKE:

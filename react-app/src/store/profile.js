@@ -31,6 +31,13 @@ const addComment = (data) => {
   }
 }
 
+const deleteComment = (data) => {
+  return {
+    type: DELETE_COMMENT,
+    data
+  }
+}
+
 
 // Thunks
 export const getProfilePosts = (userId) => async dispatch => {
@@ -70,6 +77,27 @@ export const createCommentProfile = (payload) => async dispatch => {
       return errors.errors;
     }
  }
+
+
+
+
+export const removeCommentProfile = (payload) => async dispatch => {
+  const res = await fetch('/api/comments/', {
+    method:'DELETE',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      comment_id: payload.comment_id,
+      post_id: payload.post_id,
+  })
+  });
+
+  if (res.ok){
+    const data = await res.json();
+    console.log(data, "this is data from delete comment thunk")
+    dispatch(deleteComment(data));
+    return data;
+  }
+}
 
 export const deletePost = (postId) => async dispatch => {
   const res = await fetch(`/api/posts/${postId}`, {
@@ -136,6 +164,12 @@ export default function reducer(state = initialState, action) {
       post = stateCopy.posts.postIds[action.data.comment.post_id]
       console.log(post, "THIS IS POSTprofile")
       post.comments[action.data.comment.id] = action.data.comment
+      return stateCopy
+
+    case DELETE_COMMENT:
+      stateCopy = {...state}
+      const commentsObj = stateCopy.posts.postIds[action.data.postId].comments
+      delete commentsObj[action.data.commentId]
       return stateCopy
 
     default:
