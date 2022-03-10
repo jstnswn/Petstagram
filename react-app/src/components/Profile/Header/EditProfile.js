@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { Modal } from '../../../context/Modal';
 import UploadProPicForm from './UploadProPicForm'
-import './ProPicModal.css'
 
-export default function ProPicModal({ user, cancelModal }) {
+
+export default function EditProfileModal( { user, cancelModal } ) {
     const [showModal, setShowModal] = useState(false);
 
     const openModal = () => setShowModal(true);
     const closeModal = () => setShowModal(false);
+
     return (
         <>
-            <div className='edit-pro-pic-heading'>
+        <div className='edit-pro-pic-heading'>
             <img
             className='profile-pic-mini'
             alt='profile-button'
@@ -25,6 +26,8 @@ export default function ProPicModal({ user, cancelModal }) {
                         <UploadProPicForm closeModal={closeModal} />
                     </Modal>
                 )}
+                <div className='edit-btn'>Edit Username</div>
+                <div className='edit-btn'>Edit Full Name</div>
                 <div className='cancel-btn' onClick={cancelModal}>Cancel</div>
             </div>
         </>

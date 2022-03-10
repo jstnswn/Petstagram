@@ -16,6 +16,7 @@
     display:flex;
     align-items: flex-end;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 .x-btn-container {
@@ -68,6 +69,10 @@
     font-size: 14px;
     color: #262626;
     font-weight: bold;
+}
+
+.link:visited {
+    color: #262626;
 }
 
 .modal-fullname {

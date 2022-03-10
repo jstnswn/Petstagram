@@ -8,6 +8,7 @@ import { Modal } from '../../context/Modal';
 import ProPicModal from './Header/ProPicModal';
 import FollowerFormModal from './Header/FollowerModal';
 import FollowingFormModal from './Header/FollowingModal';
+import EditProfileModal from './Header/EditProfile';
 
 export default function ProfilePage() {
   const history = useHistory();
@@ -16,6 +17,10 @@ export default function ProfilePage() {
   const [userLoaded, setUserLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [user, setUser] = useState(null);
+
+  const [showEditProfileModal, setShowProfileModal] = useState(false);
+  const openEditProfileModal = () => setShowProfileModal(true);
+  const closeEditProfileModal = () => setShowProfileModal(false);
 
   const [showProPicModal, setShowProPicModal] = useState(false);
   const openProPicModal = () => setShowProPicModal(true);
@@ -61,27 +66,33 @@ export default function ProfilePage() {
           />
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal user={user}/>
+              <ProPicModal user={user} cancelModal={closeProPicModal}/>
             </Modal>
           )}
           <div className='all-info'>
         <div className='top-column'>
         <div className='profile-username'>{user.username}
         </div>
-        <button className='edit-profile'>Edit Profile</button>
+        <button onClick={openEditProfileModal} className='edit-profile'>Edit Profile</button>
+        {showEditProfileModal && (
+          <Modal onClose={closeEditProfileModal}>
+            <EditProfileModal user={user} cancelModal={closeEditProfileModal}/>
+            </Modal>
+        )}
         </div>
         <div className='mid-column'>
           <div className='posts-number'>{posts.length} posts</div>
           <div onClick={openFollowerModal} className='followers'>{user.followers.length} followers</div>
           {showFollowerModal && (
             <Modal onClose={closeFollowerModal}>
-              <FollowerFormModal user={user} />
+              <FollowerFormModal user={user} closeModal={closeFollowerModal} />
+
             </Modal>
           )}
           <div onClick={openFollowingModal} className='following'>{user.following.length} following</div>
           {showFollowingModal && (
             <Modal onClose={closeFollowingModal}>
-              <FollowingFormModal user={user} />
+              <FollowingFormModal user={user} closeModal={closeFollowingModal}/>
             </Modal>
           )}
         </div>
