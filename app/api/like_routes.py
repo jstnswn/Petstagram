@@ -36,6 +36,13 @@ def delete_like():
     liker_to_delete = [user for user in post.likers if int(user.id) == int(user_id)][0]
     post.likers.remove(liker_to_delete)
 
+    # Delete notification if exists
+    notification = LikeNotification.query.filter(
+        LikeNotification.user_from_id==user_id, LikeNotification.user_to_id==post.user.id, LikeNotification.post_id==post.id).one()
+
+    if (notification):
+        db.session.delete(notification)
+
     db.session.commit()
 
     return { "userId": user_id, "postId": post_id }
