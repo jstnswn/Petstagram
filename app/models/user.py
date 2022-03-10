@@ -14,11 +14,16 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False)
     image_url = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
+
+
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     posts = db.relationship('Post', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
     liked_posts = db.relationship('Post', back_populates='likers', secondary=likes)
+    comment_notifications = db.relationship('CommentNotification', back_populates='user')
+    like_notifications = db.relationship('LikeNotification', back_populates='user')
+
 
     followers = db.relationship(
         'User',
@@ -39,6 +44,9 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+    def check_notifications(self):
+        pass
 
     # Follower_to_dict to avoid recursive calling of to_dict
     def f_to_dict(self):

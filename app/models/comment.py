@@ -12,6 +12,7 @@ class Comment(db.Model):
 
     user = db.relationship('User', back_populates='comments')
     post = db.relationship('Post', back_populates='comments')
+    comment_notifications = db.relationship('CommentNotification', back_populates='comment', cascade='all, delete-orphan')
 
     def to_dict(self):
 

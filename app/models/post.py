@@ -16,6 +16,7 @@ class Post(db.Model):
     user = db.relationship('User', back_populates='posts')
     comments = db.relationship('Comment', back_populates='post', cascade='all, delete-orphan')
     likers = db.relationship('User', back_populates='liked_posts', secondary=likes)
+    like_notifications = db.relationship('LikeNotification', back_populates='post', cascade='all, delete-orphan')
 
     @staticmethod
     def get_posts_by_following(current_user_id):
