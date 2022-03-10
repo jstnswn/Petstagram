@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import './Footer.css'
 
 export default function Footer() {
@@ -37,11 +38,11 @@ export default function Footer() {
                 <div id='about-us-dropdown' onClick={setShowAboutUs}>About Us<i class="fa-solid fa-angle-down down-caret"></i></div>
                 {showAboutUs && (
                     <ul id='about-us-list'>
-                        <li className='names'><a href='https://github.com/jchau-623'>Justin Chau</a></li>
-                        <li className='names'><a href='https://github.com/davigravi'>David Lee</a></li>
-                        <li className='names'><a href='https://github.com/jstnswn'>Justin Sweeney</a></li>
-                        <li className='names'><a href='https://github.com/srvorkap'>Srdan Vorkapic</a></li>
-                        <li className='names'><a href='https://github.com/Noslepr'>Chris Young</a></li>
+                        <li className='names'><a href='https://github.com/jchau-623' target='_blank'>Justin Chau</a></li>
+                        <li className='names'><a href='https://github.com/davigravi' target='_blank'>David Lee</a></li>
+                        <li className='names'><a href='https://github.com/jstnswn' target='_blank'>Justin Sweeney</a></li>
+                        <li className='names'><a href='https://github.com/srvorkap' target='_blank'>Srdan Vorkapic</a></li>
+                        <li className='names'><a href='https://github.com/Noslepr' target='_blank'>Chris Young</a></li>
                     </ul>
                 )}
                 <p>© 2022 Petstagram an Instagram Clone</p>
