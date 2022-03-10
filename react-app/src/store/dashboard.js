@@ -111,9 +111,14 @@ export const createCommentDashboard = (payload) => async dispatch => {
     }
  }
 
-export const removeComment = (payload) => async dispatch => {
+export const removeCommentDashboard = (payload) => async dispatch => {
   const res = await fetch('/api/comments/', {
     method:'DELETE',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      user_id: payload.comment_id,
+      post_id: payload.post_id,
+  })
   });
 
   if (res.ok){

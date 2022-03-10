@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import CommentForm from '../CommentForm/CommentForm';
 import './SideContainer.css'
 import { postLike, deleteLike } from '../../store/dashboard';
+import DeleteComment from '../DeleteComment/DeleteComment';
 
-function SideContainer ({post}) {
+function SideContainer ({post, closeMenu, closeModal}) {
 
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
@@ -84,7 +85,7 @@ function SideContainer ({post}) {
                     <div> */}
                         <a href={`/${comment.user.username}`}>{comment.user.username}</a>
                         <span>{comment.comment}</span>
-                        {comment.user.id === sessionUser.id ? <button>Delete</button>     : null}
+                        {comment.user.id === sessionUser.id ? <DeleteComment post={post} commentId={comment.id}/>     : null}
                     </div>
                 </li>
 

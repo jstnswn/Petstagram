@@ -34,3 +34,5 @@ def create_comment():
         db.session.commit()
 
         return {"comment": comment.to_dict()}
+
+
