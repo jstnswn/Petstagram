@@ -29,35 +29,15 @@ export default function PostMenu({ closeMenu, closeModal, post, setShowPostMenuM
   // TODO dispatch route to remove from feed
 
   return (
-   
-      <div className='post-menu'>
-        {user.username.toLowerCase() === urlParam && (
-          <>
-            <div style={{ color: 'red' }} onClick={removePost}>Delete</div>
-            <div onClick={() => {
-              setShowEditForm(true)
-              closeModal(true)
-            }}>Edit</div>
-          </>
-        )}
-        <div>Share to...</div>
-        <div onClick={closeMenu}>Cancel</div>
-      </div>
-
-      {showEditForm && (
-        <Modal onClose={() => setShowEditForm(false)}>
-          {/* This needs to happen in PostView to replace the current modal. Move show menu logic there */}
-          <PostEditForm post={post}/>
-        </Modal>
+    <div className='post-menu'>
+      {user.username.toLowerCase() === urlParam && (
+        <div style={{ color: 'red' }} onClick={removePost}>Delete</div>
       )}
-
-
-      { userFollowing.includes(post.user.id) &&
+      {userFollowing.includes(post.user.id) &&
         <div className='red' onClick={unfollowClick}>Unfollow</div>
       }
       <div>Share to...</div>
       <div onClick={closeMenu}>Cancel</div>
     </div>
-
   )
 }
