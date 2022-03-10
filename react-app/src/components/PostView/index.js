@@ -3,6 +3,9 @@ import { Modal } from '../../context/Modal';
 import PostMenu from './PostMenu';
 import './PostView.css';
 
+
+import SideContainer from './SideContainer';
+
 export default function PostView({ post, option, closeModal }) {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -29,31 +32,34 @@ export default function PostView({ post, option, closeModal }) {
           src={post.image_url}
         />
       </div>
-        <div className='post-view-side-container'>
-          <div className='header'>
-            <div className='header-box'>
-              <img
-                alt='profile avatar'
-                src={post.user.image_url}
-                style={{
-                  height: 32,
-                  width: 32,
-                  borderRadius: '50%'
-                }}
-              />
-              <div className='user-header-info'>
-                {headerInfo}
-              </div>
-            </div>
-            <i className='far fa-ellipsis-h post-view'
-              onClick={openMenu}
+      <div className='post-view-side-container'>
+        <div className='header'>
+          <div className='header-box'>
+            <img
+              alt='profile avatar'
+              src={post.user.image_url}
+              style={{
+                height: 32,
+                width: 32,
+                borderRadius: '50%'
+              }}
             />
+            <div className='user-header-info'>
+              {headerInfo}
+            </div>
           </div>
+          <i className='far fa-ellipsis-h post-view'
+            onClick={openMenu}
+          />
         </div>
+        <SideContainer post={post} closeModal={closeModal} closeMenu={closeMenu}/>
+
+
+      </div>
 
       {showMenu && (
         <Modal onClose={closeMenu}>
-          <PostMenu closeMenu={closeMenu} closeModal={closeModal} post={post}/>
+          <PostMenu closeMenu={closeMenu} closeModal={closeModal} post={post} />
         </Modal>
       )}
     </div>

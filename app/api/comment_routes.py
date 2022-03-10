@@ -34,3 +34,20 @@ def create_comment():
         db.session.commit()
 
         return {"comment": comment.to_dict()}
+
+@comment_routes.route('/', methods=['DELETE'])
+def delete_comment():
+
+    data = request.json
+
+    comment_id = data['comment_id']
+    post_id = data['post_id']
+
+    print(post_id,'---------')
+    print(comment_id, '------')
+
+    comment = Comment.query.filter(Comment.id == comment_id).first()
+   
+    db.session.delete(comment)
+    db.session.commit()
+    return { "commentId": comment_id, "postId": post_id }

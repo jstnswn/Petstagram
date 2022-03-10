@@ -1,0 +1,11 @@
+.delete-comment-menu div{
+    border-radius: 7px;
+    border-bottom: 1px solid var(--border-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    height: 48px;
+    width: 300px;
+    cursor: pointer;
+}
