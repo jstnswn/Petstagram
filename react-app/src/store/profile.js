@@ -19,7 +19,7 @@ const loadPosts = (data) => {
   };
 };
 
-const loadPost = (data) => {
+export const loadPost = (data) => {
   return {
     type: LOAD_POST,
     data
@@ -81,6 +81,27 @@ export const getProfilePosts = (userId) => async dispatch => {
   } else {
     const errors = await res.json();
     console.log(errors.errors)
+  }
+};
+
+export const createPost = (payload) => async dispatch => {
+  const { image, caption } = payload;
+
+  const formData = new FormData();
+  formData.append('image', image);
+  formData.append('caption', caption);
+
+  const res = await fetch('/api/posts/', {
+    method: 'POST',
+    body: formData
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadPost(data));
+  } else {
+    const errors = await res.json();
+    return errors.errors;
   }
 };
 
@@ -233,11 +254,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         posts: {
+          order: [action.data.post.id, ...state.posts.order],
           postIds: {
             ...state.posts.postIds,
             [action.data.post.id]: action.data.post
-          },
-          order: [action.data.post.id, ...state.posts.order]
+          }
         }
       }
 
