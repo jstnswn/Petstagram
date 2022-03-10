@@ -4,6 +4,7 @@ import { followActionCreator } from "./session";
 
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
+const UPDATE_POST = 'feed/UPDATE_POST';
 const POST_LIKE = 'feed/POST_LIKE' // Post like action type
 const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
@@ -29,6 +30,14 @@ const addComment = (data) => {
   return{
       type: ADD_COMMENT,
       data
+  }
+}
+
+export const updatePost = (postId, caption) => {
+  return {
+    type: UPDATE_POST,
+    postId,
+    caption
   }
 }
 
@@ -239,6 +248,14 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
+
+    case UPDATE_POST:
+        stateCopy = {...state};
+        post = stateCopy.feed.postIds[action.postId];
+        post.caption = action.caption;
+
+        return stateCopy;
+
     case ADD_COMMENT:
       stateCopy = {...state}
       console.log("stateCopy", stateCopy)

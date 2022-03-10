@@ -26,10 +26,11 @@ const loadPost = (data) => {
   }
 }
 
-const updatePost = (data) => {
+const updatePost = (postId, caption) => {
   return {
     type: UPDATE_POST,
-    data
+    postId,
+    caption
   }
 }
 
@@ -107,7 +108,7 @@ export const createCommentProfile = (payload) => async dispatch => {
  }
 
 export const patchPost = (payload) => async dispatch => {
-  const { caption, postId} = payload;
+  const { postId, caption } = payload;
 
   const res = await fetch(`/api/posts/${postId}`, {
     method: 'PATCH',
@@ -118,14 +119,9 @@ export const patchPost = (payload) => async dispatch => {
   });
 
   if (res.ok) {
-    const data = await res.json();
+    // const data = await res.json();
 
-    // await Promise.all([
-    //   dispatch(removePost(postId)),
-    //   dispatch(loadPost(data))
-    // ])
-
-    dispatch(updatePost(data));
+    dispatch(updatePost(postId, caption));
   } else {
     const errors = await res.json();
     return errors.errors;
@@ -247,9 +243,9 @@ export default function reducer(state = initialState, action) {
 
     case UPDATE_POST:
       stateCopy = {...state};
-      post = stateCopy.posts.postIds[action.data.post.id]
+      post = stateCopy.posts.postIds[action.postId]
       // order = stateCopy.posts.order
-      post.caption = action.data.post.caption
+      post.caption = action.caption
 
       return stateCopy;
 

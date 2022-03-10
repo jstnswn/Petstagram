@@ -69,7 +69,7 @@ export default function PostView({ post, option, closePostView }) {
 
       {showEditMenu && (
         <Modal onClose={closeEdit} option='layer'>
-          <PostEditForm post={post} closeEdit={closeEdit} closeMenu={closeMenu}/>
+          <PostEditForm post={post} closeEdit={closeEdit} closeMenu={closeMenu} option={option}/>
         </Modal>
       )}
 

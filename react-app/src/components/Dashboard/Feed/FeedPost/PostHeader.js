@@ -41,6 +41,8 @@ export default function PostHeader({ post }) {
           <PostMenu post={post} setShowPostMenuModal={setShowPostMenuModal}/>
         </Modal>
       )}
+
+      
     </div>
   )
 }
