@@ -6,7 +6,7 @@ import './PostView.css';
 
 import SideContainer from './SideContainer';
 
-export default function PostView({ post, option, closeModal }) {
+export default function PostView({ post, option, closePostView, openEdit, closeEdit }) {
   const [showMenu, setShowMenu] = useState(false);
 
   let headerInfo;
@@ -52,14 +52,14 @@ export default function PostView({ post, option, closeModal }) {
             onClick={openMenu}
           />
         </div>
-        <SideContainer post={post} closeModal={closeModal} closeMenu={closeMenu}/>
+        <SideContainer post={post} closePostView={closePostView} closeMenu={closeMenu}/>
 
 
       </div>
 
       {showMenu && (
         <Modal onClose={closeMenu}>
-          <PostMenu closeMenu={closeMenu} closeModal={closeModal} post={post} />
+          <PostMenu closeMenu={closeMenu} closePostView={closePostView} openEdit={openEdit} closeEdit={closeEdit} post={post} />
         </Modal>
       )}
     </div>

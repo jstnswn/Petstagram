@@ -5,7 +5,7 @@ import './SideContainer.css'
 import { postLike, deleteLike } from '../../store/dashboard';
 import DeleteComment from '../DeleteComment/DeleteComment';
 
-function SideContainer ({post, closeMenu, closeModal}) {
+function SideContainer ({post, closeMenu, closePostView}) {
 
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)

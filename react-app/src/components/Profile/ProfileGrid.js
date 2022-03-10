@@ -3,14 +3,19 @@ import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { getProfilePostsArray } from '../../store/profile';
 import PostView from '../PostView';
+import PostEditForm from '../PostView/PostEditForm';
 
 export default function ProfileGrid() {
   const [showIdx, setShowIdx] = useState(null);
+  const [showEditMenu, setShowEditMenu] = useState(false);
 
   const posts = useSelector(getProfilePostsArray);
 
-  const openModal = (idx) => setShowIdx(idx);
-  const closeModal = () => setShowIdx(null);
+  const openPostView = (idx) => setShowIdx(idx);
+  const closePostView = () => setShowIdx(null);
+
+  const openEdit = () => setShowEditMenu(true);
+  const closeEdit = () => setShowEditMenu(false);
 
   return (
     <div className='profile-grid'>
@@ -20,15 +25,21 @@ export default function ProfileGrid() {
             className='profile-grid-item'
             src={post.image_url}
             alt='user post'
-            onClick={() => openModal(idx)}
+            onClick={() => openPostView(idx)}
             style={{
               gridColumnStart: idx % 3 + 1
             }}
           />
 
           {showIdx === idx && (
-            <Modal onClose={closeModal}>
-              <PostView post={post} closeModal={closeModal}/>
+            <Modal onClose={closePostView}>
+              <PostView post={post} openEdit={openEdit} closeEdit={closeEdit} closePostView={closePostView}/>
+            </Modal>
+          )}
+
+          {showEditMenu && (
+            <Modal onClose={closeEdit}>
+              <PostEditForm post={post} closeEdit={closeEdit}/>
             </Modal>
           )}
         </div>
