@@ -26,7 +26,7 @@ export default function PostMenu({ closeMenu, closePostView, post, setShowPostMe
     .then(() => closePostView());
 
   const openEditMenu = () => {
-    closePostView()
+    // closePostView()
     openEdit()
   }
 

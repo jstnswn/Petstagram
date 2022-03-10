@@ -7,16 +7,11 @@ import PostEditForm from '../PostView/PostEditForm';
 
 export default function ProfileGrid() {
   const [showIdx, setShowIdx] = useState(null);
-  const [showEditMenu, setShowEditMenu] = useState(false);
 
   const posts = useSelector(getProfilePostsArray);
 
   const openPostView = (idx) => setShowIdx(idx);
   const closePostView = () => setShowIdx(null);
-
-  const openEdit = () => setShowEditMenu(true);
-  const closeEdit = () => setShowEditMenu(false);
-
   return (
     <div className='profile-grid'>
       {posts.map((post, idx) => (
@@ -33,13 +28,7 @@ export default function ProfileGrid() {
 
           {showIdx === idx && (
             <Modal onClose={closePostView}>
-              <PostView post={post} openEdit={openEdit} closeEdit={closeEdit} closePostView={closePostView}/>
-            </Modal>
-          )}
-
-          {showEditMenu && (
-            <Modal onClose={closeEdit}>
-              <PostEditForm post={post} closeEdit={closeEdit}/>
+              <PostView post={post} closePostView={closePostView}/>
             </Modal>
           )}
         </div>

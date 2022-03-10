@@ -1,7 +1,9 @@
 import { normalizePosts, orderPostIds } from "./utils";
 
 const LOAD_POSTS = 'profile/LOAD_POSTS';
+const LOAD_POST = 'profile/LOAD_POST';
 const REMOVE_POST = 'profile/REMOVE_POST';
+const UPDATE_POST = 'profile/UPDATE_POST';
 
 
 const ADD_COMMENT = 'profile/ADD_COMMENT';
@@ -16,13 +18,26 @@ const loadPosts = (data) => {
   };
 };
 
+const loadPost = (data) => {
+  return {
+    type: LOAD_POST,
+    data
+  }
+}
+
+const updatePost = (data) => {
+  return {
+    type: UPDATE_POST,
+    data
+  }
+}
+
 const removePost = (postId) => {
   return {
     type: REMOVE_POST,
     postId
   };
 };
-
 
 const addComment = (data) => {
   return{
@@ -53,7 +68,6 @@ export const getProfilePosts = (userId) => async dispatch => {
   }
 };
 
-
 export const createCommentProfile = (payload) => async dispatch => {
 
   const res = await fetch('/api/comments/', {
@@ -78,8 +92,32 @@ export const createCommentProfile = (payload) => async dispatch => {
     }
  }
 
+export const patchPost = (payload) => async dispatch => {
+  const { caption, postId} = payload;
 
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({caption})
+  });
 
+  if (res.ok) {
+    const data = await res.json();
+
+    // await Promise.all([
+    //   dispatch(removePost(postId)),
+    //   dispatch(loadPost(data))
+    // ])
+
+    dispatch(updatePost(data));
+  } else {
+    const errors = await res.json();
+    return errors.errors;
+  }
+
+};
 
 export const removeCommentProfile = (payload) => async dispatch => {
   const res = await fetch('/api/comments/', {
@@ -148,6 +186,26 @@ export default function reducer(state = initialState, action) {
           order: orderedIds
         }
       }
+    case LOAD_POST:
+      return {
+        ...state,
+        posts: {
+          postIds: {
+            ...state.posts.postIds,
+            [action.data.post.id]: action.data.post
+          },
+          order: [action.data.post.id, ...state.posts.order]
+        }
+      }
+
+    case UPDATE_POST:
+      stateCopy = {...state};
+      post = stateCopy.posts.postIds[action.data.post.id]
+      // order = stateCopy.posts.order
+      post.caption = action.data.post.caption
+
+      return stateCopy;
+
     case REMOVE_POST:
       stateCopy = {...state};
       const postsOrder = stateCopy.posts.order;

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import { Modal } from '../../context/Modal';
+import PostEditForm from './PostEditForm';
 import PostMenu from './PostMenu';
 import './PostView.css';
 
 
 import SideContainer from './SideContainer';
 
-export default function PostView({ post, option, closePostView, openEdit, closeEdit }) {
+export default function PostView({ post, option, closePostView }) {
   const [showMenu, setShowMenu] = useState(false);
+  const [showEditMenu, setShowEditMenu] = useState(false);
 
   let headerInfo;
   if (option === 'feed') {
@@ -22,6 +24,9 @@ export default function PostView({ post, option, closePostView, openEdit, closeE
 
   const openMenu = () => setShowMenu(true);
   const closeMenu = () => setShowMenu(false);
+
+  const openEdit = () => setShowEditMenu(true);
+  const closeEdit = () => setShowEditMenu(false);
 
   return (
     <div className='post-view-container'>
@@ -54,7 +59,6 @@ export default function PostView({ post, option, closePostView, openEdit, closeE
         </div>
         <SideContainer post={post} closePostView={closePostView} closeMenu={closeMenu}/>
 
-
       </div>
 
       {showMenu && (
@@ -62,6 +66,13 @@ export default function PostView({ post, option, closePostView, openEdit, closeE
           <PostMenu closeMenu={closeMenu} closePostView={closePostView} openEdit={openEdit} closeEdit={closeEdit} post={post} />
         </Modal>
       )}
+
+      {showEditMenu && (
+        <Modal onClose={closeEdit} option='layer'>
+          <PostEditForm post={post} closeEdit={closeEdit} closeMenu={closeMenu}/>
+        </Modal>
+      )}
+
     </div>
   )
 }
