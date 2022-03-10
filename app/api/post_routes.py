@@ -79,3 +79,14 @@ def delete_post(post_id):
     db.session.commit()
 
     return {'response': 'Post Deleted'}, 204
+
+@post_routes.route('/<int:post_id>', methods=['PATCH'])
+def update_post(post_id):
+    caption = request.json['caption']
+
+    post = Post.query.get(post_id)
+
+    post.caption = caption
+    db.session.commit()
+
+    return {'post': post.to_dict()}, 201
