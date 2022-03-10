@@ -85,7 +85,7 @@ function SideContainer ({post, closeMenu, closeModal}) {
                     <div> */}
                         <a href={`/${comment.user.username}`}>{comment.user.username}</a>
                         <span>{comment.comment}</span>
-                        {comment.user.id === sessionUser.id ? <DeleteComment post={post} commentId={comment.id}/>     : null}
+                        {comment.user.id === sessionUser.id ? <DeleteComment comment={comment.comment} post={post} commentId={comment.id}/>     : null}
                     </div>
                 </li>
 
