@@ -2,20 +2,20 @@ import {useSelector, useDispatch} from 'react-redux';
 import React, { useState } from 'react';
 import CommentForm from '../CommentForm/CommentForm';
 import './SideContainer.css'
+// import { postLike, deleteLike } from '../../store/dashboard';
+import { profilePostLike, profileDeleteLike } from '../../store/profile';
 import { postLike, deleteLike } from '../../store/dashboard';
 import DeleteComment from '../DeleteComment/DeleteComment';
 
-function SideContainer ({post, closeMenu, closeModal}) {
+function SideContainer ({post, closeMenu, closeModal, option}) {
 
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
     let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
-    console.log(sessionUser, "i am session User                                       ")
     //comments variables
     const id = post.id;
 
-    console.log(post, "post")
     const comments = post.comments;
 
     const commentsArr = Object.values(comments);
@@ -34,16 +34,23 @@ function SideContainer ({post, closeMenu, closeModal}) {
           const payload = {
             postId: post.id
           }
-          const data = await dispatch(deleteLike(payload))
+          if (option === 'feed') {
+              dispatch(deleteLike(payload))
+          } else {
+              const data = await dispatch(profileDeleteLike(payload))
+          }
         } else {
           const payload = {
             userId: sessionUser.id,
             postId: post.id
           }
-          const data = await dispatch(postLike(payload))
+          if (option === 'feed') {
+              dispatch(postLike(payload))
+          } else {
+            const data = await dispatch(profilePostLike(payload))
+          }
         }
 
-        console.log('inside event listener',isLiked)
         const icon = e.target
         if (!isLiked) {
           icon.classList.add('red')
@@ -55,7 +62,7 @@ function SideContainer ({post, closeMenu, closeModal}) {
           icon.classList.add('fa-regular')
           icon.classList.remove('fa-solid')
         }
-      }
+    }
 
 
 

@@ -52,7 +52,7 @@ export default function PostView({ post, option, closeModal }) {
             onClick={openMenu}
           />
         </div>
-        <SideContainer post={post} closeModal={closeModal} closeMenu={closeMenu}/>
+        <SideContainer post={post} closeModal={closeModal} closeMenu={closeMenu} option={option}/>
 
 
       </div>

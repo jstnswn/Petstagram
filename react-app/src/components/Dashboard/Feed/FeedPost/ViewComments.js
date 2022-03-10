@@ -48,8 +48,8 @@ function ViewComments ({post, option, closeModal}) {
              <div>
                 <a className="view-all-anchor" onClick={() => setShowModal(true)}>View all {commentsArr.length} comments</a>
                 {showModal && (
-                    <Modal onClose={() => setShowModal(false)}>
-                        <PostView post={post} />
+                    <Modal onClose={() => setShowModal(false) }>
+                        <PostView post={post} option='feed' />
                     </Modal>
                 )}
             </div> : null}
