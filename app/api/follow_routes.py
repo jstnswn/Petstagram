@@ -7,7 +7,7 @@ follow_routes = Blueprint('follow', __name__)
 
 @follow_routes.route('/', methods=['POST'])
 def create_follow():
-    follower_id = 2 #current_user.get_id()
+    follower_id = current_user.get_id()
     data = request.json
     follower = User.query.get(follower_id)
 
