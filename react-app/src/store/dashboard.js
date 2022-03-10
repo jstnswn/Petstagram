@@ -98,6 +98,7 @@ export const createPost = (payload) => async dispatch => {
   if (res.ok) {
     const data = await res.json();
     dispatch(loadPost(data));
+    return data;
   } else {
     const errors = await res.json();
     return errors.errors;

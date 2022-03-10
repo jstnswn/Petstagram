@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { FileUploader } from 'react-drag-drop-files';
 import { useDispatch, useSelector } from 'react-redux'
-import { createPost } from '../../store/dashboard';
+import { createPost as createPostDashboard } from '../../store/dashboard';
+import { createPost as createPostProfile, loadPost} from '../../store/profile';
 import dragAndDropImage from '../../assets/drag-and-drop.png'
 import './UploadPostForm.css'
 
@@ -31,11 +32,12 @@ export default function UploadPostForm({ closeModal }) {
       caption
     };
     // TODO error handling
-    const data = await dispatch(createPost(payload))
-      .then(() => closeModal())
-    if (data) {
-      setErrors([data]);
-    }
+      await dispatch(createPostDashboard(payload))
+        .then((res) => dispatch(loadPost(res)))
+    // if (data) {
+    //   setErrors([data]);
+    // }
+    closeModal()
   };
 
   const setFile = (file) => {
