@@ -5,8 +5,8 @@ const LOAD_POST = 'feed/LOAD_POST';
 const POST_LIKE = 'feed/POST_LIKE' // Post like action type
 const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
-const ADD_COMMENT = 'comment/ADD_COMMENT';
-const DELETE_COMMENT = 'comment/DELETE_COMMENT';
+const ADD_COMMENT = 'feed/ADD_COMMENT';
+const DELETE_COMMENT = 'feed/DELETE_COMMENT';
 
 // Action Creators
 const loadPosts = (data) => {
@@ -80,7 +80,7 @@ export const createPost = (payload) => async dispatch => {
 };
 
 
-export const createComment = (payload) => async dispatch => {
+export const createCommentDashboard = (payload) => async dispatch => {
 
   const res = await fetch('/api/comments/', {
       method: 'POST',
@@ -195,7 +195,9 @@ export default function reducer(state = initialState, action) {
       }
     case ADD_COMMENT:
       stateCopy = {...state}
+      console.log("stateCopy", stateCopy)
       post = stateCopy.feed.postIds[action.data.comment.post_id]
+      console.log(post.comments, "post.comments")
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
 

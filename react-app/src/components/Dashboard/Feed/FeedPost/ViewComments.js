@@ -56,11 +56,11 @@ function ViewComments ({post, option, closeModal}) {
 
 
 
-            {commentsArr.length > 0 ? <div>{commentsArr[commentsArr.length-1].comment}</div> : null}
+            {commentsArr.length > 0 ? <div className="comment1"><a href={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</a> {commentsArr[commentsArr.length-1].comment}</div> : null}
 
 
 
-            {commentsArr.length > 1 ? <div>{commentsArr[commentsArr.length-2].comment}</div> : null}
+            {commentsArr.length > 1 ? <div className="comment2"><a href={`/${commentsArr[commentsArr.length-2].user.username}`}>{commentsArr[commentsArr.length-2].user.username}</a> {commentsArr[commentsArr.length-2].comment}</div> : null}
         </div>
     )
 

@@ -3,6 +3,11 @@ import { normalizePosts, orderPostIds } from "./utils";
 const LOAD_POSTS = 'profile/LOAD_POSTS';
 const REMOVE_POST = 'profile/REMOVE_POST';
 
+
+const ADD_COMMENT = 'profile/ADD_COMMENT';
+const DELETE_COMMENT = 'profile/DELETE_COMMENT';
+
+
 // Action Creators
 const loadPosts = (data) => {
   return {
@@ -18,6 +23,15 @@ const removePost = (postId) => {
   };
 };
 
+
+const addComment = (data) => {
+  return{
+      type: ADD_COMMENT,
+      data
+  }
+}
+
+
 // Thunks
 export const getProfilePosts = (userId) => async dispatch => {
   const res = await fetch(`/api/posts/${userId}`);
@@ -31,6 +45,31 @@ export const getProfilePosts = (userId) => async dispatch => {
     console.log(errors.errors)
   }
 };
+
+
+export const createCommentProfile = (payload) => async dispatch => {
+
+  const res = await fetch('/api/comments/', {
+      method: 'POST',
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          user_id: payload.user_id,
+          post_id: payload.post_id,
+          comment: payload.comment,
+      })
+  });
+
+  if (res.ok) {
+      const data = await res.json();
+      console.log(data, "data");
+      dispatch(addComment(data));
+    } else {
+      const errors = await res.json();
+      return errors.errors;
+    }
+ }
 
 export const deletePost = (postId) => async dispatch => {
   const res = await fetch(`/api/posts/${postId}`, {
@@ -46,6 +85,9 @@ export const deletePost = (postId) => async dispatch => {
   }
 
 };
+
+
+
 
 // Helper Functions
 export const getProfilePostsArray = (state) => {
@@ -65,6 +107,7 @@ const initialState = {
 };
 
 export default function reducer(state = initialState, action) {
+  let post;
   let stateCopy;
   let idx;
   switch(action.type) {
@@ -86,6 +129,15 @@ export default function reducer(state = initialState, action) {
       postsOrder.splice(idx, 1);
       delete stateCopy.posts[action.postId]
       return stateCopy;
+
+    case ADD_COMMENT:
+      stateCopy = {...state}
+      console.log("stateCopy", stateCopy)
+      post = stateCopy.posts.postIds[action.data.comment.post_id]
+      console.log(post, "THIS IS POSTprofile")
+      post.comments[action.data.comment.id] = action.data.comment
+      return stateCopy
+
     default:
       return state;
   }

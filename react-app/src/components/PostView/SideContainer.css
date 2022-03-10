@@ -1,0 +1,43 @@
+
+
+.post-view-comments{
+    display:flex;
+    flex-direction: column;
+    height:600px;
+}
+
+
+
+.post-view-user-img{
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+    margin-right:12px;
+}
+
+
+.comment-shell{
+    display:flex;
+    align-items: center;
+    margin:16px;
+}
+
+
+.post-view-comments ul{
+    overflow:scroll;
+
+}
+
+.post-view-comments ul::-webkit-scrollbar {
+    display: none;
+
+}
+
+.post-view-comments a{
+    font-weight:bold;
+    margin-right:6px;
+}
+
+.post-view-comments a:visited{
+    color:black;
+}
