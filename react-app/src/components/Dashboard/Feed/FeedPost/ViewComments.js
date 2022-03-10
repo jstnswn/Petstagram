@@ -2,6 +2,7 @@
 import './ViewComments.css'
 import {useSelector} from 'react-redux';
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -46,7 +47,7 @@ function ViewComments ({post, option, closeModal}) {
 
             {commentsArr.length > 2 ?
              <div>
-                <a className="view-all-anchor" onClick={() => setShowModal(true)}>View all {commentsArr.length} comments</a>
+                <div className="view-all-anchor" onClick={() => setShowModal(true)}>View all {commentsArr.length} comments</div>
                 {showModal && (
                     <Modal onClose={() => setShowModal(false) }>
                         <PostView post={post} option='feed' />
@@ -56,11 +57,11 @@ function ViewComments ({post, option, closeModal}) {
 
 
 
-            {commentsArr.length > 0 ? <div className="comment1"><a href={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</a> {commentsArr[commentsArr.length-1].comment}</div> : null}
+            {commentsArr.length > 0 ? <div className="comment1"><NavLink to={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</NavLink> {commentsArr[commentsArr.length-1].comment}</div> : null}
 
 
 
-            {commentsArr.length > 1 ? <div className="comment2"><a href={`/${commentsArr[commentsArr.length-2].user.username}`}>{commentsArr[commentsArr.length-2].user.username}</a> {commentsArr[commentsArr.length-2].comment}</div> : null}
+            {commentsArr.length > 1 ? <div className="comment2"><NavLink to={`/${commentsArr[commentsArr.length-2].user.username}`}>{commentsArr[commentsArr.length-2].user.username}</NavLink> {commentsArr[commentsArr.length-2].comment}</div> : null}
         </div>
     )
 

@@ -24,6 +24,7 @@
 #about-us-dropdown {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .down-caret {
