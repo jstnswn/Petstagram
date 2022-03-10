@@ -11,7 +11,7 @@ export default function NavBar() {
   return (
     <nav id='nav-bar'>
       <NavLink to='/' exact={true} activeClassName='active'>
-      <img className='title-logo' alt='Logo' src={petstagram}></img>
+        <img className='title-logo' alt='Logo' src={petstagram}></img>
       </NavLink>
       <div className='nav-bar right-section'>
         <NavLink to='/' className='home-icon-container'>

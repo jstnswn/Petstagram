@@ -5,7 +5,10 @@ import { getProfilePosts } from '../../store/profile';
 import ProfileGrid from './ProfileGrid.js';
 import './ProfilePage.css';
 import { Modal } from '../../context/Modal';
-import ProPicModal from '../UploadProPicModal';
+import ProPicModal from './Header/ProPicModal';
+import FollowerFormModal from './Header/FollowerModal';
+import FollowingFormModal from './Header/FollowingModal';
+import EditProfileModal from './Header/EditProfile';
 
 export default function ProfilePage() {
   const history = useHistory();
@@ -14,6 +17,10 @@ export default function ProfilePage() {
   const [userLoaded, setUserLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [user, setUser] = useState(null);
+
+  const [showEditProfileModal, setShowProfileModal] = useState(false);
+  const openEditProfileModal = () => setShowProfileModal(true);
+  const closeEditProfileModal = () => setShowProfileModal(false);
 
   const [showProPicModal, setShowProPicModal] = useState(false);
   const openProPicModal = () => setShowProPicModal(true);
@@ -26,37 +33,6 @@ export default function ProfilePage() {
   const [showFollowerModal, setShowFollowerModal] = useState(false)
   const openFollowerModal = () => setShowFollowerModal(true)
   const closeFollowerModal = () => setShowFollowerModal(false)
-
-
-  function FollowingFormModal() {
-    return (
-        <>
-            <h2>{user.following.map(user => (
-              <>
-              <img className='modal-img' src={user.image_url}></img>
-              <li className='modal-username'>{user.username}</li>
-              <li className='modal-fullname'>{user.full_name}</li>
-              </>
-            ))}
-            </h2>
-        </>
-    )
-}
-
-  function FollowerFormModal() {
-    return (
-      <>
-      <h2>{user.followers.map(follower => (
-        <>
-        <img className='modal-img' src={follower.image_url}></img>
-        <li className='modal-username'>{follower.username}</li>
-        <li className='modal-fullname'>{follower.full_name}</li>
-        </>
-      ))}
-      </h2>
-      </>
-    )
-  }
 
   const posts = useSelector(({profile}) => profile.posts?.order)
 
@@ -90,27 +66,33 @@ export default function ProfilePage() {
           />
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal />
+              <ProPicModal user={user} cancelModal={closeProPicModal}/>
             </Modal>
           )}
           <div className='all-info'>
         <div className='top-column'>
         <div className='profile-username'>{user.username}
         </div>
-        <button className='edit-profile'>Edit Profile</button>
+        <button onClick={openEditProfileModal} className='edit-profile'>Edit Profile</button>
+        {showEditProfileModal && (
+          <Modal onClose={closeEditProfileModal}>
+            <EditProfileModal user={user} cancelModal={closeEditProfileModal}/>
+            </Modal>
+        )}
         </div>
         <div className='mid-column'>
           <div className='posts-number'>{posts.length} posts</div>
           <div onClick={openFollowerModal} className='followers'>{user.followers.length} followers</div>
           {showFollowerModal && (
             <Modal onClose={closeFollowerModal}>
-              <FollowerFormModal />
+              <FollowerFormModal user={user} closeModal={closeFollowerModal} />
+
             </Modal>
           )}
           <div onClick={openFollowingModal} className='following'>{user.following.length} following</div>
           {showFollowingModal && (
             <Modal onClose={closeFollowingModal}>
-              <FollowingFormModal />
+              <FollowingFormModal user={user} closeModal={closeFollowingModal}/>
             </Modal>
           )}
         </div>
