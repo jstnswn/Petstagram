@@ -36,7 +36,6 @@ export default function PostMenu({ closeMenu, closeModal, post }) {
         <div onClick={closeMenu}>Cancel</div>
       </div>
 
-
       {showEditForm && (
         <Modal onClose={() => setShowEditForm(false)}>
           {/* This needs to happen in PostView to replace the current modal. Move show menu logic there */}
