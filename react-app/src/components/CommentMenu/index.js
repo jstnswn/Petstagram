@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import {Modal} from '../../context/Modal'
-import DeleteCommentMenu from './DeleteCommentMenu';
+import CommentMenu from './CommentMenu';
 
-function DeleteComment({ commentId, post, comment}) {
+function CommentMenuModal({ commentId, post, comment}) {
 
 
     const [showModal, setShowModal] = useState(false);
@@ -19,7 +19,7 @@ function DeleteComment({ commentId, post, comment}) {
 
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <DeleteCommentMenu comment={comment} post={post} hideForm={hideForm} commentId={commentId}/>
+                    <CommentMenu comment={comment} post={post} hideForm={hideForm} commentId={commentId}/>
                 </Modal>
             )}
 
@@ -31,4 +31,4 @@ function DeleteComment({ commentId, post, comment}) {
 }
 
 
-export default DeleteComment;
+export default CommentMenuModal;

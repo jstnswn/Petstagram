@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import CommentForm from '../CommentForm/CommentForm';
 import './SideContainer.css'
 import { postLike, deleteLike } from '../../store/dashboard';
-import DeleteComment from '../DeleteComment/DeleteComment';
+import CommentMenuModal from '../CommentMenu';
 
 function SideContainer ({post, closeMenu, closeModal}) {
 
@@ -85,7 +85,7 @@ function SideContainer ({post, closeMenu, closeModal}) {
                     <div> */}
                         <a href={`/${comment.user.username}`}>{comment.user.username}</a>
                         <span>{comment.comment}</span>
-                        {comment.user.id === sessionUser.id ? <DeleteComment comment={comment.comment} post={post} commentId={comment.id}/>     : null}
+                        {comment.user.id === sessionUser.id ? <CommentMenuModal comment={comment.comment} post={post} commentId={comment.id}/>     : null}
                     </div>
                 </li>
 

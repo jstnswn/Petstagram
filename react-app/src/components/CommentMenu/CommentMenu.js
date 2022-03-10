@@ -1,12 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux'
-import './DeleteCommentMenu.css'
+import React, { useState } from 'react'
+import {Modal} from '../../context/Modal'
+import './CommentMenu.css'
 import { removeCommentDashboard } from '../../store/dashboard'
 import {removeCommentProfile} from '../../store/profile'
+import EditComment from './EditComment/EditComment'
 
-function DeleteCommentMenu ({commentId, hideForm, post}) {
+function CommentMenu ({commentId, hideForm, post, comment}) {
 
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
+    const [showModal, setShowModal] = useState(false);
 
     const deleteCommentDashboard = async (e) => {
 
@@ -41,12 +45,17 @@ function DeleteCommentMenu ({commentId, hideForm, post}) {
 
 
     if(document.URL.includes(`http://localhost:3000/${currentUser.username}`) && document.URL.toString().length > 21){
-        
+
         return (
             <div className="delete-comment-menu">
                 <div style={{color: 'red'}} onClick={deleteCommentProfile}>Delete</div>
-                <div>Update</div>
-                <div onClick={hideForm}>Cancel</div>
+                <div onClick={() => setShowModal(true)}>Update</div>
+                {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                   <EditComment hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
+                </Modal>
+                )}
+                 <div onClick={hideForm}>Cancel</div>
 
             </div>
         )
@@ -56,8 +65,13 @@ function DeleteCommentMenu ({commentId, hideForm, post}) {
         return (
             <div className="delete-comment-menu">
                 <div style={{color: 'red'}} onClick={deleteCommentDashboard}>Delete</div>
-                <div>Update</div>
-                <div onClick={hideForm}>Cancel</div>
+                <div onClick={() => setShowModal(true)}>Update</div>
+                {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                   <EditComment hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
+                </Modal>
+                )}
+                 <div onClick={hideForm}>Cancel</div>
 
             </div>
         )
@@ -67,7 +81,13 @@ function DeleteCommentMenu ({commentId, hideForm, post}) {
         return (
             <div className="delete-comment-menu">
                 <div style={{color: 'red'}} onClick={deleteCommentProfile}>Delete</div>
-                <div>Update</div>
+                <div onClick={() => setShowModal(true)}>Update</div>
+                {showModal && (
+                <Modal onClose={() => setShowModal(false)}>
+                   <EditComment hideForm={hideForm} comment={comment} commentId={commentId}post={post}/>
+                </Modal>
+                )}
+
                 <div onClick={hideForm}>Cancel</div>
 
             </div>
@@ -78,4 +98,4 @@ function DeleteCommentMenu ({commentId, hideForm, post}) {
 
 
 
-export default DeleteCommentMenu;
+export default CommentMenu;

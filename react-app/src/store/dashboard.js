@@ -9,6 +9,7 @@ const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
 const ADD_COMMENT = 'feed/ADD_COMMENT';
 const DELETE_COMMENT = 'feed/DELETE_COMMENT';
+const UPDATE_COMMENT = 'feed/UPDATE_COMMENT';
 
 // Action Creators
 const loadPosts = (data) => {
@@ -38,6 +39,15 @@ const deleteComment = (data) => {
     data
   }
 }
+
+const updateComment = (data) => {
+  return {
+    type: UPDATE_COMMENT,
+    data
+  }
+}
+
+
 
 export const postLikeActionCreator = (user, postId) => { // Post like action creator
   return {
@@ -124,6 +134,25 @@ export const removeCommentDashboard = (payload) => async dispatch => {
     const data = await res.json();
     console.log(data, "this is data from delete comment thunk")
     dispatch(deleteComment(data));
+    return data;
+  }
+}
+
+export const editCommentDashboard = (payload) => async dispatch => {
+  const res = await fetch('/api/comments/', {
+    method:'PUT',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      comment_id: payload.comment_id,
+      post_id: payload.post_id,
+      updated_comment: payload.updated_comment,
+  })
+  });
+
+  if (res.ok){
+    const data = await res.json();
+    console.log(data, "this is data from edit comment thunk")
+    dispatch(updateComment(data));
     return data;
   }
 }
