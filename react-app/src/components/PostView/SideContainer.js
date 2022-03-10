@@ -6,6 +6,7 @@ import './SideContainer.css'
 import { profilePostLike, profileDeleteLike } from '../../store/profile';
 import { postLike, deleteLike } from '../../store/dashboard';
 import DeleteComment from '../DeleteComment/DeleteComment';
+import { NavLink } from 'react-router-dom';
 
 function SideContainer({ post, closeMenu, closePostView, option}) {
 
@@ -77,7 +78,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                             <img className="post-view-user-img"src={post.user.image_url}></img>
                         </div>
                         <div>
-                            <a href={`/${post.user.username}`}>{post.user.username}</a>
+                            <NavLink to={`/${post.user.username}`}>{post.user.username}</NavLink>
                             <span>{post.caption}</span>
                         </div>
                     </div>
@@ -90,7 +91,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                         <img className="post-view-user-img"src={comment.user.image_url}></img>
                     {/* </div>
                     <div> */}
-                        <a href={`/${comment.user.username}`}>{comment.user.username}</a>
+                        <NavLink to={`/${comment.user.username}`}>{comment.user.username}</NavLink>
                         <span>{comment.comment}</span>
                         {comment.user.id === sessionUser.id ? <DeleteComment post={post} commentId={comment.id}/>     : null}
                     </div>
@@ -169,7 +170,7 @@ export default SideContainer;
                     <img className="post-view-user-img"src={post.user.image_url}></img>
                 </div>
                 <div>
-                    <a href={`/${post.user.username}`}>{post.user.username}</a>
+                    <NavLink to={`/${post.user.username}`}>{post.user.username}</NavLink>
                     <span>{post.caption}</span>
                 </div>
             </div>
@@ -182,7 +183,7 @@ export default SideContainer;
                     <img className="post-view-user-img"src={comment.user.image_url}></img>
                 </div>
                 <div>
-                    <a href={`/${comment.user.username}`}>{comment.user.username}</a>
+                    <NavLink to={`/${comment.user.username}`}>{comment.user.username}</NavLink>
                     <span>{comment.comment}</span>
                 </div>
                 {comment.user.id === sessionUser.id ? <button>Delete</button>     : null}
