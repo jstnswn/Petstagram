@@ -10,7 +10,7 @@ function SideContainer ({post}) {
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
     let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
-    console.log(sessionUser, "i am session User")
+    console.log(sessionUser, "i am session User                                       ")
     //comments variables
     const id = post.id;
 

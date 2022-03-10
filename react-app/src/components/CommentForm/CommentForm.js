@@ -13,6 +13,8 @@ function CommentForm({ post }) {
     const [errors, setErrors] = useState([]);
 
     //useSelector on comments
+    const url = document.URL;
+    console.log(url, "this is url")
 
 
     const handleSubmitDashboard = async (e) => {
@@ -58,7 +60,7 @@ function CommentForm({ post }) {
         <div>
 
 
-            {document.URL.includes(`http://localhost:3000/${currentUser.username}`) ?
+            {document.URL.includes(`http://localhost:3000/${currentUser.username}`) && document.URL.toString().length > 21 ?
 
                 <form onSubmit={handleSubmitProfile}>
                     <div className="comment-form-container">
@@ -75,8 +77,9 @@ function CommentForm({ post }) {
                     </div>
 
                 </form>
+            :
 
-                :
+            document.URL.toString().length === 22 ?
 
                 <form onSubmit={handleSubmitDashboard}>
                     <div className="comment-form-container">
@@ -94,10 +97,25 @@ function CommentForm({ post }) {
 
                 </form>
 
+            :
+
+                <form onSubmit={handleSubmitProfile}>
+                <   div className="comment-form-container">
+                    <textarea
+                        id={post.id}
+                        className="comment-form-textarea"
+                        cols="74"
+                        placeholder="Add a comment..."
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                    >
+                        </textarea>
+                        <button className="comment-button" type="submit">Post</button>
+                    </div>
+
+                </form>
+
             }
-
-
-
 
         </div>
 
