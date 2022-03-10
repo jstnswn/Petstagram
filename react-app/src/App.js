@@ -12,6 +12,7 @@ import Dashboard from './components/Dashboard';
 import NavBar from './components/NavBar';
 import ProfilePage from './components/Profile';
 import Footer from './components/Footer'
+import { getFeedPosts } from './store/dashboard';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(getFeedPosts())
       setLoaded(true);
     })();
   }, [dispatch]);

@@ -1,12 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { patchPost } from '../../store/profile';
 
-export default function PostEditForm({ post }) {
+export default function PostEditForm({ post, closeEdit, closeMenu }) {
   const dispatch = useDispatch();
-  const [caption, setCaption] = useState('');
+  const [caption, setCaption] = useState(post.caption);
   const [disableSubmit, setDisableSubmit] = useState(false);
+  const [errors, setErrors] = useState(false);
 
-  const handleSubmit = () => null
+  const inputFocus = useRef(null);
+
+  useEffect(() => {
+    inputFocus.current.focus();
+  }, [])
+
+  useEffect(() => {
+    if (caption.length > 2200) setDisableSubmit(true);
+    else setDisableSubmit(false);
+  }, [caption])
+
+
+  const handleSubmit = async () => {
+    if (disableSubmit) return;
+    setDisableSubmit(true);
+
+    const payload = { caption, postId: post.id };
+
+    const data = await dispatch(patchPost(payload))
+      .then(() => {
+        closeEdit()
+        closeMenu()
+      })
+    // if (data) {
+    //   setErrors([data]);
+    // }
+
+  };
 
   return (
 
@@ -43,9 +72,11 @@ export default function PostEditForm({ post }) {
           </div>
           <textarea
             className='comment-input'
-            placeholder='Write a caption...'
+            // placeholder='Write a caption...'
+            ref={inputFocus}
             value={caption}
             onChange={e => setCaption(e.target.value)}
+            onFocus={e => e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
           />
           <p
             className={`post-form word-count ${caption.length > 2200 ? 'active' : ''}`}

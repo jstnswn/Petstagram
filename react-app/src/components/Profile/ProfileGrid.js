@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { getProfilePostsArray } from '../../store/profile';
 import PostView from '../PostView';
+import PostEditForm from '../PostView/PostEditForm';
 
 export default function ProfileGrid() {
   const [showIdx, setShowIdx] = useState(null);
 
   const posts = useSelector(getProfilePostsArray);
 
-  const openModal = (idx) => setShowIdx(idx);
-  const closeModal = () => setShowIdx(null);
-
+  const openPostView = (idx) => setShowIdx(idx);
+  const closePostView = () => setShowIdx(null);
   return (
     <div className='profile-grid'>
       {posts.map((post, idx) => (
@@ -20,15 +20,15 @@ export default function ProfileGrid() {
             className='profile-grid-item'
             src={post.image_url}
             alt='user post'
-            onClick={() => openModal(idx)}
+            onClick={() => openPostView(idx)}
             style={{
               gridColumnStart: idx % 3 + 1
             }}
           />
 
           {showIdx === idx && (
-            <Modal onClose={closeModal}>
-              <PostView post={post} closeModal={closeModal} option='profile'/>
+            <Modal onClose={closePostView}>
+              <PostView post={post} closePostView={closePostView} option='profile'/>
             </Modal>
           )}
         </div>

@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './FollowerModal.css'
 import x_btn from '../../../assets/x.png'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { follow } from '../../../store/dashboard'
 
 
-export default function FollowerFormModal({ user, closeModal }) {
+export default function FollowerFormModal({ user: profileUser, closeModal }) {
     const dispatch = useDispatch()
-    const userFollowing = user.following.map(user => user.id)
-
-    console.log(userFollowing)
+    const user = useSelector(({ session }) => session.user);
+    const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
 
     return (
         <>
@@ -22,7 +21,7 @@ export default function FollowerFormModal({ user, closeModal }) {
             </div>
             <div className='follower-modal-container'>
 
-                {user.followers.map(follower => (
+                {profileUser.followers.map(follower => (
                         <div className='follower-info'>
                             <img className='modal-img' src={follower.image_url}></img>
                             <div className='follower-user-full'>
@@ -30,8 +29,11 @@ export default function FollowerFormModal({ user, closeModal }) {
                                     <Link onClick={closeModal} className='link' to={`/${follower.username}`}>
                                         {follower.username}
                                     </Link>
-                                    { !userFollowing.includes(follower.id) &&
-                                    <div className='modal-follow' onClick={() => dispatch(follow(follower.id))}>Follow</div>
+                                    {!userFollowing.includes(follower.id) &&
+                                        <div className='modal-follow' onClick={() => {
+                                        dispatch(follow(follower.id))
+                                        setUserFollowing(prev => [...userFollowing, follower.id])
+                                    }}>Follow</div>
                                     }
                                 </div>
                                 <li className='modal-fullname'>{follower.full_name}</li>
