@@ -13,6 +13,7 @@ import NavBar from './components/NavBar';
 import ProfilePage from './components/Profile';
 import Footer from './components/Footer'
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -25,6 +26,13 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    // dispatch(getNotifications())
+
+  }, [user])
 
   if (!loaded) {
     return null;

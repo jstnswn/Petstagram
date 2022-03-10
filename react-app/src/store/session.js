@@ -1,6 +1,10 @@
+import FeedPost from "../components/Dashboard/Feed/FeedPost";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const UNFOLLOW = 'follow/UNFOLLOW'
+const FOLLOW = 'follow/follow'
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -10,6 +14,20 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER,
 })
+
+export const unfollowActionCreator = (userId) => {    // Unfollow action creator
+  return {
+    type: UNFOLLOW,
+    userId
+  }
+}
+
+export const followActionCreator = (user) => {    // Follow action creator
+  return {
+    type: FOLLOW,
+    user
+  }
+}
 
 const initialState = { user: null };
 
@@ -102,11 +120,27 @@ export const signUp = (username, email, password, full_name) => async (dispatch)
 }
 
 export default function reducer(state = initialState, action) {
+  let stateCopy
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
+
     case REMOVE_USER:
       return { user: null }
+
+    case UNFOLLOW:
+      stateCopy = {...state}
+      let user_to_unfollow = action.userId
+      const index = stateCopy.user.following.findIndex(user => user.id === user_to_unfollow)
+      stateCopy.user.following.splice(index, 1)
+      console.log('------------------',stateCopy)
+      return stateCopy
+
+    case FOLLOW:
+      stateCopy = {...state}
+      stateCopy.user.following.push(action.user)
+      return stateCopy
+      
     default:
       return state;
   }

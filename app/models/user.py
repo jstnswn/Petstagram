@@ -1,9 +1,13 @@
+# from app.models import like_notifications
+from sqlalchemy import ForeignKey
 from .db import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .like import likes
 from .follow import follows
+from .like_notification import LikeNotification # like_notifications
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -14,17 +18,25 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False)
     image_url = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
+
+
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     posts = db.relationship('Post', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
     liked_posts = db.relationship('Post', back_populates='likers', secondary=likes)
+    comment_notifications = db.relationship('CommentNotification', back_populates='user')
+
+    like_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_to_id', back_populates='from_user')
+    l_from_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_from_id', backref='l_to_notifications', lazy='dynamic')
+    l_to_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_to_id', backref='l_from_notifications', lazy='dynamic')
+
 
     followers = db.relationship(
         'User',
         secondary=follows,
-        primaryjoin=(follows.c.follower_id == id),
-        secondaryjoin=(follows.c.followed_id == id),
+        primaryjoin=(follows.c.followed_id == id),
+        secondaryjoin=(follows.c.follower_id == id),
         backref=db.backref('following', lazy='dynamic'),
         lazy='dynamic'
     )
@@ -40,13 +52,16 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def check_notifications(self):
+        pass
+
     # Follower_to_dict to avoid recursive calling of to_dict
     def f_to_dict(self):
         return {
             'id': self.id,
             'username': self.username,
             'image_url': self.image_url,
-            'full_name': self.full_name
+            'full_name': self.full_name,
         }
 
     def to_dict(self):
@@ -59,4 +74,7 @@ class User(db.Model, UserMixin):
             'created_at': self.created_at,
             'following': [user.f_to_dict() for user in self.following],
             'followers': [user.f_to_dict() for user in self.followers],
+            'notifications': {
+                'likes': [like.to_dict() for like in self.l_to_notifications]
+            }
         }
