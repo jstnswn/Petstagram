@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import petstagram from '../../assets/petstagram.png'
 import './SignUpForm.css'
@@ -176,7 +176,7 @@ const SignUpForm = () => {
         </form>
         <div className='signup-form-heading' id='signup-form-footing'>By signing up, you agree to view many cute photos of pets.</div>
       </div>
-      <div className='form-container' id='have-account'>Have an account?<a href='/login' id='login-link'>Log in</a></div>
+      <div className='form-container' id='have-account'>Have an account?<NavLink to='/login' id='login-link'>Log in</NavLink></div>
     </div>
   );
 };
