@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from '../../context/Modal';
-import PostEditForm from './PostEditForm';
+// import PostEditForm from './PostEditForm';
 import PostMenu from './PostMenu';
 import './PostView.css';
 

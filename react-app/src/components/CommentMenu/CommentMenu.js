@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux'
 import React, { useState } from 'react'
-import {Modal} from '../../context/Modal'
-import './CommentMenu.css'
+import { useDispatch } from 'react-redux'
+import { Modal } from '../../context/Modal'
 import { removeCommentDashboard } from '../../store/dashboard'
-import {removeCommentProfile} from '../../store/profile'
-import EditComment from './EditComment/EditComment'
+import { removeCommentProfile } from '../../store/profile'
 import { deleteComment } from '../../store/dashboard'
+import EditComment from './EditComment/EditComment'
+import './CommentMenu.css'
 
 function CommentMenu ({commentId, hideForm, post, comment, option, profileUser}) {
  
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.session.user);
+    // const currentUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
 
 
@@ -26,7 +26,8 @@ function CommentMenu ({commentId, hideForm, post, comment, option, profileUser})
         }else if(option === 'profile'){
             let deletedComment = await dispatch(removeCommentProfile(payload))
             if (deletedComment){
-                const updatingDash = await dispatch(deleteComment(deletedComment))
+                dispatch(deleteComment(deletedComment))
+                // const updatingDash = await dispatch(deleteComment(deletedComment))
             hideForm();
         }
         }else if (option === 'feed'){

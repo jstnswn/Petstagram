@@ -11,7 +11,7 @@ function CommentForm({ option, post, profileUser}) {
     const currentUser = useSelector(state => state.session.user);
 
     const [comment, setComment] = useState("");
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
 
 
     const handleSubmit = async (e) => {

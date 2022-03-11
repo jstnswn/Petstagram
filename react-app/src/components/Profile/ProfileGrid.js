@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { getProfilePostsArray } from '../../store/profile';
 import PostView from '../PostView';
-import PostEditForm from '../PostView/PostEditForm';
+// import PostEditForm from '../PostView/PostEditForm';
 
 export default function ProfileGrid({profileUser}) {
   const [showIdx, setShowIdx] = useState(null);

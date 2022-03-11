@@ -1,13 +1,11 @@
 
 import './ViewComments.css'
-import {useSelector} from 'react-redux';
+// import {useSelector} from 'react-redux';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-
-
 import PostView from '../../../PostView';
-import PostMenu from '../../../PostView/PostMenu';
+// import PostMenu from '../../../PostView/PostMenu';
 import { Modal } from '../../../../context/Modal';
 
 
@@ -15,12 +13,12 @@ function ViewComments ({post, option, closeModal}) {
 
     const [showModal, setShowModal] = useState(false);
 
-    const hideForm = () => {
-        setShowModal(false)
-    }
+    // const hideForm = () => {
+    //     setShowModal(false)
+    // }
 
 
-    const id = post.id
+    // const id = post.id
     const comments = post.comments
     // const comments = useSelector(state=>state.dashboard.feed.postIds[id].comments)
     const commentsArr = Object.values(comments)
