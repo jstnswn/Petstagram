@@ -13,7 +13,9 @@ export default function PostView({ post, option, closePostView, profileUser}) {
   let headerInfo;
   if (option === 'feed') {
     headerInfo = (
-      <p>{post.user.username}<span>Following</span></p>
+      <p>{post.user.username}
+      {/* <span>Following</span> */}
+      </p>
     )
   } else {
     headerInfo = (
