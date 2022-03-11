@@ -33,7 +33,7 @@ export const addComment = (data) => {
   }
 }
 
-const deleteComment = (data) => {
+export const deleteComment = (data) => {
   return {
     type: DELETE_COMMENT,
     data
@@ -275,15 +275,25 @@ export default function reducer(state = initialState, action) {
     case ADD_COMMENT:
       stateCopy = {...state}
       post = stateCopy.feed.postIds[action.data.comment.post_id]
-      console.log(stateCopy.feed.postIds, 'this is feed.postids')
-      const postId = [action.data.comment.post_id][0]
-      // console.log([action.data.comment.post_id][0], 'this is the key')
-      console.log(postId, 'this is both put together')
-      console.log(stateCopy.feed.postIds.postId, "this is statecopy.feed.postIds.postId")
-      // console.log(post.comments, 'this is post.comment')
-
+      console.log(post, 'this is post')
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
+      // console.log(action.data.comment, ' data')
+      // if (action.data.comment.post_id){
+      //   console.log('inside if')
+      // }else {
+      //   console.log('inside else')
+      //   post = stateCopy.feed.postIds[action.data.post_id]
+      //   post.comments[action.data.id] = action.data.comment
+      //   return stateCopy
+      // }
+      // post = stateCopy.feed.postIds[+4]
+      // console.log(post, 'what is post')
+      // const postId = [action.data.comment.post_id][0]
+      // console.log([action.data.comment.post_id][0], 'this is the key')
+      // console.log(postId, 'this is both put together')
+      // console.log(stateCopy.feed.postIds.postId, "this is statecopy.feed.postIds.postId")
+      // console.log(post.comments, 'this is post.comment')
 
     case DELETE_COMMENT:
       stateCopy = {...state}
