@@ -88,5 +88,5 @@ def update_post(post_id):
 
     post.caption = caption
     db.session.commit()
-
+    
     return {'post': post.to_dict()}, 201
