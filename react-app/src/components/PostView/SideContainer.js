@@ -123,7 +123,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
 
 
             <div>{post.id}</div>
-            <div className="modal-icons">
+            <div className="footer-icons">
                 <span>
                 {isLiked ?
                     <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
