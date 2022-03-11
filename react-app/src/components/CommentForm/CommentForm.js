@@ -9,7 +9,6 @@ function CommentForm({ option, post, profileUser}) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector(state => state.session.user);
-    console.log(profileUser, 'this is profileUser in add comment')
 
     const [comment, setComment] = useState("");
     // const [errors, setErrors] = useState([]);

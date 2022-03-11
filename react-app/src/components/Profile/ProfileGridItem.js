@@ -6,8 +6,6 @@ export default function ProfileGridItem({ post, idx , profileUser}) {
     const [showPost, setShowPost] = useState(false);
     const [showOverlay, setShowOverlay] = useState(null);
 
-    console.log(profileUser, 'profileUser in griditem')
-
     const likes = post.likers.length;
     const comments = Object.values(post?.comments)?.length
 

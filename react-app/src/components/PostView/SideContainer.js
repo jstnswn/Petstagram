@@ -10,7 +10,7 @@ import './SideContainer.css'
 // import DeleteComment from '../DeleteComment/DeleteComment';
 
 function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
-    console.log(profileUser, 'this is profileUser on sidecontainer')
+   
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
