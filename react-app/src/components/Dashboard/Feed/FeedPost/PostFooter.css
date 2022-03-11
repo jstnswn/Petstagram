@@ -63,3 +63,7 @@ span i {
 .red {
     color: rgb(249,67,77);
 }
+
+.add-comment-container {
+    margin-top: 35px;
+}

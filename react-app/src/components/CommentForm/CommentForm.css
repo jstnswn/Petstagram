@@ -4,12 +4,17 @@
     background-color: white;
     font-weight:bold;
     color:#0095f6;
+    margin-left: 70px;
+    margin-bottom: 5px;
+    background: transparent;
 }
 
 
 .comment-form-textarea{
     border:none;
     resize:none;
+    margin-top: 10px;
+    background: transparent;
 }
 
 .comment-form-textarea:focus{
@@ -20,5 +25,23 @@
 
 .comment-form-container{
     display:flex;
-    /* border-top: 1px grey solid; */
 }
+
+.comment-form-container-profile {
+    display:flex;
+    border: solid 1px red;
+}
+
+.add-comment-and-post-btn {
+    display: flex;
+    justify-content:flex-end;
+}
+
+/* .icons-and-comment-form {
+    display: flex;
+    align-items: flex-end;
+} */
+
+/* .profile-modal-icon i {
+    padding-right: 5px;
+} */
