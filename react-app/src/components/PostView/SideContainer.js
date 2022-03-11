@@ -13,7 +13,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
-    
+
     let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
     //comments variables
     const id = post.id;
@@ -68,8 +68,6 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
 
 
 
-    const onComment = () => console.log('focus')
-
     return (
         <div className="post-view-comments">
             <ul>
@@ -112,7 +110,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 }
                 </span>
                 <span>
-                     <i className='fa-regular fa-comment post-icon' onClick={onComment}></i>
+                     <i className='fa-regular fa-comment post-icon'></i>
                 </span>
                  <span>
                      <i className='fa-regular fa-paper-plane post-icon'></i>
