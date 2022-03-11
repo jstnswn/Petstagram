@@ -59,6 +59,14 @@ export default function PostFooter({ post, option}) {
     setShowModal(true)
   }
 
+  let likesCountRender;
+  let likesCount;
+  if (post.likers.length !== 0) {
+    likesCount = post.likers.length;
+    if (post.likers.length === 1) likesCountRender = `${likesCount} like`;
+      else likesCountRender = `${likesCount} likes`;
+  } else likesCountRender = null;
+
   return (
     <div className='post-footer'>
       <div>{post.id}</div>
@@ -84,7 +92,9 @@ export default function PostFooter({ post, option}) {
           <i className='fa-regular fa-bookmark post-icon'></i>
         </span>
       </div>
-      <div className='footer-likes'>likes</div>
+      {/* number of likes */}
+      {likesCount > 0 ? <div className='footer-likes'>{likesCountRender}</div> : null}
+      {/* <div className='footer-likes'>{likesCountRender}</div> */}
       <div className='comment-container'>
         <p className='caption'><span className='caption-username'>{post.user.username}</span>{post.caption}</p>
         <ViewComments post={post}/>
