@@ -89,6 +89,14 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
         }
     }
 
+    let likesCountRender;
+    let likesCount;
+        if (post.likers.length !== 0) {
+        likesCount = post.likers.length;
+        if (post.likers.length === 1) likesCountRender = `${likesCount} like`;
+        else likesCountRender = `${likesCount} likes`;
+    } else likesCountRender = null;
+
 
 
     return (
@@ -145,6 +153,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
                     <i className='fa-regular fa-bookmark post-icon'></i>
                 </span>
             </div>
+            {likesCount > 0 ? <div className='footer-likes'>{likesCountRender}</div> : null}
 
             <div>
                 <CommentForm profileUser={profileUser} option={option} post={post}/>
