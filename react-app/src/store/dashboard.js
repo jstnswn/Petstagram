@@ -11,28 +11,29 @@ const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
 const ADD_COMMENT = 'feed/ADD_COMMENT';
 const DELETE_COMMENT = 'feed/DELETE_COMMENT';
+const UPDATE_COMMENT = 'feed/UPDATE_COMMENT';
 
 // Action Creators
 const loadPosts = (data) => {
   return {
     type: LOAD_POSTS,
     data
-  }
+  };
 };
 
 const loadPost = (data) => {
   return {
     type: LOAD_POST,
     data
-  }
-}
+  };
+};
 
 const updatePost = (postId, caption) => {
   return {
     type: UPDATE_POST,
     postId,
     caption
-  }
+  };
 };
 
 const removePost = (postId) => {
@@ -42,34 +43,42 @@ const removePost = (postId) => {
   };
 };
 
-const addComment = (data) => {
+export const addComment = (data) => {
   return{
       type: ADD_COMMENT,
       data
-  }
-}
+  };
+};
 
-
-const deleteComment = (data) => {
+export const deleteComment = (data) => {
   return {
     type: DELETE_COMMENT,
     data
-  }
-}
+  };
+};
 
-const postLikeActionCreator = (user, postId) => { // Post like action creator
+export const updateComment = (data) => {
+  return {
+    type: UPDATE_COMMENT,
+    data
+  };
+};
+
+
+
+export const postLikeActionCreator = (user, postId) => { // Post like action creator
   return {
     type: POST_LIKE,
     user, postId
-  }
-}
+  };
+};
 
 const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
   return {
     type: DELETE_LIKE,
     userId, postId
-  }
-}
+  };
+};
 
 // Thunks
 export const getFeedPosts = () => async dispatch => {
@@ -159,6 +168,7 @@ export const createCommentDashboard = (payload) => async dispatch => {
   if (res.ok) {
       const data = await res.json();
       dispatch(addComment(data));
+      return data;
     } else {
       const errors = await res.json();
       return errors.errors;
@@ -171,7 +181,9 @@ export const removeCommentDashboard = (payload) => async dispatch => {
     headers: { "Content-Type": "application/json"},
     body: JSON.stringify({
       comment_id: payload.comment_id,
+      updated_comment: payload.updated_comment,
       post_id: payload.post_id,
+
   })
   });
 
@@ -179,6 +191,26 @@ export const removeCommentDashboard = (payload) => async dispatch => {
     const data = await res.json();
     console.log(data, "this is data from delete comment thunk")
     dispatch(deleteComment(data));
+    return data;
+  }
+}
+
+export const editCommentDashboard = (payload) => async dispatch => {
+  console.log('in here')
+  const res = await fetch('/api/comments/', {
+    method:'PATCH',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      comment_id: payload.comment_id,
+      post_id: payload.post_id,
+      updated_comment: payload.updated_comment,
+  })
+  });
+
+  if (res.ok){
+    const data = await res.json();
+    console.log(data, "this is data from edit comment thunk")
+    dispatch(updateComment(data));
     return data;
   }
 }
@@ -313,17 +345,26 @@ export default function reducer(state = initialState, action) {
 
     case ADD_COMMENT:
       stateCopy = {...state}
-      console.log("stateCopy", stateCopy)
       post = stateCopy.feed.postIds[action.data.comment.post_id]
-      console.log(post.comments, "post.comments")
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
+
 
     case DELETE_COMMENT:
       stateCopy = {...state}
       const commentsObj = stateCopy.feed.postIds[action.data.postId].comments
+      console.log(commentsObj, "comment in update action")
       delete commentsObj[action.data.commentId]
       return stateCopy
+
+    case UPDATE_COMMENT:
+      stateCopy = {...state}
+      console.log(stateCopy.feed.postIds[action.data.postId], "HELLO")
+      const comment = stateCopy.feed.postIds[action.data.postId].comments[action.data.commentId]
+      console.log("this is comment", comment)
+
+      comment.comment = action.data.updatedComment
+      return stateCopy;
 
       // post like
     case POST_LIKE:

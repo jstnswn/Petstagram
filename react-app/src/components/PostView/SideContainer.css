@@ -13,6 +13,7 @@
     width: 42px;
     border-radius: 50%;
     margin-right:12px;
+    object-fit:cover;
 }
 
 
@@ -40,4 +41,19 @@
 
 .post-view-comments a:visited{
     color:black;
+}
+
+.comment-shell span{
+    white-space: normal;
+    max-width: 120px;
+}
+
+.time-and-menu{
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.time-and-menu #ghost{
+    visibility: hidden;
 }
