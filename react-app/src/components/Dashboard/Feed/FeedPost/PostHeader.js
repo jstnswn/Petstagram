@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import { Modal } from '../../../../context/Modal'
-import PostMenu from '../../../PostView/PostMenu'
 import { follow } from '../../../../store/dashboard'
+import PostMenu from '../../../PostView/PostMenu'
+import Unfollow from '../../../UnfollowModal/Unfollow'
 
 export default function PostHeader({ post }) {
   const user = useSelector(({ session }) => session.user)
   const dispatch = useDispatch();
   const [showPostMenuModal, setShowPostMenuModal] = useState(false)
+  const [showUnfollowModal, setShowUnfollowModal] = useState(false)
 
   const userFollowing = user.following.map(user => user.id)
 
@@ -36,9 +39,15 @@ export default function PostHeader({ post }) {
       <i className='fa-solid fa-ellipsis' onClick={showPostModal}></i>
       {showPostMenuModal && (
         <Modal onClose={closePostModal}>
-          <PostMenu post={post} setShowPostMenuModal={setShowPostMenuModal} closeMenu={closePostModal} option='feed'/>
+          <PostMenu post={post} setShowUnfollowModal={setShowUnfollowModal} setShowPostMenuModal={setShowPostMenuModal} closeMenu={closePostModal} option='feed'/>
         </Modal>
       )}
+
+      {showUnfollowModal &&
+        <Modal>
+          <Unfollow post={post}/>
+        </Modal>
+      }
 
     </div>
   )

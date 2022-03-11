@@ -59,12 +59,14 @@ export default function PostView({ post, option, closePostView }) {
 
       {showMenu && (
         <Modal onClose={closeMenu}>
-          <PostMenu closeMenu={closeMenu} closePostView={closePostView} post={post} option={option}/>
+          <PostMenu
+            closeMenu={closeMenu}
+            closePostView={closePostView}
+            post={post}
+            option={option}
+          />
         </Modal>
       )}
-
-
-
     </div>
   )
 }

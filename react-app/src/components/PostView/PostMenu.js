@@ -8,10 +8,10 @@ import '../Dashboard/Feed/FeedPost/PostFooter.css'
 import { Modal } from '../../context/Modal';
 import PostEditForm from './PostEditForm';
 
-export default function PostMenu({ closeMenu, closePostView, post, setShowPostMenuModal, option }) {
+export default function PostMenu({ closeMenu, closePostView, post, setShowPostMenuModal, setShowUnfollowModal, option }) {
   const [showEditMenu, setShowEditMenu] = useState(false);
   const dispatch = useDispatch();
-
+// console.log(setShowUnfollowModal)
   const user = useSelector(({ session }) => session.user)
 
   const userFollowing = user.following.map(user => user.id)
@@ -23,8 +23,9 @@ export default function PostMenu({ closeMenu, closePostView, post, setShowPostMe
   // const urlParam = history.location.pathname.slice(1).toLowerCase();
 
   const unfollowClick = () => {
-    dispatch(unfollow(post.user.id))
+    // dispatch(unfollow(post.user.id))
     setShowPostMenuModal(false)
+    setShowUnfollowModal(true)
   };
 
   const removePost = async () => {
