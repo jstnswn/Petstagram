@@ -140,7 +140,7 @@ export default function reducer(state = initialState, action) {
       stateCopy = {...state}
       stateCopy.user.following.push(action.user)
       return stateCopy
-      
+
     default:
       return state;
   }

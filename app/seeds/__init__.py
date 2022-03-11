@@ -1,6 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
 from .posts import seed_posts, undo_posts
+from .notifications import undo_like_notifications
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -20,4 +21,5 @@ def seed():
 def undo():
     undo_users()
     undo_posts()
+    undo_like_notifications()
     # Add other undo functions here
