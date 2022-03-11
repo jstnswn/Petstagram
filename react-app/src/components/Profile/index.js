@@ -16,7 +16,7 @@ export default function ProfilePage() {
   const dispatch = useDispatch();
   const [userLoaded, setUserLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
-  const [user, setUser] = useState(null);
+  const [profileUser, setProfileUser] = useState(null);
 
   const [showEditProfileModal, setShowProfileModal] = useState(false);
   const openEditProfileModal = () => setShowProfileModal(true);
@@ -40,7 +40,7 @@ export default function ProfilePage() {
     async function fetchUser() {
       const response = await fetch(`/api/users/usernames/${urlParam}`);
       const data = await response.json();
-      setUser(data.user);
+      setProfileUser(data.user);
     };
     fetchUser()
       .then(() => setUserLoaded(true));
@@ -51,9 +51,9 @@ export default function ProfilePage() {
   useEffect(() => {
     if (!userLoaded) return;
 
-    dispatch((getProfilePosts(user?.id)))
+    dispatch((getProfilePosts(profileUser?.id)))
       .then(() => setPostsLoaded(true));
-  }, [dispatch, userLoaded, user]);
+  }, [dispatch, userLoaded, profileUser]);
 
   return postsLoaded && (
     <div className='profile-page-container'>
@@ -61,42 +61,42 @@ export default function ProfilePage() {
           <img
             className='profile-pic'
             alt='profile-button'
-            src={user.image_url}
+            src={profileUser.image_url}
             onClick={openProPicModal}
           />
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal user={user} cancelModal={closeProPicModal}/>
+              <ProPicModal profileUser={profileUser} cancelModal={closeProPicModal}/>
             </Modal>
           )}
           <div className='all-info'>
         <div className='top-column'>
-        <div className='profile-username'>{user.username}
+        <div className='profile-username'>{profileUser.username}
         </div>
         <button onClick={openEditProfileModal} className='edit-profile'>Edit Profile</button>
         {showEditProfileModal && (
           <Modal onClose={closeEditProfileModal}>
-            <EditProfileModal user={user} cancelModal={closeEditProfileModal}/>
+            <EditProfileModal user={profileUser} cancelModal={closeEditProfileModal}/>
             </Modal>
         )}
         </div>
         <div className='mid-column'>
           <div className='posts-number'>{posts.length} posts</div>
-          <div onClick={openFollowerModal} className='followers'>{user.followers.length} followers</div>
+          <div onClick={openFollowerModal} className='followers'>{profileUser.followers.length} followers</div>
           {showFollowerModal && (
             <Modal onClose={closeFollowerModal}>
-              <FollowerFormModal user={user} closeModal={closeFollowerModal} />
+              <FollowerFormModal profileUser={profileUser} closeModal={closeFollowerModal} />
 
             </Modal>
           )}
-          <div onClick={openFollowingModal} className='following'>{user.following.length} following</div>
+          <div onClick={openFollowingModal} className='following'>{profileUser.following.length} following</div>
           {showFollowingModal && (
             <Modal onClose={closeFollowingModal}>
-              <FollowingFormModal user={user} closeModal={closeFollowingModal}/>
+              <FollowingFormModal profileUser={profileUser} closeModal={closeFollowingModal}/>
             </Modal>
           )}
         </div>
-        <div className='bot-column'>{user.full_name}</div>
+        <div className='bot-column'>{profileUser.full_name}</div>
       </div>
       </div>
       <nav className='profile-nav'>
