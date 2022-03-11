@@ -70,6 +70,7 @@ function CommentForm({ option, post}) {
 
         if(option === 'feed'){
             dispatch(createCommentDashboard(payload))
+            setComment('')
             // const newComment = await dispatch(createCommentDashboard(payload))
         }else{
             const newComment = await dispatch(createCommentProfile(payload))
