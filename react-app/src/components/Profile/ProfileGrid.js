@@ -5,8 +5,9 @@ import { getProfilePostsArray } from '../../store/profile';
 import PostView from '../PostView';
 // import PostEditForm from '../PostView/PostEditForm';
 
-export default function ProfileGrid() {
+export default function ProfileGrid({profileUser}) {
   const [showIdx, setShowIdx] = useState(null);
+  console.log(profileUser, 'this is profile User')
 
   const posts = useSelector(getProfilePostsArray);
 
@@ -28,7 +29,7 @@ export default function ProfileGrid() {
 
           {showIdx === idx && (
             <Modal onClose={closePostView}>
-              <PostView post={post} closePostView={closePostView} option='profile' />
+              <PostView profileUser={profileUser} post={post} closePostView={closePostView} option='profile' />
             </Modal>
           )}
         </div>

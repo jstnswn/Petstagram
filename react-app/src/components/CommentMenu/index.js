@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import {Modal} from '../../context/Modal'
 import CommentMenu from './CommentMenu';
 
-function CommentMenuModal({ commentId, post, comment, option}) {
+function CommentMenuModal({ commentId, post, comment, option, profileUser}) {
 
-
+    
     const [showModal, setShowModal] = useState(false);
 
     const hideForm = () => {
@@ -19,7 +19,7 @@ function CommentMenuModal({ commentId, post, comment, option}) {
 
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <CommentMenu option={option} comment={comment} post={post} hideForm={hideForm} commentId={commentId}/>
+                    <CommentMenu profileUser={profileUser} option={option} comment={comment} post={post} hideForm={hideForm} commentId={commentId}/>
                 </Modal>
             )}
 
