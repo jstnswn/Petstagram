@@ -30,12 +30,15 @@ def create_comment():
 
         )
 
-        db.session.add(comment)
-        db.session.commit()
+    db.session.add(comment)
+    db.session.commit()
 
-    
-
+    comment_object = comment.to_dict()
+    print(comment_object, '-----------------------this is comment obj')
     return {"comment": comment.to_dict()}
+
+
+
 
 @comment_routes.route('/', methods=['DELETE'])
 def delete_comment():

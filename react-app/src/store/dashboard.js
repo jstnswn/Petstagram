@@ -114,6 +114,7 @@ export const createCommentDashboard = (payload) => async dispatch => {
   if (res.ok) {
       const data = await res.json();
       dispatch(addComment(data));
+      return data;
     } else {
       const errors = await res.json();
       return errors.errors;

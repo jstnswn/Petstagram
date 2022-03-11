@@ -5,7 +5,7 @@ import { editCommentProfile } from '../../../store/profile';
 import { updateComment } from '../../../store/dashboard';
 
 export default function EditComment({ option, hideForm, post, commentId, comment }) {
-  console.log(option, 'this is option for edit')
+  
   const [prevComment, setPrevComment] = useState(comment)
 
   const sessionUser = useSelector(state => state?.session?.user)

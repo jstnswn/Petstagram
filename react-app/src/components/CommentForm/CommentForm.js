@@ -48,74 +48,44 @@ function CommentForm({ option, post}) {
         }
 
         let newComment = await dispatch(createCommentProfile(payload))
+        console.log(newComment, 'this is newComment')
         if(newComment){
 
-            console.log(newComment, 'this is newComment')
-            const actionCreatorPayload = {
 
-                comment,
-
-            }
-            dispatch(addComment(actionCreatorPayload))
+            dispatch(addComment(newComment))
         }
 
 
     }
 
-    // if (option === 'feed') {
-
-    //     return (
-
-    //         <div>
-
-    //             <form onSubmit={handleSubmitDashboard}>
-    //                 <div className="comment-form-container">
-    //                     <textarea
-    //                         id={post.id}
-    //                         className="comment-form-textarea"
-    //                         cols="74"
-    //                         placeholder="Add a comment..."
-    //                         value={comment}
-    //                         onChange={(e) => setComment(e.target.value)}
-    //                     >
-    //                     </textarea>
-    //                     <button className="comment-button" type="submit">Post</button>
-    //                 </div>
-    //             </form>
-    //         </div>
-    //     )
-    // }else if(option === 'profile'){
-
-    //     return (
-    //         <div>
-    //             <form onSubmit={handleSubmitProfile}>
-    //                 <div className="comment-form-container">
-    //                     <textarea
-    //                         id={post.id}
-    //                         className="comment-form-textarea"
-    //                         cols="74"
-    //                         placeholder="Add a comment..."
-    //                         value={comment}
-    //                         onChange={(e) => setComment(e.target.value)}
-    //                     >
-    //                     </textarea>
-    //                     <button className="comment-button" type="submit">Post</button>
-    //                 </div>
-
-    //             </form>
-    //         </div>
-
-    //     )
-
-    // }
-
-    return (
-
-        <div>
 
 
-            {document.URL.includes(`http://localhost:3000/${currentUser.username}`) && document.URL.toString().length > 21 ?
+    if (option === 'feed') {
 
+        return (
+
+            <div>
+
+                <form onSubmit={handleSubmitDashboard}>
+                    <div className="comment-form-container">
+                        <textarea
+                            id={post.id}
+                            className="comment-form-textarea"
+                            cols="74"
+                            placeholder="Add a comment..."
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        >
+                        </textarea>
+                        <button className="comment-button" type="submit">Post</button>
+                    </div>
+                </form>
+            </div>
+        )
+    }else if(option !== 'feed'){
+
+        return (
+            <div>
                 <form onSubmit={handleSubmitProfile}>
                     <div className="comment-form-container">
                         <textarea
@@ -131,51 +101,80 @@ function CommentForm({ option, post}) {
                     </div>
 
                 </form>
-                :
+            </div>
 
-                document.URL.toString().length === 22 ?
+        )
 
-                    <form onSubmit={handleSubmitDashboard}>
-                        <div className="comment-form-container">
-                            <textarea
-                                id={post.id}
-                                className="comment-form-textarea"
-                                cols="74"
-                                placeholder="Add a comment..."
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                            >
-                            </textarea>
-                            <button className="comment-button" type="submit">Post</button>
-                        </div>
+    }
 
-                    </form>
-
-                    :
-
-                    <form onSubmit={handleSubmitProfile}>
-                        <   div className="comment-form-container">
-                            <textarea
-                                id={post.id}
-                                className="comment-form-textarea"
-                                cols="74"
-                                placeholder="Add a comment..."
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                            >
-                            </textarea>
-                            <button className="comment-button" type="submit">Post</button>
-                        </div>
-
-                    </form>
-
-            }
-
-        </div>
-
-
-    )
 }
 
 
 export default CommentForm;
+
+// return (
+
+//     <div>
+
+
+//         {document.URL.includes(`http://localhost:3000/${currentUser.username}`) && document.URL.toString().length > 21 ?
+
+//             <form onSubmit={handleSubmitProfile}>
+//                 <div className="comment-form-container">
+//                     <textarea
+//                         id={post.id}
+//                         className="comment-form-textarea"
+//                         cols="74"
+//                         placeholder="Add a comment..."
+//                         value={comment}
+//                         onChange={(e) => setComment(e.target.value)}
+//                     >
+//                     </textarea>
+//                     <button className="comment-button" type="submit">Post</button>
+//                 </div>
+
+//             </form>
+//             :
+
+//             document.URL.toString().length === 22 ?
+
+//                 <form onSubmit={handleSubmitDashboard}>
+//                     <div className="comment-form-container">
+//                         <textarea
+//                             id={post.id}
+//                             className="comment-form-textarea"
+//                             cols="74"
+//                             placeholder="Add a comment..."
+//                             value={comment}
+//                             onChange={(e) => setComment(e.target.value)}
+//                         >
+//                         </textarea>
+//                         <button className="comment-button" type="submit">Post</button>
+//                     </div>
+
+//                 </form>
+
+//                 :
+
+//                 <form onSubmit={handleSubmitProfile}>
+//                     <   div className="comment-form-container">
+//                         <textarea
+//                             id={post.id}
+//                             className="comment-form-textarea"
+//                             cols="74"
+//                             placeholder="Add a comment..."
+//                             value={comment}
+//                             onChange={(e) => setComment(e.target.value)}
+//                         >
+//                         </textarea>
+//                         <button className="comment-button" type="submit">Post</button>
+//                     </div>
+
+//                 </form>
+
+//         }
+
+//     </div>
+
+
+// )

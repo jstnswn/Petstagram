@@ -10,9 +10,10 @@ import { postLike, deleteLike } from '../../../../store/dashboard';
 import { useState } from 'react';
 
 
-export default function PostFooter({ post }) {
+export default function PostFooter({ post, option}) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
+
 
   let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
   // console.log(isLiked)
@@ -77,7 +78,7 @@ export default function PostFooter({ post }) {
         <ViewComments post={post}/>
       </div>
       <div className='add-comment-container'>
-        <CommentForm post={post}/>
+        <CommentForm option={option} post={post}/>
       </div>
     </div>
   )

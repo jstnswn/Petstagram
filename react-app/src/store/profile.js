@@ -136,7 +136,9 @@ export const patchPost = (payload) => async dispatch => {
 
     if (res.ok) {
         const data = await res.json();
+        console.log('data in the thunk', data)
         dispatch(addComment(data));
+        return data;
       } else {
         const errors = await res.json();
         return errors.errors;
@@ -156,7 +158,6 @@ export const removeCommentProfile = (payload) => async dispatch => {
 
   if (res.ok){
     const data = await res.json();
-    console.log(data, "this is data from delete comment thunk")
     dispatch(deleteComment(data));
     return data;
   }
@@ -175,7 +176,6 @@ export const editCommentProfile = (payload) => async dispatch => {
 
   if (res.ok){
     const data = await res.json();
-    console.log(data, "this is data from edit comment thunk")
     dispatch(updateComment(data));
     return data;
   }
