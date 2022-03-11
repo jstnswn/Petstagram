@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { patchPost as updateDashboardPost } from '../../store/dashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import { patchPost as updateDashboardPost, updatePost } from '../../store/dashboard';
 import { patchPost as updateProfilePost } from '../../store/profile';
 
 
@@ -10,7 +10,8 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   // const [errors, setErrors] = useState(false);
 
-  console.log('option: ', option)
+  const feed = useSelector(({ dashboard }) => dashboard.feed);
+  const feedPost = feed.postIds[post.id];
 
   const inputFocus = useRef(null);
 
@@ -36,8 +37,10 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
       dispatch(updateProfilePost(payload));
       // data = await dispatch(updateProfilePost(payload));
 
+      if (feedPost) dispatch(updatePost(post.id, caption))
+
     } else if (option === 'feed') {
-      dispatch(updateDashboardPost(post.id, caption))
+      dispatch(updateDashboardPost(payload))
       // data = await dispatch(updateDashboardPost(post.id, caption))
     }
 

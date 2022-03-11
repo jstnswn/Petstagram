@@ -84,7 +84,6 @@ export const getProfilePosts = (userId) => async dispatch => {
 
   if (res.ok) {
     const data = await res.json();
-    console.log("DATA: ',", data)
     dispatch(loadPosts(data));
   } else {
     const errors = await res.json();
@@ -133,13 +132,13 @@ export const patchPost = (payload) => async dispatch => {
       //   dispatch(loadPost(data))
       // ])
 
-      dispatch(updatePost(data));
+      dispatch(updatePost(postId, caption));
     } else {
       const errors = await res.json();
       return errors.errors;
     }
 
-  };
+};
 
 
   export const createCommentProfile = (payload) => async dispatch => {

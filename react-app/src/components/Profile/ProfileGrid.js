@@ -7,7 +7,6 @@ import PostView from '../PostView';
 
 export default function ProfileGrid({profileUser}) {
   const [showIdx, setShowIdx] = useState(null);
-  console.log(profileUser, 'this is profile User')
 
   const posts = useSelector(getProfilePostsArray);
 
