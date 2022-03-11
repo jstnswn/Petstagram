@@ -4,6 +4,8 @@ import './PostFooter.css';
 
 import CommentForm from '../../../CommentForm/CommentForm'
 import ViewComments from './ViewComments'
+import { Modal } from '../../../../context/Modal';
+import PostView from '../../../PostView';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { postLike, deleteLike } from '../../../../store/dashboard';
@@ -13,10 +15,12 @@ import { postLike, deleteLike } from '../../../../store/dashboard';
 export default function PostFooter({ post, option}) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
+  const history = useHistory()
 
 
   let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
   // console.log(isLiked)
+  const [showModal, setShowModal] = useState(false);// test
 
   const onClick = async e => {
     e.preventDefault()
@@ -53,10 +57,14 @@ export default function PostFooter({ post, option}) {
     }
   }
 
+  const onComment = () => {
+    setShowModal(true)
+  }
+
   return (
     <div className='post-footer'>
       <div>{post.id}</div>
-      <div className='footer-icons'>
+        <div className='footer-icons'>
         <span>
           {isLiked ?
             <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
@@ -64,15 +72,19 @@ export default function PostFooter({ post, option}) {
           }
         </span>
         <span>
-          <i className='fa-regular fa-comment post-icon'></i>
+          <i className='fa-regular fa-comment post-icon' onClick={onComment}></i>
         </span>
+        {showModal && (
+                    <Modal onClose={() => setShowModal(false) }>
+                        <PostView post={post} option='feed' />
+                    </Modal>
+                )}
         <span>
           <i className='fa-regular fa-paper-plane post-icon'></i>
         </span>
         <span>
           <i className='fa-regular fa-bookmark post-icon'></i>
         </span>
-
       </div>
       <div className='footer-likes'>likes</div>
       <div className='comment-container'>

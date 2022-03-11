@@ -14,6 +14,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
+
     let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
     //comments variables
     // const id = post.id;
@@ -97,7 +98,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                             <img className="post-view-user-img"src={post.user.image_url} alt='profile'></img>
                         </div>
                         <div>
-                            <NavLink to={`/${post.user.username}`}>{post.user.username}</NavLink>
+                            <NavLink to={`/${post.user.username}`} onClick={closePostView}>{post.user.username}</NavLink>
                             <span>{post.caption}</span>
                         </div>
                     </div>
@@ -123,8 +124,9 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 : null}
             </ul>
 
+
             <div>{post.id}</div>
-            <div className="">
+            <div className="footer-icons">
                 <span>
                 {isLiked ?
                     <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
