@@ -55,17 +55,17 @@ def seed_comments():
         Comment(
             user_id=2,
             post_id=70,
-            comment="You look so good here!"
+            comment="so cute"
         ),
         Comment(
             user_id=1,
             post_id=69,
-            comment="Let me adopt you pls <3"
+            comment="very cute"
         ),
         Comment(
-            user_id=12,
+            user_id=10,
             post_id=68,
-            comment="So cute"
+            comment="so so cute"
         ),
         Comment(
             user_id=11,
@@ -80,12 +80,12 @@ def seed_comments():
         Comment(
             user_id=9,
             post_id=65,
-            comment="You are so cute!",
+            comment="You are so adorable!",
         ),
         Comment(
             user_id=8,
             post_id=64,
-            comment="OMG adorable!",
+            comment="YAYAYA",
         ),
         Comment(
             user_id=7,
@@ -95,7 +95,7 @@ def seed_comments():
         Comment(
             user_id=6,
             post_id=62,
-            comment="Can i adopt you!",
+            comment="YOU NEED TO BE MINE",
         ),
         Comment(
             user_id=5,
@@ -138,29 +138,29 @@ def seed_comments():
             comment="Let me adopt you pls <3"
         ),
         Comment(
-            user_id=9,
+            user_id=3,
             post_id=53,
             comment="So cute"
         ),
         Comment(
             user_id=8,
             post_id=52,
-            comment="Soooo cute"
+            comment="hehehehe ily"
         ),
         Comment(
             user_id=7,
             post_id=51,
-            comment="Yes i love it!"
+            comment="IM DYING OF CUTENESS!"
         ),
         Comment(
             user_id=6,
             post_id=50,
-            comment="You are so cute!",
+            comment="i love you and i love cuteness!",
         ),
         Comment(
             user_id=5,
             post_id=49,
-            comment="OMG adorable!",
+            comment="GUSHING"
         ),
         Comment(
             user_id=4,
@@ -170,7 +170,7 @@ def seed_comments():
         Comment(
             user_id=3,
             post_id=47,
-            comment="Can i adopt you!",
+            comment="<3!",
         ),
         Comment(
             user_id=2,
@@ -220,22 +220,22 @@ def seed_comments():
         Comment(
             user_id=5,
             post_id=37,
-            comment="Soooo cute"
+            comment="mwah mwah kisses"
         ),
         Comment(
             user_id=4,
             post_id=36,
-            comment="Yes i love it!"
+            comment="MWAH KISSES"
         ),
         Comment(
             user_id=3,
             post_id=35,
-            comment="You are so cute!",
+            comment="omgomgomg",
         ),
         Comment(
             user_id=2,
             post_id=34,
-            comment="OMG adorable!",
+            comment="UGH YES",
         ),
         Comment(
             user_id=1,
@@ -245,7 +245,7 @@ def seed_comments():
         Comment(
             user_id=12,
             post_id=32,
-            comment="Can i adopt you!",
+            comment="XOXOXOXO",
         ),
         Comment(
             user_id=11,
@@ -295,135 +295,135 @@ def seed_comments():
         Comment(
             user_id=2,
             post_id=22,
-            comment="Soooo cute"
+            comment="i love this so much"
         ),
         Comment(
             user_id=1,
             post_id=21,
-            comment="Yes i love it!"
+            comment="IM GUSHING"
         ),
         Comment(
-            user_id=12,
+            user_id=1,
             post_id=20,
-            comment="You are so cute!",
+            comment="xoxo",
         ),
         Comment(
             user_id=11,
             post_id=19,
-            comment="OMG adorable!",
+            comment="OMG ILY",
         ),
         Comment(
-            user_id=10,
+            user_id=9,
             post_id=18,
             comment="This is amazing!",
         ),
         Comment(
-            user_id=9,
+            user_id=10,
             post_id=17,
-            comment="Can i adopt you!",
+            comment="I AM DYING FROM THE CUTENESS",
         ),
         Comment(
-            user_id=8,
+            user_id=11,
             post_id=16,
             comment="<3",
         ),
         Comment(
-            user_id=7,
+            user_id=12,
             post_id=15,
             comment="You look so good here!",
         ),
         Comment(
-            user_id=6,
+            user_id=1,
             post_id=14,
             comment="mhm slayyyy",
         ),
         Comment(
-            user_id=5,
+            user_id=2,
             post_id=13,
             comment="caption game on point",
         ),
         Comment(
-            user_id=4,
+            user_id=3,
             post_id=12,
             comment="Adorbs"
         ),
         Comment(
-            user_id=3,
+            user_id=4,
             post_id=11,
             comment="ily <3"
         ),
         Comment(
-            user_id=2,
+            user_id=5,
             post_id=10,
             comment="You look so good here!"
         ),
         Comment(
-            user_id=1,
+            user_id=6,
             post_id=9,
             comment="Let me adopt you pls <3"
         ),
         Comment(
-            user_id=12,
+            user_id=7,
             post_id=7,
             comment="So cute"
         ),
         Comment(
-            user_id=11,
+            user_id=8,
             post_id=6,
-            comment="Soooo cute"
-        ),
-        Comment(
-            user_id=10,
-            post_id=5,
-            comment="Yes i love it!"
+            comment="am dead"
         ),
         Comment(
             user_id=9,
+            post_id=5,
+            comment="AHHHH! <3"
+        ),
+        Comment(
+            user_id=3,
             post_id=4,
-            comment="You are so cute!",
+            comment="MORE PICS",
         ),
         Comment(
-            user_id=8,
+            user_id=1,
             post_id=3,
-            comment="OMG adorable!",
+            comment="SO ADORABLE",
         ),
         Comment(
-            user_id=7,
+            user_id=2,
             post_id=2,
             comment="This is amazing!",
         ),
         Comment(
-            user_id=6,
+            user_id=3,
             post_id=1,
-            comment="Can i adopt you!",
+            comment="LOVEEEE",
         ),
         Comment(
-            user_id=5,
+            user_id=4,
             post_id=80,
             comment="<3",
         ),
         Comment(
-            user_id=4,
+            user_id=5,
             post_id=79,
             comment="You look so good here!",
         ),
         Comment(
-            user_id=3,
+            user_id=6,
             post_id=78,
             comment="mhm slayyyy",
         ),
         Comment(
-            user_id=2,
+            user_id=7,
             post_id=58,
             comment="caption game on point",
         ),
         Comment(
-            user_id=1,
+            user_id=8,
             post_id=57,
             comment="Adorbs"
         ),
         Comment(
-            user_id=12,
+            user_id=9,
             post_id=56,
             comment="ily <3"
         ),
@@ -433,57 +433,57 @@ def seed_comments():
             comment="You look so good here!"
         ),
         Comment(
-            user_id=10,
+            user_id=11,
             post_id=54,
             comment="Let me adopt you pls <3"
         ),
         Comment(
-            user_id=9,
+            user_id=6,
             post_id=53,
             comment="So cute"
         ),
         Comment(
-            user_id=8,
+            user_id=1,
             post_id=52,
-            comment="Soooo cute"
+            comment="So freaking cute"
         ),
         Comment(
-            user_id=7,
+            user_id=2,
             post_id=51,
-            comment="Yes i love it!"
+            comment="OMGGGGG!"
         ),
         Comment(
-            user_id=6,
+            user_id=3,
             post_id=50,
-            comment="You are so cute!",
+            comment="I NEED MOAR!",
         ),
         Comment(
-            user_id=5,
+            user_id=4,
             post_id=49,
             comment="OMG adorable!",
         ),
         Comment(
-            user_id=4,
+            user_id=5,
             post_id=48,
             comment="This is amazing!",
         ),
         Comment(
-            user_id=3,
+            user_id=6,
             post_id=47,
-            comment="Can i adopt you!",
+            comment="YESSSSS",
         ),
         Comment(
-            user_id=2,
+            user_id=7,
             post_id=46,
             comment="<3",
         ),
         Comment(
-            user_id=1,
+            user_id=8,
             post_id=45,
             comment="You look so good here!",
         ),
         Comment(
-            user_id=12,
+            user_id=9,
             post_id=44,
             comment="mhm slayyyy",
         ),
@@ -498,107 +498,107 @@ def seed_comments():
             comment="Adorbs"
         ),
         Comment(
-            user_id=9,
+            user_id=1,
             post_id=41,
             comment="ily <3"
         ),
         Comment(
-            user_id=8,
+            user_id=2,
             post_id=40,
             comment="You look so good here!"
         ),
         Comment(
-            user_id=7,
+            user_id=3,
             post_id=39,
             comment="Let me adopt you pls <3"
         ),
         Comment(
-            user_id=6,
+            user_id=7,
             post_id=38,
             comment="So cute"
         ),
         Comment(
-            user_id=5,
+            user_id=8,
             post_id=37,
             comment="Soooo cute"
         ),
         Comment(
-            user_id=4,
+            user_id=5,
             post_id=36,
-            comment="Yes i love it!"
+            comment="YESSSS!"
         ),
         Comment(
-            user_id=3,
+            user_id=9,
             post_id=35,
-            comment="You are so cute!",
+            comment="THIS NEEDS MORE LIKES",
         ),
         Comment(
-            user_id=2,
+            user_id=10,
             post_id=34,
             comment="OMG adorable!",
         ),
         Comment(
-            user_id=1,
+            user_id=11,
             post_id=33,
             comment="This is amazing!",
         ),
         Comment(
-            user_id=12,
+            user_id=1,
             post_id=32,
-            comment="Can i adopt you!",
+            comment="SO FREAKING CUTE OMG",
         ),
         Comment(
-            user_id=11,
+            user_id=2,
             post_id=31,
             comment="<3",
         ),
         Comment(
-            user_id=10,
+            user_id=3,
             post_id=30,
             comment="You look so good here!",
         ),
         Comment(
-            user_id=9,
+            user_id=4,
             post_id=29,
             comment="mhm slayyyy",
         ),
         Comment(
-            user_id=8,
+            user_id=5,
             post_id=28,
             comment="caption game on point",
         ),
         Comment(
-            user_id=7,
+            user_id=6,
             post_id=27,
             comment="Adorbs"
         ),
         Comment(
-            user_id=6,
+            user_id=7,
             post_id=26,
             comment="ily <3"
         ),
         Comment(
-            user_id=5,
+            user_id=8,
             post_id=25,
             comment="You look so good here!"
         ),
         Comment(
-            user_id=4,
+            user_id=9,
             post_id=24,
             comment="Let me adopt you pls <3"
         ),
         Comment(
-            user_id=3,
+            user_id=10,
             post_id=23,
             comment="So cute"
         ),
         Comment(
-            user_id=2,
+            user_id=11,
             post_id=22,
-            comment="Soooo cute"
+            comment="So very mucho cute"
         ),
         Comment(
-            user_id=1,
+            user_id=12,
             post_id=21,
             comment="Yes i love it!"
         ),
@@ -607,7 +607,7 @@ def seed_comments():
 
     for comment in comments:
         db.session.add(comment)
-        
+
     db.session.commit()
 
 def undo_comments():
