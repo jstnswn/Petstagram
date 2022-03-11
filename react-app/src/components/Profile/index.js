@@ -78,18 +78,21 @@ export default function ProfilePage() {
   return postsLoaded && (
     <div className='profile-page-container'>
       <div className='profile-header'>
+        <div className='profile-header-pic-container'>
           <img
-            className='profile-pic'
+            className='header-profile-pic'
             alt='profile-button'
             src={profileUser.image_url}
             onClick={openProPicModal}
           />
+
+        </div>
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
               <ProPicModal user={profileUser} cancelModal={closeProPicModal}/>
             </Modal>
           )}
-          <div className='all-info'>
+          <div className='header-info'>
         <div className='top-column'>
         <div className='profile-username'>{profileUser.username}
         </div>
