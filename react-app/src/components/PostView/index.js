@@ -7,9 +7,9 @@ import './PostView.css';
 
 import SideContainer from './SideContainer';
 
-export default function PostView({ post, option, closePostView }) {
+export default function PostView({ post, option, closePostView, profileUser}) {
   const [showMenu, setShowMenu] = useState(false);
-
+  console.log(profileUser, 'this is profileUser on postview')
   let headerInfo;
   if (option === 'feed') {
     headerInfo = (
@@ -53,7 +53,7 @@ export default function PostView({ post, option, closePostView }) {
             onClick={openMenu}
           />
         </div>
-        <SideContainer post={post} closePostView={closePostView} closeMenu={closeMenu} option={option}/>
+        <SideContainer profileUser={profileUser} post={post} closePostView={closePostView} closeMenu={closeMenu} option={option}/>
 
       </div>
 

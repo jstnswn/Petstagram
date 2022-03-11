@@ -9,8 +9,8 @@ import CommentMenuModal from '../CommentMenu';
 // import DeleteComment from '../DeleteComment/DeleteComment';
 import { NavLink } from 'react-router-dom';
 
-function SideContainer({ post, closeMenu, closePostView, option}) {
-
+function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
+    console.log(profileUser, 'this is profileUser on sidecontainer')
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
@@ -111,7 +111,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                     </div>
                     <div className='time-and-menu'>
                         <div>{timePassed(Date.parse(new Date().toString()) - Date.parse(comment?.created_at))}</div>
-                        {comment.user.id === sessionUser.id ? <CommentMenuModal option={option} comment={comment.comment} post={post} commentId={comment.id}/>   : <i id='ghost'className='far fa-ellipsis-h post-view'/>}
+                        {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id}/>   : <i id='ghost'className='far fa-ellipsis-h post-view'/>}
 
                     </div>
                 </li>

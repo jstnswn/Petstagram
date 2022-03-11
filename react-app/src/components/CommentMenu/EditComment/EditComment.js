@@ -4,8 +4,8 @@ import { editCommentDashboard } from '../../../store/dashboard';
 import { editCommentProfile } from '../../../store/profile';
 import { updateComment } from '../../../store/dashboard';
 
-export default function EditComment({ option, hideForm, post, commentId, comment }) {
-
+export default function EditComment({ option, hideForm, post, commentId, comment, profileUser }) {
+  console.log(profileUser, 'this is profile user on edit')
   const [prevComment, setPrevComment] = useState(comment)
 
   const sessionUser = useSelector(state => state?.session?.user)
@@ -23,7 +23,13 @@ export default function EditComment({ option, hideForm, post, commentId, comment
       post_id: post.id
     }
 
-    if(option==='feed'){
+    
+    if(option === 'profile' && profileUser.username === sessionUser.username){
+      let updatedComment = dispatch(editCommentProfile(payload))
+      if(updatedComment){
+        hideForm();
+      }
+    }else if(option==='feed'){
       let updatedComment = dispatch(editCommentDashboard(payload))
       if (updatedComment) {
         hideForm();

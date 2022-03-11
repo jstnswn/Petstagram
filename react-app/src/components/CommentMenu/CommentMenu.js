@@ -7,8 +7,8 @@ import {removeCommentProfile} from '../../store/profile'
 import EditComment from './EditComment/EditComment'
 import { deleteComment } from '../../store/dashboard'
 
-function CommentMenu ({commentId, hideForm, post, comment, option}) {
-
+function CommentMenu ({commentId, hideForm, post, comment, option, profileUser}) {
+    console.log(profileUser, 'this is profile user on comment menu')
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
@@ -21,7 +21,9 @@ function CommentMenu ({commentId, hideForm, post, comment, option}) {
             post_id: postId,
         };
 
-        if(option === 'profile'){
+        if(option === 'profile' && profileUser.username === currentUser.username){
+            let deletedComment = await dispatch(removeCommentProfile(payload))
+        }else if(option === 'profile'){
             let deletedComment = await dispatch(removeCommentProfile(payload))
             if (deletedComment){
                 const updatingDash = await dispatch(deleteComment(deletedComment))
@@ -42,7 +44,7 @@ function CommentMenu ({commentId, hideForm, post, comment, option}) {
             <div onClick={() => setShowModal(true)}>Update</div>
             {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-               <EditComment option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
+               <EditComment profileUser={profileUser} option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
             </Modal>
             )}
              <div onClick={hideForm}>Cancel</div>

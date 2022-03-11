@@ -104,7 +104,7 @@ export default function ProfilePage() {
         <p>SAVED</p>
         <p>TAGGED</p>
       </nav>
-      <ProfileGrid />
+      <ProfileGrid profileUser={profileUser}/>
     </div>
   )
 }
