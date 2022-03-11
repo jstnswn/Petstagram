@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './FollowerModal.css'
 import x_btn from '../../../assets/x.png'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { follow, unfollow } from '../../../store/dashboard'
 
 export default function FollowingFormModal({ profileUser, userFollowing, setUserFollowing, user, closeModal}) {
     const dispatch = useDispatch()
-    // const user = useSelector(({ session }) => session.user);
-    // const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
 
     const handleUnfollow = (e, id) => {
         e.preventDefault()
