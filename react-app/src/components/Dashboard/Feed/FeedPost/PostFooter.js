@@ -54,7 +54,7 @@ export default function PostFooter({ post, option}) {
   return (
     <div className='post-footer'>
       <div>{post.id}</div>
-        <div className='profile-modal-icon'>
+        <div className='footer-icons'>
         <span>
           {isLiked ?
             <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
