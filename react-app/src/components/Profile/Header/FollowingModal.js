@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { follow, unfollow } from '../../../store/dashboard'
 
-export default function FollowingFormModal({ profileUser, closeModal}) {
+export default function FollowingFormModal({ profileUser, userFollowing, setUserFollowing, user, closeModal}) {
     const dispatch = useDispatch()
-    const user = useSelector(({ session }) => session.user);
-    const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
+    // const user = useSelector(({ session }) => session.user);
+    // const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
 
     const handleUnfollow = (e, id) => {
         e.preventDefault()

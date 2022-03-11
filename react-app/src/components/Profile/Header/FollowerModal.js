@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { follow, unfollow } from '../../../store/dashboard'
 
 
-export default function FollowerFormModal({ profileUser, closeModal }) {
+export default function FollowerFormModal({ profileUser, userFollowing, setUserFollowing, user, closeModal }) {
     const dispatch = useDispatch()
-    const user = useSelector(({ session }) => session.user);
-    const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
+    // const user = useSelector(({ session }) => session.user);
+    // const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
 
     // useEffect(() => {
     //     console.log('userFollowing:', userFollowing)
@@ -18,12 +18,25 @@ export default function FollowerFormModal({ profileUser, closeModal }) {
         e.preventDefault()
         dispatch(unfollow(id))
         setUserFollowing(userFollowing.filter(followId => followId !== id))
+        // if (user.id === profileUser.id) {
+        //    setProfileUser(prev => {
+        //         const index = prev.following.indexOf(id)
+        //         prev.following.splice(index, 1)
+        //         return prev
+        //    })
+        // }
     }
 
     const handleFollow = (e, id) => {
         e.preventDefault()
         dispatch(follow(id))
         setUserFollowing(prev => [...userFollowing, id])
+        // if (user.id === profileUser.id) {
+        //     setProfileUser(prev => {
+        //         prev.following.push(id)
+        //         return prev
+        //     })
+        // }
     }
     return (
         <>

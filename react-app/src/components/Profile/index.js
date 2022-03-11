@@ -12,8 +12,11 @@ import EditProfileModal from './Header/EditProfile';
 
 export default function ProfilePage() {
   const location = useLocation();
-  const urlParam = location.pathname.slice(1);
   const dispatch = useDispatch();
+  const urlParam = location.pathname.slice(1);
+  const user = useSelector(({ session }) => session.user);
+  const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
+
   const [userLoaded, setUserLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [profileUser, setProfileUser] = useState(null);
@@ -44,8 +47,7 @@ export default function ProfilePage() {
     };
     fetchUser()
       .then(() => setUserLoaded(true));
-  }, [urlParam]);
-
+  }, [urlParam, userFollowing]);
 
 
   useEffect(() => {
@@ -66,7 +68,7 @@ export default function ProfilePage() {
           />
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal profileUser={profileUser} cancelModal={closeProPicModal}/>
+              <ProPicModal user={profileUser} cancelModal={closeProPicModal}/>
             </Modal>
           )}
           <div className='all-info'>
@@ -85,14 +87,28 @@ export default function ProfilePage() {
           <div onClick={openFollowerModal} className='followers'>{profileUser.followers.length} followers</div>
           {showFollowerModal && (
             <Modal onClose={closeFollowerModal}>
-              <FollowerFormModal profileUser={profileUser} closeModal={closeFollowerModal} />
+              <FollowerFormModal
+                user={user}
+                profileUser={profileUser}
+                userFollowing={userFollowing}
+                setUserFollowing={setUserFollowing}
+                setProfileUser={setProfileUser}
+                closeModal={closeFollowerModal}
+              />
 
             </Modal>
           )}
           <div onClick={openFollowingModal} className='following'>{profileUser.following.length} following</div>
           {showFollowingModal && (
             <Modal onClose={closeFollowingModal}>
-              <FollowingFormModal profileUser={profileUser} closeModal={closeFollowingModal}/>
+              <FollowingFormModal
+                user={user}
+                profileUser={profileUser}
+                userFollowing={userFollowing}
+                setUserFollowing={setUserFollowing}
+                setProfileUser={setProfileUser}
+                closeModal={closeFollowingModal}
+              />
             </Modal>
           )}
         </div>
