@@ -7,6 +7,7 @@ const UPDATE_POST = 'profile/UPDATE_POST';
 
 const ADD_COMMENT = 'profile/ADD_COMMENT';
 const DELETE_COMMENT = 'profile/DELETE_COMMENT';
+const UPDATE_COMMENT = 'profile/UPDATE_COMMENT';
 
 const PROFILE_POST_LIKE = 'profile/PROFILE_POST_LIKE' // Post like action type
 const PROFILE_DELETE_LIKE = 'profile/PROFILE_DELETE_LIKE'
@@ -51,6 +52,13 @@ const addComment = (data) => {
 const deleteComment = (data) => {
   return {
     type: DELETE_COMMENT,
+    data
+  }
+}
+
+const updateComment = (data) => {
+  return {
+    type: UPDATE_COMMENT,
     data
   }
 }
@@ -105,28 +113,6 @@ export const createPost = (payload) => async dispatch => {
   }
 };
 
-export const createCommentProfile = (payload) => async dispatch => {
-
-  const res = await fetch('/api/comments/', {
-      method: 'POST',
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-          user_id: payload.user_id,
-          post_id: payload.post_id,
-          comment: payload.comment,
-      })
-  });
-
-  if (res.ok) {
-      const data = await res.json();
-      dispatch(addComment(data));
-    } else {
-      const errors = await res.json();
-      return errors.errors;
-    }
- }
 
 export const patchPost = (payload) => async dispatch => {
   const { postId, caption } = payload;
@@ -140,15 +126,54 @@ export const patchPost = (payload) => async dispatch => {
   });
 
   if (res.ok) {
+    const data = await res.json();
+
+    // await Promise.all([
+      //   dispatch(removePost(postId)),
+      //   dispatch(loadPost(data))
+      // ])
+
+      dispatch(updatePost(data));
+    } else {
+      const errors = await res.json();
+      return errors.errors;
+    }
+
+  };
+
+
+  export const createCommentProfile = (payload) => async dispatch => {
+
+    const res = await fetch('/api/comments/', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            user_id: payload.user_id,
+            post_id: payload.post_id,
+            comment: payload.comment,
+        })
+    });
+
+    if (res.ok) {
+        const data = await res.json();
+        console.log('data in the thunk', data)
+        dispatch(addComment(data));
+        return data;
+      } else {
+        const errors = await res.json();
+        return errors.errors;
+      }
+   }
     // const data = await res.json();
 
-    dispatch(updatePost(postId, caption));
-  } else {
-    const errors = await res.json();
-    return errors.errors;
-  }
+  //   dispatch(updatePost(postId, caption));
+  // } else {
+  //   const errors = await res.json();
+  //   return errors.errors;
+  // }
 
-};
 
 export const removeCommentProfile = (payload) => async dispatch => {
   const res = await fetch('/api/comments/', {
@@ -162,8 +187,25 @@ export const removeCommentProfile = (payload) => async dispatch => {
 
   if (res.ok){
     const data = await res.json();
-    console.log(data, "this is data from delete comment thunk")
     dispatch(deleteComment(data));
+    return data;
+  }
+}
+
+export const editCommentProfile = (payload) => async dispatch => {
+  const res = await fetch('/api/comments/', {
+    method:'PATCH',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+      comment_id: payload.comment_id,
+      post_id: payload.post_id,
+      updated_comment: payload.updated_comment,
+  })
+  });
+
+  if (res.ok){
+    const data = await res.json();
+    dispatch(updateComment(data));
     return data;
   }
 }
@@ -291,6 +333,13 @@ export default function reducer(state = initialState, action) {
       const commentsObj = stateCopy.posts.postIds[action.data.postId].comments
       delete commentsObj[action.data.commentId]
       return stateCopy
+
+    case UPDATE_COMMENT:
+      stateCopy = {...state}
+      console.log("end of reducer")
+      const comment = stateCopy.posts.postIds[action.data.postId].comments[action.data.commentId]
+      comment.comment = action.data.updatedComment
+      return stateCopy;
 
     case PROFILE_POST_LIKE:
       stateCopy = {...state}
