@@ -9,8 +9,8 @@ import './SideContainer.css'
 // import { postLike, deleteLike } from '../../store/dashboard';
 // import DeleteComment from '../DeleteComment/DeleteComment';
 
-function SideContainer({ post, closeMenu, closePostView, option}) {
-
+function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
+    console.log(profileUser, 'this is profileUser on sidecontainer')
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
@@ -22,6 +22,8 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
     const comments = post.comments;
 
     const commentsArr = Object.values(comments);
+    const reverseArr = [...commentsArr].reverse();
+    console.log(reverseArr, 'reverseArr')
 
 
     //created at logic
@@ -87,6 +89,14 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
         }
     }
 
+    let likesCountRender;
+    let likesCount;
+        if (post.likers.length !== 0) {
+        likesCount = post.likers.length;
+        if (post.likers.length === 1) likesCountRender = `${likesCount} like`;
+        else likesCountRender = `${likesCount} likes`;
+    } else likesCountRender = null;
+
 
 
     return (
@@ -105,7 +115,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 </li>
 
                 {commentsArr.length !==0 ? <>
-                {commentsArr.map((comment)=>
+                {reverseArr.map((comment)=>
                 <li key={comment.id}>
                     <div className="comment-shell">
                         <img className="post-view-user-img"src={comment.user.image_url} alt='profile'></img>
@@ -114,7 +124,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                     </div>
                     <div className='time-and-menu'>
                         <div>{timePassed(Date.parse(new Date().toString()) - Date.parse(comment?.created_at))}</div>
-                        {comment.user.id === sessionUser.id ? <CommentMenuModal option={option} comment={comment.comment} post={post} commentId={comment.id}/>   : <i id='ghost'className='far fa-ellipsis-h post-view'/>}
+                        {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id}/>   : <i id='ghost'className='far fa-ellipsis-h post-view'/>}
 
                     </div>
                 </li>
@@ -143,9 +153,10 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                     <i className='fa-regular fa-bookmark post-icon'></i>
                 </span>
             </div>
+            {likesCount > 0 ? <div className='footer-likes'>{likesCountRender}</div> : null}
 
             <div>
-                <CommentForm option={option} post={post}/>
+                <CommentForm profileUser={profileUser} option={option} post={post}/>
             </div>
         </div>
 

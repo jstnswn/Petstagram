@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from '../../context/Modal'
 import { removeCommentDashboard } from '../../store/dashboard'
 import { removeCommentProfile } from '../../store/profile'
@@ -7,10 +7,10 @@ import { deleteComment } from '../../store/dashboard'
 import EditComment from './EditComment/EditComment'
 import './CommentMenu.css'
 
-function CommentMenu ({commentId, hideForm, post, comment, option}) {
+function CommentMenu ({commentId, hideForm, post, comment, option, profileUser}) {
 
     const dispatch = useDispatch();
-    // const currentUser = useSelector(state => state.session.user);
+    const currentUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
 
 
@@ -21,7 +21,9 @@ function CommentMenu ({commentId, hideForm, post, comment, option}) {
             post_id: postId,
         };
 
-        if(option === 'profile'){
+        if(option === 'profile' && profileUser.username === currentUser.username){
+            let deletedComment = await dispatch(removeCommentProfile(payload))
+        }else if(option === 'profile'){
             let deletedComment = await dispatch(removeCommentProfile(payload))
             if (deletedComment){
                 dispatch(deleteComment(deletedComment))
@@ -43,7 +45,7 @@ function CommentMenu ({commentId, hideForm, post, comment, option}) {
             <div onClick={() => setShowModal(true)}>Update</div>
             {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-               <EditComment option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
+               <EditComment profileUser={profileUser} option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
             </Modal>
             )}
              <div onClick={hideForm}>Cancel</div>
