@@ -62,7 +62,7 @@ function CommentForm({ post }) {
             {document.URL.includes(`http://localhost:3000/${currentUser.username}`) && document.URL.toString().length > 21 ?
 
                 <form onSubmit={handleSubmitProfile}>
-                    <div className="comment-form-container">
+                    <div className="comment-form-container-profile">
                         <textarea
                             id={post.id}
                             className="comment-form-textarea"
@@ -99,8 +99,8 @@ function CommentForm({ post }) {
             :
 
                 <form onSubmit={handleSubmitProfile}>
-                <   div className="comment-form-container">
-                    <div className="add-comment-and-post-btn">
+                <   div className="comment-form-container-profile">
+
                     <textarea
                         id={post.id}
                         className="comment-form-textarea"
@@ -111,7 +111,6 @@ function CommentForm({ post }) {
                     >
                         </textarea>
                         <button className="comment-button" type="submit">Post</button>
-                        </div>
                     </div>
 
                 </form>

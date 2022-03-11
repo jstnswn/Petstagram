@@ -25,7 +25,10 @@
 
 .comment-form-container{
     display:flex;
-    /* border-top: 1px grey solid; */
+}
+
+.comment-form-container-profile {
+    display:flex;
 }
 
 .add-comment-and-post-btn {

@@ -53,7 +53,7 @@ export default function PostFooter({ post }) {
   return (
     <div className='post-footer'>
       <div>{post.id}</div>
-      <div className='footer-icons'>
+        <div className='profile-modal-icon'>
         <span>
           {isLiked ?
             <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
@@ -69,7 +69,6 @@ export default function PostFooter({ post }) {
         <span>
           <i className='fa-regular fa-bookmark post-icon'></i>
         </span>
-
       </div>
       <div className='footer-likes'>likes</div>
       <div className='comment-container'>
