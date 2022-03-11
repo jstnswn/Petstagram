@@ -275,6 +275,13 @@ export default function reducer(state = initialState, action) {
     case ADD_COMMENT:
       stateCopy = {...state}
       post = stateCopy.feed.postIds[action.data.comment.post_id]
+      console.log(stateCopy.feed.postIds, 'this is feed.postids')
+      const postId = [action.data.comment.post_id][0]
+      // console.log([action.data.comment.post_id][0], 'this is the key')
+      console.log(postId, 'this is both put together')
+      console.log(stateCopy.feed.postIds.postId, "this is statecopy.feed.postIds.postId")
+      // console.log(post.comments, 'this is post.comment')
+
       post.comments[action.data.comment.id] = action.data.comment
       return stateCopy
 

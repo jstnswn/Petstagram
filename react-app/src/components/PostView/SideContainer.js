@@ -8,7 +8,7 @@ import { postLike, deleteLike } from '../../store/dashboard';
 import CommentMenuModal from '../CommentMenu';
 
 function SideContainer({ post, closeMenu, closePostView, option}) {
-    console.log(option, 'this is option sidecontainer')
+
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
@@ -131,5 +131,3 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
 
 
 export default SideContainer;
-
-

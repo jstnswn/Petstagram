@@ -8,7 +8,7 @@ import { addComment } from "../../store/dashboard";
 function CommentForm({ option, post}) {
     const dispatch = useDispatch();
 
-    console.log(option, 'this is option')
+   
     const currentUser = useSelector(state => state.session.user);
 
     const [comment, setComment] = useState("");
