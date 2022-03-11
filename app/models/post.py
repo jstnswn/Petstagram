@@ -23,7 +23,7 @@ class Post(db.Model):
         current_user = User.query.get(current_user_id)
         following = current_user.following
         following_ids = [user.id for user in following]
-        posts = Post.query.filter(Post.user_id.in_(following_ids)).order_by(Post.id.desc()).all()
+        posts = Post.query.filter(Post.user_id.in_(following_ids)).all()
 
         return [post.to_dict() for post in posts]
 
@@ -37,6 +37,7 @@ class Post(db.Model):
             'comments': [comment.to_dict() for comment in self.comments],
             'created_at': self.created_at
         }
+
 
     # added static method, dict comments, and dict image_url
     # added created_at so posts can be ordered

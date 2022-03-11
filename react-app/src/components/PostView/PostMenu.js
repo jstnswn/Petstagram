@@ -1,40 +1,52 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { deletePost } from '../../store/profile';
+// import { useHistory } from 'react-router-dom';
+import { deletePost as deletePostProfile } from '../../store/profile';
 import { unfollow } from '../../store/dashboard';
 import './PostMenu.css';
 import '../Dashboard/Feed/FeedPost/PostFooter.css'
+import { Modal } from '../../context/Modal';
+import PostEditForm from './PostEditForm';
 
-export default function PostMenu({ closeMenu, closePostView, post, setShowPostMenuModal, openEdit, closeEdit }) {
-  const history = useHistory();
+export default function PostMenu({ closeMenu, closePostView, post, setShowPostMenuModal, option }) {
+  const [showEditMenu, setShowEditMenu] = useState(false);
   const dispatch = useDispatch();
 
   const user = useSelector(({ session }) => session.user)
 
   const userFollowing = user.following.map(user => user.id)
 
+  const openEdit = () => setShowEditMenu(true);
+  const closeEdit = () => setShowEditMenu(false);
 
-  const urlParam = history.location.pathname.slice(1).toLowerCase();
+
+  // const urlParam = history.location.pathname.slice(1).toLowerCase();
 
   const unfollowClick = () => {
     dispatch(unfollow(post.user.id))
     setShowPostMenuModal(false)
   };
 
-  const removePost = () => dispatch(deletePost(post.id))
-    .then(() => closePostView());
+  const removePost = async () => {
+    if (option === 'profile') {
+      await dispatch(deletePostProfile(post.id));
+
+    } else {
+      // await dispatch(deletePostFeed(post.id));
+    }
+    closePostView();
+  }
 
   const openEditMenu = () => {
     // closePostView()
-    openEdit()
+    openEdit();
   }
 
   // TODO dispatch route to remove from feed
 
   return (
     <div className='post-menu'>
-      {user.username.toLowerCase() === urlParam && (
+      {user.id === post.user.id && (
         <>
           <div style={{ color: 'red' }} onClick={removePost}>Delete</div>
           <div onClick={openEditMenu}>Edit</div>
@@ -45,6 +57,12 @@ export default function PostMenu({ closeMenu, closePostView, post, setShowPostMe
       }
       <div>Share to...</div>
       <div onClick={closeMenu}>Cancel</div>
+
+      {showEditMenu && (
+        <Modal onClose={closeEdit} option='layer'>
+          <PostEditForm post={post} closeEdit={closeEdit} closeMenu={closeMenu} option={option} />
+        </Modal>
+      )}
     </div>
   )
 }

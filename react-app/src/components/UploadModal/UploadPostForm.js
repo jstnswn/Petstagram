@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { FileUploader } from 'react-drag-drop-files';
+// import { FileUploader } from 'react-drag-drop-files';
+import Dropzone from 'react-dropzone'
 import { useDispatch, useSelector } from 'react-redux'
-import { createPost } from '../../store/dashboard';
+import { createPost as createPostDashboard } from '../../store/dashboard';
+import { createPost as createPostProfile, loadPost} from '../../store/profile';
 import dragAndDropImage from '../../assets/drag-and-drop.png'
 import './UploadPostForm.css'
+
 
 export default function UploadPostForm({ closeModal }) {
   const dispatch = useDispatch();
@@ -12,7 +15,7 @@ export default function UploadPostForm({ closeModal }) {
   const [showTextForm, setShowTextForm] = useState(false);
   const [caption, setCaption] = useState('');
   const [disableSubmit, setDisableSubmit] = useState(false);
-  const [errors, setErrors] = useState(false);
+  const [fileError, setFileError] = useState(false);
 
   const user = useSelector(({ session }) => session.user);
   const hiddenInputRef = useRef(null);
@@ -31,19 +34,36 @@ export default function UploadPostForm({ closeModal }) {
       caption
     };
     // TODO error handling
-    const data = await dispatch(createPost(payload))
-      .then(() => closeModal())
-    if (data) {
-      setErrors([data]);
-    }
+      await dispatch(createPostDashboard(payload))
+        .then((res) => dispatch(loadPost(res)))
+    // if (data) {
+    //   setErrors([data]);
+    // }
+    closeModal()
   };
+
+  const handleFileReader = (e, file) => {
+    const dataUrl = e.target.result;
+
+    const allowedFileTypes = ['pdf', 'png', 'jpg', 'jpeg'];
+    const stopIdx = dataUrl.indexOf(';');
+    const fileType = dataUrl.slice(11, stopIdx)
+
+    if (!allowedFileTypes.includes(fileType)) {
+      setImage(null)
+      setImageUrl(null);
+      setFileError('Must upload a PDF, PNG, JPG, or JPEG image.')
+      return
+    }
+    setImageUrl(dataUrl)
+    setImage(file);
+    setFileError(null);
+  }
 
   const setFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-
-    reader.onload = (e) => setImageUrl(e.target.result);
-    setImage(file);
+    reader.onload = (e) => handleFileReader(e, file);
   };
 
   const handleButton = (e) => {
@@ -55,8 +75,6 @@ export default function UploadPostForm({ closeModal }) {
     const file = e.target.files[0];
     setFile(file);
   };
-
-  const fileTypes = ['PDF', 'PNG', 'JPG', 'JPEG'];
 
   let headerContent;
   if (!imageUrl) {
@@ -77,6 +95,7 @@ export default function UploadPostForm({ closeModal }) {
       </>
     )
   } else {
+    console.log('image', image)
     headerContent = (
       <>
         <i className='fal fa-arrow-left' onClick={() => setShowTextForm(false)}></i>
@@ -101,11 +120,32 @@ export default function UploadPostForm({ closeModal }) {
       // onSubmit={handleSubmit}
       >
         <img className='drag-and-drop' alt='drag and drop' src={dragAndDropImage}/>
-        <FileUploader
+
+
+        {/* <FileUploader
           handleChange={(file) => setFile(file)}
           name='image'
           types={fileTypes}
-        />
+        /> */}
+
+        <Dropzone onDrop={(file) => setFile(file[0])}>
+          {({ getRootProps, getInputProps }) => (
+            <section>
+              <div {...getRootProps()}>
+                <input
+                  className='ref-test'
+                  {...getInputProps()}
+                  style={{
+                    width: '755px',
+                    height: '755px',
+                    postition: 'absolute',
+                    opacity: 0
+                  }}/>
+              </div>
+            </section>
+          )}
+        </Dropzone>
+
         <button
           onClick={handleButton}
           className='upload-image-button'
@@ -118,6 +158,7 @@ export default function UploadPostForm({ closeModal }) {
           onChange={handleFileChange}
           style={{ display: 'none' }}
         />
+        {fileError && <p className='file-error'>{fileError}</p>}
       </form>
     )
   } else if (imageUrl && !showTextForm) {

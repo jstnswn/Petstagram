@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { patchPost } from '../../store/profile';
+import { patchPost as updateDashboardPost } from '../../store/dashboard';
+import { patchPost as updateProfilePost } from '../../store/profile';
 
-export default function PostEditForm({ post, closeEdit, closeMenu }) {
+
+export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
   const dispatch = useDispatch();
   const [caption, setCaption] = useState(post.caption);
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [errors, setErrors] = useState(false);
+
+  console.log('option: ', option)
 
   const inputFocus = useRef(null);
 
@@ -24,17 +28,19 @@ export default function PostEditForm({ post, closeEdit, closeMenu }) {
     if (disableSubmit) return;
     setDisableSubmit(true);
 
-    const payload = { caption, postId: post.id };
+    const payload = { postId: post.id, caption };
 
-    const data = await dispatch(patchPost(payload))
-      .then(() => {
-        closeEdit()
-        closeMenu()
-      })
-    // if (data) {
-    //   setErrors([data]);
-    // }
+    let data;
 
+    if (option === 'profile') {
+      data = await dispatch(updateProfilePost(payload));
+
+    } else if (option === 'feed') {
+      data = await dispatch(updateDashboardPost(post.id, caption))
+    }
+
+    closeEdit()
+    closeMenu()
   };
 
   return (

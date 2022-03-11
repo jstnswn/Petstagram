@@ -9,7 +9,6 @@ import SideContainer from './SideContainer';
 
 export default function PostView({ post, option, closePostView }) {
   const [showMenu, setShowMenu] = useState(false);
-  const [showEditMenu, setShowEditMenu] = useState(false);
 
   let headerInfo;
   if (option === 'feed') {
@@ -24,9 +23,6 @@ export default function PostView({ post, option, closePostView }) {
 
   const openMenu = () => setShowMenu(true);
   const closeMenu = () => setShowMenu(false);
-
-  const openEdit = () => setShowEditMenu(true);
-  const closeEdit = () => setShowEditMenu(false);
 
   return (
     <div className='post-view-container'>
@@ -63,15 +59,11 @@ export default function PostView({ post, option, closePostView }) {
 
       {showMenu && (
         <Modal onClose={closeMenu}>
-          <PostMenu closeMenu={closeMenu} closePostView={closePostView} openEdit={openEdit} closeEdit={closeEdit} post={post} />
+          <PostMenu closeMenu={closeMenu} closePostView={closePostView} post={post} option={option}/>
         </Modal>
       )}
 
-      {showEditMenu && (
-        <Modal onClose={closeEdit} option='layer'>
-          <PostEditForm post={post} closeEdit={closeEdit} closeMenu={closeMenu}/>
-        </Modal>
-      )}
+
 
     </div>
   )

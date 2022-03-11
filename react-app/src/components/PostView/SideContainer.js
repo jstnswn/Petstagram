@@ -6,6 +6,8 @@ import './SideContainer.css'
 import { profilePostLike, profileDeleteLike } from '../../store/profile';
 import { postLike, deleteLike } from '../../store/dashboard';
 import CommentMenuModal from '../CommentMenu';
+// import DeleteComment from '../DeleteComment/DeleteComment';
+import { NavLink } from 'react-router-dom';
 
 function SideContainer({ post, closeMenu, closePostView, option}) {
 
@@ -19,7 +21,6 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
     const comments = post.comments;
 
     const commentsArr = Object.values(comments);
-
 
 
     //created at logic
@@ -40,14 +41,6 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
         if (pastDay >= 2 || pastHour > 24) return `${pastDay}d`;
 
     }
-
-
-
-
-
-
-
-
 
 
     //likes logic
@@ -93,8 +86,6 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
 
 
 
-
-
     return (
         <div className="post-view-comments">
             <ul>
@@ -104,7 +95,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                             <img className="post-view-user-img"src={post.user.image_url}></img>
                         </div>
                         <div>
-                            <a href={`/${post.user.username}`}>{post.user.username}</a>
+                            <NavLink to={`/${post.user.username}`}>{post.user.username}</NavLink>
                             <span>{post.caption}</span>
                         </div>
                     </div>
@@ -115,9 +106,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 <li key={comment.id}>
                     <div className="comment-shell">
                         <img className="post-view-user-img"src={comment.user.image_url}></img>
-                    {/* </div>
-                    <div> */}
-                        <a href={`/${comment.user.username}`}>{comment.user.username}</a>
+                        <NavLink to={`/${comment.user.username}`}>{comment.user.username}</NavLink>
                         <span>{comment.comment}</span>
                     </div>
                     <div className='time-and-menu'>

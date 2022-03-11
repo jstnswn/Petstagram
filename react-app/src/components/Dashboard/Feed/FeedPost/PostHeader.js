@@ -12,13 +12,11 @@ export default function PostHeader({ post }) {
 
   const userFollowing = user.following.map(user => user.id)
 
-  const showPostModal = () => {
-    setShowPostMenuModal(true)
-  }
+  const showPostModal = () => setShowPostMenuModal(true)
+  const closePostModal = () => setShowPostMenuModal(false)
 
-  const closePostModal = () => {
-    setShowPostMenuModal(false)
-  }
+  // const
+
 
   const handleFollow = () => {
     dispatch(follow(post.user.id))
@@ -38,9 +36,10 @@ export default function PostHeader({ post }) {
       <i className='fa-solid fa-ellipsis' onClick={showPostModal}></i>
       {showPostMenuModal && (
         <Modal onClose={closePostModal}>
-          <PostMenu post={post} setShowPostMenuModal={setShowPostMenuModal}/>
+          <PostMenu post={post} setShowPostMenuModal={setShowPostMenuModal} closeMenu={closePostModal} option='feed'/>
         </Modal>
       )}
+
     </div>
   )
 }
