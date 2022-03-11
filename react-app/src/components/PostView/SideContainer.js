@@ -22,6 +22,33 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
 
 
 
+    //created at logic
+    const timePassed = (milliseconds) => {
+
+        const second = 1000
+        const minute = 60 * second
+        const hour = 60 * minute
+
+        const pastSecond = Math.floor((milliseconds % minute) / second)
+        const pastMinute = Math.floor((milliseconds % hour) / minute)
+        const pastHour = Math.floor((milliseconds / hour))
+        const pastDay = Math.floor(pastHour / 24)
+
+        if (pastSecond <= 60 && pastMinute === 0 && pastHour === 0 && pastDay === 0) return `< 1m`;
+        if (pastMinute <= 60 && pastHour === 0 && pastDay === 0) return `${pastMinute}m`;
+        if (pastHour <= 60 && pastDay === 0) return `${pastHour-5}h`;
+        if (pastDay >= 2 || pastHour > 24) return `${pastDay}d`;
+
+    }
+
+
+
+
+
+
+
+
+
 
     //likes logic
     const onClick = async e => {
@@ -92,7 +119,11 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                     <div> */}
                         <a href={`/${comment.user.username}`}>{comment.user.username}</a>
                         <span>{comment.comment}</span>
-                        {comment.user.id === sessionUser.id ? <CommentMenuModal option={option} comment={comment.comment} post={post} commentId={comment.id}/>     : null}
+                    </div>
+                    <div className='time-and-menu'>
+                        <div>{timePassed(Date.parse(new Date().toString()) - Date.parse(comment?.created_at))}</div>
+                        {comment.user.id === sessionUser.id ? <CommentMenuModal option={option} comment={comment.comment} post={post} commentId={comment.id}/>   : <i id='ghost'className='far fa-ellipsis-h post-view'/>}
+
                     </div>
                 </li>
 
@@ -101,7 +132,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 : null}
             </ul>
 
-
+            <div>{post.id}</div>
             <div className="">
                 <span>
                 {isLiked ?
