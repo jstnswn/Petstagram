@@ -5,7 +5,7 @@ import { createCommentDashboard } from "../../store/dashboard";
 import { createCommentProfile } from "../../store/profile";
 import { addComment } from "../../store/dashboard";
 
-function CommentForm({ option, post}) {
+function CommentForm({ option, post, profileUser}) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector(state => state.session.user);
@@ -24,7 +24,9 @@ function CommentForm({ option, post}) {
             comment,
         }
 
-        if(option === 'feed'){
+        if(option === 'profile' && profileUser.username === currentUser.username){
+            const newComment = await dispatch(createCommentProfile(payload))
+        }else if(option === 'feed'){
             const newComment = await dispatch(createCommentDashboard(payload))
         }else{
             const newComment = await dispatch(createCommentProfile(payload))

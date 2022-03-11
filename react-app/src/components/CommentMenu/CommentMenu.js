@@ -8,7 +8,7 @@ import EditComment from './EditComment/EditComment'
 import { deleteComment } from '../../store/dashboard'
 
 function CommentMenu ({commentId, hideForm, post, comment, option, profileUser}) {
-    console.log(profileUser, 'this is profile user on comment menu')
+ 
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);

@@ -4,7 +4,7 @@ import CommentMenu from './CommentMenu';
 
 function CommentMenuModal({ commentId, post, comment, option, profileUser}) {
 
-    console.log(profileUser, 'this is profileUser on comment menu modal')
+    
     const [showModal, setShowModal] = useState(false);
 
     const hideForm = () => {

@@ -141,7 +141,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
             </div>
 
             <div>
-                <CommentForm option={option} post={post}/>
+                <CommentForm profileUser={profileUser} option={option} post={post}/>
             </div>
         </div>
 
