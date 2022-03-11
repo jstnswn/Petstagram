@@ -10,7 +10,6 @@ export default function NavDropdown() {
     <ul className='nav-dropdown'>
       <li id='profile-btn'>
         <Link to={`/${user.username}`}>Profile</Link>
-        {/* <i class="fas fa-user-circle"></i> */}
       </li>
       <li id='logout-btn'>
         <LogoutButton />

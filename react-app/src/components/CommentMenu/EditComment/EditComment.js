@@ -5,14 +5,14 @@ import { editCommentProfile } from '../../../store/profile';
 import { updateComment } from '../../../store/dashboard';
 
 export default function EditComment({ option, hideForm, post, commentId, comment }) {
-  
+
   const [prevComment, setPrevComment] = useState(comment)
 
   const sessionUser = useSelector(state => state?.session?.user)
 
   const dispatch = useDispatch();
   const [caption, setCaption] = useState('');
-  const [disableSubmit, setDisableSubmit] = useState(false);
+  // const [disableSubmit, setDisableSubmit] = useState(false);
 
 
 
