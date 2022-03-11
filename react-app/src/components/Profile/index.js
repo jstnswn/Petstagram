@@ -92,7 +92,7 @@ export default function ProfilePage() {
           <div onClick={openFollowingModal} className='following'>{profileUser.following.length} following</div>
           {showFollowingModal && (
             <Modal onClose={closeFollowingModal}>
-              <FollowingFormModal user={profileUser} closeModal={closeFollowingModal}/>
+              <FollowingFormModal profileUser={profileUser} closeModal={closeFollowingModal}/>
             </Modal>
           )}
         </div>

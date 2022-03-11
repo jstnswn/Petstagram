@@ -1,3 +1,9 @@
+.follower-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .follower-heading {
     border-bottom: var(--border-gray) 0.5px solid;
     font-size: 16px;
@@ -86,20 +92,23 @@
 }
 
 .modal-follow {
-    font-size: 13px;
-    display: list-item;
-    list-style-type: disc;
-    margin-left: 30px;
-    color: #0095F6;
-    font-weight: 500;
-}
-.modal-follow::marker {
-    color: black;
-}
-.modal-follow:hover {
-    cursor: pointer
+    background-color: #0095F6;
+    font-size: 14px;
+    height: 30px;
+    width: 65px;
+    color: white;
+    border: none;
+    margin-right: 16px;
+    border-radius: 4px;
+    font-weight: 600;
 }
 
-.username-follow-container {
-    display: flex;
+.modal-following {
+    border: 1px solid rgb(215,215,215);
+    background-color: white;
+    height: 30px;
+    width: 85px;
+    border-radius: 4px;
+    margin-right: 16px;
+    font-weight: 500;
 }
