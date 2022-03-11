@@ -1,21 +1,17 @@
-import React from 'react'
-import './PostFooter.css';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-
+import { postLike, deleteLike } from '../../../../store/dashboard';
+import { Modal } from '../../../../context/Modal';
 import CommentForm from '../../../CommentForm/CommentForm'
 import ViewComments from './ViewComments'
-import { Modal } from '../../../../context/Modal';
 import PostView from '../../../PostView';
-
-import { useDispatch, useSelector } from 'react-redux'
-import { postLike, deleteLike } from '../../../../store/dashboard';
-// import { useState } from 'react';
-
+import './PostFooter.css';
 
 export default function PostFooter({ post, option}) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
-  const history = useHistory()
+  // const history = useHistory()
 
 
   let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
