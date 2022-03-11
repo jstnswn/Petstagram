@@ -5,6 +5,7 @@ import { followActionCreator } from "./session";
 const LOAD_POSTS = 'feed/LOAD_POSTS';
 const LOAD_POST = 'feed/LOAD_POST';
 const UPDATE_POST = 'feed/UPDATE_POST';
+const REMOVE_POST = 'feed/REMOVE_POST';
 const POST_LIKE = 'feed/POST_LIKE' // Post like action type
 const DELETE_LIKE = 'feed/DELETE_LIKE' // Delete like action type
 
@@ -26,6 +27,21 @@ const loadPost = (data) => {
   }
 }
 
+const updatePost = (postId, caption) => {
+  return {
+    type: UPDATE_POST,
+    postId,
+    caption
+  }
+};
+
+const removePost = (postId) => {
+  return {
+    type: REMOVE_POST,
+    postId
+  };
+};
+
 const addComment = (data) => {
   return{
       type: ADD_COMMENT,
@@ -33,13 +49,6 @@ const addComment = (data) => {
   }
 }
 
-export const updatePost = (postId, caption) => {
-  return {
-    type: UPDATE_POST,
-    postId,
-    caption
-  }
-}
 
 const deleteComment = (data) => {
   return {
@@ -89,10 +98,47 @@ export const createPost = (payload) => async dispatch => {
   if (res.ok) {
     const data = await res.json();
     dispatch(loadPost(data));
+    return data;
   } else {
     const errors = await res.json();
     return errors.errors;
   }
+};
+
+export const patchPost = (payload) => async dispatch => {
+  const { postId, caption } = payload;
+
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ caption })
+  });
+
+  if (res.ok) {
+    // const data = await res.json();
+
+    dispatch(updatePost(postId, caption));
+  } else {
+    const errors = await res.json();
+    return errors.errors;
+  }
+};
+
+export const deletePost = (postId) => async dispatch => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: 'DELETE'
+  });
+
+  if (res.ok) {
+    // const data = await res.json();
+    console.log('Post Deleted');
+    dispatch(removePost(postId));
+  } else {
+    console.log('Internal server error')
+  }
+
 };
 
 
@@ -226,6 +272,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   let post;
   let stateCopy;
+  let idx;
   switch(action.type) {
     case LOAD_POSTS:
       const posts = normalizePosts(action.data.posts);
@@ -248,13 +295,21 @@ export default function reducer(state = initialState, action) {
           }
         }
       }
-
     case UPDATE_POST:
         stateCopy = {...state};
         post = stateCopy.feed.postIds[action.postId];
         post.caption = action.caption;
 
         return stateCopy;
+    case REMOVE_POST:
+      stateCopy = { ...state };
+      const postsOrder = stateCopy.feed.order;
+
+      idx = postsOrder.findIndex(id => id === action.postId);
+
+      postsOrder.splice(idx, 1);
+      delete stateCopy.feed[action.postId]
+      return stateCopy;
 
     case ADD_COMMENT:
       stateCopy = {...state}

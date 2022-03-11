@@ -23,8 +23,6 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
     const commentsArr = Object.values(comments);
 
 
-
-
     //likes logic
     const onClick = async e => {
         e.preventDefault()

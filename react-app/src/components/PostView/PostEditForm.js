@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { updatePost as updateDashboardPost } from '../../store/dashboard';
+import { patchPost as updateDashboardPost } from '../../store/dashboard';
 import { patchPost as updateProfilePost } from '../../store/profile';
 
 
@@ -39,16 +39,8 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
       data = await dispatch(updateDashboardPost(post.id, caption))
     }
 
-
-    // if ()
-      // .then(() => {
     closeEdit()
     closeMenu()
-      // })
-    // if (data) {
-    //   setErrors([data]);
-    // }
-
   };
 
   return (
