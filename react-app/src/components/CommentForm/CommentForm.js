@@ -100,6 +100,7 @@ function CommentForm({ post }) {
 
                 <form onSubmit={handleSubmitProfile}>
                 <   div className="comment-form-container">
+                    <div className="add-comment-and-post-btn">
                     <textarea
                         id={post.id}
                         className="comment-form-textarea"
@@ -110,6 +111,7 @@ function CommentForm({ post }) {
                     >
                         </textarea>
                         <button className="comment-button" type="submit">Post</button>
+                        </div>
                     </div>
 
                 </form>

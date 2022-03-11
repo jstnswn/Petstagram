@@ -4,12 +4,17 @@
     background-color: white;
     font-weight:bold;
     color:#0095f6;
+    margin-left: 70px;
+    margin-bottom: 5px;
+    background: transparent;
 }
 
 
 .comment-form-textarea{
     border:none;
     resize:none;
+    margin-top: 10px;
+    background: transparent;
 }
 
 .comment-form-textarea:focus{
@@ -22,3 +27,13 @@
     display:flex;
     /* border-top: 1px grey solid; */
 }
+
+.add-comment-and-post-btn {
+    display: flex;
+    justify-content:flex-end;
+}
+
+/* .icons-and-comment-form {
+    display: flex;
+    align-items: flex-end;
+} */
