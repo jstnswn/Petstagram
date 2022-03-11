@@ -14,6 +14,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
+
     let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
     //comments variables
     const id = post.id;
@@ -95,7 +96,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                             <img className="post-view-user-img"src={post.user.image_url}></img>
                         </div>
                         <div>
-                            <NavLink to={`/${post.user.username}`}>{post.user.username}</NavLink>
+                            <NavLink to={`/${post.user.username}`} onClick={closePostView}>{post.user.username}</NavLink>
                             <span>{post.caption}</span>
                         </div>
                     </div>
@@ -106,7 +107,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 <li key={comment.id}>
                     <div className="comment-shell">
                         <img className="post-view-user-img"src={comment.user.image_url}></img>
-                        <NavLink to={`/${comment.user.username}`}>{comment.user.username}</NavLink>
+                        <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
                         <span>{comment.comment}</span>
                     </div>
                     <div className='time-and-menu'>
