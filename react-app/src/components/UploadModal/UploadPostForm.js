@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost as createPostDashboard } from '../../store/dashboard';
-import { createPost as createPostProfile, loadPost} from '../../store/profile';
+import { createPost as loadPost} from '../../store/profile';
 import dragAndDropImage from '../../assets/drag-and-drop.png'
 import './UploadPostForm.css'
 

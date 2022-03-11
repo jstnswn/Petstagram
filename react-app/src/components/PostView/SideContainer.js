@@ -1,22 +1,23 @@
+import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import React, { useState } from 'react';
-import CommentForm from '../CommentForm/CommentForm';
-import './SideContainer.css'
-// import { postLike, deleteLike } from '../../store/dashboard';
+import { NavLink } from 'react-router-dom';
 import { profilePostLike, profileDeleteLike } from '../../store/profile';
 import { postLike, deleteLike } from '../../store/dashboard';
+import CommentForm from '../CommentForm/CommentForm';
 import CommentMenuModal from '../CommentMenu';
+import './SideContainer.css'
+// import { postLike, deleteLike } from '../../store/dashboard';
 // import DeleteComment from '../DeleteComment/DeleteComment';
-import { NavLink } from 'react-router-dom';
 
 function SideContainer({ post, closeMenu, closePostView, option}) {
 
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
+
     let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
     //comments variables
-    const id = post.id;
+    // const id = post.id;
 
     const comments = post.comments;
 
@@ -57,7 +58,8 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
           if (option === 'feed') {
               dispatch(deleteLike(payload))
           } else {
-              const data = await dispatch(profileDeleteLike(payload))
+            dispatch(profileDeleteLike(payload))
+            //   const data = await dispatch(profileDeleteLike(payload))
           }
         } else {
           const payload = {
@@ -67,7 +69,8 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
           if (option === 'feed') {
               dispatch(postLike(payload))
           } else {
-            const data = await dispatch(profilePostLike(payload))
+            dispatch(profilePostLike(payload))
+            // const data = await dispatch(profilePostLike(payload))
           }
         }
 
@@ -92,10 +95,10 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 <li>
                     <div className="comment-shell">
                         <div>
-                            <img className="post-view-user-img"src={post.user.image_url}></img>
+                            <img className="post-view-user-img"src={post.user.image_url} alt='profile'></img>
                         </div>
                         <div>
-                            <NavLink to={`/${post.user.username}`}>{post.user.username}</NavLink>
+                            <NavLink to={`/${post.user.username}`} onClick={closePostView}>{post.user.username}</NavLink>
                             <span>{post.caption}</span>
                         </div>
                     </div>
@@ -105,7 +108,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 {commentsArr.map((comment)=>
                 <li key={comment.id}>
                     <div className="comment-shell">
-                        <img className="post-view-user-img"src={comment.user.image_url}></img>
+                        <img className="post-view-user-img"src={comment.user.image_url} alt='profile'></img>
                         <NavLink to={`/${comment.user.username}`}>{comment.user.username}</NavLink>
                         <span>{comment.comment}</span>
                     </div>
@@ -121,8 +124,9 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                 : null}
             </ul>
 
+
             <div>{post.id}</div>
-            <div className="">
+            <div className="footer-icons">
                 <span>
                 {isLiked ?
                     <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>

@@ -8,7 +8,7 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
   const dispatch = useDispatch();
   const [caption, setCaption] = useState(post.caption);
   const [disableSubmit, setDisableSubmit] = useState(false);
-  const [errors, setErrors] = useState(false);
+  // const [errors, setErrors] = useState(false);
 
   console.log('option: ', option)
 
@@ -30,13 +30,15 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
 
     const payload = { postId: post.id, caption };
 
-    let data;
+    // let data;
 
     if (option === 'profile') {
-      data = await dispatch(updateProfilePost(payload));
+      dispatch(updateProfilePost(payload));
+      // data = await dispatch(updateProfilePost(payload));
 
     } else if (option === 'feed') {
-      data = await dispatch(updateDashboardPost(post.id, caption))
+      dispatch(updateDashboardPost(post.id, caption))
+      // data = await dispatch(updateDashboardPost(post.id, caption))
     }
 
     closeEdit()

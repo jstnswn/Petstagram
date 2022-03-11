@@ -1,5 +1,5 @@
 .post-container {
-    max-height: 955px;
+    height: 1060px;
     border: var(--border-gray) 1px solid;
     display: flex;
     flex-direction: column;

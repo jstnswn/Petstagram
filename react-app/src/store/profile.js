@@ -351,7 +351,7 @@ export default function reducer(state = initialState, action) {
       const likers = stateCopy.posts.postIds[action.postId].likers
       console.log('likers',likers)
       console.log(action.userId)
-      const newLikers = likers.filter(user => user.id != action.userId)
+      const newLikers = likers.filter(user => user.id !== parseInt(action.userId))
       stateCopy.posts.postIds[action.postId].likers = newLikers
       return stateCopy
 

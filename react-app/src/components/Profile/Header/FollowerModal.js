@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './FollowerModal.css'
 import x_btn from '../../../assets/x.png'
 import { Link } from 'react-router-dom'
@@ -30,15 +30,15 @@ export default function FollowerFormModal({ profileUser, closeModal }) {
             <div className='follower-heading'>
             <div className='x-btn-container'>
                 <div className='follower-title'>Followers</div>
-                <img className='x-btn' src={x_btn} onClick={closeModal}/>
+                <img className='x-btn' src={x_btn} onClick={closeModal} alt='Close Button'/>
             </div>
             </div>
             <div className='follower-modal-container'>
 
                 {profileUser.followers.map(follower => (
-                    <div className='follower-info-container'>
+                    <div className='follower-info-container' key={`${follower.id}-follower`}>
                         <div className='follower-info'>
-                            <img className='modal-img' src={follower.image_url}></img>
+                            <img className='modal-img' src={follower.image_url} alt='Profile'></img>
                             <div className='follower-user-full'>
                                 <Link onClick={closeModal} className='link' to={`/${follower.username}`}>
                                     {follower.username}
