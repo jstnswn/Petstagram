@@ -1,30 +1,31 @@
-import React, { useState } from 'react'
-import './FollowerModal.css'
-import x_btn from '../../../assets/x.png'
+import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { follow, unfollow } from '../../../store/dashboard'
+import x_btn from '../../../assets/x.png'
+import './FollowerModal.css'
 
 
-export default function FollowerFormModal({ profileUser, closeModal }) {
+export default function FollowerFormModal({ profileUser, setNumberFollowing, userFollowing, setUserFollowing, user, closeModal }) {
     const dispatch = useDispatch()
-    const user = useSelector(({ session }) => session.user);
-    const [userFollowing, setUserFollowing] = useState(user.following.map(user => user.id))
-
-    // useEffect(() => {
-    //     console.log('userFollowing:', userFollowing)
-    // }, [userFollowing])
     const handleUnfollow = (e, id) => {
         e.preventDefault()
         dispatch(unfollow(id))
         setUserFollowing(userFollowing.filter(followId => followId !== id))
+        if (profileUser.id === user.id) {
+            setNumberFollowing(prev => --prev)
+        }
     }
 
     const handleFollow = (e, id) => {
         e.preventDefault()
         dispatch(follow(id))
         setUserFollowing(prev => [...userFollowing, id])
+        if (profileUser.id === user.id) {
+            setNumberFollowing(prev => ++prev)
+        }
     }
+
     return (
         <>
             <div className='follower-heading'>
