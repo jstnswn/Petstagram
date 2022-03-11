@@ -2,12 +2,13 @@
 .profile-page-container {
     display: flex;
     flex-direction: column;
+    max-width: 975px;
 }
 
 .profile-header {
     display:flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     border-bottom: var(--border-gray) 1px solid;
     width: 100%;
@@ -37,11 +38,19 @@
     padding: 12px;
 }
 
-.profile-pic {
-    height: 200px;
-    width:200px;
+.profile-header-pic-container {
+    width: 291px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 30px 0 0 ;
+}
+
+.header-profile-pic {
+    height: 168px;
+    width:168px;
     border-radius: 50%;
-    margin-right:200px;
+    /* margin-right:200px; */
     object-fit: cover;
     cursor: pointer;
 }
@@ -106,7 +115,7 @@
     font-weight: bold;
 }
 
-.all-info {
+.header-info {
     display:flex;
     flex-direction: column;
 }
