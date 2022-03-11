@@ -3,17 +3,16 @@ import { useState } from "react";
 import "./CommentForm.css"
 import { createCommentDashboard } from "../../store/dashboard";
 import { createCommentProfile } from "../../store/profile";
+import { addComment } from "../../store/dashboard";
 
-function CommentForm({ post }) {
+function CommentForm({ option, post}) {
     const dispatch = useDispatch();
 
+    console.log(option, 'this is option')
     const currentUser = useSelector(state => state.session.user);
 
     const [comment, setComment] = useState("");
     const [errors, setErrors] = useState([]);
-
-    //useSelector on comments
-    const url = document.URL;
 
 
     const handleSubmitDashboard = async (e) => {
@@ -39,7 +38,7 @@ function CommentForm({ post }) {
     const handleSubmitProfile = async (e) => {
         e.preventDefault();
         const postId = post.id
-
+        console.log("in here")
 
         const payload = {
 
@@ -49,10 +48,66 @@ function CommentForm({ post }) {
         }
 
         let newComment = await dispatch(createCommentProfile(payload))
+        if(newComment){
+
+            console.log(newComment, 'this is newComment')
+            const actionCreatorPayload = {
+
+                comment,
+
+            }
+            dispatch(addComment(actionCreatorPayload))
+        }
 
 
     }
 
+    // if (option === 'feed') {
+
+    //     return (
+
+    //         <div>
+
+    //             <form onSubmit={handleSubmitDashboard}>
+    //                 <div className="comment-form-container">
+    //                     <textarea
+    //                         id={post.id}
+    //                         className="comment-form-textarea"
+    //                         cols="74"
+    //                         placeholder="Add a comment..."
+    //                         value={comment}
+    //                         onChange={(e) => setComment(e.target.value)}
+    //                     >
+    //                     </textarea>
+    //                     <button className="comment-button" type="submit">Post</button>
+    //                 </div>
+    //             </form>
+    //         </div>
+    //     )
+    // }else if(option === 'profile'){
+
+    //     return (
+    //         <div>
+    //             <form onSubmit={handleSubmitProfile}>
+    //                 <div className="comment-form-container">
+    //                     <textarea
+    //                         id={post.id}
+    //                         className="comment-form-textarea"
+    //                         cols="74"
+    //                         placeholder="Add a comment..."
+    //                         value={comment}
+    //                         onChange={(e) => setComment(e.target.value)}
+    //                     >
+    //                     </textarea>
+    //                     <button className="comment-button" type="submit">Post</button>
+    //                 </div>
+
+    //             </form>
+    //         </div>
+
+    //     )
+
+    // }
 
     return (
 
@@ -76,43 +131,43 @@ function CommentForm({ post }) {
                     </div>
 
                 </form>
-            :
+                :
 
-            document.URL.toString().length === 22 ?
+                document.URL.toString().length === 22 ?
 
-                <form onSubmit={handleSubmitDashboard}>
-                    <div className="comment-form-container">
-                        <textarea
-                            id={post.id}
-                            className="comment-form-textarea"
-                            cols="74"
-                            placeholder="Add a comment..."
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                        >
-                        </textarea>
-                        <button className="comment-button" type="submit">Post</button>
-                    </div>
+                    <form onSubmit={handleSubmitDashboard}>
+                        <div className="comment-form-container">
+                            <textarea
+                                id={post.id}
+                                className="comment-form-textarea"
+                                cols="74"
+                                placeholder="Add a comment..."
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                            >
+                            </textarea>
+                            <button className="comment-button" type="submit">Post</button>
+                        </div>
 
-                </form>
+                    </form>
 
-            :
+                    :
 
-                <form onSubmit={handleSubmitProfile}>
-                <   div className="comment-form-container">
-                    <textarea
-                        id={post.id}
-                        className="comment-form-textarea"
-                        cols="74"
-                        placeholder="Add a comment..."
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                    >
-                        </textarea>
-                        <button className="comment-button" type="submit">Post</button>
-                    </div>
+                    <form onSubmit={handleSubmitProfile}>
+                        <   div className="comment-form-container">
+                            <textarea
+                                id={post.id}
+                                className="comment-form-textarea"
+                                cols="74"
+                                placeholder="Add a comment..."
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                            >
+                            </textarea>
+                            <button className="comment-button" type="submit">Post</button>
+                        </div>
 
-                </form>
+                    </form>
 
             }
 

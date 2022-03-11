@@ -6,7 +6,7 @@ import { removeCommentDashboard } from '../../store/dashboard'
 import {removeCommentProfile} from '../../store/profile'
 import EditComment from './EditComment/EditComment'
 
-function CommentMenu ({commentId, hideForm, post, comment}) {
+function CommentMenu ({commentId, hideForm, post, comment, option}) {
 
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
@@ -44,7 +44,7 @@ function CommentMenu ({commentId, hideForm, post, comment}) {
     }
 
 
-    if(document.URL.includes(`http://localhost:3000/${currentUser.username}`) && document.URL.toString().length > 21){
+    if(option === 'profile'){
 
         return (
             <div className="delete-comment-menu">
@@ -52,7 +52,7 @@ function CommentMenu ({commentId, hideForm, post, comment}) {
                 <div onClick={() => setShowModal(true)}>Update</div>
                 {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                   <EditComment hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
+                   <EditComment option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
                 </Modal>
                 )}
                  <div onClick={hideForm}>Cancel</div>
@@ -60,7 +60,7 @@ function CommentMenu ({commentId, hideForm, post, comment}) {
             </div>
         )
 
-    }else if(document.URL.toString().length === 22){
+    } else if (option === 'feed') {
 
         return (
             <div className="delete-comment-menu">
@@ -68,7 +68,7 @@ function CommentMenu ({commentId, hideForm, post, comment}) {
                 <div onClick={() => setShowModal(true)}>Update</div>
                 {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                   <EditComment hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
+                   <EditComment option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
                 </Modal>
                 )}
                  <div onClick={hideForm}>Cancel</div>
@@ -76,24 +76,7 @@ function CommentMenu ({commentId, hideForm, post, comment}) {
             </div>
         )
 
-    }else{
-
-        return (
-            <div className="delete-comment-menu">
-                <div style={{color: 'red'}} onClick={deleteCommentProfile}>Delete</div>
-                <div onClick={() => setShowModal(true)}>Update</div>
-                {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
-                   <EditComment hideForm={hideForm} comment={comment} commentId={commentId}post={post}/>
-                </Modal>
-                )}
-
-                <div onClick={hideForm}>Cancel</div>
-
-            </div>
-        )
     }
-
 }
 
 

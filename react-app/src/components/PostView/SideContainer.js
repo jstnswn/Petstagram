@@ -8,7 +8,7 @@ import { postLike, deleteLike } from '../../store/dashboard';
 import CommentMenuModal from '../CommentMenu';
 
 function SideContainer({ post, closeMenu, closePostView, option}) {
-
+    console.log(option, 'this is option sidecontainer')
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
@@ -92,7 +92,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
                     <div> */}
                         <a href={`/${comment.user.username}`}>{comment.user.username}</a>
                         <span>{comment.comment}</span>
-                        {comment.user.id === sessionUser.id ? <CommentMenuModal comment={comment.comment} post={post} commentId={comment.id}/>     : null}
+                        {comment.user.id === sessionUser.id ? <CommentMenuModal option={option} comment={comment.comment} post={post} commentId={comment.id}/>     : null}
                     </div>
                 </li>
 
@@ -121,7 +121,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
             </div>
 
             <div>
-                <CommentForm post={post}/>
+                <CommentForm option={option} post={post}/>
             </div>
         </div>
 
@@ -132,63 +132,4 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
 
 export default SideContainer;
 
-{/* <ul>
-    <li>
-        <div className="comment-shell">
-        <div>
-        <img className="post-view-user-img"src={post.user.image_url}></img>
-            </div>
-            <div>
-                <a>{post.user.username}</a>
-                <span>{post.caption}</span>
-            </div>
-        </div>
-    </li>
-    {commentsArr.map((comment)=>
-    <li>
-    <div className="comment-shell">
-            <div>
-            <img className="post-view-user-img"src={comment.user.image_url}></img>
-            </div>
-            <div>
-            <a>{comment.user.username}</a>
-            <span>{comment.comment}</span>
-            </div>
-            </div>
-            </li>
-            )}
-        </ul> */}
 
-
-
-        {/* {commentsArr.length !== 0 ? [
-        <ul>
-        <li>
-            <div className="comment-shell">
-                <div>
-                    <img className="post-view-user-img"src={post.user.image_url}></img>
-                </div>
-                <div>
-                    <a href={`/${post.user.username}`}>{post.user.username}</a>
-                    <span>{post.caption}</span>
-                </div>
-            </div>
-        </li>
-
-        {commentsArr.map((comment)=>
-        <li key={comment.id}>
-            <div className="comment-shell">
-                <div>
-                    <img className="post-view-user-img"src={comment.user.image_url}></img>
-                </div>
-                <div>
-                    <a href={`/${comment.user.username}`}>{comment.user.username}</a>
-                    <span>{comment.comment}</span>
-                </div>
-                {comment.user.id === sessionUser.id ? <button>Delete</button>     : null}
-            </div>
-        </li>
-        )}
-        </ul>
-
-        ] : null} */}

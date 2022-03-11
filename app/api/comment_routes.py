@@ -33,7 +33,9 @@ def create_comment():
         db.session.add(comment)
         db.session.commit()
 
-        return {"comment": comment.to_dict()}
+    
+
+    return {"comment": comment.to_dict()}
 
 @comment_routes.route('/', methods=['DELETE'])
 def delete_comment():
@@ -43,11 +45,24 @@ def delete_comment():
     comment_id = data['comment_id']
     post_id = data['post_id']
 
-    print(post_id,'---------')
-    print(comment_id, '------')
-
     comment = Comment.query.filter(Comment.id == comment_id).first()
-   
+
     db.session.delete(comment)
     db.session.commit()
     return { "commentId": comment_id, "postId": post_id }
+
+
+@comment_routes.route('/', methods=['PATCH'])
+def update_comment():
+    data = request.json
+
+
+    comment_id = data['comment_id']
+    post_id = data['post_id']
+    updated_comment = data['updated_comment']
+
+    comment = Comment.query.get(comment_id)
+    comment.comment = updated_comment
+    db.session.commit()
+
+    return {"commentId": comment_id, "postId": post_id, "updatedComment": updated_comment}
