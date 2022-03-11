@@ -124,7 +124,6 @@
     color: black;
     display: flex;
     align-items: center;
-    /* border: red 1px solid; */
 }
 
 .profile-button-container ul li:hover {
