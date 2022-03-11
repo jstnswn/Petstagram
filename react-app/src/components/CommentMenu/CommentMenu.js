@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from '../../context/Modal'
 import { removeCommentDashboard } from '../../store/dashboard'
 import { removeCommentProfile } from '../../store/profile'
@@ -8,9 +8,9 @@ import EditComment from './EditComment/EditComment'
 import './CommentMenu.css'
 
 function CommentMenu ({commentId, hideForm, post, comment, option, profileUser}) {
- 
+
     const dispatch = useDispatch();
-    // const currentUser = useSelector(state => state.session.user);
+    const currentUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
 
 

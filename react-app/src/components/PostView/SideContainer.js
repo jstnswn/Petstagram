@@ -22,6 +22,8 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
     const comments = post.comments;
 
     const commentsArr = Object.values(comments);
+    const reverseArr = [...commentsArr].reverse();
+    console.log(reverseArr, 'reverseArr')
 
 
     //created at logic
@@ -105,7 +107,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
                 </li>
 
                 {commentsArr.length !==0 ? <>
-                {commentsArr.map((comment)=>
+                {reverseArr.map((comment)=>
                 <li key={comment.id}>
                     <div className="comment-shell">
                         <img className="post-view-user-img"src={comment.user.image_url} alt='profile'></img>
