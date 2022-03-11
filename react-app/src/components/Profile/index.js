@@ -132,6 +132,7 @@ export default function ProfilePage() {
                 user={user}
                 profileUser={profileUser}
                 userFollowing={userFollowing}
+                setNumberFollowing={setNumberFollowing}
                 setUserFollowing={setUserFollowing}
                 setProfileUser={setProfileUser}
                 closeModal={closeFollowingModal}
