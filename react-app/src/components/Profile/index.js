@@ -44,6 +44,8 @@ export default function ProfilePage() {
   const [numberFollowing, setNumberFollowing] = useState(null)
   const [numberFollowers, setNumberFollowers] = useState(null)
 
+  console.log(profileUser, 'this is profileUser on index')
+
   useEffect(() => {
     async function fetchUser() {
       const response = await fetch(`/api/users/usernames/${urlParam}`);
