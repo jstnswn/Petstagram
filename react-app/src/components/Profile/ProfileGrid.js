@@ -8,16 +8,13 @@ import PostEditForm from '../PostView/PostEditForm';
 export default function ProfileGrid() {
   const [showIdx, setShowIdx] = useState(null);
 
-  const posts = useSelector(({ profile }) => profile.posts.postIds);
-  console.log('posts: ', posts)
-  // const postsArray = Object.values(posts);
-  const postsArray = useSelector(getProfilePostsArray);
+  const posts = useSelector(getProfilePostsArray);
 
   const openPostView = (idx) => setShowIdx(idx);
   const closePostView = () => setShowIdx(null);
   return (
     <div className='profile-grid'>
-      {postsArray.map((post, idx) => (
+      {posts.map((post, idx) => (
         <div key={idx}>
           <img
             className='profile-grid-item'
@@ -31,7 +28,7 @@ export default function ProfileGrid() {
 
           {showIdx === idx && (
             <Modal onClose={closePostView}>
-              <PostView post={post} closePostView={closePostView} option='profile'/>
+              <PostView post={post} closePostView={closePostView} option='profile' />
             </Modal>
           )}
         </div>
