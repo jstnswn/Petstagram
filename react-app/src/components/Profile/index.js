@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector, useStore } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { getProfilePosts } from '../../store/profile';
 import ProfileGrid from './ProfileGrid.js';
 import './ProfilePage.css';
@@ -11,8 +11,8 @@ import FollowingFormModal from './Header/FollowingModal';
 import EditProfileModal from './Header/EditProfile';
 
 export default function ProfilePage() {
-  const history = useHistory();
-  const urlParam = history.location.pathname.slice(1);
+  const location = useLocation();
+  const urlParam = location.pathname.slice(1);
   const dispatch = useDispatch();
   const [userLoaded, setUserLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
@@ -46,7 +46,7 @@ export default function ProfilePage() {
       .then(() => setUserLoaded(true));
   }, [urlParam]);
 
-  // const user = useSelector(({ session }) => session.user)
+
 
   useEffect(() => {
     if (!userLoaded) return;
