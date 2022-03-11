@@ -62,7 +62,7 @@ function CommentForm({ post }) {
             {document.URL.includes(`http://localhost:3000/${currentUser.username}`) && document.URL.toString().length > 21 ?
 
                 <form onSubmit={handleSubmitProfile}>
-                    <div className="comment-form-container-profile">
+                    <div className="comment-form-container">
                         <textarea
                             id={post.id}
                             className="comment-form-textarea"

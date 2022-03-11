@@ -19,7 +19,9 @@
 .comment-shell{
     display:flex;
     align-items: center;
-    margin:16px;
+    margin-top:16px;
+    margin-right:16px;
+    margin-bottom:16px;
 }
 
 
@@ -40,4 +42,8 @@
 
 .post-view-comments a:visited{
     color:black;
+}
+
+.modal-icons i {
+    margin-right: 5px;
 }

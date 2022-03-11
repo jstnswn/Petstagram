@@ -101,7 +101,7 @@ function SideContainer({ post, closeMenu, closePostView, option}) {
             </ul>
 
 
-            <div className="">
+            <div className="modal-icons">
                 <span>
                 {isLiked ?
                     <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
