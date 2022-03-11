@@ -5,7 +5,9 @@ import PostView from '../PostView';
 export default function ProfileGridItem({ post, idx }) {
     const [showPost, setShowPost] = useState(false);
     const [showOverlay, setShowOverlay] = useState(null);
-    // console.log('post')
+
+    const likes = post.likers.length;
+    const comments = Object.values(post?.comments)?.length
 
     const openPostView = () => setShowPost(true);
     const closePostView = () => setShowPost(false);
@@ -15,15 +17,17 @@ export default function ProfileGridItem({ post, idx }) {
     return (
         <div
             className='grid-item-container'
-            // onMouseEnter={seeOverlay}
-            // onMouseLeave={hideOverlay}
-
+            onMouseEnter={seeOverlay}
+            onMouseLeave={hideOverlay}
         >
             <img
                 className='profile-grid-image'
                 src={post.image_url}
                 alt='user post'
-                onClick={() => setShowPost(true)}
+                onClick={() => {
+                    openPostView();
+                    hideOverlay();
+                }}
                 style={{
                     gridColumnStart: idx % 3 + 1
                 }}
@@ -35,12 +39,11 @@ export default function ProfileGridItem({ post, idx }) {
                 </Modal>
             )}
 
-
-
-
             {showOverlay && (
                 <div className='grid-item-overlay'>
-                    dkfadjsfl
+                    {/* dkfadjsfl */}
+                    <i className='fas fa-heart overlay icon'></i><span className='overlay'>{likes}</span>
+                    <i className='fas fa-comment overlay icon'></i><span className='overalay'>{comments}</span>
                 </div>
             )}
 

@@ -33,8 +33,8 @@ export default function ProfileGrid() {
         //     </Modal>
         //   )}
         // </div>
-        <ProfileGridItem post={post} idx={idx}/>
-        
+        <ProfileGridItem key={idx} post={post} idx={idx}/>
+
       ))}
     </div>
   )

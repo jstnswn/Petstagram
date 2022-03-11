@@ -39,7 +39,6 @@ export default function PostHeader({ post }) {
           <PostMenu post={post} setShowPostMenuModal={setShowPostMenuModal} closeMenu={closePostModal} option='feed'/>
         </Modal>
       )}
-
     </div>
   )
 }
