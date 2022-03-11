@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal } from '../../context/Modal';
 import PostView from '../PostView';
 
-export default function ProfileGridItem({ post, idx }) {
+export default function ProfileGridItem({ post, idx , profileUser}) {
     const [showPost, setShowPost] = useState(false);
     const [showOverlay, setShowOverlay] = useState(null);
 
@@ -35,7 +35,7 @@ export default function ProfileGridItem({ post, idx }) {
 
             {showPost && (
                 <Modal onClose={closePostView}>
-                    <PostView post={post} closePostView={closePostView} option='profile' />
+                    <PostView profileUser={profileUser} post={post} closePostView={closePostView} option='profile' />
                 </Modal>
             )}
 

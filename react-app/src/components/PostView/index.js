@@ -9,7 +9,7 @@ import SideContainer from './SideContainer';
 
 export default function PostView({ post, option, closePostView, profileUser}) {
   const [showMenu, setShowMenu] = useState(false);
-  console.log(profileUser, 'this is profileUser on postview')
+ 
   let headerInfo;
   if (option === 'feed') {
     headerInfo = (
