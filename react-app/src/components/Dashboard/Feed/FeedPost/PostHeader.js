@@ -18,9 +18,6 @@ export default function PostHeader({ post }) {
   const showPostModal = () => setShowPostMenuModal(true)
   const closePostModal = () => setShowPostMenuModal(false)
 
-  // const
-
-
   const handleFollow = () => {
     dispatch(follow(post.user.id))
   }
@@ -45,7 +42,7 @@ export default function PostHeader({ post }) {
 
       {showUnfollowModal &&
         <Modal>
-          <Unfollow post={post}/>
+          <Unfollow user={post.user} setShowUnfollowModal={setShowUnfollowModal}/>
         </Modal>
       }
 

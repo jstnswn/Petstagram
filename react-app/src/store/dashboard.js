@@ -28,7 +28,7 @@ const loadPost = (data) => {
   };
 };
 
-const updatePost = (postId, caption) => {
+export const updatePost = (postId, caption) => {
   return {
     type: UPDATE_POST,
     postId,

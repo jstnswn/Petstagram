@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-// import { useHistory } from 'react-router-dom';
 import { deletePost as deletePostProfile } from '../../store/profile';
-import { unfollow } from '../../store/dashboard';
 import './PostMenu.css';
 import '../Dashboard/Feed/FeedPost/PostFooter.css'
 import { Modal } from '../../context/Modal';
@@ -11,7 +9,6 @@ import PostEditForm from './PostEditForm';
 export default function PostMenu({ closeMenu, closePostView, post, setShowPostMenuModal, setShowUnfollowModal, option }) {
   const [showEditMenu, setShowEditMenu] = useState(false);
   const dispatch = useDispatch();
-// console.log(setShowUnfollowModal)
   const user = useSelector(({ session }) => session.user)
 
   const userFollowing = user.following.map(user => user.id)
@@ -23,7 +20,6 @@ export default function PostMenu({ closeMenu, closePostView, post, setShowPostMe
   // const urlParam = history.location.pathname.slice(1).toLowerCase();
 
   const unfollowClick = () => {
-    // dispatch(unfollow(post.user.id))
     setShowPostMenuModal(false)
     setShowUnfollowModal(true)
   };
