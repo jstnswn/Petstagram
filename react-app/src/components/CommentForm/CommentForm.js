@@ -12,7 +12,7 @@ function CommentForm({ option, post}) {
     const currentUser = useSelector(state => state.session.user);
 
     const [comment, setComment] = useState("");
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
 
 
     // const handleSubmitDashboard = async (e) => {
@@ -69,12 +69,14 @@ function CommentForm({ option, post}) {
         }
 
         if(option === 'feed'){
-            const newComment = await dispatch(createCommentDashboard(payload))
+            dispatch(createCommentDashboard(payload))
+            // const newComment = await dispatch(createCommentDashboard(payload))
         }else{
             const newComment = await dispatch(createCommentProfile(payload))
             if(newComment){
                 console.log(newComment, "new comment thats returning")
-                const updatingDash = await dispatch(addComment(newComment))
+                dispatch(addComment(newComment))
+                // const updatingDash = await dispatch(addComment(newComment))
             }
         }
 

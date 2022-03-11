@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
+
 import { login } from '../../store/session';
-import './LoginForm.css'
 import picture from '../../assets/login-pic.png'
 import petstagram from '../../assets/petstagram.png'
+import './LoginForm.css'
 
 
 const LoginForm = () => {
@@ -90,7 +91,7 @@ const LoginForm = () => {
       <div className='right-col'>
         <div className='right'>
           <div className='login-form-container'>
-            <img className='title' src={petstagram}></img>
+            <img className='title' src={petstagram} alt='Petstagram Title'></img>
             <form onSubmit={onLogin}>
               <div>
                 {errors.map((error, ind) => (
@@ -130,7 +131,7 @@ const LoginForm = () => {
       </div>
       <div className='left-col'>
         <div className='left'>
-          <img id='img' src={picture}></img>
+          <img id='img' src={picture} alt='Petstagram Phone'></img>
         </div>
       </div>
     </div>

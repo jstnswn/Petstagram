@@ -106,7 +106,7 @@ const SignUpForm = () => {
   return (
     <div id='signup-form-page'>
       <div className='form-container'>
-        <img className='title' src={petstagram}></img>
+        <img className='title' src={petstagram} alt='Petstagram Title'></img>
         <div className='signup-form-heading'>Sign up to see photos and videos from your friends.</div>
         <form onSubmit={onSignUp}>
           <div>
@@ -115,7 +115,7 @@ const SignUpForm = () => {
             ))}
           </div>
           <div className='field-container'>
-            <span class='email-placeholder'>Email</span>
+            <span className='email-placeholder'>Email</span>
             <input
               className='form-field email'
               placeholder='Email'
@@ -127,7 +127,7 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div className='field-container'>
-            <span class='name-placeholder'>Full Name</span>
+            <span className='name-placeholder'>Full Name</span>
             <input
               className='form-field name'
               placeholder='Full Name'
@@ -139,7 +139,7 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div className='field-container'>
-            <span class='username-placeholder'>Username</span>
+            <span className='username-placeholder'>Username</span>
             <input
               className='form-field username'
               placeholder='Username'
@@ -151,7 +151,7 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div className='field-container'>
-            <span class='password-placeholder'>Password</span>
+            <span className='password-placeholder'>Password</span>
             <input
               className='form-field password'
               placeholder='Password'

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+// import { NavLink } from 'react-router-dom'
 import './Footer.css'
 
 export default function Footer() {
     const [showAboutUs, setShowAboutUs] = useState(false)
 
-    const toggleAboutUsDropdown = () => {
-        setShowAboutUs(true)
-    }
+    // const toggleAboutUsDropdown = () => {
+    //     setShowAboutUs(true)
+    // }
 
     useEffect(() => {
         if (!showAboutUs) return
@@ -35,14 +35,14 @@ export default function Footer() {
                 <li className='list-item'>AWS</li>
             </ul>
             <div id='footer-bottom'>
-                <div id='about-us-dropdown' onClick={setShowAboutUs}>About Us<i class="fa-solid fa-angle-down down-caret"></i></div>
+                <div id='about-us-dropdown' onClick={setShowAboutUs}>About Us<i className="fa-solid fa-angle-down down-caret"></i></div>
                 {showAboutUs && (
                     <ul id='about-us-list'>
-                        <li className='names'><a href='https://github.com/jchau-623' target='_blank'>Justin Chau</a></li>
-                        <li className='names'><a href='https://github.com/davigravi' target='_blank'>David Lee</a></li>
-                        <li className='names'><a href='https://github.com/jstnswn' target='_blank'>Justin Sweeney</a></li>
-                        <li className='names'><a href='https://github.com/srvorkap' target='_blank'>Srdan Vorkapic</a></li>
-                        <li className='names'><a href='https://github.com/Noslepr' target='_blank'>Chris Young</a></li>
+                        <li className='names'><a href='https://github.com/jchau-623' target='_blank' rel="noopener noreferrer">Justin Chau</a></li>
+                        <li className='names'><a href='https://github.com/davigravi' target='_blank' rel="noopener noreferrer">David Lee</a></li>
+                        <li className='names'><a href='https://github.com/jstnswn' target='_blank' rel="noopener noreferrer">Justin Sweeney</a></li>
+                        <li className='names'><a href='https://github.com/srvorkap' target='_blank' rel="noopener noreferrer">Srdan Vorkapic</a></li>
+                        <li className='names'><a href='https://github.com/Noslepr' target='_blank' rel="noopener noreferrer">Chris Young</a></li>
                     </ul>
                 )}
                 <p>© 2022 Petstagram an Instagram Clone</p>

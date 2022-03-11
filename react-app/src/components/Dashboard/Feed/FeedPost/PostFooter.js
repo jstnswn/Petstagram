@@ -7,7 +7,7 @@ import ViewComments from './ViewComments'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { postLike, deleteLike } from '../../../../store/dashboard';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 
 export default function PostFooter({ post, option}) {
@@ -28,13 +28,15 @@ export default function PostFooter({ post, option}) {
       const payload = {
         postId: post.id
       }
-      const data = await dispatch(deleteLike(payload))
+      dispatch(deleteLike(payload))
+      // const data = await dispatch(deleteLike(payload))
     } else {
       const payload = {
         userId: sessionUser.id,
         postId: post.id
       }
-      const data = await dispatch(postLike(payload))
+      dispatch(postLike(payload))
+      // const data = await dispatch(postLike(payload))
     }
 
     console.log('inside event listener',isLiked)

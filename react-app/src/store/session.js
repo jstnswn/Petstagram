@@ -1,4 +1,4 @@
-import FeedPost from "../components/Dashboard/Feed/FeedPost";
+// import FeedPost from "../components/Dashboard/Feed/FeedPost";
 
 // constants
 const SET_USER = 'session/SET_USER';
