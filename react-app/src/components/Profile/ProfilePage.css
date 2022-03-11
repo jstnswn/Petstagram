@@ -31,12 +31,31 @@
 }
 
 
-.profile-grid-item {
+
+
+
+
+.grid-item-container {
+    position: relative;
+    padding: 12px;
+}
+
+.profile-grid-image {
     height: 19em;
     width: 19em;
     object-fit: cover;
-    padding: 12px;
 }
+.grid-item-overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+
+
+
 
 .profile-header-pic-container {
     width: 291px;
