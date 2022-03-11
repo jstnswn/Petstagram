@@ -28,7 +28,7 @@
 
 .post-view-comments ul{
     overflow:scroll;
-
+    min-height: 500px;
 }
 
 .post-view-comments ul::-webkit-scrollbar {
