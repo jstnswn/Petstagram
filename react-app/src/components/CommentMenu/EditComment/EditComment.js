@@ -8,6 +8,7 @@ import { updateComment } from '../../../store/dashboard';
 export default function EditComment({ option, hideForm, post, commentId, comment, profileUser }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state?.session?.user)
+  const dashboardPosts = useSelector(({ dashboard }) => dashboard.feed.postIds);
 
   const [prevComment, setPrevComment] = useState(comment)
   const [caption, setCaption] = useState('');
@@ -33,7 +34,7 @@ export default function EditComment({ option, hideForm, post, commentId, comment
 
     }else if (option === 'profile'){
       let updatedComment = dispatch(editCommentProfile(payload))
-      if (updatedComment) {
+      if (updatedComment && post.id[dashboardPosts]) {
         const actionCreatorPayload = {
           commentId : commentId,
           postId: post.id,

@@ -9,6 +9,7 @@ function CommentForm({ option, post, profileUser}) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector(state => state.session.user);
+    const dashboardPosts = useSelector(({ dashboard }) => dashboard.feed.postIds)
 
     const [comment, setComment] = useState("");
     // const [errors, setErrors] = useState([]);
@@ -30,7 +31,8 @@ function CommentForm({ option, post, profileUser}) {
             dispatch(createCommentDashboard(payload))
         }else{
             const newComment = await dispatch(createCommentProfile(payload))
-            if(newComment){
+
+            if (newComment && post.id[dashboardPosts]){
                 dispatch(addComment(newComment))
             }
         }
