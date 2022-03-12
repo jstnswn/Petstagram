@@ -28,6 +28,7 @@
 
 .post-view-comments ul{
     overflow:scroll;
+    height:525px;
 
 }
 
