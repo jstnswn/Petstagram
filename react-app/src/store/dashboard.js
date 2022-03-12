@@ -73,7 +73,9 @@ export const postLikeActionCreator = (user, postId) => { // Post like action cre
   };
 };
 
-const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+  console.log('inside action creator', userId, postId)
+
   return {
     type: DELETE_LIKE,
     userId, postId
@@ -353,16 +355,12 @@ export default function reducer(state = initialState, action) {
     case DELETE_COMMENT:
       stateCopy = {...state}
       const commentsObj = stateCopy.feed.postIds[action.data.postId].comments
-      console.log(commentsObj, "comment in update action")
       delete commentsObj[action.data.commentId]
       return stateCopy
 
     case UPDATE_COMMENT:
       stateCopy = {...state}
-      console.log(stateCopy.feed.postIds[action.data.postId], "HELLO")
       const comment = stateCopy.feed.postIds[action.data.postId].comments[action.data.commentId]
-      console.log("this is comment", comment)
-
       comment.comment = action.data.updatedComment
       return stateCopy;
 

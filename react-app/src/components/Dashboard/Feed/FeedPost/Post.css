@@ -39,6 +39,8 @@
     list-style-type: disc;
     margin-left: 30px;
     color: #0095F6;
+    font-size: 14px;
+    font-weight: 600;
 }
 #post-header-follow::marker {
     color: black;
