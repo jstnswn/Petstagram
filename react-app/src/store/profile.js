@@ -299,7 +299,6 @@ export default function reducer(state = initialState, action) {
     case UPDATE_POST:
       stateCopy = {...state};
       post = stateCopy.posts.postIds[action.postId]
-      // order = stateCopy.posts.order
       post.caption = action.caption
 
       return stateCopy;
@@ -328,7 +327,6 @@ export default function reducer(state = initialState, action) {
 
     case UPDATE_COMMENT:
       stateCopy = {...state}
-      console.log("end of reducer")
       const comment = stateCopy.posts.postIds[action.data.postId].comments[action.data.commentId]
       comment.comment = action.data.updatedComment
       return stateCopy;
@@ -341,8 +339,6 @@ export default function reducer(state = initialState, action) {
     case PROFILE_DELETE_LIKE:
       stateCopy = {...state}
       const likers = stateCopy.posts.postIds[action.postId].likers
-      console.log('likers',likers)
-      console.log(action.userId)
       const newLikers = likers.filter(user => user.id !== parseInt(action.userId))
       stateCopy.posts.postIds[action.postId].likers = newLikers
       return stateCopy

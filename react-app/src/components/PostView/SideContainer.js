@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { profilePostLike, profileDeleteLike } from '../../store/profile';
-import { postLike, deleteLike } from '../../store/dashboard';
+import { postLike, deleteLike, postLikeActionCreator ,deleteLikeActionCreator } from '../../store/dashboard';
 import CommentForm from '../CommentForm/CommentForm';
 import CommentMenuModal from '../CommentMenu';
 import './SideContainer.css'
@@ -10,7 +10,7 @@ import './SideContainer.css'
 // import DeleteComment from '../DeleteComment/DeleteComment';
 
 function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
-   
+
     //likes variables
     const sessionUser = useSelector(state => state?.session?.user)
     const dispatch = useDispatch()
@@ -53,7 +53,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
         post.likers.forEach((obj) => {
           likers.push(obj.id)
         })
-        if (likers.includes(sessionUser.id)) {
+        if (likers.includes(sessionUser.id)) { // already liked
           const payload = {
             postId: post.id
           }
@@ -61,9 +61,9 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
               dispatch(deleteLike(payload))
           } else {
             dispatch(profileDeleteLike(payload))
-            //   const data = await dispatch(profileDeleteLike(payload))
+            dispatch(deleteLikeActionCreator(sessionUser.id, post.id))
           }
-        } else {
+        } else {                               // not liked yet
           const payload = {
             userId: sessionUser.id,
             postId: post.id
@@ -72,7 +72,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
               dispatch(postLike(payload))
           } else {
             dispatch(profilePostLike(payload))
-            // const data = await dispatch(profilePostLike(payload))
+            dispatch(postLikeActionCreator(sessionUser, post.id))
           }
         }
 
@@ -135,7 +135,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
             </ul>
 
 
-            
+
             <div className="footer-icons">
                 <span>
                 {isLiked ?
