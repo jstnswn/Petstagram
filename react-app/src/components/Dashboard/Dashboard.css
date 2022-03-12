@@ -10,8 +10,5 @@
 
 .feed-container {
     width: 614px;
-    /* border: red 1px solid; */
     display: flex;
-    /* justify-self: center; */
-    /* align-self: center; */
 }

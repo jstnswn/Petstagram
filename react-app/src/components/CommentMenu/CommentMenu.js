@@ -22,12 +22,11 @@ function CommentMenu ({commentId, hideForm, post, comment, option, profileUser})
         };
 
         if(option === 'profile' && profileUser.username === currentUser.username){
-            let deletedComment = await dispatch(removeCommentProfile(payload))
+            dispatch(removeCommentProfile(payload))
         }else if(option === 'profile'){
             let deletedComment = await dispatch(removeCommentProfile(payload))
             if (deletedComment){
                 dispatch(deleteComment(deletedComment))
-                // const updatingDash = await dispatch(deleteComment(deletedComment))
             hideForm();
         }
         }else if (option === 'feed'){
