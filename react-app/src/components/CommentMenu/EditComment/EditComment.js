@@ -44,6 +44,7 @@ export default function EditComment({ option, hideForm, post, commentId, comment
         dispatch(updateComment(actionCreatorPayload))
         hideForm();
       }
+      hideForm();
     }
   }
 
