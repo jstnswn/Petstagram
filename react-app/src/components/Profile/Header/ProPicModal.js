@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 // import { Modal } from '../../../context/Modal';
 // import UploadProPicForm from './UploadProPicForm'
 import './ProPicModal.css'
@@ -14,25 +14,19 @@ export default function ProPicModal({ user, setUser, cancelModal }) {
 
     const handleButton = () => {
         if (disableEdit) return;
-        console.log("disable: edit", disableEdit)
         hiddenInputRef.current.click();
     };
-
-    useEffect(() => {
-        console.log('disable', disableEdit)
-    }, [disableEdit])
 
     const handleFileChange = async (e) => {
         if (disableEdit) return;
         const file = e.target.files[0];
-        setDisableEdit(true);
-        console.log('handled', disableEdit)
+        await setDisableEdit(true);
         await dispatch(updateProfileImage(file))
             .then((res) => setUser(prev => {
                 prev.image_url = res.imageUrl
                 return prev;
             }))
-            .then(setDisableEdit(false))
+        setDisableEdit(false)
         cancelModal();
     };
 
@@ -47,12 +41,13 @@ export default function ProPicModal({ user, setUser, cancelModal }) {
             </div>
             <div className='edit-pro-pic-container'>
 
-                <div className='edit-btn' onClick={handleButton}>Edit Photo</div>
-                {/* {showModal && (
-                    <Modal onClose={closeModal}>
-                        <UploadProPicForm closeModal={closeModal} />
-                    </Modal>
-                )} */}
+                <div
+                    className='edit-btn'
+                    onClick={handleButton}
+                    style={{
+                        opacity: disableEdit ? .5 : 1
+                    }}
+                >{!disableEdit ? 'Update Profile Image' : 'Loading...'}</div>
                 <div className='cancel-btn' onClick={cancelModal}>Cancel</div>
             </div>
 

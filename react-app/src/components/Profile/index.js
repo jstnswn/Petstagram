@@ -79,7 +79,7 @@ export default function ProfilePage() {
   const handleFollow = (e) => {
     e.preventDefault()
     dispatch(follow(profileUser.id))
-    setUserFollowing(prev => [...userFollowing, profileUser.id])
+    setUserFollowing(prev => [...prev, profileUser.id])
     setNumberFollowers(prev => ++prev)
   }
 
@@ -97,7 +97,7 @@ export default function ProfilePage() {
         </div>
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal} setDisableEdit={setDisableEdit}/>
+              <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal} />
             </Modal>
           )}
           <div className='header-info'>
