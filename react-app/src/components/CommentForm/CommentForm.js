@@ -77,6 +77,7 @@ function CommentForm({ option, post}) {
             if(newComment){
                 console.log(newComment, "new comment thats returning")
                 dispatch(addComment(newComment))
+                setComment('')
                 // const updatingDash = await dispatch(addComment(newComment))
             }
         }
@@ -92,12 +93,14 @@ function CommentForm({ option, post}) {
             <form onSubmit={handleSubmit}>
                 <div className="comment-form-container">
                     <textarea
+                        name="comment"
                         id={post.id}
                         className="comment-form-textarea"
                         cols="74"
                         placeholder="Add a comment..."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
+                        required
                     >
                     </textarea>
                     <button className="comment-button" type="submit">Post</button>
