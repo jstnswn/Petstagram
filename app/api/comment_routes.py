@@ -19,7 +19,6 @@ def create_comment():
     print(data, "-------")
 
     form = CommentForm()
-
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
@@ -31,13 +30,13 @@ def create_comment():
 
         )
 
-        db.session.add(comment)
-        db.session.commit()
+    db.session.add(comment)
+    db.session.commit()
 
-        comment_object = comment.to_dict()
-        print(form)
-        print(comment_object, '-----------------------this is comment obj')
-        return {"comment": comment.to_dict()}
+    comment_object = comment.to_dict()
+    print(comment_object, '-----------------------this is comment obj')
+    return {"comment": comment.to_dict()}
+
 
 
 
