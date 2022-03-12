@@ -4,6 +4,7 @@
     flex-direction: row;
     border-radius: 6px;
     min-height: 675px;
+    max-width:75vw;
 }
 
 .post-view-image-container {
@@ -17,6 +18,8 @@
 .post-view-image {
     width: 100%;
     height: 100%;
+    /* max-width: 597.328px;
+    max-height:796.438px; */
     object-fit: cover;
 }
 
