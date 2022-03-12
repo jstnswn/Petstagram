@@ -1,5 +1,6 @@
 from app.models import db, Post
 from app.seeds.users import users
+from random import randint
 
 def seed_posts():
     posts = [
@@ -425,11 +426,13 @@ def seed_posts():
         ),
     ]
 
+    random1 = randint(1,5)
+    random2 = randint(6,11)
 
     for post in posts:
         post.likers.append(users[0])
-        # post.likers.append(users[1])
-        # post.likers.append(users[2])
+        post.likers.append(users[random1])
+        post.likers.append(users[random2])
         # post.likers.append(users[3])
         # post.likers.append(users[4])
         db.session.add(post)
