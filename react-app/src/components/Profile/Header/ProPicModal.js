@@ -7,8 +7,6 @@ import { updateProfileImage } from '../../../store/session';
 
 export default function ProPicModal({ user, setUser, cancelModal }) {
     const dispatch = useDispatch();
-    // const [showModal, setShowModal] = useState(false);
-    // const [image, setImage] = useState(null);
     const [disableEdit, setDisableEdit] = useState(false);
     const hiddenInputRef = useRef(null);
 
