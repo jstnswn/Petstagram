@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from '../../context/Modal';
+import Unfollow from '../UnfollowModal/Unfollow';
 // import PostEditForm from './PostEditForm';
 import PostMenu from './PostMenu';
 import './PostView.css';
@@ -9,7 +10,7 @@ import SideContainer from './SideContainer';
 
 export default function PostView({ post, option, closePostView, profileUser}) {
   const [showMenu, setShowMenu] = useState(false);
- 
+  const [showUnfollowModal, setShowUnfollowModal] = useState(false)
   let headerInfo;
   if (option === 'feed') {
     headerInfo = (
@@ -59,12 +60,21 @@ export default function PostView({ post, option, closePostView, profileUser}) {
 
       {showMenu && (
         <Modal onClose={closeMenu}>
-          <PostMenu closeMenu={closeMenu} closePostView={closePostView} post={post} option={option}/>
+          <PostMenu
+            closeMenu={closeMenu}
+            closePostView={closePostView}
+            setShowPostMenuModal={setShowMenu}
+            setShowUnfollowModal={setShowUnfollowModal}
+            post={post}
+            option={option}
+          />
         </Modal>
       )}
-
-
-
+      {showUnfollowModal &&
+        <Modal>
+          <Unfollow user={post.user} setShowUnfollowModal={setShowUnfollowModal} option='profile'/>
+        </Modal>
+      }
     </div>
   )
 }

@@ -1,0 +1,46 @@
+#unfollow-profile-pic {
+    height: 90px;
+    width: 90px;
+    margin-top: 32px
+}
+
+#unfollow-modal-container {
+    height: 300px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px
+}
+
+.modal-unfollow-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    border-top: 1px solid rgb(219,219,219);
+    width: 100%;
+    height: 50px;
+}
+
+.modal-unfollow-btn:hover {
+    cursor: pointer;
+}
+
+.modal-cancel-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid rgb(219,219,219);
+    width: 100%;
+    height: 50px;
+}
+
+.modal-cancel-btn:hover {
+    cursor: pointer;
+}
+
+.unfollow-mobal-btn-container {
+    width: 100%;
+}
