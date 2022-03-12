@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 // import { Modal } from '../../../context/Modal';
 // import UploadProPicForm from './UploadProPicForm'
 import './ProPicModal.css'
@@ -9,17 +9,30 @@ export default function ProPicModal({ user, setUser, cancelModal }) {
     const dispatch = useDispatch();
     // const [showModal, setShowModal] = useState(false);
     // const [image, setImage] = useState(null);
+    const [disableEdit, setDisableEdit] = useState(false);
     const hiddenInputRef = useRef(null);
 
-    const handleButton = () => hiddenInputRef.current.click();
+    const handleButton = () => {
+        if (disableEdit) return;
+        console.log("disable: edit", disableEdit)
+        hiddenInputRef.current.click();
+    };
+
+    useEffect(() => {
+        console.log('disable', disableEdit)
+    }, [disableEdit])
 
     const handleFileChange = async (e) => {
+        if (disableEdit) return;
         const file = e.target.files[0];
+        setDisableEdit(true);
+        console.log('handled', disableEdit)
         await dispatch(updateProfileImage(file))
             .then((res) => setUser(prev => {
                 prev.image_url = res.imageUrl
                 return prev;
             }))
+            .then(setDisableEdit(false))
         cancelModal();
     };
 
