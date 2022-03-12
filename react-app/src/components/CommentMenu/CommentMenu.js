@@ -11,6 +11,7 @@ function CommentMenu ({commentId, hideForm, post, comment, option, profileUser})
 
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
+    const dashboardPosts = useSelector(({ dashboard }) => dashboard.feed.postIds);
     const [showModal, setShowModal] = useState(false);
 
 
@@ -22,10 +23,12 @@ function CommentMenu ({commentId, hideForm, post, comment, option, profileUser})
         };
 
         if(option === 'profile' && profileUser.username === currentUser.username){
+            // console.log("")
             dispatch(removeCommentProfile(payload))
         }else if(option === 'profile'){
             let deletedComment = await dispatch(removeCommentProfile(payload))
-            if (deletedComment){
+
+                if (deletedComment && post.id[dashboardPosts]){
                 dispatch(deleteComment(deletedComment))
             hideForm();
         }
@@ -35,7 +38,6 @@ function CommentMenu ({commentId, hideForm, post, comment, option, profileUser})
                 hideForm();
             }
         }
-
     }
 
     return (
