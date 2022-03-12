@@ -58,7 +58,7 @@ function CommentForm({ option, post, profileUser}) {
                     </textarea>
                     {comment ? (
                     <button className="comment-button" type="submit">Post</button>) : (
-                        <button id="fake-button" disabled>Post</button>
+                        <button id="unclickable-post-comment-button" disabled>Post</button>
                     )}
                 </div>
             </form>
