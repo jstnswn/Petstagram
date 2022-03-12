@@ -54,7 +54,10 @@ function CommentForm({ option, post, profileUser}) {
                         required
                     >
                     </textarea>
-                    <button className="comment-button" type="submit">Post</button>
+                    {comment ? (
+                    <button className="comment-button" type="submit">Post</button>) : (
+                        <button id="fake-button" disabled>Post</button>
+                    )}
                 </div>
             </form>
         </div>
