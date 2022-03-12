@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { unfollow } from "../../store/dashboard";
-import './unfollow.css'
+import './Unfollow.css'
 
 
 export default function Unfollow({ user, setShowUnfollowModal, option }) {
