@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editCommentDashboard } from '../../../store/dashboard';
 import { editCommentProfile } from '../../../store/profile';
 import { updateComment } from '../../../store/dashboard';
+import './EditComment.css'
 
 export default function EditComment({ option, hideForm, post, commentId, comment, profileUser }) {
   const dispatch = useDispatch();
@@ -53,14 +54,18 @@ export default function EditComment({ option, hideForm, post, commentId, comment
       <div className='upload-post header'>
         {/* <i className='fal fa-arrow-left' onClick={() => setShowTextForm(false)}></i> */}
         <h3>Edit Comment</h3>
-        <p
-          className={`next-button `}
-          style={{
-            opacity: caption.length > 2200 ? '50%' : '100%',
-            cursor: caption.length > 2200 ? 'default' : 'pointer'
-          }}
-          onClick={handleClick}
-        >Submit</p>
+        {prevComment ? (
+          <p
+            className={`next-button `}
+            style={{
+              opacity: caption.length > 2200 ? '50%' : '100%',
+              cursor: caption.length > 2200 ? 'default' : 'pointer'
+            }}
+            onClick={handleClick}
+          >Submit</p>
+        ) : (
+          <p id='fake-submit'>Submit</p>
+        )}
       </div>
       <div className='upload-form-container final'>
         <div className='image-container'>
