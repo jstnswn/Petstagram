@@ -114,7 +114,7 @@ const SignUpForm = () => {
         <img className='title' src={petstagram} alt='Petstagram Title'></img>
         <div className='signup-form-heading'>Sign up to see photos and videos from your friends.</div>
         <form onSubmit={onSignUp}>
-          <div>
+          <div className='error-handling'>
             {errors.map((error, ind) => (
               <div key={ind}>{formatError(error)}</div>
             ))}

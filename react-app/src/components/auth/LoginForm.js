@@ -103,7 +103,7 @@ const LoginForm = () => {
           <div className='login-form-container'>
             <img className='title' src={petstagram} alt='Petstagram Title'></img>
             <form onSubmit={onLogin}>
-              <div>
+              <div className='error-handling'>
                 {errors.map((error, ind) => (
                   <div key={ind}>{formatError(error)}</div>
                 ))}

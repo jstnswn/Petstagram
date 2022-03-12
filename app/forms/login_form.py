@@ -34,7 +34,7 @@ def check_credentials(form, field):
     user = User.query.filter(or_(User.email == credentials, User.username == credentials)).first()
 
     if not user or '':
-        raise ValidationError('User provided not found.')
+        raise ValidationError('Username or email provided not found.')
 
 
 # def password_matches(form, field):
@@ -64,5 +64,5 @@ def check_password(form, field):
 class LoginForm(FlaskForm):
     # email = StringField('email', validators=[user_exists_email])
     # username = StringField('username', validators=[user_exists_username])
-    credentials = StringField('credentials', validators=[DataRequired(message='Username/Email is required.'), check_credentials])
+    credentials = StringField('credentials', validators=[DataRequired(message='Username or Email is required.'), check_credentials])
     password = StringField('password', validators=[DataRequired('Password is required.'), check_password])
