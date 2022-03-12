@@ -137,7 +137,7 @@ const LoginForm = () => {
               </div>
               {credentials && password ? (
               <button id='login-clickable'>Log In</button>) : (
-                <button id='login-unclickable'>Log In</button>
+                <button id='login-unclickable' disabled>Log In</button>
               )}
 
             </form>

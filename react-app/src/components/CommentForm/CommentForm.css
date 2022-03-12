@@ -46,7 +46,7 @@
     padding-right: 5px;
 } */
 
-#fake-button {
+#unclickable-post-comment-button {
     border: none;
     align-items: center;
     background-color: white;
