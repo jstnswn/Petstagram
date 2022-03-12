@@ -125,18 +125,11 @@ export const patchPost = (payload) => async dispatch => {
   });
 
   if (res.ok) {
+    dispatch(updatePost(postId, caption));
+  } else {
     const data = await res.json();
-
-    // await Promise.all([
-      //   dispatch(removePost(postId)),
-      //   dispatch(loadPost(data))
-      // ])
-
-      dispatch(updatePost(postId, caption));
-    } else {
-      const errors = await res.json();
-      return errors.errors;
-    }
+    return data.errors;
+  }
 
 };
 
