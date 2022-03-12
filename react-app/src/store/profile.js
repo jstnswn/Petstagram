@@ -84,7 +84,6 @@ export const getProfilePosts = (userId) => async dispatch => {
 
   if (res.ok) {
     const data = await res.json();
-    console.log("DATA: ',", data)
     dispatch(loadPosts(data));
   } else {
     const errors = await res.json();
@@ -126,20 +125,13 @@ export const patchPost = (payload) => async dispatch => {
   });
 
   if (res.ok) {
+    dispatch(updatePost(postId, caption));
+  } else {
     const data = await res.json();
+    return data.errors;
+  }
 
-    // await Promise.all([
-      //   dispatch(removePost(postId)),
-      //   dispatch(loadPost(data))
-      // ])
-
-      dispatch(updatePost(data));
-    } else {
-      const errors = await res.json();
-      return errors.errors;
-    }
-
-  };
+};
 
 
   export const createCommentProfile = (payload) => async dispatch => {

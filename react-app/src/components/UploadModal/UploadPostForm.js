@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost as createPostDashboard } from '../../store/dashboard';
-import { createPost as loadPost} from '../../store/profile';
+import { loadPost } from '../../store/profile';
 import dragAndDropImage from '../../assets/drag-and-drop.png'
 import './UploadPostForm.css'
 
@@ -33,7 +33,6 @@ export default function UploadPostForm({ closeModal }) {
       image,
       caption
     };
-    // TODO error handling
       await dispatch(createPostDashboard(payload))
         .then((res) => dispatch(loadPost(res)))
     // if (data) {
@@ -95,7 +94,6 @@ export default function UploadPostForm({ closeModal }) {
       </>
     )
   } else {
-    console.log('image', image)
     headerContent = (
       <>
         <i className='fal fa-arrow-left' onClick={() => setShowTextForm(false)}></i>
