@@ -93,7 +93,7 @@ export default function ProfilePage() {
         </div>
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal user={profileUser} cancelModal={closeProPicModal}/>
+              <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal}/>
             </Modal>
           )}
           <div className='header-info'>
