@@ -25,12 +25,15 @@ class User(db.Model, UserMixin):
     posts = db.relationship('Post', back_populates='user')
     comments = db.relationship('Comment', back_populates='user')
     liked_posts = db.relationship('Post', back_populates='likers', secondary=likes)
-    comment_notifications = db.relationship('CommentNotification', back_populates='user')
+    # comment_notifications = db.relationship('CommentNotification', back_populates='to_user')
 
-    like_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_to_id', back_populates='from_user')
+    like_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_from_id', back_populates='from_user')
     l_from_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_from_id', backref='l_to_notifications', lazy='dynamic')
     l_to_notifications = db.relationship('LikeNotification', foreign_keys='LikeNotification.user_to_id', backref='l_from_notifications', lazy='dynamic')
 
+    comment_notifications = db.relationship('CommentNotification', foreign_keys='CommentNotification.user_from_id', back_populates='from_user')
+    c_from_notifications = db.relationship('CommentNotification', foreign_keys='CommentNotification.user_from_id', backref='c_to_notifications', lazy='dynamic')
+    c_to_notifications = db.relationship('CommentNotification', foreign_keys='CommentNotification.user_to_id', backref='c_from_notifications', lazy='dynamic')
 
     followers = db.relationship(
         'User',
@@ -75,6 +78,7 @@ class User(db.Model, UserMixin):
             'following': [user.f_to_dict() for user in self.following],
             'followers': [user.f_to_dict() for user in self.followers],
             'notifications': {
-                'likes': [like.to_dict() for like in self.l_to_notifications]
+                'likes': [like.to_dict() for like in self.l_to_notifications],
+                'comments': [notification.to_dict() for notification in self.c_to_notifications]
             }
         }
