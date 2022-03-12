@@ -69,7 +69,8 @@
 }
 
 .post-footer {
-    max-height: 221px;
+    /* max-height: 221px; */
+    max-height:15%;
     width: 100%;
     padding: 0 10px;
 }

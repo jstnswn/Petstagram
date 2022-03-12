@@ -103,7 +103,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
         <div className="post-view-comments">
             <ul>
                 <li>
-                    <div className="comment-shell">
+                    <div className="caption-shell">
                         <div>
                             <img className="post-view-user-img"src={post.user.image_url} alt='profile'></img>
                         </div>
@@ -123,7 +123,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
                         <span>{comment.comment}</span>
                     </div>
                     <div className='time-and-menu'>
-                        <div>{timePassed(Date.parse(new Date().toString()) - Date.parse(comment?.created_at))}</div>
+                        <div className='time-passed'>{timePassed(Date.parse(new Date().toString()) - Date.parse(comment?.created_at))}</div>
                         {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id}/>   : <i id='ghost'className='far fa-ellipsis-h post-view'/>}
 
                     </div>
@@ -135,7 +135,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser}) {
             </ul>
 
 
-            <div>{post.id}</div>
+            
             <div className="footer-icons">
                 <span>
                 {isLiked ?
