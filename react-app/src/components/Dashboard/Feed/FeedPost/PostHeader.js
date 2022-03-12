@@ -41,7 +41,7 @@ export default function PostHeader({ post }) {
       )}
 
       {showUnfollowModal &&
-        <Modal>
+        <Modal onClose={() => setShowUnfollowModal(false)}>
           <Unfollow user={post.user} setShowUnfollowModal={setShowUnfollowModal}/>
         </Modal>
       }

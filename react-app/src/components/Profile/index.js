@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { getProfilePosts } from '../../store/profile';
 import { Modal } from '../../context/Modal';
 import { follow } from '../../store/dashboard';
+import Unfollow from '../UnfollowModal/Unfollow';
 import ProfileGrid from './ProfileGrid.js';
 import ProPicModal from './Header/ProPicModal';
 import FollowerFormModal from './Header/FollowerModal';
@@ -38,6 +39,8 @@ export default function ProfilePage() {
   const [showFollowerModal, setShowFollowerModal] = useState(false)
   const openFollowerModal = () => setShowFollowerModal(true)
   const closeFollowerModal = () => setShowFollowerModal(false)
+
+  const [showUnfollowModal, setShowUnfollowModal] = useState(false)
 
   const posts = useSelector(({profile}) => profile.posts?.order)
 
@@ -100,13 +103,25 @@ export default function ProfilePage() {
         {profileUser.id === user.id &&
           <button onClick={openEditProfileModal} className='edit-profile'>Edit Profile</button>
         }
-        {!userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
+        {!userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) ?
           <button onClick={handleFollow} className='modal-follow'>Follow</button>
+          : <div id='profile-unfollow-btn'onClick={() => setShowUnfollowModal(true)}><i className="fa-solid fa-user-check"></i></div>
+        }
+        {showUnfollowModal &&
+          <Modal onClose={() => setShowUnfollowModal(false)}>
+            <Unfollow
+              user={profileUser}
+              setShowUnfollowModal={setShowUnfollowModal}
+              option='profile-direct'
+              setNumberFollowers={setNumberFollowers}
+              setUserFollowing={setUserFollowing}
+            />
+          </Modal>
         }
         {showEditProfileModal && (
           <Modal onClose={closeEditProfileModal}>
             <EditProfileModal user={profileUser} cancelModal={closeEditProfileModal}/>
-            </Modal>
+          </Modal>
         )}
         </div>
         <div className='mid-column'>
@@ -149,7 +164,7 @@ export default function ProfilePage() {
         <p>SAVED</p>
         <p>TAGGED</p>
       </nav>
-      <ProfileGrid profileUser={profileUser}/>
+      <ProfileGrid profileUser={profileUser} setUserFollowing={setUserFollowing} setNumberFollowers={setNumberFollowers}/>
     </div>
   )
 }
