@@ -5,6 +5,7 @@ const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const UNFOLLOW = 'follow/UNFOLLOW'
 const FOLLOW = 'follow/follow'
+const SET_PROFILE_IMAGE = 'session/SET_PROFILE_IMAGE';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -26,6 +27,13 @@ export const followActionCreator = (user) => {    // Follow action creator
   return {
     type: FOLLOW,
     user
+  }
+}
+
+const setProfileImage = (imageUrl) => {
+  return {
+    type: SET_PROFILE_IMAGE,
+    imageUrl
   }
 }
 
@@ -118,6 +126,27 @@ export const signUp = (username, email, password, full_name) => async (dispatch)
   }
 }
 
+export const updateProfileImage = (image) => async dispatch => {
+  const formData = new FormData();
+  formData.append('image', image);
+
+  const res = await fetch('api/users/profile_image', {
+    method: 'PATCH',
+    body: formData
+  })
+
+  if (res.ok) {
+    const data = await res.json();
+    const imageUrl = data.url;
+    dispatch(setProfileImage(imageUrl));
+      return {imageUrl};
+  } else {
+    const data = await res.json();
+    return data.errors;
+  }
+
+};
+
 export default function reducer(state = initialState, action) {
   let stateCopy
   switch (action.type) {
@@ -139,6 +168,11 @@ export default function reducer(state = initialState, action) {
       stateCopy = {...state}
       stateCopy.user.following.push(action.user)
       return stateCopy
+
+    case SET_PROFILE_IMAGE:
+      stateCopy = {...state};
+      stateCopy.user.image_url = action.imageUrl;
+      return stateCopy;
 
     default:
       return state;
