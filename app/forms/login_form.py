@@ -64,5 +64,5 @@ def check_password(form, field):
 class LoginForm(FlaskForm):
     # email = StringField('email', validators=[user_exists_email])
     # username = StringField('username', validators=[user_exists_username])
-    credentials = StringField('credentials', validators=[DataRequired(), check_credentials])
-    password = StringField('password', validators=[DataRequired(), check_password])
+    credentials = StringField('credentials', validators=[DataRequired(message='Username/Email is required.'), check_credentials])
+    password = StringField('password', validators=[DataRequired('Password is required.'), check_password])
