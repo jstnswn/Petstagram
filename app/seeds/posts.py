@@ -426,15 +426,13 @@ def seed_posts():
         ),
     ]
 
-    random1 = randint(1,5)
-    random2 = randint(6,11)
 
     for post in posts:
+        random1 = randint(1,5)
+        random2 = randint(6,11)
         post.likers.append(users[0])
         post.likers.append(users[random1])
         post.likers.append(users[random2])
-        # post.likers.append(users[3])
-        # post.likers.append(users[4])
         db.session.add(post)
 
     db.session.commit()
