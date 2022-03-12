@@ -99,10 +99,10 @@ export default function UploadPostForm({ closeModal }) {
         <i className='fal fa-arrow-left' onClick={() => setShowTextForm(false)}></i>
         <h3>Create new post</h3>
         <p
-          className={`next-button `}
+          className='submit-button next-button'
           style={{
-            opacity: caption.length > 2200 ? '50%' : '100%',
-            cursor: caption.length > 2200 ? 'default' : 'pointer'
+            opacity: disableSubmit ? '50%' : '100%',
+            cursor: disableSubmit ? 'default' : 'pointer'
           }}
           onClick={handleSubmit}
         >Submit</p>

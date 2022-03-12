@@ -23,13 +23,17 @@ export default function ProfilePage() {
   const [userLoaded, setUserLoaded] = useState(false);
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [profileUser, setProfileUser] = useState(null);
+  const [disableEdit, setDisableEdit] = useState(false);
 
   const [showEditProfileModal, setShowProfileModal] = useState(false);
-  const openEditProfileModal = () => setShowProfileModal(true);
+  // const openEditProfileModal = () => setShowProfileModal(true);
   const closeEditProfileModal = () => setShowProfileModal(false);
 
   const [showProPicModal, setShowProPicModal] = useState(false);
-  const openProPicModal = () => setShowProPicModal(true);
+  const openProPicModal = () => {
+    if (user.id !== profileUser.id || disableEdit) return;
+    setShowProPicModal(true);
+  }
   const closeProPicModal = () => setShowProPicModal(false);
 
   const [showFollowingModal, setShowFollowingModal] = useState(false)
@@ -75,7 +79,7 @@ export default function ProfilePage() {
   const handleFollow = (e) => {
     e.preventDefault()
     dispatch(follow(profileUser.id))
-    setUserFollowing(prev => [...userFollowing, profileUser.id])
+    setUserFollowing(prev => [...prev, profileUser.id])
     setNumberFollowers(prev => ++prev)
   }
 
@@ -93,19 +97,22 @@ export default function ProfilePage() {
         </div>
           {showProPicModal && (
             <Modal onClose={closeProPicModal}>
-              <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal}/>
+              <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal} />
             </Modal>
           )}
           <div className='header-info'>
         <div className='top-column'>
         <div className='profile-username'>{profileUser.username}
         </div>
-        {profileUser.id === user.id &&
+        {/* {profileUser.id === user.id &&
           <button onClick={openEditProfileModal} className='edit-profile'>Edit Profile</button>
-        }
-        {!userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) ?
+        } */}
+
+        {!userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
           <button onClick={handleFollow} className='modal-follow'>Follow</button>
-          : <div id='profile-unfollow-btn'onClick={() => setShowUnfollowModal(true)}><i className="fa-solid fa-user-check"></i></div>
+        }
+        { userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
+           <div id='profile-unfollow-btn'onClick={() => setShowUnfollowModal(true)}><i className="fa-solid fa-user-check"></i></div>
         }
         {showUnfollowModal &&
           <Modal onClose={() => setShowUnfollowModal(false)}>

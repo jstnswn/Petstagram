@@ -7,19 +7,24 @@ import { updateProfileImage } from '../../../store/session';
 
 export default function ProPicModal({ user, setUser, cancelModal }) {
     const dispatch = useDispatch();
-    // const [showModal, setShowModal] = useState(false);
-    // const [image, setImage] = useState(null);
+    const [disableEdit, setDisableEdit] = useState(false);
     const hiddenInputRef = useRef(null);
 
-    const handleButton = () => hiddenInputRef.current.click();
+    const handleButton = () => {
+        if (disableEdit) return;
+        hiddenInputRef.current.click();
+    };
 
     const handleFileChange = async (e) => {
+        if (disableEdit) return;
         const file = e.target.files[0];
+        await setDisableEdit(true);
         await dispatch(updateProfileImage(file))
             .then((res) => setUser(prev => {
                 prev.image_url = res.imageUrl
                 return prev;
             }))
+        setDisableEdit(false)
         cancelModal();
     };
 
@@ -34,12 +39,13 @@ export default function ProPicModal({ user, setUser, cancelModal }) {
             </div>
             <div className='edit-pro-pic-container'>
 
-                <div className='edit-btn' onClick={handleButton}>Edit Photo</div>
-                {/* {showModal && (
-                    <Modal onClose={closeModal}>
-                        <UploadProPicForm closeModal={closeModal} />
-                    </Modal>
-                )} */}
+                <div
+                    className='edit-btn'
+                    onClick={handleButton}
+                    style={{
+                        opacity: disableEdit ? .5 : 1
+                    }}
+                >{!disableEdit ? 'Update Profile Image' : 'Loading...'}</div>
                 <div className='cancel-btn' onClick={cancelModal}>Cancel</div>
             </div>
 
