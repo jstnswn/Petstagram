@@ -35,6 +35,11 @@ class User(db.Model, UserMixin):
     c_from_notifications = db.relationship('CommentNotification', foreign_keys='CommentNotification.user_from_id', backref='c_to_notifications', lazy='dynamic')
     c_to_notifications = db.relationship('CommentNotification', foreign_keys='CommentNotification.user_to_id', backref='c_from_notifications', lazy='dynamic')
 
+    follow_notifications = db.relationship('FollowNotification', foreign_keys='FollowNotification.user_from_id', back_populates='from_user')
+    f_from_notifications = db.relationship('FollowNotification', foreign_keys='FollowNotification.user_from_id', backref='f_to_notifications', lazy='dynamic')
+    f_to_notifications = db.relationship('FollowNotification', foreign_keys='FollowNotification.user_to_id', backref='f_from_notifications', lazy='dynamic')
+
+
     followers = db.relationship(
         'User',
         secondary=follows,
@@ -79,6 +84,7 @@ class User(db.Model, UserMixin):
             'followers': [user.f_to_dict() for user in self.followers],
             'notifications': {
                 'likes': [like.to_dict() for like in self.l_to_notifications],
-                'comments': [notification.to_dict() for notification in self.c_to_notifications]
+                'comments': [comment.to_dict() for comment in self.c_to_notifications],
+                'follows': [follow.to_dict() for follow in self.f_to_notifications]
             }
         }
