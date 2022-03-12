@@ -82,14 +82,17 @@ const LoginForm = () => {
   if (user) {
     return <Redirect to='/' />;
   }
-  const button = document.querySelector('#login-btn')
-  if (button) {
-    if (credentials !== '' && password !== '') {
-      button.style.backgroundColor = '#0095f6'
-    } else {
-      button.style.backgroundColor = 'rgb(160,218,249)'
-    }
-  }
+  // const button = document.querySelector('#login-btn')
+  // if (button) {
+  //   if (credentials !== '' && password !== '') {
+  //     button.classList.add('srki')
+  //     button.classList.remove('miki')
+  //   } else {
+  //     button.classList.add('miki')
+  //     button.classList.remove('srki')
+  //     button.required = 'required'
+  //   }
+  // }
 
   const formatError = error => {
     const startIndex = error.indexOf(':') + 1
@@ -132,7 +135,11 @@ const LoginForm = () => {
                   required
                 />
               </div>
-              <button id='login-btn' type='submit'>Log In</button>
+              {credentials && password ? (
+              <button id='login-clickable'>Log In</button>) : (
+                <button id='login-unclickable'>Log In</button>
+              )}
+
             </form>
             <button id='demo-login' onClick={demoLogin}>Demo User</button>
           </div>
