@@ -106,8 +106,8 @@ const LoginForm = () => {
                   type='text'
                   placeholder='Username or Email'
                   value={emailOrUsername}
-                  required='required'
                   onChange={updateEmailOrUsername}
+                  required
                 />
               </div>
               <div className='field-container'>
@@ -118,8 +118,8 @@ const LoginForm = () => {
                   type='password'
                   placeholder='Password'
                   value={password}
-                  required='required'
                   onChange={updatePassword}
+                  required
                 />
                 <button id='login-btn' type='submit'>Log In</button>
               </div>

@@ -22,6 +22,7 @@ const SignUpForm = () => {
       const data = await dispatch(signUp(username, email, password, fullName));
       if (data) {
         setErrors(data)
+        console.log(data)
       }
     // }
   };
@@ -102,6 +103,10 @@ const SignUpForm = () => {
     }
 
   }
+  const formatError = error => {
+    const startIndex = error.indexOf(':') + 1
+    return error.slice(startIndex)
+  }
 
   return (
     <div id='signup-form-page'>
@@ -111,7 +116,7 @@ const SignUpForm = () => {
         <form onSubmit={onSignUp}>
           <div>
             {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+              <div key={ind}>{formatError(error)}</div>
             ))}
           </div>
           <div className='field-container'>
@@ -122,8 +127,8 @@ const SignUpForm = () => {
               type='text'
               name='email'
               onChange={updateEmail}
-              required='required'
               value={email}
+              required
             ></input>
           </div>
           <div className='field-container'>
@@ -134,8 +139,8 @@ const SignUpForm = () => {
               type='text'
               name='fullName'
               onChange={updateFullName}
-              required='required'
               value={fullName}
+              required
             ></input>
           </div>
           <div className='field-container'>
@@ -146,8 +151,8 @@ const SignUpForm = () => {
               type='text'
               name='username'
               onChange={updateUsername}
-              required='required'
               value={username}
+              required
             ></input>
           </div>
           <div className='field-container'>
@@ -158,8 +163,8 @@ const SignUpForm = () => {
               type='password'
               name='password'
               onChange={updatePassword}
-              required='required'
               value={password}
+              required
             ></input>
           </div>
           {/* <div>
