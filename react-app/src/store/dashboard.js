@@ -198,8 +198,7 @@ export const removeCommentDashboard = (payload) => async dispatch => {
       comment_id: payload.comment_id,
       updated_comment: payload.updated_comment,
       post_id: payload.post_id,
-
-  })
+    })
   });
 
   if (res.ok){

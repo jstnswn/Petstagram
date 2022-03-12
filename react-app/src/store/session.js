@@ -6,6 +6,8 @@ const REMOVE_USER = 'session/REMOVE_USER';
 const UNFOLLOW = 'follow/UNFOLLOW'
 const FOLLOW = 'follow/follow'
 
+const REMOVE_NOTIFICATIONS = 'session/REMOVE_NOTIFICATIONS'
+
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
@@ -29,7 +31,21 @@ export const followActionCreator = (user) => {    // Follow action creator
   }
 }
 
-const initialState = { user: null };
+export const removeNotifications = () => {
+  return {
+    type: REMOVE_NOTIFICATIONS
+  }
+}
+
+const initialState = {
+  user: {
+    notifications: {
+      likes: [],
+      comments: [],
+      follows: []
+    }
+  }
+};
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -119,6 +135,24 @@ export const signUp = (username, email, password, full_name) => async (dispatch)
   }
 }
 
+// Helper Functions
+export const deleteNotifications = (payload) => async dispatch => {
+  const { likes, comments, follows } = payload;
+
+  const res = await fetch('/api/notifications/all/', {
+    method: 'DELETE',
+    headers: { "Content-Type": "application/json" },
+  })
+
+  if (res.ok) {
+    dispatch(removeNotifications())
+  }
+
+  // return
+};
+
+
+
 export default function reducer(state = initialState, action) {
   let stateCopy
   switch (action.type) {
@@ -140,6 +174,11 @@ export default function reducer(state = initialState, action) {
       stateCopy = {...state}
       stateCopy.user.following.push(action.user)
       return stateCopy
+
+    case REMOVE_NOTIFICATIONS:
+      stateCopy = {...state}
+      stateCopy.user.notifications = null;
+      return stateCopy;
 
     default:
       return state;
