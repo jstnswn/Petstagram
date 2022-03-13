@@ -86,3 +86,13 @@
     font-size: 14px;
     visibility:hidden;
 }
+
+#profile-like-button {
+    padding-left: 16px;
+    padding-top: 1px;
+}
+
+#profile-likes-number{
+    padding-left: 10px;
+    padding-top: 10px;
+}
