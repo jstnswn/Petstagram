@@ -67,3 +67,7 @@ span i {
 .add-comment-container {
     margin-top: 10px;
 }
+
+#feed-comment-icon {
+    margin-right: 520px;
+}

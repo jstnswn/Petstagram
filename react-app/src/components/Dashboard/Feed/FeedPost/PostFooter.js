@@ -76,23 +76,21 @@ export default function PostFooter({ post, option}) {
           }
         </span>
         <span>
-          <i className='fa-regular fa-comment post-icon' onClick={onComment}></i>
+          <i id='feed-comment-icon' className='fa-regular fa-comment post-icon' onClick={onComment}></i>
         </span>
         {showModal && (
                     <Modal onClose={() => setShowModal(false) }>
                         <PostView post={post} option='feed' />
                     </Modal>
                 )}
-        <span>
+        {/* <span>
           <i className='fa-regular fa-paper-plane post-icon'></i>
-        </span>
-        <span>
+        </span> */}
+        {/* <span>
           <i className='fa-regular fa-bookmark post-icon'></i>
-        </span>
+        </span> */}
       </div>
-      {/* number of likes */}
       {likesCount > 0 ? <div className='footer-likes'>{likesCountRender}</div> : null}
-      {/* <div className='footer-likes'>{likesCountRender}</div> */}
       <div className='comment-container'>
         <p className='caption'><span className='caption-username'>{post.user.username}</span>{post.caption}</p>
         <ViewComments post={post}/>
