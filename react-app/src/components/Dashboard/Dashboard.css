@@ -4,7 +4,6 @@
     margin-top: 60px;
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
     justify-content: center;
     background-color: var(--main-background-color);
     position: relative;
