@@ -4,7 +4,7 @@ from app.models import Comment, db
 from app.forms.comment_form import CommentForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 comment_routes = Blueprint('comment', __name__)
 
@@ -12,7 +12,7 @@ comment_routes = Blueprint('comment', __name__)
 @comment_routes.route('/', methods=['POST'])
 def create_comment():
 
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
     current_time = now.strftime("%H:%M:%S")
     print("current time", current_time)
 
