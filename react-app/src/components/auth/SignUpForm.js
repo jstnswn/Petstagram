@@ -18,7 +18,6 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     // if (password === repeatPassword) {
-      console.log(fullName)
       const data = await dispatch(signUp(username, email, password, fullName));
       if (data) {
         setErrors(data)
@@ -114,7 +113,7 @@ const SignUpForm = () => {
         <img className='title' src={petstagram} alt='Petstagram Title'></img>
         <div className='signup-form-heading'>Sign up to see photos and videos from your friends.</div>
         <form onSubmit={onSignUp}>
-          <div>
+          <div className='error-handling'>
             {errors.map((error, ind) => (
               <div key={ind}>{formatError(error)}</div>
             ))}
@@ -177,7 +176,10 @@ const SignUpForm = () => {
               required={true}
             ></input>
           </div> */}
-          <button id='signup-btn' type='submit'>Sign Up</button>
+          {username && fullName && email && password ? (
+              <button id='signup-clickable'>Sign Up</button>) : (
+                <button id='signup-unclickable' disabled>Sign Up</button>
+              )}
         </form>
         <div className='signup-form-heading' id='signup-form-footing'>By signing up, you agree to view many cute photos of pets.</div>
       </div>

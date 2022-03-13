@@ -9,6 +9,7 @@ function CommentForm({ option, post, profileUser}) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector(state => state.session.user);
+    const dashboardPosts = useSelector(({ dashboard }) => dashboard.feed.postIds)
 
     const [comment, setComment] = useState("");
     // const [errors, setErrors] = useState([]);
@@ -25,13 +26,18 @@ function CommentForm({ option, post, profileUser}) {
         }
 
         if(option === 'profile' && profileUser.username === currentUser.username){
-            dispatch(createCommentProfile(payload))
+            const newComment = await dispatch(createCommentProfile(payload))
+            if (newComment && dashboardPosts[postId]){
+                dispatch(addComment(newComment))
+            }
+            console.log(dashboardPosts[postId], 'this is dashboard postid')
         }else if(option === 'feed'){
             dispatch(createCommentDashboard(payload))
         }else{
             const newComment = await dispatch(createCommentProfile(payload))
-            if(newComment){
+            if (newComment && dashboardPosts[postId]){
                 dispatch(addComment(newComment))
+                // post.id[dashboardPosts]
             }
         }
         setComment('')
@@ -54,7 +60,10 @@ function CommentForm({ option, post, profileUser}) {
                         required
                     >
                     </textarea>
-                    <button className="comment-button" type="submit">Post</button>
+                    {comment ? (
+                    <button className="comment-button" type="submit">Post</button>) : (
+                        <button id="unclickable-post-comment-button" disabled>Post</button>
+                    )}
                 </div>
             </form>
         </div>

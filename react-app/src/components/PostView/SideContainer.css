@@ -7,10 +7,9 @@
 }
 
 
-
 .post-view-user-img{
-    height: 42px;
-    width: 42px;
+    height: 32px;
+    width: 32px;
     border-radius: 50%;
     margin-right:12px;
     object-fit:cover;
@@ -19,16 +18,26 @@
 
 .comment-shell{
     display:flex;
-    align-items: center;
     margin-top:16px;
     margin-right:16px;
     margin-bottom:16px;
+
+}
+
+.caption-shell{
+    display:flex;
+    margin-top:16px;
+    margin-right:16px;
+    margin-bottom:16px;
+    padding-bottom:21px;
 }
 
 
 .post-view-comments ul{
     overflow:scroll;
-    min-height: 500px;
+/*     min-height: 500px; */
+    height:525px;
+    padding-left:15px;
 }
 
 .post-view-comments ul::-webkit-scrollbar {
@@ -51,15 +60,28 @@
 
 .comment-shell span{
     white-space: normal;
-    max-width: 120px;
+    max-width: 235px;
+}
+
+.caption-shell span{
+    white-space: normal;
+    max-width: 235px;
 }
 
 .time-and-menu{
     display:flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-bottom:5px;
+    padding-left:103px;
+    width: 315px;
 }
 
 .time-and-menu #ghost{
     visibility: hidden;
+}
+
+.time-passed{
+    color:#8e8e8e;
+    font-size: 14px;
 }

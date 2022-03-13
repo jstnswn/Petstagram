@@ -33,3 +33,16 @@ def delete_follow():
 
     db.session.commit()
     return { 'userId': unfollowed_id}
+
+@follow_routes.route('/suggestions/')
+def get_follow_suggestions():
+    # Route currently gets the first 5 users that aren't followed
+    current_user_id = current_user.get_id()
+
+    c_user = User.query.get(current_user_id)
+    c_following = c_user.following
+    following_ids = [user.id for user in c_following]
+
+    users = User.query.filter(User.id.not_in(following_ids), User.id!=current_user_id).limit(5).all()
+
+    return {'suggestions': [user.f_to_dict() for user in users]}, 200
