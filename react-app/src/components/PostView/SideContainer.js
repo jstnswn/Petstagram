@@ -148,8 +148,6 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                 </>
                     : null}
             </ul>
-            
-
             <div className="footer-icons">
                 <span>
                     {isLiked ?
