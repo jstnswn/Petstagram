@@ -97,7 +97,7 @@ export default function EditComment({ option, hideForm, post, commentId, comment
           />
           <p
             className={`post-form word-count ${caption.length > 2200 ? 'active' : ''}`}
-          >{`${caption.length}/2,200`}</p>
+          >{`${prevComment.length}/2,200`}</p>
         </div>
       </div>
     </div>
