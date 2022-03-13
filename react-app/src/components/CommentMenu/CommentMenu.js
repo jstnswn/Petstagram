@@ -7,7 +7,7 @@ import { deleteComment } from '../../store/dashboard'
 import EditComment from './EditComment/EditComment'
 import './CommentMenu.css'
 
-function CommentMenu ({commentId, hideForm, post, comment, option, profileUser}) {
+function CommentMenu({ commentId, hideForm, post, comment, option, profileUser }) {
 
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
@@ -22,19 +22,21 @@ function CommentMenu ({commentId, hideForm, post, comment, option, profileUser})
             post_id: postId,
         };
 
-        if(option === 'profile' && profileUser.username === currentUser.username){
-            // console.log("")
-            dispatch(removeCommentProfile(payload))
-        }else if(option === 'profile'){
-            let deletedComment = await dispatch(removeCommentProfile(payload))
-
-                if (deletedComment && post.id[dashboardPosts]){
+        if (option === 'profile' && profileUser.username === currentUser.username) {
+            const deletedComment = await dispatch(removeCommentProfile(payload))
+            if (deletedComment && dashboardPosts[postId]) {
                 dispatch(deleteComment(deletedComment))
-            hideForm();
-        }
-        }else if (option === 'feed'){
-            let deletedComment = await dispatch(removeCommentDashboard(payload))
-            if (deletedComment){
+            }
+        } else if (option === 'profile') {
+            const deletedComment = await dispatch(removeCommentProfile(payload))
+
+            if (deletedComment && dashboardPosts[postId]) {
+                dispatch(deleteComment(deletedComment))
+                hideForm();
+            }
+        } else if (option === 'feed') {
+            const deletedComment = await dispatch(removeCommentDashboard(payload))
+            if (deletedComment) {
                 hideForm();
             }
         }
@@ -42,14 +44,14 @@ function CommentMenu ({commentId, hideForm, post, comment, option, profileUser})
 
     return (
         <div className="delete-comment-menu">
-            <div style={{color: 'red'}} onClick={handleClick}>Delete</div>
+            <div style={{ color: 'red' }} onClick={handleClick}>Delete</div>
             <div onClick={() => setShowModal(true)}>Update</div>
             {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-               <EditComment profileUser={profileUser} option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post}/>
-            </Modal>
+                <Modal onClose={() => setShowModal(false)}>
+                    <EditComment profileUser={profileUser} option={option} hideForm={hideForm} comment={comment} commentId={commentId} post={post} />
+                </Modal>
             )}
-             <div onClick={hideForm}>Cancel</div>
+            <div onClick={hideForm}>Cancel</div>
 
         </div>
     )
