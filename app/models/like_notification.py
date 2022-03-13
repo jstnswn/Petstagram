@@ -20,6 +20,6 @@ class LikeNotification(db.Model):
         return {
             'id': self.id,
             'from_user': self.from_user.f_to_dict(),
-            'post_id': self.post_id,
+            'post': self.post.n_to_dict(),
             # 'is_checked': self.is_checked
         }

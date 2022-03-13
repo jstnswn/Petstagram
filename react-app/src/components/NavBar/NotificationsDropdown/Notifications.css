@@ -1,0 +1,61 @@
+.notification-container {
+    width: 100%;
+    height: 68px;
+    /* border: blue solid 1px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.notifications-dropdown > p {
+    margin: 0;
+    padding-left: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.notification.user-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.notification.user-info img {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+
+
+.notification.user-info p,
+.notification.user-info .notification-username {
+    font-size: 14px;
+    padding: 2px;
+    /* border: red 1px solid; */
+    color: black;
+    /* height: 23px; */
+}
+
+.notification.user-info .notification-username {
+    font-weight: bold;
+}
+
+.notification-container .post-notification-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.notification-container button {
+    margin-right: -3px;
+    padding: 0;
+    /* margin: 0; */
+    /* padding: 0; */
+    /* border: 1px solid red; */
+    /* color: red; */
+}
