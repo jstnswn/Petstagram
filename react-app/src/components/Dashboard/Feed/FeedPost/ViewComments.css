@@ -4,8 +4,27 @@
 
 .view-all-anchor{
     color: rgba(var(--f52,142,142,142),1);
+    font-size: 14px;
 }
 
+.view-more{
+    color: rgba(var(--f52,142,142,142),1);
+}
+
+.view-more:hover{
+    cursor: pointer;
+}
+
+.comment1-navlink,
+.comment2-navlink{
+    margin-right:5px;
+}
+
+.comment1,
+.comment2{
+    display:flex;
+    font-size:14px;
+}
 
 .comment1 a,
 .comment2 a{

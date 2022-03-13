@@ -34,6 +34,20 @@ function ViewComments ({post, option, closeModal}) {
 
     // }
 
+    function moreComments (){
+        return (
+            <div>
+            <div className="view-more" onClick={() => setShowModal(true)}>more</div>
+            {showModal && (
+                <Modal onClose={() => setShowModal(false) }>
+                    <PostView post={post} option='feed' />
+                </Modal>
+            )}
+        </div>
+
+        )
+    }
+
 
 
     return  (
@@ -44,33 +58,22 @@ function ViewComments ({post, option, closeModal}) {
 
 
             {commentsArr.length > 2 ?
-                <div>
-                    <div className="view-all-anchor" onClick={() => setShowModal(true)}>View all {commentsArr.length} comments</div>
-                    {showModal && (
-                        <Modal onClose={() => setShowModal(false) }>
-                            <PostView post={post} option='feed' />
-                        </Modal>
-                    )}
-                </div> : null
-            }
+             <div>
+                <div className="view-all-anchor" onClick={() => setShowModal(true)}>View all {commentsArr.length} comments</div>
+                {showModal && (
+                    <Modal onClose={() => setShowModal(false) }>
+                        <PostView post={post} option='feed' />
+                    </Modal>
+                )}
+            </div> : null}
 
-            {commentsArr.length > 0 ?
-                <div className="comment1">
-                    <NavLink to={`/${commentsArr[commentsArr.length-1].user.username}`}>
-                        {commentsArr[commentsArr.length-1].user.username}
-                    </NavLink> {commentsArr[commentsArr.length-1].comment}
-                </div> : null
-            }
+            {commentsArr.length > 0 && (commentsArr[commentsArr.length-1].comment).length > 70 ? <div className="comment1"><NavLink className='comment1-navlink' to={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</NavLink> {(commentsArr[commentsArr.length-1].comment).slice(0,65)} ... {moreComments()} </div> : commentsArr.length > 0 ? <div className="comment1"><NavLink className='comment1-navlink'to={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</NavLink> {commentsArr[commentsArr.length-1].comment}</div> : null}        
+            {/* {commentsArr.length > 0 ? <div className="comment1"><NavLink to={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</NavLink> {commentsArr[commentsArr.length-1].comment}</div> : null} */}
+            {commentsArr.length > 1 && (commentsArr[commentsArr.length-2].comment).length > 70 ? <div className="comment2"><NavLink className='comment2-navlink' to={`/${commentsArr[commentsArr.length-2].user.username}`}>{commentsArr[commentsArr.length-2].user.username}</NavLink> {(commentsArr[commentsArr.length-2].comment).slice(0,65)} ... {moreComments()} </div> : commentsArr.length > 1 ? <div className="comment2"><NavLink className='comment2-navlink' to={`/${commentsArr[commentsArr.length-2].user.username}`}>{commentsArr[commentsArr.length-2].user.username}</NavLink> {commentsArr[commentsArr.length-2].comment}</div> : null}
 
 
 
-            {commentsArr.length > 1 ?
-                <div className="comment2">
-                    <NavLink to={`/${commentsArr[commentsArr.length-2].user.username}`}>
-                        {commentsArr[commentsArr.length-2].user.username}
-                    </NavLink> {commentsArr[commentsArr.length-2].comment}
-                </div> : null
-            }
+            {/* {commentsArr.length > 1 ? <div className="comment2"><NavLink to={`/${commentsArr[commentsArr.length-2].user.username}`}>{commentsArr[commentsArr.length-2].user.username}</NavLink> {commentsArr[commentsArr.length-2].comment}</div> : null} */}
         </div>
     )
 
