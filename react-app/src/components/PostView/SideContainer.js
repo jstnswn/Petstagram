@@ -136,7 +136,9 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                                 <span>{comment.comment}</span>
                             </div>
                             <div className='time-and-menu'>
-                                <div className='time-passed'>{timePassed(Date.parse(new Date().toString()) - Date.parse(comment?.created_at))}</div>
+                            {console.log('srkica',Date.parse(new Date().toUTCString()) - Date.parse(comment?.created_at) - 28800000)}
+                            {/* {console.log(Date.parse(comment?.created_at))} */}
+                                <div className='time-passed'>{timePassed(Date.parse(new Date().toUTCString()) - Date.parse(comment?.created_at) - 28800000)}</div>
                                 {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id} /> : <i id='ghost' className='far fa-ellipsis-h post-view' />}
 
                             </div>
