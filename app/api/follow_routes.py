@@ -40,7 +40,7 @@ def get_follow_suggestions():
     current_user_id = current_user.get_id()
 
     c_user = User.query.get(current_user_id)
-    c_following = c_user.followers
+    c_following = c_user.following
     following_ids = [user.id for user in c_following]
 
     users = User.query.filter(User.id.not_in(following_ids)).limit(5).all()

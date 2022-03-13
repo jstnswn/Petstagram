@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     max-width: 975px;
+    margin-top: 60px;
 }
 
 .profile-header {

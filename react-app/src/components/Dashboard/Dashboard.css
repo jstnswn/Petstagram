@@ -1,6 +1,7 @@
 #dashboard-container {
     height: 100%;
     width: 100%;
+    margin-top: 60px;
     display: flex;
     flex-direction: row;
     /* align-items: center; */
@@ -8,6 +9,7 @@
     background-color: var(--main-background-color);
     position: relative;
 
+    /* z-index: -1; */
     /* margin-right: 293px; */
 }
 
@@ -19,16 +21,80 @@
 .dashboard-sidebar-container {
     position: fixed;
     width: 293px;
-
     margin-top: 30px;
-    border: red 1px solid;
     right: 50%;
     left: 50%;
     margin-left: 307px;
+    padding-left: 37px;
+    /* z-index:-1; */
 }
 
 .side-profile-container {
     height: 56px;
-    border: rgb(89, 0, 255) 1px solid;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
 
+.suggestion-item-container {
+    height: 48px;
+    width: 100%;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-end; */
+}
+
+.side-profile-avatar {
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.suggestion-avatar {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.suggestion-item-container p {
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+.suggestion-follow-button {
+    /* justify-self: flex-end; */
+    cursor: pointer;
+    margin-left: auto;
+    padding-right: 10px;
+    color: var(--button-blue)
+}
+
+.suggestion-follow-button.followed {
+    color: rgb(22, 22, 22);
+}
+
+.suggestion-header {
+    margin-bottom: 5px;
+    color: #8E8E8E;
+    font-size: 14px;
+}
+
+.side-user-info {
+    padding-left: 18px;
+}
+
+.side-user-info > p{
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.side-user-info .full-name {
+    color: #8E8E8E;
 }

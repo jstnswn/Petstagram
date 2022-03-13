@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { patchPost as updateDashboardPost, updatePost } from '../../store/dashboard';
-import { patchPost as updateProfilePost } from '../../store/profile';
-
+import { patchPost as updateProfilePost } from '../../store/profile'
 
 export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
   const dispatch = useDispatch();
