@@ -1320,6 +1320,7 @@ def seed_comments():
 
     for comment in comments:
         db.session.add(comment)
+        
 
     db.session.commit()
 

@@ -99,9 +99,7 @@
     height: 168px;
     width:168px;
     border-radius: 50%;
-    /* margin-right:200px; */
     object-fit: cover;
-    cursor: pointer;
 }
 
 .profile-username {
