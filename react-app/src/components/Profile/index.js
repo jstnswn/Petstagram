@@ -91,15 +91,15 @@ export default function ProfilePage() {
             className='header-profile-pic'
             alt='profile-button'
             src={profileUser.image_url}
-            onClick={openProPicModal}
+            // onClick={openProPicModal}
           />
 
         </div>
-          {showProPicModal && (
+          {/* {showProPicModal && (
             <Modal onClose={closeProPicModal}>
               <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal} />
             </Modal>
-          )}
+          )} */}
           <div className='header-info'>
         <div className='top-column'>
         <div className='profile-username'>{profileUser.username}

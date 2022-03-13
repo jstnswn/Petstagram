@@ -1,8 +1,7 @@
 from app.models import db, User
 
 # Adds a demo user, you can add other users here if you want
-def seed_users():
-    users = [
+users = [
         User(
             username='MisterJackson',
             full_name='Jackson Young-Summers',
@@ -88,6 +87,7 @@ def seed_users():
             image_url='http://photo-bucket-137.s3.amazonaws.com/seeds/420b786cc70748c7af21934a913c30fd.jpg'
         ),
     ]
+def seed_users():
 
     for user in users:
         # Have all seed users follow each other

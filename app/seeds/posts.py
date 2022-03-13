@@ -1,4 +1,6 @@
 from app.models import db, Post
+from app.seeds.users import users
+from random import randint
 
 def seed_posts():
     posts = [
@@ -7,6 +9,7 @@ def seed_posts():
             user_id=2,
             caption="I'm a bag kitty!",
             image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/8120c8697c5d41f4a5ec4abf37c30c53.jpeg',
+            likers=[]
         ),
         Post(
             user_id=7,
@@ -423,10 +426,17 @@ def seed_posts():
         ),
     ]
 
+
     for post in posts:
+        random1 = randint(1,5)
+        random2 = randint(6,11)
+        post.likers.append(users[0])
+        post.likers.append(users[random1])
+        post.likers.append(users[random2])
         db.session.add(post)
 
     db.session.commit()
+
 
 
 def undo_posts():
