@@ -13,11 +13,11 @@ comment_routes = Blueprint('comment', __name__)
 def create_comment():
 
     now = datetime.now()
+    print(now, '-------------------')
     current_time = now.strftime("%H:%M:%S")
-    print("current time", current_time)
 
     data = request.json
-    print(data, "-------")
+    
 
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -35,7 +35,6 @@ def create_comment():
         db.session.commit()
 
         comment_object = comment.to_dict()
-        print(comment_object, '-----------------------this is comment obj')
         return {"comment": comment.to_dict()}
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 

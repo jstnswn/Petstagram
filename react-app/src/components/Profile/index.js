@@ -177,12 +177,12 @@ export default function ProfilePage() {
           <div className='bot-column'>{profileUser.full_name}</div>
         </div>
       </div>
-      <nav className='profile-nav'>
+      {/* <nav className='profile-nav'>
         <p>POSTS</p>
         <p>SAVED</p>
         <p>TAGGED</p>
-      </nav>
-      <ProfileGrid profileUser={profileUser} setUserFollowing={setUserFollowing} setNumberFollowers={setNumberFollowers} />
+      </nav> */}
+      <ProfileGrid profileUser={profileUser} setUserFollowing={setUserFollowing} setNumberFollowers={setNumberFollowers}/>
     </div>
   )
 }
