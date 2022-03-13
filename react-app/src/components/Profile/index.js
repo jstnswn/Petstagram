@@ -46,7 +46,7 @@ export default function ProfilePage() {
 
   const [showUnfollowModal, setShowUnfollowModal] = useState(false)
 
-  const posts = useSelector(({profile}) => profile.posts?.order)
+  const posts = useSelector(({ profile }) => profile.posts?.order)
 
   const [numberFollowing, setNumberFollowing] = useState(null)
   const [numberFollowers, setNumberFollowers] = useState(null)
@@ -83,11 +83,22 @@ export default function ProfilePage() {
     setNumberFollowers(prev => ++prev)
   }
 
+
+  if (profileUser) {
+    if (profileUser.id === user.id) {
+      const headerProfilePic = document.getElementById('my-profile-pic')
+      if (headerProfilePic) {
+        headerProfilePic.style.cursor="pointer"
+      }
+    }
+  }
+
   return postsLoaded && (
     <div className='profile-page-container'>
       <div className='profile-header'>
         <div className='profile-header-pic-container'>
           <img
+            id='my-profile-pic'
             className='header-profile-pic'
             alt='profile-button'
             src={profileUser.image_url}
@@ -95,83 +106,83 @@ export default function ProfilePage() {
           />
 
         </div>
-          {showProPicModal && (
-            <Modal onClose={closeProPicModal}>
-              <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal} />
-            </Modal>
-          )}
-          <div className='header-info'>
-        <div className='top-column'>
-        <div className='profile-username'>{profileUser.username}
-        </div>
-        {/* {profileUser.id === user.id &&
+        {showProPicModal && (
+          <Modal onClose={closeProPicModal}>
+            <ProPicModal user={profileUser} setUser={setProfileUser} cancelModal={closeProPicModal} />
+          </Modal>
+        )}
+        <div className='header-info'>
+          <div className='top-column'>
+            <div className='profile-username'>{profileUser.username}
+            </div>
+            {/* {profileUser.id === user.id &&
           <button onClick={openEditProfileModal} className='edit-profile'>Edit Profile</button>
         } */}
 
-        {!userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
-          <button onClick={handleFollow} className='modal-follow'>Follow</button>
-        }
-        { userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
-           <div id='profile-unfollow-btn'onClick={() => setShowUnfollowModal(true)}><i className="fa-solid fa-user-check"></i></div>
-        }
-        {showUnfollowModal &&
-          <Modal onClose={() => setShowUnfollowModal(false)}>
-            <Unfollow
-              user={profileUser}
-              setShowUnfollowModal={setShowUnfollowModal}
-              option='profile-direct'
-              setNumberFollowers={setNumberFollowers}
-              setUserFollowing={setUserFollowing}
-            />
-          </Modal>
-        }
-        {showEditProfileModal && (
-          <Modal onClose={closeEditProfileModal}>
-            <EditProfileModal user={profileUser} cancelModal={closeEditProfileModal}/>
-          </Modal>
-        )}
-        </div>
-        <div className='mid-column'>
-          <div className='posts-number'>{posts.length} posts</div>
-          <div onClick={openFollowerModal} className='followers'>{numberFollowers} followers</div>
-          {showFollowerModal && (
-            <Modal onClose={closeFollowerModal}>
-              <FollowerFormModal
-                user={user}
-                profileUser={profileUser}
-                userFollowing={userFollowing}
-                setNumberFollowing={setNumberFollowing}
-                setUserFollowing={setUserFollowing}
-                setProfileUser={setProfileUser}
-                closeModal={closeFollowerModal}
-              />
+            {!userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
+              <button onClick={handleFollow} className='modal-follow'>Follow</button>
+            }
+            {userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
+              <div id='profile-unfollow-btn' onClick={() => setShowUnfollowModal(true)}><i className="fa-solid fa-user-check"></i></div>
+            }
+            {showUnfollowModal &&
+              <Modal onClose={() => setShowUnfollowModal(false)}>
+                <Unfollow
+                  user={profileUser}
+                  setShowUnfollowModal={setShowUnfollowModal}
+                  option='profile-direct'
+                  setNumberFollowers={setNumberFollowers}
+                  setUserFollowing={setUserFollowing}
+                />
+              </Modal>
+            }
+            {showEditProfileModal && (
+              <Modal onClose={closeEditProfileModal}>
+                <EditProfileModal user={profileUser} cancelModal={closeEditProfileModal} />
+              </Modal>
+            )}
+          </div>
+          <div className='mid-column'>
+            <div className='posts-number'>{posts.length} posts</div>
+            <div onClick={openFollowerModal} className='followers'>{numberFollowers} followers</div>
+            {showFollowerModal && (
+              <Modal onClose={closeFollowerModal}>
+                <FollowerFormModal
+                  user={user}
+                  profileUser={profileUser}
+                  userFollowing={userFollowing}
+                  setNumberFollowing={setNumberFollowing}
+                  setUserFollowing={setUserFollowing}
+                  setProfileUser={setProfileUser}
+                  closeModal={closeFollowerModal}
+                />
 
-            </Modal>
-          )}
-          <div onClick={openFollowingModal} className='following'>{numberFollowing} following</div>
-          {showFollowingModal && (
-            <Modal onClose={closeFollowingModal}>
-              <FollowingFormModal
-                user={user}
-                profileUser={profileUser}
-                userFollowing={userFollowing}
-                setNumberFollowing={setNumberFollowing}
-                setUserFollowing={setUserFollowing}
-                setProfileUser={setProfileUser}
-                closeModal={closeFollowingModal}
-              />
-            </Modal>
-          )}
+              </Modal>
+            )}
+            <div onClick={openFollowingModal} className='following'>{numberFollowing} following</div>
+            {showFollowingModal && (
+              <Modal onClose={closeFollowingModal}>
+                <FollowingFormModal
+                  user={user}
+                  profileUser={profileUser}
+                  userFollowing={userFollowing}
+                  setNumberFollowing={setNumberFollowing}
+                  setUserFollowing={setUserFollowing}
+                  setProfileUser={setProfileUser}
+                  closeModal={closeFollowingModal}
+                />
+              </Modal>
+            )}
+          </div>
+          <div className='bot-column'>{profileUser.full_name}</div>
         </div>
-        <div className='bot-column'>{profileUser.full_name}</div>
-      </div>
       </div>
       <nav className='profile-nav'>
         <p>POSTS</p>
         <p>SAVED</p>
         <p>TAGGED</p>
       </nav>
-      <ProfileGrid profileUser={profileUser} setUserFollowing={setUserFollowing} setNumberFollowers={setNumberFollowers}/>
+      <ProfileGrid profileUser={profileUser} setUserFollowing={setUserFollowing} setNumberFollowers={setNumberFollowers} />
     </div>
   )
 }

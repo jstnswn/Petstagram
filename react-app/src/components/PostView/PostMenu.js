@@ -52,7 +52,7 @@ export default function PostMenu({ closeMenu, closePostView, post, setShowPostMe
       {userFollowing.includes(post.user.id) &&
         <div className='red' onClick={unfollowClick}>Unfollow</div>
       }
-      <div>Share to...</div>
+      {/* <div>Share to...</div> */}
       <div onClick={closeMenu}>Cancel</div>
 
       {showEditMenu && (
