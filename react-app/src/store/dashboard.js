@@ -73,7 +73,9 @@ export const postLikeActionCreator = (user, postId) => { // Post like action cre
   };
 };
 
-const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
+  console.log('inside action creator', userId, postId)
+
   return {
     type: DELETE_LIKE,
     userId, postId
@@ -166,21 +168,24 @@ export const createCommentDashboard = (payload) => async dispatch => {
 
   if (res.ok) {
       const data = await res.json();
-      console.log('data: ', data)
 
-      const res2 = await fetch('/api/notifications/comments/', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          user_to_id: payload.user_to_id,
-          comment_id: data.comment.id,
-          post_id: payload.post_id,
+      if (payload.user_id !== payload.user_to_id) {
+
+        const res = await fetch('/api/notifications/comments/', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            user_to_id: payload.user_to_id,
+            comment_id: data.comment.id,
+            post_id: payload.post_id,
+          })
         })
-      })
 
-      if (!res2.ok) console.log('500: Failed to create notification')
+        if (!res.ok) console.log('500: Failed to create notification')
+      }
+
 
       dispatch(addComment(data));
       return data;
@@ -367,16 +372,12 @@ export default function reducer(state = initialState, action) {
     case DELETE_COMMENT:
       stateCopy = {...state}
       const commentsObj = stateCopy.feed.postIds[action.data.postId].comments
-      console.log(commentsObj, "comment in update action")
       delete commentsObj[action.data.commentId]
       return stateCopy
 
     case UPDATE_COMMENT:
       stateCopy = {...state}
-      console.log(stateCopy.feed.postIds[action.data.postId], "HELLO")
       const comment = stateCopy.feed.postIds[action.data.postId].comments[action.data.commentId]
-      console.log("this is comment", comment)
-
       comment.comment = action.data.updatedComment
       return stateCopy;
 

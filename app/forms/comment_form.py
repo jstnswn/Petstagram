@@ -9,5 +9,5 @@ from app.models import Comment
 class CommentForm(FlaskForm):
     #userId = IntegerField('userId')
     #postId = IntegerField('postId')
-    comment = TextAreaField('comment', validators=[DataRequired()])
+    comment = TextAreaField('comment', validators=[DataRequired('Please provide a comment.')])
     #createdAt = DateField('createdAt')

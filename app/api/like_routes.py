@@ -19,8 +19,9 @@ def create_like():
     post.likers.append(user)
 
     # Create notification for like
-    notification = LikeNotification(user_from_id=user_id, user_to_id=post.user.id, post_id=post.id)
-    db.session.add(notification)
+    if user_id != post.user.id:
+        notification = LikeNotification(user_from_id=user_id, user_to_id=post.user.id, post_id=post.id)
+        db.session.add(notification)
 
     db.session.commit()
     return {'user': user.f_to_dict()}, 200

@@ -125,18 +125,11 @@ export const patchPost = (payload) => async dispatch => {
   });
 
   if (res.ok) {
+    dispatch(updatePost(postId, caption));
+  } else {
     const data = await res.json();
-
-    // await Promise.all([
-      //   dispatch(removePost(postId)),
-      //   dispatch(loadPost(data))
-      // ])
-
-      dispatch(updatePost(postId, caption));
-    } else {
-      const errors = await res.json();
-      return errors.errors;
-    }
+    return data.errors;
+  }
 
 };
 
@@ -157,21 +150,22 @@ export const patchPost = (payload) => async dispatch => {
 
     if (res.ok) {
         const data = await res.json();
-        console.log('data in the thunk', data)
 
-      const res2 = await fetch('/api/notifications/comments/', {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          user_to_id: payload.user_to_id,
-          comment_id: data.comment.id,
-          post_id: payload.post_id,
-        })
-      })
+        if (payload.user_id !== payload.user_to_id) {
+          const res = await fetch('/api/notifications/comments/', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              user_to_id: payload.user_to_id,
+              comment_id: data.comment.id,
+              post_id: payload.post_id,
+            })
+          })
 
-      if (!res2.ok) console.log('500: Failed to create notification')
+          if (!res.ok) console.log('500: Failed to create notification')
+        }
 
         dispatch(addComment(data));
         return data;
@@ -321,7 +315,6 @@ export default function reducer(state = initialState, action) {
     case UPDATE_POST:
       stateCopy = {...state};
       post = stateCopy.posts.postIds[action.postId]
-      // order = stateCopy.posts.order
       post.caption = action.caption
 
       return stateCopy;
@@ -350,7 +343,6 @@ export default function reducer(state = initialState, action) {
 
     case UPDATE_COMMENT:
       stateCopy = {...state}
-      console.log("end of reducer")
       const comment = stateCopy.posts.postIds[action.data.postId].comments[action.data.commentId]
       comment.comment = action.data.updatedComment
       return stateCopy;
@@ -363,8 +355,6 @@ export default function reducer(state = initialState, action) {
     case PROFILE_DELETE_LIKE:
       stateCopy = {...state}
       const likers = stateCopy.posts.postIds[action.postId].likers
-      console.log('likers',likers)
-      console.log(action.userId)
       const newLikers = likers.filter(user => user.id !== parseInt(action.userId))
       stateCopy.posts.postIds[action.postId].likers = newLikers
       return stateCopy

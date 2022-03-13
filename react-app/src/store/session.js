@@ -5,6 +5,7 @@ const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
 const UNFOLLOW = 'follow/UNFOLLOW'
 const FOLLOW = 'follow/follow'
+const SET_PROFILE_IMAGE = 'session/SET_PROFILE_IMAGE';
 
 const REMOVE_NOTIFICATIONS = 'session/REMOVE_NOTIFICATIONS'
 
@@ -47,6 +48,15 @@ const initialState = {
   }
 };
 
+const setProfileImage = (imageUrl) => {
+  return {
+    type: SET_PROFILE_IMAGE,
+    imageUrl
+  }
+}
+
+
+
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
     headers: {
@@ -63,17 +73,16 @@ export const authenticate = () => async (dispatch) => {
   }
 }
 
-export const login = (email, username, password) => async (dispatch) => {
-  console.log('email:', email)
-  console.log('username:', username)
+export const login = (credentials, password) => async (dispatch) => {
+  // console.log('email:', email)
+  // console.log('username:', username)
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      email,
-      username,
+      credentials,
       password
     })
   });
@@ -91,7 +100,6 @@ export const login = (email, username, password) => async (dispatch) => {
   } else {
     return ['An error occurred. Please try again.']
   }
-
 }
 
 export const logout = () => async (dispatch) => {
@@ -136,8 +144,7 @@ export const signUp = (username, email, password, full_name) => async (dispatch)
 }
 
 // Helper Functions
-export const deleteNotifications = (payload) => async dispatch => {
-  const { likes, comments, follows } = payload;
+export const deleteNotifications = () => async dispatch => {
 
   const res = await fetch('/api/notifications/all/', {
     method: 'DELETE',
@@ -152,6 +159,26 @@ export const deleteNotifications = (payload) => async dispatch => {
 };
 
 
+export const updateProfileImage = (image) => async dispatch => {
+  const formData = new FormData();
+  formData.append('image', image);
+
+  const res = await fetch('api/users/profile_image', {
+    method: 'PATCH',
+    body: formData
+  })
+
+  if (res.ok) {
+    const data = await res.json();
+    const imageUrl = data.url;
+    dispatch(setProfileImage(imageUrl));
+      return {imageUrl};
+  } else {
+    const data = await res.json();
+    return data.errors;
+  }
+
+};
 
 export default function reducer(state = initialState, action) {
   let stateCopy
@@ -178,6 +205,9 @@ export default function reducer(state = initialState, action) {
     case REMOVE_NOTIFICATIONS:
       stateCopy = {...state}
       stateCopy.user.notifications = null;
+    case SET_PROFILE_IMAGE:
+      stateCopy = {...state};
+      stateCopy.user.image_url = action.imageUrl;
       return stateCopy;
 
     default:

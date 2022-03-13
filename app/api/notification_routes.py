@@ -33,23 +33,23 @@ def delete_like_notification(notification_id):
 
     return {'message': 'Like notification deleted'}
 
-@notifiction_routes.route('/comments/<int:notification_id>', methods=['DELETE'])
-def delete_comment_notification(notification_id):
-    notification = CommentNotification.query.get(notification_id)
+# @notifiction_routes.route('/comments/<int:notification_id>', methods=['DELETE'])
+# def delete_comment_notification(notification_id):
+#     notification = CommentNotification.query.get(notification_id)
 
-    db.session.delete(notification)
-    db.session.commit()
+#     db.session.delete(notification)
+#     db.session.commit()
 
-    return {'message': 'Comment notification deleted'}
+#     return {'message': 'Comment notification deleted'}
 
-@notifiction_routes.route('/follows/<int:notification_id>', methods=['DELETE'])
-def delete_follow_notification(notification_id):
-    notification = FollowNotification.query.get(notification_id)
+# @notifiction_routes.route('/follows/<int:notification_id>', methods=['DELETE'])
+# def delete_follow_notification(notification_id):
+#     notification = FollowNotification.query.get(notification_id)
 
-    db.session.delete(notification)
-    db.session.commit()
+#     db.session.delete(notification)
+#     db.session.commit()
 
-    return {'message': 'Follow notification deleted'}
+#     return {'message': 'Follow notification deleted'}
 
 @notifiction_routes.route('/all/', methods=['DELETE'])
 def delete_all_user_notifications():

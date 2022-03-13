@@ -18,10 +18,10 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     // if (password === repeatPassword) {
-      console.log(fullName)
       const data = await dispatch(signUp(username, email, password, fullName));
       if (data) {
         setErrors(data)
+        console.log(data)
       }
     // }
   };
@@ -102,6 +102,10 @@ const SignUpForm = () => {
     }
 
   }
+  const formatError = error => {
+    const startIndex = error.indexOf(':') + 1
+    return error.slice(startIndex)
+  }
 
   return (
     <div id='signup-form-page'>
@@ -109,9 +113,9 @@ const SignUpForm = () => {
         <img className='title' src={petstagram} alt='Petstagram Title'></img>
         <div className='signup-form-heading'>Sign up to see photos and videos from your friends.</div>
         <form onSubmit={onSignUp}>
-          <div>
+          <div className='error-handling'>
             {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+              <div key={ind}>{formatError(error)}</div>
             ))}
           </div>
           <div className='field-container'>
@@ -122,8 +126,8 @@ const SignUpForm = () => {
               type='text'
               name='email'
               onChange={updateEmail}
-              required='required'
               value={email}
+              required
             ></input>
           </div>
           <div className='field-container'>
@@ -134,8 +138,8 @@ const SignUpForm = () => {
               type='text'
               name='fullName'
               onChange={updateFullName}
-              required='required'
               value={fullName}
+              required
             ></input>
           </div>
           <div className='field-container'>
@@ -146,8 +150,8 @@ const SignUpForm = () => {
               type='text'
               name='username'
               onChange={updateUsername}
-              required='required'
               value={username}
+              required
             ></input>
           </div>
           <div className='field-container'>
@@ -158,8 +162,8 @@ const SignUpForm = () => {
               type='password'
               name='password'
               onChange={updatePassword}
-              required='required'
               value={password}
+              required
             ></input>
           </div>
           {/* <div>
@@ -172,7 +176,10 @@ const SignUpForm = () => {
               required={true}
             ></input>
           </div> */}
-          <button id='signup-btn' type='submit'>Sign Up</button>
+          {username && fullName && email && password ? (
+              <button id='signup-clickable'>Sign Up</button>) : (
+                <button id='signup-unclickable' disabled>Sign Up</button>
+              )}
         </form>
         <div className='signup-form-heading' id='signup-form-footing'>By signing up, you agree to view many cute photos of pets.</div>
       </div>

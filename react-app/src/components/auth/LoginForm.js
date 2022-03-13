@@ -10,40 +10,45 @@ import './LoginForm.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  const [emailOrUsername, setEmailOrUsername] = useState('');
+  // const [emailOrUsername, setEmailOrUsername] = useState('');
+  const [credentials, setCredentials] = useState('')
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    if (emailOrUsername.includes('@')) {
-      let email = emailOrUsername
-      let username = ''
-      const data = await dispatch(login(email, username, password));
-      if (data) {
-        setErrors(data);
-      }
-    } else {
-      let email = ''
-      let username = emailOrUsername
-      const data = await dispatch(login(email, username, password))
-      if (data) {
-        setErrors(data);
-      }
+    const data = await dispatch(login(credentials, password))
+    if (data) {
+      setErrors(data)
     }
+    // if (credentials.includes('@')) {
+    //   let email = emailOrUsername
+    //   let username = ''
+    //   const data = await dispatch(login(email, username, password));
+    //   if (data) {
+    //     setErrors(data);
+    //   }
+    // } else {
+    //   let email = ''
+    //   let username = credentials
+    //   const data = await dispatch(login(email, username, password))
+    //   if (data) {
+    //     setErrors(data);
+    //   }
+    // }
   };
 
   const demoLogin = (e) => {
     e.preventDefault();
-    let email = 'Mango@Voisin.com'
-    let username = 'Mango'
+    let credentials = 'Mango@Voisin.com'
+    // let username = 'Mango'
     let password = 'password'
-    dispatch(login(email, username, password))
+    dispatch(login(credentials, password))
   }
 
-  const updateEmailOrUsername = (e) => {
-    setEmailOrUsername(e.target.value);
+  const updateCredentials = (e) => {
+    setCredentials(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -57,7 +62,7 @@ const LoginForm = () => {
     const passwordField = document.querySelector('.password')
     const passwordPlaceholder = document.querySelector('#password-placeholder')
 
-    if (emailOrUsername === '') {
+    if (credentials === '') {
       emailPlaceholder.style.opacity = 0
       emailField.style.padding = '0px 10px'
     } else {
@@ -72,18 +77,26 @@ const LoginForm = () => {
       passwordPlaceholder.style.opacity = 1
       passwordField.style.padding = '14px 0 2px 8px'
     }
-  }, [emailOrUsername, password])
+  }, [credentials, password])
 
   if (user) {
     return <Redirect to='/' />;
   }
-  const button = document.querySelector('#login-btn')
-  if (button) {
-    if (emailOrUsername !== '' && password !== '') {
-      button.style.backgroundColor = '#0095f6'
-    } else {
-      button.style.backgroundColor = 'rgb(160,218,249)'
-    }
+  // const button = document.querySelector('#login-btn')
+  // if (button) {
+  //   if (credentials !== '' && password !== '') {
+  //     button.classList.add('srki')
+  //     button.classList.remove('miki')
+  //   } else {
+  //     button.classList.add('miki')
+  //     button.classList.remove('srki')
+  //     button.required = 'required'
+  //   }
+  // }
+
+  const formatError = error => {
+    const startIndex = error.indexOf(':') + 1
+    return error.slice(startIndex)
   }
 
   return (
@@ -93,21 +106,21 @@ const LoginForm = () => {
           <div className='login-form-container'>
             <img className='title' src={petstagram} alt='Petstagram Title'></img>
             <form onSubmit={onLogin}>
-              <div>
+              <div className='error-handling'>
                 {errors.map((error, ind) => (
-                  <div key={ind}>{error}</div>
+                  <div key={ind}>{formatError(error)}</div>
                 ))}
               </div>
               <div className='field-container'>
                 <span id='email-placeholder'>Username or Email</span>
                 <input
                   className='login-form-field email'
-                  name='emailOrUsername'
+                  name='credentials'
                   type='text'
                   placeholder='Username or Email'
-                  value={emailOrUsername}
-                  required='required'
-                  onChange={updateEmailOrUsername}
+                  value={credentials}
+                  onChange={updateCredentials}
+                  required
                 />
               </div>
               <div className='field-container'>
@@ -118,11 +131,15 @@ const LoginForm = () => {
                   type='password'
                   placeholder='Password'
                   value={password}
-                  required='required'
                   onChange={updatePassword}
+                  required
                 />
-                <button id='login-btn' type='submit'>Log In</button>
               </div>
+              {credentials && password ? (
+              <button id='login-clickable'>Log In</button>) : (
+                <button id='login-unclickable' disabled>Log In</button>
+              )}
+
             </form>
             <button id='demo-login' onClick={demoLogin}>Demo User</button>
           </div>

@@ -35,3 +35,8 @@ a {
 button:hover {
     cursor: pointer;
 }
+
+.error-handling {
+    color: rgb(237,73,86);
+    font-size: 14px;
+}

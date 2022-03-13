@@ -8,13 +8,13 @@ import './PostView.css';
 
 import SideContainer from './SideContainer';
 
-export default function PostView({ post, option, closePostView, profileUser}) {
+export default function PostView({ post, option, closePostView, profileUser, setUserFollowing, setNumberFollowers}) {
   const [showMenu, setShowMenu] = useState(false);
   const [showUnfollowModal, setShowUnfollowModal] = useState(false)
   let headerInfo;
   if (option === 'feed') {
     headerInfo = (
-      <p>{post.user.username}<span>Following</span></p>
+      <p>{post.user.username}</p>
     )
   } else {
     headerInfo = (
@@ -71,8 +71,14 @@ export default function PostView({ post, option, closePostView, profileUser}) {
         </Modal>
       )}
       {showUnfollowModal &&
-        <Modal>
-          <Unfollow user={post.user} setShowUnfollowModal={setShowUnfollowModal} option='profile'/>
+        <Modal onClose={() => setShowUnfollowModal(false)}>
+          <Unfollow
+            user={post.user}
+            setShowUnfollowModal={setShowUnfollowModal}
+            setUserFollowing={setUserFollowing}
+            option='profile-direct'
+            setNumberFollowers={setNumberFollowers}
+          />
         </Modal>
       }
     </div>

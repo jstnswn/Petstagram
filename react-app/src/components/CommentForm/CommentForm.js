@@ -9,6 +9,7 @@ function CommentForm({ option, post, profileUser}) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector(state => state.session.user);
+    const dashboardPosts = useSelector(({ dashboard }) => dashboard.feed.postIds)
 
     const [comment, setComment] = useState("");
     // const [errors, setErrors] = useState([]);
@@ -27,15 +28,20 @@ function CommentForm({ option, post, profileUser}) {
 
         if(option === 'profile' && profileUser.username === currentUser.username){
             const newComment = await dispatch(createCommentProfile(payload))
+            if (newComment && dashboardPosts[postId]){
+                dispatch(addComment(newComment))
+            }
+            console.log(dashboardPosts[postId], 'this is dashboard postid')
         }else if(option === 'feed'){
-            const newComment = await dispatch(createCommentDashboard(payload))
+            dispatch(createCommentDashboard(payload))
         }else{
             const newComment = await dispatch(createCommentProfile(payload))
-            if(newComment){
-                const updatingDash = await dispatch(addComment(newComment))
+            if (newComment && dashboardPosts[postId]){
+                dispatch(addComment(newComment))
+                // post.id[dashboardPosts]
             }
         }
-
+        setComment('')
     }
 
     return (
@@ -45,15 +51,20 @@ function CommentForm({ option, post, profileUser}) {
             <form onSubmit={handleSubmit}>
                 <div className="comment-form-container">
                     <textarea
+                        name="comment"
                         id={post.id}
                         className="comment-form-textarea"
                         cols="74"
                         placeholder="Add a comment..."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
+                        required
                     >
                     </textarea>
-                    <button className="comment-button" type="submit">Post</button>
+                    {comment ? (
+                    <button className="comment-button" type="submit">Post</button>) : (
+                        <button id="unclickable-post-comment-button" disabled>Post</button>
+                    )}
                 </div>
             </form>
         </div>

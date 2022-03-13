@@ -7,20 +7,20 @@ export default function Notifications() {
   // const likes = useSelector(({ session }) => session.user.notifications.likes)
 
   const notifications = useSelector(({ session }) => session.user.notifications)
-  const likes = notifications?.likes
-  const comments = notifications?.comments
-  const follows = notifications?.follows
+  // const likes = notifications?.likes
+  // const comments = notifications?.comments
+  // const follows = notifications?.follows
 
   const clearNotifications = () => {
     if (!notifications) return;
 
-    const payload = {
-      likes,
-      comments,
-      follows
-    }
+    // const payload = {
+    //   likes,
+    //   comments,
+    //   follows
+    // }
 
-    dispatch(deleteNotifications(payload))
+    dispatch(deleteNotifications())
   };
 
 
@@ -29,7 +29,7 @@ export default function Notifications() {
       <i
         className='far fa-heart like-icon'
         style={{
-          color: likes?.length ? 'red' : 'black'
+          color: notifications?.length ? 'red' : 'black'
         }}
         onClick={clearNotifications}
       ></i>

@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import current_user
 from app.models import Comment, db, CommentNotification, Post
 from app.forms.comment_form import CommentForm
+from app.api.auth_routes import validation_errors_to_error_messages
 
 from datetime import datetime
 
@@ -29,13 +30,13 @@ def create_comment():
             created_at = now,
         )
 
-    db.session.add(comment)
-    db.session.commit()
+        db.session.add(comment)
+        db.session.commit()
 
-    comment_object = comment.to_dict()
-    print(comment_object, '-----------------------this is comment obj')
-    return {"comment": comment.to_dict()}
-
+        comment_object = comment.to_dict()
+        print(comment_object, '-----------------------this is comment obj')
+        return {"comment": comment.to_dict()}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 
