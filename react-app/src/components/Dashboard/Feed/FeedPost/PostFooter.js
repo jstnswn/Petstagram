@@ -67,7 +67,7 @@ export default function PostFooter({ post, option}) {
 
   return (
     <div className='post-footer'>
-      <div>{post.id}</div>
+      {/* <div>{post.id}</div> */}
         <div className='footer-icons'>
         <span>
           {isLiked ?
