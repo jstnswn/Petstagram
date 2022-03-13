@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 
 import { postLike, deleteLike } from '../../../../store/dashboard';
 import { Modal } from '../../../../context/Modal';
@@ -94,7 +95,13 @@ export default function PostFooter({ post, option}) {
       {likesCount > 0 ? <div className='footer-likes'>{likesCountRender}</div> : null}
       {/* <div className='footer-likes'>{likesCountRender}</div> */}
       <div className='comment-container'>
-        <p className='caption'><span className='caption-username'>{post.user.username}</span>{post.caption}</p>
+        <p className='caption'>
+          <span className='caption-username'>
+            <NavLink to={`/${post.user.username}`} id='dashboard-caption-username'>
+              {post.user.username}
+            </ NavLink>
+          </span>{post.caption}
+        </p>
         <ViewComments post={post}/>
       </div>
       <div className='add-comment-container'>
