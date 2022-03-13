@@ -57,3 +57,4 @@ def update_profile_image():
     db.session.commit()
 
     return {'url': url}, 200
+

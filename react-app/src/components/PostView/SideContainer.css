@@ -35,9 +35,9 @@
 
 .post-view-comments ul{
     overflow:scroll;
+/*     min-height: 500px; */
     height:525px;
     padding-left:15px;
-
 }
 
 .post-view-comments ul::-webkit-scrollbar {

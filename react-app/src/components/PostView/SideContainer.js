@@ -148,8 +148,8 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                 </>
                     : null}
             </ul>
-
-
+            
+//             <div>{post.id}</div>
 
             <div className="footer-icons">
                 <span>

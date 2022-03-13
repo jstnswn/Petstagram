@@ -1,14 +1,108 @@
 #dashboard-container {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
+    margin-top: 60px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
     background-color: var(--main-background-color);
-
+    position: relative;
 }
 
 .feed-container {
     width: 614px;
     display: flex;
+}
+
+.dashboard-sidebar-container {
+    position: relative;
+    width: 294px;
+}
+
+.dashboard-sidebar-inner {
+    width: 294px;
+
+    position: fixed;
+    margin-top: 30px;
+
+    padding-left: 37px;
+}
+
+.side-profile-container {
+    height: 56px;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.suggestion-item-container {
+    height: 48px;
+    width: 100%;
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    /* justify-content: flex-end; */
+}
+
+.side-profile-avatar {
+    height: 56px;
+    width: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.suggestion-avatar {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.suggestion-item-container a,
+.suggestion-item-container p {
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+.suggestion-item-container a {
+    color: black;
+}
+
+.suggestion-follow-button {
+    /* justify-self: flex-end; */
+    cursor: pointer;
+    margin-left: auto;
+    padding-right: 10px;
+    color: var(--button-blue)
+}
+
+.suggestion-follow-button.followed {
+    color: rgb(22, 22, 22);
+}
+
+.suggestion-header {
+    margin-bottom: 5px;
+    color: #8E8E8E;
+    font-size: 14px;
+}
+
+.side-user-info {
+    padding-left: 18px;
+}
+
+.side-user-info p {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+}
+
+.side-user-info a {
+    color: black;
+}
+
+.side-user-info .full-name {
+    color: #8E8E8E;
 }

@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     max-width: 975px;
+    margin-top: 60px;
 }
 
 .profile-header {
@@ -102,7 +103,7 @@
     border-radius: 50%;
     /* margin-right:200px; */
     object-fit: cover;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .profile-username {
