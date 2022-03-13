@@ -4,7 +4,7 @@ import { unfollow } from "../../store/dashboard";
 import './Unfollow.css'
 
 
-export default function Unfollow({ user, setShowUnfollowModal, option, setUserFollowing, setNumberFollowers }) {
+export default function Unfollow({ user, setShowUnfollowModal, option, setUserFollowing, setNumberFollowers, sessionUser, profileUser, setNumberFollowing }) {
     const dispatch = useDispatch();
     // const user = post.user
 
@@ -15,6 +15,12 @@ export default function Unfollow({ user, setShowUnfollowModal, option, setUserFo
         if (option === 'profile-direct') {
             setUserFollowing(prev => prev.filter(followId => followId !== user.id))
             setNumberFollowers(prev => --prev)
+        }
+        if (option === 'profile') {
+            setUserFollowing(prev => prev.filter(followId => followId !== user.id))
+            if (sessionUser.id === profileUser.id) {
+                setNumberFollowing(prev => --prev)
+            }
         }
     }
 
