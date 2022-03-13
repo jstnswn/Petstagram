@@ -82,7 +82,6 @@ export const login = (credentials, password) => async (dispatch) => {
   } else {
     return ['An error occurred. Please try again.']
   }
-
 }
 
 export const logout = () => async (dispatch) => {
