@@ -30,7 +30,6 @@ function CommentForm({ option, post, profileUser}) {
             if (newComment && dashboardPosts[postId]){
                 dispatch(addComment(newComment))
             }
-            console.log(dashboardPosts[postId], 'this is dashboard postid')
         }else if(option === 'feed'){
             dispatch(createCommentDashboard(payload))
         }else{

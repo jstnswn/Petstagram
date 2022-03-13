@@ -27,6 +27,8 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
 
     //created at logic
     const timePassed = (milliseconds) => {
+        console.log(milliseconds, 'this is milliseconds')
+        console.log(new Date().toLocaleString(), 'this is date')
 
         const second = 1000
         const minute = 60 * second
@@ -39,7 +41,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
 
         if (pastSecond <= 60 && pastMinute === 0 && pastHour === 0 && pastDay === 0) return `< 1m`;
         if (pastMinute <= 60 && pastHour === 0 && pastDay === 0) return `${pastMinute}m`;
-        if (pastHour <= 60 && pastDay === 0) return `${pastHour - 5}h`;
+        if (pastHour <= 60 && pastDay === 0) return `${pastHour-4}h`;
         if (pastDay >= 2 || pastHour > 24) return `${pastDay}d`;
 
     }
@@ -136,7 +138,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                                 <span>{comment.comment}</span>
                             </div>
                             <div className='time-and-menu'>
-                                <div className='time-passed'>{timePassed(Date.parse(new Date().toString()) - Date.parse(comment?.created_at))}</div>
+                                <div className='time-passed'>{timePassed(Date.parse(new Date().toLocaleString()) - Date.parse(comment?.created_at))}</div>
                                 {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id} /> : <i id='ghost' className='far fa-ellipsis-h post-view' />}
 
                             </div>
