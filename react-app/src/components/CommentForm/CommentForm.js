@@ -26,14 +26,18 @@ function CommentForm({ option, post, profileUser}) {
         }
 
         if(option === 'profile' && profileUser.username === currentUser.username){
-            dispatch(createCommentProfile(payload))
+            const newComment = await dispatch(createCommentProfile(payload))
+            if (newComment && dashboardPosts[postId]){
+                dispatch(addComment(newComment))
+            }
+            console.log(dashboardPosts[postId], 'this is dashboard postid')
         }else if(option === 'feed'){
             dispatch(createCommentDashboard(payload))
         }else{
             const newComment = await dispatch(createCommentProfile(payload))
-
-            if (newComment && post.id[dashboardPosts]){
+            if (newComment && dashboardPosts[postId]){
                 dispatch(addComment(newComment))
+                // post.id[dashboardPosts]
             }
         }
         setComment('')

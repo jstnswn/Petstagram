@@ -15,29 +15,34 @@ export default function EditComment({ option, hideForm, post, commentId, comment
   const [caption, setCaption] = useState('');
 
   const handleClick = async (e) => {
+
+    const postId = post.id;
+
     const payload = {
       comment_id: commentId,
       updated_comment: prevComment,
       post_id: post.id
     }
 
-    if(option === 'profile' && profileUser.username === sessionUser.username){
+    if (option === 'profile' && profileUser.username === sessionUser.username) {
       let updatedComment = dispatch(editCommentProfile(payload))
-      if(updatedComment){
+      if (updatedComment && dashboardPosts[postId]) {
+        dispatch(editCommentDashboard(payload))
         hideForm();
       }
+      hideForm();
 
-    }else if(option==='feed'){
+    } else if (option === 'feed') {
       let updatedComment = dispatch(editCommentDashboard(payload))
       if (updatedComment) {
         hideForm();
       }
 
-    }else if (option === 'profile'){
+    } else if (option === 'profile') {
       let updatedComment = dispatch(editCommentProfile(payload))
-      if (updatedComment && post.id[dashboardPosts]) {
+      if (updatedComment && dashboardPosts[postId]) {
         const actionCreatorPayload = {
-          commentId : commentId,
+          commentId: commentId,
           postId: post.id,
           updatedComment: prevComment,
         }
