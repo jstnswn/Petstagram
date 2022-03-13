@@ -29,7 +29,7 @@ export default function PostHeader({ post }) {
           <img className='feed-profile-pic' alt='profile avatar' src={post.user.image_url}/>
           <p className='post-username'>{post.user.username}</p>
         </Link>
-        {!userFollowing.includes(post.user.id) &&
+        {!userFollowing.includes(post.user.id) && post.user.id !== user.id &&
           <div id='post-header-follow'onClick={handleFollow}>Follow</div>
         }
       </div>
