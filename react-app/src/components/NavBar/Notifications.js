@@ -13,11 +13,6 @@ export default function Notifications() {
   const [follows, setFollows] = useState(notifications ? notifications.follows : []);
   const [showDrowdown, setShowDropdown] = useState(false);
 
-  console.log('hiii')
-
-  // const likes = notifications?.likes
-  // const comments = notifications?.comments
-  // const follows = notifications?.follows
   const hasNotifications = () => {
     return (
       likes.length > 0 ||
