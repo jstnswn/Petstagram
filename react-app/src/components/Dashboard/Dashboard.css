@@ -1,14 +1,34 @@
 #dashboard-container {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
     background-color: var(--main-background-color);
+    position: relative;
 
+    /* margin-right: 293px; */
 }
 
 .feed-container {
     width: 614px;
     display: flex;
+}
+
+.dashboard-sidebar-container {
+    position: fixed;
+    width: 293px;
+
+    margin-top: 30px;
+    border: red 1px solid;
+    right: 50%;
+    left: 50%;
+    margin-left: 307px;
+}
+
+.side-profile-container {
+    height: 56px;
+    border: rgb(89, 0, 255) 1px solid;
+
 }
