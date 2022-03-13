@@ -39,13 +39,7 @@ export const removeNotifications = () => {
 }
 
 const initialState = {
-  user: {
-    notifications: {
-      likes: [],
-      comments: [],
-      follows: []
-    }
-  }
+  user: null
 };
 
 const setProfileImage = (imageUrl) => {

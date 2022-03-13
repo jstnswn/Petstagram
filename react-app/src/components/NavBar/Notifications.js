@@ -8,9 +8,9 @@ export default function Notifications() {
   const dispatch = useDispatch()
   // const likes = useSelector(({ session }) => session.user.notifications.likes)
   const notifications = useSelector(({ session }) => session.user.notifications);
-  const [likes, setLikes] = useState(notifications?.likes);
-  const [comments, setComments] = useState(notifications?.comments);
-  const [follows, setFollows] = useState(notifications?.follows);
+  const [likes, setLikes] = useState(notifications ? notifications.likes : []);
+  const [comments, setComments] = useState(notifications ? notifications.comments : []);
+  const [follows, setFollows] = useState(notifications ? notifications.follows : []);
   const [showDrowdown, setShowDropdown] = useState(false);
 
   console.log('hiii')
