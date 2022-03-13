@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { Modal } from '../../../context/Modal';
 import { follow, unfollow } from '../../../store/dashboard';
 import Unollow from './Unollow';
@@ -34,12 +35,13 @@ export default function FollowSuggestion({ user, setSuggestions }) {
     }
   };
 
-
   return (
     <>
       <div className='suggestion-item-container'>
-        <img className='suggestion-avatar' alt='profile avatar' src={user.image_url}/>
-        <p>{user.username}</p>
+        <Link to={`/${user.username}`}>
+          <img className='suggestion-avatar' alt='profile avatar' src={user.image_url} />
+        </Link>
+        <Link to={`/${user.username}`}>{user.username}</Link>
         <p
           className={`suggestion-follow-button ${followed ? 'followed' : ''}`}
           onClick={!followed ? toggleFollow : openMenu}

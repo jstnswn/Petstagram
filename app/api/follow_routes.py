@@ -43,6 +43,6 @@ def get_follow_suggestions():
     c_following = c_user.following
     following_ids = [user.id for user in c_following]
 
-    users = User.query.filter(User.id.not_in(following_ids)).limit(5).all()
+    users = User.query.filter(User.id.not_in(following_ids), User.id!=current_user_id).limit(5).all()
 
     return {'suggestions': [user.f_to_dict() for user in users]}, 200
