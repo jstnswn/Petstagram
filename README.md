@@ -112,6 +112,7 @@ Once logged in, the dashboard presents the user with a feed of posts shared by t
 - When you click on the comment bubble or 'View all comments' it opens the postView modal where you can see all comments
 - Here you can also leave a comment or like a post.
 -
+
 <img src='react-app/public/read-me-imgs/dashboard-postview-modal.png'></img>
 ## Images
 

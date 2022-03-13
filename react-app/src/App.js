@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     (async() => {
-      if (user) {
+      if (user?.username) {
         await dispatch(getFeedPosts())
         setStoreLoaded(true);
       }
