@@ -29,6 +29,11 @@ export default function Notifications() {
   const showMenu = () => setShowDropdown(true);
   const hideMenu = (e) => {
     if (!e.target.classList.contains('dd')) setShowDropdown(false);
+    if (!notifications) return;
+    setLikes(false);
+    setComments(false);
+    setFollows(false);
+    dispatch(deleteNotifications())
   }
 
   useEffect(() => {
@@ -50,8 +55,8 @@ export default function Notifications() {
       //   follows
       // }
 
-    if (!notifications) return;
-    dispatch(deleteNotifications())
+    // if (!notifications) return;
+    // dispatch(deleteNotifications())
   };
 
 

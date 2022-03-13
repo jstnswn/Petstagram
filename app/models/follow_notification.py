@@ -9,7 +9,7 @@ class FollowNotification(db.Model):
     user_to_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user_from_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    from_user = db.relationship('User', back_populates='follow_notifications', foreign_keys='FollowNotification.user_from_id')
+    from_user = db.relationship('User', back_populates='f_from_notifications', viewonly=True, foreign_keys='FollowNotification.user_from_id')
 
     def to_dict(self):
         return {

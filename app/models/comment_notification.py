@@ -11,7 +11,7 @@ class CommentNotification(db.Model):
     comment_id = db.Column(db.Integer, db.ForeignKey('comments.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
 
-    from_user = db.relationship('User', back_populates='comment_notifications', foreign_keys='CommentNotification.user_from_id')
+    from_user = db.relationship('User', back_populates='c_from_notifications', viewonly=True, foreign_keys='CommentNotification.user_from_id')
     comment = db.relationship('Comment', back_populates='comment_notifications')
     post = db.relationship('Post', back_populates='comment_notifications')
 

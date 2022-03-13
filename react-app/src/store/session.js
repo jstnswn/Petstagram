@@ -205,6 +205,7 @@ export default function reducer(state = initialState, action) {
     case REMOVE_NOTIFICATIONS:
       stateCopy = {...state}
       stateCopy.user.notifications = null;
+      return stateCopy;
     case SET_PROFILE_IMAGE:
       stateCopy = {...state};
       stateCopy.user.image_url = action.imageUrl;

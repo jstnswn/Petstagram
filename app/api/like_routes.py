@@ -43,10 +43,10 @@ def delete_like():
     try:
         notification = LikeNotification.query.filter(
             LikeNotification.user_from_id==user_id, LikeNotification.user_to_id==post.user.id, LikeNotification.post_id==post.id).one()
-    except: print('Notification not found')
 
-    if (notification):
         db.session.delete(notification)
+    except: print(' 🤗Notification not found')
+
 
     db.session.commit()
 

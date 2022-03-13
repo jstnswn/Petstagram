@@ -12,7 +12,7 @@ class LikeNotification(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     # is_checked = db.Column(db.Boolean, default=False)
 
-    from_user = db.relationship('User', back_populates='like_notifications', foreign_keys='LikeNotification.user_from_id')
+    from_user = db.relationship('User', back_populates='l_from_notifications', viewonly=True, foreign_keys='LikeNotification.user_from_id')
     post = db.relationship('Post', back_populates='like_notifications')
 
 

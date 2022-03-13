@@ -40,11 +40,12 @@ def delete_follow():
     try:
         notification = FollowNotification.query.filter(
                         FollowNotification.user_to_id==unfollowed_id, FollowNotification.user_from_id==follower_id).one()
+
+        db.session.delete(notification)
     except:
         print('Notification not found')
 
-    if (notification):
-        db.session.delete(notification)
+    # if (notification):
 
     db.session.commit()
     return { 'userId': unfollowed_id}
