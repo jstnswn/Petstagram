@@ -146,11 +146,8 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                 </>
                     : null}
             </ul>
-
-//             <div>{post.id}</div>
-
             {/* <div className="footer-icons"> */}
-            <div>
+            <div className="footer-icons">
                 <span id='profile-like-button'>
                     {isLiked ?
                         <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>

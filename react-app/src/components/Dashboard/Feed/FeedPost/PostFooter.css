@@ -51,6 +51,13 @@ span i {
     margin-right: 5px;
 }
 
+#dashboard-caption-username:visited {
+    color: black;
+}
+#dashboard-caption-username:hover {
+    text-decoration: underline;
+}
+
 .caption {
     font-size: 14px;
 }
