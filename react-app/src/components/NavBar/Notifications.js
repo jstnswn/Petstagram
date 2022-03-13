@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal } from '../../context/Modal';
 import { deleteNotifications } from '../../store/session'
@@ -13,6 +13,8 @@ export default function Notifications() {
   const [follows, setFollows] = useState(notifications?.follows);
   const [showDrowdown, setShowDropdown] = useState(false);
 
+  console.log('hiii')
+
   // const likes = notifications?.likes
   // const comments = notifications?.comments
   // const follows = notifications?.follows
@@ -21,23 +23,35 @@ export default function Notifications() {
       likes.length > 0 ||
       comments.length > 0 ||
       follows.length > 0
-    )
-  }
+    );
+  };
 
   const showMenu = () => setShowDropdown(true);
-  const hideMenu = () => setShowDropdown(false);
+  const hideMenu = (e) => {
+    if (!e.target.classList.contains('dd')) setShowDropdown(false);
+  }
+
+  useEffect(() => {
+    if (!showDrowdown) return;
+
+    console.log('target')
+    document.addEventListener('click', hideMenu)
+
+    return () => document.removeEventListener('click', hideMenu)
+  })
+
   // console.log('notificatiosn: ', hasNotifications())
 
   const openAndClear = () => {
-    if (!notifications) return;
     showMenu()
     // const payload = {
-    //   likes,
-    //   comments,
-    //   follows
-    // }
+      //   likes,
+      //   comments,
+      //   follows
+      // }
 
-    // dispatch(deleteNotifications())
+    if (!notifications) return;
+    dispatch(deleteNotifications())
   };
 
 
@@ -46,12 +60,12 @@ export default function Notifications() {
       <i
         className='far fa-heart like-icon'
         style={{
-          color: hasNotifications() ? 'red' : 'black'
+          color: notifications?.likes.length || notifications?.follows.length || notifications?.comments.length ? 'red' : 'black'
         }}
         onClick={openAndClear}
       ></i>
 
-        {showDrowdown && <NotificationsDropdown hideMenu={hideMenu} notifications={{ likes, comments, follows }} />}
+        {showDrowdown && <NotificationsDropdown hideMenu={hideMenu} notifications={{ likes, comments, follows }} hasNotifications={hasNotifications}/>}
 
     </div>
   )
