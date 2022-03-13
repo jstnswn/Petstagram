@@ -37,13 +37,13 @@ function ViewComments ({post, option, closeModal}) {
     function moreComments (){
         return (
             <div>
-            <div className="view-more" onClick={() => setShowModal(true)}>more</div>
-            {showModal && (
-                <Modal onClose={() => setShowModal(false) }>
-                    <PostView post={post} option='feed' />
-                </Modal>
-            )}
-        </div>
+                <div className="view-more" onClick={() => setShowModal(true)}>more</div>
+                {showModal && (
+                    <Modal onClose={() => setShowModal(false) }>
+                        <PostView post={post} option='feed' />
+                    </Modal>
+                )}
+            </div>
 
         )
     }

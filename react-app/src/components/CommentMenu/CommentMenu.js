@@ -35,6 +35,7 @@ function CommentMenu({ commentId, hideForm, post, comment, option, profileUser }
                 hideForm();
             }
         } else if (option === 'feed') {
+            console.log('here')
             const deletedComment = await dispatch(removeCommentDashboard(payload))
             if (deletedComment) {
                 hideForm();

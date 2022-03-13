@@ -6,6 +6,7 @@ function CommentMenuModal({ commentId, post, comment, option, profileUser}) {
 
     
     const [showModal, setShowModal] = useState(false);
+    
 
     const hideForm = () => {
         setShowModal(false)
