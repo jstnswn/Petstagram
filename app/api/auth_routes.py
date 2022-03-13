@@ -63,12 +63,15 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    default_img_url = 'https://ig-clone-bucket.s3.us-east-2.amazonaws.com/seeds/profile_avatar.png'
+
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
             full_name=form.data['full_name'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            image_url=default_img_url
         )
         db.session.add(user)
         db.session.commit()
