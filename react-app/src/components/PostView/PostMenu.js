@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deletePost as deletePostProfile } from '../../store/profile';
+import { deletePost as deletePostFeed, removePost as removePostActionDashbaord } from '../../store/dashboard';
 import './PostMenu.css';
 import '../Dashboard/Feed/FeedPost/PostFooter.css'
 import { Modal } from '../../context/Modal';
 import PostEditForm from './PostEditForm';
 
-export default function PostMenu({ closeMenu, closePostView, post, setShowPostMenuModal, setShowUnfollowModal, option }) {
+export default function PostMenu({ setPosts, closeMenu, closePostView, post, setShowPostMenuModal, setShowUnfollowModal, option }) {
   const [showEditMenu, setShowEditMenu] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(({ session }) => session.user)
+  const feedPosts = useSelector(({ dashboard }) => dashboard.feed.postIds);
 
   const userFollowing = user.following.map(user => user.id)
+
 
   const openEdit = () => setShowEditMenu(true);
   const closeEdit = () => setShowEditMenu(false);
@@ -25,19 +28,23 @@ export default function PostMenu({ closeMenu, closePostView, post, setShowPostMe
   };
 
   const removePost = async () => {
+
     if (option === 'profile') {
       await dispatch(deletePostProfile(post.id));
+      if (feedPosts[post.id]) await dispatch(removePostActionDashbaord(post.id))
+      closePostView();
 
     } else {
-      // await dispatch(deletePostFeed(post.id));
+      setPosts(prev => prev.slice(1))
+      await dispatch(deletePostFeed(post.id))
+      closeMenu()
     }
-    closePostView();
   }
 
-  const openEditMenu = () => {
-    // closePostView()
-    openEdit();
-  }
+  // const openEditMenu = () => {
+  //   // closePostView()
+  //   openEdit();
+  // }
 
   // TODO dispatch route to remove from feed
 
@@ -46,7 +53,7 @@ export default function PostMenu({ closeMenu, closePostView, post, setShowPostMe
       {user.id === post.user.id && (
         <>
           <div style={{ color: 'red' }} onClick={removePost}>Delete</div>
-          <div onClick={openEditMenu}>Edit</div>
+          <div onClick={openEdit}>Edit</div>
         </>
       )}
       {userFollowing.includes(post.user.id) &&
