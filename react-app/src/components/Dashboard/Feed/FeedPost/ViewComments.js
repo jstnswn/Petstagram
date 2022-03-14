@@ -1,22 +1,16 @@
 
-import './ViewComments.css'
-// import {useSelector} from 'react-redux';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import PostView from '../../../PostView';
-// import PostMenu from '../../../PostView/PostMenu';
 import { Modal } from '../../../../context/Modal';
+import './ViewComments.css'
 
 
 function ViewComments({ post, option, closeModal }) {
-    const [showModal, setShowModal] = useState(false);
     const [viewCommentModal, setViewCommentModal] = useState(false);
 
     const comments = post.comments
     const commentsArr = Object.values(comments)
-
-    console.log(showModal, 'this is showmodel value')
 
     let message;
     if(commentsArr.length > 2){
@@ -24,8 +18,6 @@ function ViewComments({ post, option, closeModal }) {
     }else{
         message = ''
     }
-
-
     return (
         <div className="view-comments-container">
 

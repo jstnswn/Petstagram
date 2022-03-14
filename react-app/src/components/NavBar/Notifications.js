@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal } from '../../context/Modal';
 import { deleteNotifications } from '../../store/session'
 import NotificationsDropdown from './NotificationsDropdown';
 
@@ -34,7 +33,6 @@ export default function Notifications() {
   useEffect(() => {
     if (!showDrowdown) return;
 
-    console.log('target')
     document.addEventListener('click', hideMenu)
 
     return () => document.removeEventListener('click', hideMenu)

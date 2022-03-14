@@ -35,7 +35,6 @@ export default function PostFooter({ post, option}) {
       dispatch(postLike(payload))
     }
 
-    console.log('inside event listener',isLiked)
     const icon = e.target
     if (!isLiked) {
       icon.classList.add('red')

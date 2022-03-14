@@ -80,7 +80,6 @@ const profileDeleteLikeActionCreator = (userId, postId) => { // Post like action
 
 // Thunks
 export const getProfilePosts = (userId) => async dispatch => {
-  console.log('profile thunk')
   const res = await fetch(`/api/posts/${userId}`);
 
   if (res.ok) {
@@ -175,14 +174,6 @@ export const patchPost = (payload) => async dispatch => {
         return errors.errors;
       }
    }
-    // const data = await res.json();
-
-  //   dispatch(updatePost(postId, caption));
-  // } else {
-  //   const errors = await res.json();
-  //   return errors.errors;
-  // }
-
 
 export const removeCommentProfile = (payload) => async dispatch => {
   const res = await fetch('/api/comments/', {
@@ -225,8 +216,6 @@ export const deletePost = (postId) => async dispatch => {
   });
 
   if (res.ok) {
-      // const data = await res.json();
-      console.log('Post Deleted');
       dispatch(removePost(postId));
   } else {
     console.log('Internal server error')

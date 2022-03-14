@@ -10,7 +10,6 @@ import './LoginForm.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
-  // const [emailOrUsername, setEmailOrUsername] = useState('');
   const [credentials, setCredentials] = useState('')
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
@@ -66,17 +65,6 @@ const LoginForm = () => {
   if (user) {
     return <Redirect to='/' />;
   }
-  // const button = document.querySelector('#login-btn')
-  // if (button) {
-  //   if (credentials !== '' && password !== '') {
-  //     button.classList.add('srki')
-  //     button.classList.remove('miki')
-  //   } else {
-  //     button.classList.add('miki')
-  //     button.classList.remove('srki')
-  //     button.required = 'required'
-  //   }
-  // }
 
   const formatError = error => {
     const startIndex = error.indexOf(':') + 1
