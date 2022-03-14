@@ -18,8 +18,7 @@ def create_like():
 
     post.likers.append(user)
 
-    # Create notification for like
-    if user_id != post.user.id:
+    if int(user_id) != post.user.id:
         notification = LikeNotification(user_from_id=user_id, user_to_id=post.user.id, post_id=post.id)
         db.session.add(notification)
 
@@ -45,7 +44,7 @@ def delete_like():
             LikeNotification.user_from_id==user_id, LikeNotification.user_to_id==post.user.id, LikeNotification.post_id==post.id).one()
 
         db.session.delete(notification)
-    except: print(' 🤗Notification not found')
+    except: print('Notification not found')
 
 
     db.session.commit()

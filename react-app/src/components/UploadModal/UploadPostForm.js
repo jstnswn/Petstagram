@@ -18,7 +18,6 @@ export default function UploadPostForm({ closeModal }) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [fileError, setFileError] = useState(false);
   const location = useLocation()
-  console.log('loveaion", ', location)
 
   const user = useSelector(({ session }) => session.user);
   const hiddenInputRef = useRef(null);
