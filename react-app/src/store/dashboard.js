@@ -13,6 +13,8 @@ const ADD_COMMENT = 'feed/ADD_COMMENT';
 const DELETE_COMMENT = 'feed/DELETE_COMMENT';
 const UPDATE_COMMENT = 'feed/UPDATE_COMMENT';
 
+const CLEAN_DASHBOARD = 'feed/CLEAN_DASHBOARD';
+
 // Action Creators
 const loadPosts = (data) => {
   return {
@@ -64,8 +66,6 @@ export const updateComment = (data) => {
   };
 };
 
-
-
 export const postLikeActionCreator = (user, postId) => { // Post like action creator
   return {
     type: POST_LIKE,
@@ -81,6 +81,13 @@ export const deleteLikeActionCreator = (userId, postId)=> { // Delete like actio
     userId, postId
   };
 };
+
+export const cleanDashboard = () => {
+  return {
+    type: CLEAN_DASHBOARD
+  }
+}
+
 
 // Thunks
 export const getFeedPosts = () => async dispatch => {
@@ -395,6 +402,9 @@ export default function reducer(state = initialState, action) {
       let newLikers = likers.filter(user => user.id !== parseInt(action.userId))
       stateCopy.feed.postIds[action.postId].likers = newLikers
       return stateCopy
+
+    case CLEAN_DASHBOARD:
+      return initialState;
 
     default:
       return state
