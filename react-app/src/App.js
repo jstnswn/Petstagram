@@ -14,7 +14,7 @@ import { getFeedPosts } from './store/dashboard';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
-  const [storeLoaded, setStoreLoaded] = useState(false);
+  // const [storeLoaded, setStoreLoaded] = useState(false);
   const dispatch = useDispatch();
 
   const user = useSelector(({ session }) => session.user);
@@ -22,15 +22,16 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      setLoaded(true);
+      // setLoaded(true);
     })();
   }, [dispatch]);
 
   useEffect(() => {
+    if (!user) setLoaded(false);
     (async() => {
       if (user) {
         await dispatch(getFeedPosts())
-        setStoreLoaded(true);
+        setLoaded(true);
       }
     })()
   }, [user, dispatch])
@@ -47,7 +48,7 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path='/' exact={true} >
-          {storeLoaded && <Dashboard />}
+          {user && loaded && <Dashboard />}
         </ProtectedRoute>
         <ProtectedRoute path='/:username' exact={true} >
           <ProfilePage />
