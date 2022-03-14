@@ -30,8 +30,8 @@ function ViewComments({ post, option, closeModal }) {
     // const comments = useSelector(state=>state.dashboard.feed.postIds[id].comments)
     const commentsArr = Object.values(comments)
 
-    console.log(showModal, 'this is showmodel value')
-    
+    // console.log(showModal, 'this is showmodel value')
+
 
     //delete logic
     // const handleClick = async(e)=>{
@@ -46,7 +46,7 @@ function ViewComments({ post, option, closeModal }) {
     // function moreComments (){
     //     return (
     //         <>
-    //             {commentsArr.length >=2 ? 
+    //             {commentsArr.length >=2 ?
     //             <div>
     //                 <div className="view-more" onClick={() => setViewRestOfCommentModal(true)}>more</div>
     //                 {viewRestOfCommentModal && (
@@ -56,9 +56,9 @@ function ViewComments({ post, option, closeModal }) {
     //                 )}
     //             </div> : null
     //             }
-            
-            
-            
+
+
+
     //         </>
     //     )
     // }
@@ -85,11 +85,11 @@ function ViewComments({ post, option, closeModal }) {
                     )}
                 </div> : null}
 
-            
 
 
 
-                {commentsArr.length > 0 ? <div className="comment1"><NavLink className='comment1-navlink'to={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</NavLink> {commentsArr[commentsArr.length-1].comment}</div> : null} 
+
+                {commentsArr.length > 0 ? <div className="comment1"><NavLink className='comment1-navlink'to={`/${commentsArr[commentsArr.length-1].user.username}`}>{commentsArr[commentsArr.length-1].user.username}</NavLink> {commentsArr[commentsArr.length-1].comment}</div> : null}
                 {commentsArr.length > 1 ? <div className="comment2"><NavLink className='comment2-navlink'to={`/${commentsArr[commentsArr.length-2].user.username}`}>{commentsArr[commentsArr.length-2].user.username}</NavLink> {commentsArr[commentsArr.length-2].comment}</div> : null}
 
         </div>

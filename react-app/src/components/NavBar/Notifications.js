@@ -35,7 +35,7 @@ export default function Notifications() {
   useEffect(() => {
     if (!showDrowdown) return;
 
-    console.log('target')
+    // console.log('target')
     document.addEventListener('click', hideMenu)
 
     return () => document.removeEventListener('click', hideMenu)

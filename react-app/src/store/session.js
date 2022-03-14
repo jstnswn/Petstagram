@@ -191,7 +191,7 @@ export default function reducer(state = initialState, action) {
       let user_to_unfollow = action.userId
       const index = stateCopy.user.following.findIndex(user => user.id === user_to_unfollow)
       stateCopy.user.following.splice(index, 1)
-      console.log('------------------',stateCopy)
+      // console.log('------------------',stateCopy)
       return stateCopy
 
     case FOLLOW:

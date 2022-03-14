@@ -74,7 +74,7 @@ export const postLikeActionCreator = (user, postId) => { // Post like action cre
 };
 
 export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
-  console.log('inside action creator', userId, postId)
+  // console.log('inside action creator', userId, postId)
 
   return {
     type: DELETE_LIKE,
@@ -151,7 +151,7 @@ export const deletePost = (postId) => async dispatch => {
 
   if (res.ok) {
     // const data = await res.json();
-    console.log('Post Deleted');
+    // console.log('Post Deleted');
     dispatch(removePost(postId));
   } else {
     console.log('Internal server error')
@@ -215,14 +215,14 @@ export const removeCommentDashboard = (payload) => async dispatch => {
 
   if (res.ok){
     const data = await res.json();
-    console.log(data, "this is data from delete comment thunk")
+    // console.log(data, "this is data from delete comment thunk")
     dispatch(deleteComment(data));
     return data;
   }
 }
 
 export const editCommentDashboard = (payload) => async dispatch => {
-  console.log('in here')
+  // console.log('in here')
   const res = await fetch('/api/comments/', {
     method:'PATCH',
     headers: { "Content-Type": "application/json"},
@@ -235,7 +235,7 @@ export const editCommentDashboard = (payload) => async dispatch => {
 
   if (res.ok){
     const data = await res.json();
-    console.log(data, "this is data from edit comment thunk")
+    // console.log(data, "this is data from edit comment thunk")
     dispatch(updateComment(data));
     return data;
   }
@@ -368,7 +368,7 @@ export default function reducer(state = initialState, action) {
       postsOrder.splice(idx, 1);
       delete stateCopy.feed.postIds[action.postId]
 
-      console.log("action", action.postId)
+      // console.log("action", action.postId)
       return stateCopy;
 
     case ADD_COMMENT:
