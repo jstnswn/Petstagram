@@ -9,3 +9,27 @@
     /* height: 100%; */
     /* overflow: hidden; */
 }
+
+.feed-placeholder-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.feed-placeholder-container > * {
+    /* font-family: 'Oleo Script', cursive; */
+    font-family: 'Lato', sans-serif;
+    margin-bottom: 10px;
+}
+
+.feed-placeholder-container h3 {
+    font-size: 22px;
+}
+
+
+.feed-placeholder-container h4 {
+    font-weight:400;
+    font-size: 18px;
+}
