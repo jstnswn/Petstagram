@@ -13,6 +13,18 @@ Petstagram, a full-stack application inspired by Instagram, is a photo-sharing p
 
 <img src="react-app/public/images/AWS.png" width="40" height="40"><img src="react-app/public/images/Python.png" width="40" height="40"><img src="react-app/public/images/Flask.png" width="40" height="40"><img src="react-app/public/images/React.png" width="40" height="40"><img src="react-app/public/images/Redux.png" width="40" height="40"><img src="react-app/public/images/HTML.png" width="40" height="40"><img src="react-app/public/images/CSS.png" width="40" height="40"><img src="react-app/public/images/Node.png" width="40" height="40"><img src="react-app/public/images/PostgresQL.png" width="40" height="40"><img src="react-app/public/images/SQLA.png" width="40" height="40"><img src="react-app/public/images/Javascript.png" width="40" height="40"><img src="react-app/public/images/Docker.png" width="40" height="40">
 
+- Amazon web services
+- Python
+- Flask
+- React
+- Redux
+- HTML
+- CSS
+- Node
+- Postgres
+- Sequel Alchemy
+- JavaScript
+- Docker
 # Getting Started
 
 1. Clone the repository
@@ -171,6 +183,12 @@ On the dashboard, a user is able to unfollow any users they are currently follow
 
 On the profile page, if it is the user's profile they can change their profile image. On any profile page, they can see the profile users followers and who the profile user is following. Here they can also view details of any post and view all of the post's comments.
 
-- 
-
 <img src='react-app/public/read-me-imgs/profile-page.png'></img>
+
+1. If the user is on his own profile page, he/she has the option to update the profile picture by clicking the profile picture. When the profile picture is clicked, it will generate a modal with options to update the profile image, but there will be more features to come in this menu.
+2. The profile page also displays a grid view of all posts from that user, with the most recent posts showing at the top. When hovering over a post, the user will be able to see an overlay which will display the amount of likes and comments that post currently has.
+3. In the header for the profile page, users can view how many posts this profile has, and the amount of followers and following the profile has as well. If the user clicks on followers or following, a modal will pop up which displays more detailed information such as the username, full name, and the option to follow/unfollow the other related users.
+
+<img src='react-app/public/read-me-imgs/edit-profile-image.png'></img>
+<img src='react-app/public/read-me-imgs/post-meta-data.png'></img>
+<img src='react-app/public/read-me-imgs/followers.png'></img>
