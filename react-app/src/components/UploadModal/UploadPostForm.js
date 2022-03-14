@@ -43,14 +43,14 @@ export default function UploadPostForm({ closeModal }) {
   const handleFileReader = (e, file) => {
     const dataUrl = e.target.result;
 
-    const allowedFileTypes = ['pdf', 'png', 'jpg', 'jpeg'];
+    const allowedFileTypes = ['png', 'jpg', 'jpeg'];
     const stopIdx = dataUrl.indexOf(';');
     const fileType = dataUrl.slice(11, stopIdx)
 
     if (!allowedFileTypes.includes(fileType)) {
       setImage(null)
       setImageUrl(null);
-      setFileError('Must upload a PDF, PNG, JPG, or JPEG image.')
+      setFileError('Must upload a PNG, JPG, or JPEG image.')
       return
     }
     setImageUrl(dataUrl)
