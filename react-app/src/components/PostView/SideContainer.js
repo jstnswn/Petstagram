@@ -134,7 +134,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                         <li key={comment.id}>
                             <div className="comment-shell">
                                 <img className="post-view-user-img" src={comment.user.image_url} alt='profile'></img>
-                                <NavLink to={`/${comment.user.username}`}>{comment.user.username}</NavLink>
+                                <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
                                 <span>{comment.comment}</span>
                             </div>
                             <div className='time-and-menu'>
