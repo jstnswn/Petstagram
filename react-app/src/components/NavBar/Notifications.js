@@ -23,7 +23,8 @@ export default function Notifications() {
 
   const showMenu = () => setShowDropdown(true);
   const hideMenu = (e) => {
-    if (!e.target.classList.contains('dd')) setShowDropdown(false);
+    if (e.target.classList.contains('dd')) return;
+    setShowDropdown(false);
     if (!notifications) return;
     setLikes(false);
     setComments(false);
@@ -40,21 +41,6 @@ export default function Notifications() {
     return () => document.removeEventListener('click', hideMenu)
   })
 
-  // console.log('notificatiosn: ', hasNotifications())
-
-  const openAndClear = () => {
-    showMenu()
-    // const payload = {
-      //   likes,
-      //   comments,
-      //   follows
-      // }
-
-    // if (!notifications) return;
-    // dispatch(deleteNotifications())
-  };
-
-
   return (
     <div className='likes-dropdown-container'>
       <i
@@ -62,7 +48,7 @@ export default function Notifications() {
         style={{
           color: notifications?.likes.length || notifications?.follows.length || notifications?.comments.length ? 'red' : 'black'
         }}
-        onClick={openAndClear}
+        onClick={showMenu}
       ></i>
 
         {showDrowdown && <NotificationsDropdown hideMenu={hideMenu} notifications={{ likes, comments, follows }} hasNotifications={hasNotifications}/>}

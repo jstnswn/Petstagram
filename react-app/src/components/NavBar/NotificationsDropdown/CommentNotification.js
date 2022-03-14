@@ -12,7 +12,7 @@ export default function CommentNotification({ comments }) {
             <Link to={`/${comment.from_user.username}`} className='notification-username'>{comment.from_user.username}</Link>
               <p className='dd comment-notification'>{comment.comment.comment}</p>
           </div>
-          <img className='post-notification-image' alt='post' src={comment.post.image_url} />
+          <img className='post-notification-image dd' alt='post' src={comment.post.image_url} />
         </div>
       ))}
     </>
