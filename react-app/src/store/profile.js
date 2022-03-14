@@ -80,7 +80,7 @@ const profileDeleteLikeActionCreator = (userId, postId) => { // Post like action
 
 // Thunks
 export const getProfilePosts = (userId) => async dispatch => {
-  console.log('profile thunk')
+  // console.log('profile thunk')
   const res = await fetch(`/api/posts/${userId}`);
 
   if (res.ok) {
@@ -226,7 +226,7 @@ export const deletePost = (postId) => async dispatch => {
 
   if (res.ok) {
       // const data = await res.json();
-      console.log('Post Deleted');
+      // console.log('Post Deleted');
       dispatch(removePost(postId));
   } else {
     console.log('Internal server error')

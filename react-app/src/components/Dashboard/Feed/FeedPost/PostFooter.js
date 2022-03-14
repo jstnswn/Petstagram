@@ -40,7 +40,7 @@ export default function PostFooter({ post, option}) {
       // const data = await dispatch(postLike(payload))
     }
 
-    console.log('inside event listener',isLiked)
+    // console.log('inside event listener',isLiked)
     const icon = e.target
     if (!isLiked) {
       icon.classList.add('red')

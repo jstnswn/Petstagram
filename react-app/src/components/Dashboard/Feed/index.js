@@ -23,7 +23,7 @@ export default function Feed() {
 
   const loadMorePosts = () => {
     if (index >= allPosts.length) {
-      console.log('stop')
+      // console.log('stop')
       setHasMore(false);
       return;
     }

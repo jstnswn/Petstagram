@@ -8,7 +8,7 @@ export default function FollowNotification({ follows }) {
   const [openUnfollowMenu, setOpenUnfollowMenu] = useState(false);
   const dispatch = useDispatch();
 
-  console.log('follows: ', follows)
+  // console.log('follows: ', follows)
 
   const toggleFollow = async (e, userId) => {
     e.preventDefault();
