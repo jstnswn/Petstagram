@@ -5,7 +5,8 @@ import NavDropdown from './NavDropdown';
 export default function ProfileButton() {
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const user = useSelector(({ session }) => session.user);
+  const session = useSelector(({ session }) => session);
+  const user = session.user;
 
   const openDropdown = () => {
     if (showDropdown) return;
