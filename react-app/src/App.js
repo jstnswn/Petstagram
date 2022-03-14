@@ -34,7 +34,6 @@ function App() {
     })()
   }, [user, dispatch])
 
-
   return (
     <BrowserRouter>
       {user && <NavBar />}
