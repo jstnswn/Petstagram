@@ -39,7 +39,6 @@ export default function PostMenu({ setPosts, closeMenu, closePostView, post, set
       await dispatch(deletePostFeed(post.id))
       closeMenu()
     }
-
   }
 
   // const openEditMenu = () => {
