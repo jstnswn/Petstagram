@@ -80,6 +80,7 @@ const profileDeleteLikeActionCreator = (userId, postId) => { // Post like action
 
 // Thunks
 export const getProfilePosts = (userId) => async dispatch => {
+  console.log('profile thunk')
   const res = await fetch(`/api/posts/${userId}`);
 
   if (res.ok) {
