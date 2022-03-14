@@ -27,8 +27,6 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
 
     //created at logic
     const timePassed = (milliseconds) => {
-        // console.log(milliseconds, 'this is milliseconds')
-        // console.log(new Date().toLocaleString(), 'this is date')
 
         const second = 1000
         const minute = 60 * second

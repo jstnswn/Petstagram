@@ -6,7 +6,6 @@ import NotificationsDropdown from './NotificationsDropdown';
 
 export default function Notifications() {
   const dispatch = useDispatch()
-  // const likes = useSelector(({ session }) => session.user.notifications.likes)
   const notifications = useSelector(({ session }) => session.user.notifications);
   const [likes, setLikes] = useState(notifications ? notifications.likes : []);
   const [comments, setComments] = useState(notifications ? notifications.comments : []);
@@ -34,8 +33,6 @@ export default function Notifications() {
 
   useEffect(() => {
     if (!showDrowdown) return;
-
-    // console.log('target')
     document.addEventListener('click', hideMenu)
 
     return () => document.removeEventListener('click', hideMenu)

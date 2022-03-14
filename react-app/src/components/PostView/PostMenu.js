@@ -19,9 +19,6 @@ export default function PostMenu({ setPosts, closeMenu, closePostView, post, set
   const openEdit = () => setShowEditMenu(true);
   const closeEdit = () => setShowEditMenu(false);
 
-
-  // const urlParam = history.location.pathname.slice(1).toLowerCase();
-
   const unfollowClick = () => {
     setShowPostMenuModal(false)
     setShowUnfollowModal(true)
@@ -41,11 +38,6 @@ export default function PostMenu({ setPosts, closeMenu, closePostView, post, set
     }
   }
 
-  // const openEditMenu = () => {
-  //   // closePostView()
-  //   openEdit();
-  // }
-
   // TODO dispatch route to remove from feed
 
   return (
@@ -59,7 +51,6 @@ export default function PostMenu({ setPosts, closeMenu, closePostView, post, set
       {userFollowing.includes(post.user.id) &&
         <div className='red' onClick={unfollowClick}>Unfollow</div>
       }
-      {/* <div>Share to...</div> */}
       <div onClick={closeMenu}>Cancel</div>
 
       {showEditMenu && (

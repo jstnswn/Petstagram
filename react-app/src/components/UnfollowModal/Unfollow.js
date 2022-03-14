@@ -6,7 +6,6 @@ import './Unfollow.css'
 
 export default function Unfollow({ user, setShowUnfollowModal, option, setUserFollowing, setNumberFollowers, sessionUser, profileUser, setNumberFollowing }) {
     const dispatch = useDispatch();
-    // const user = post.user
 
     const handleUnfollow = (e) => {
         e.preventDefault()

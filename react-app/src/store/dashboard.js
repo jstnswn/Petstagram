@@ -74,7 +74,6 @@ export const postLikeActionCreator = (user, postId) => { // Post like action cre
 };
 
 export const deleteLikeActionCreator = (userId, postId)=> { // Delete like action creator
-  // console.log('inside action creator', userId, postId)
 
   return {
     type: DELETE_LIKE,
@@ -97,7 +96,6 @@ export const getFeedPosts = () => async dispatch => {
     const data = await res.json();
     dispatch(loadPosts(data));
   } else {
-    // const errors = await res.json();
   }
 };
 
@@ -135,8 +133,6 @@ export const patchPost = (payload) => async dispatch => {
   });
 
   if (res.ok) {
-    // const data = await res.json();
-
     dispatch(updatePost(postId, caption));
   } else {
     const errors = await res.json();
@@ -150,8 +146,6 @@ export const deletePost = (postId) => async dispatch => {
   });
 
   if (res.ok) {
-    // const data = await res.json();
-    // console.log('Post Deleted');
     dispatch(removePost(postId));
   } else {
     console.log('Internal server error')
@@ -235,7 +229,6 @@ export const editCommentDashboard = (payload) => async dispatch => {
 
   if (res.ok){
     const data = await res.json();
-    // console.log(data, "this is data from edit comment thunk")
     dispatch(updateComment(data));
     return data;
   }
@@ -285,8 +278,6 @@ export const follow = payload => async dispatch => {
     body: JSON.stringify({"user_id": payload})
   })
   const data = await res.json()
-
-  // console.log('data:', data)
 
   if (res.ok) {
     dispatch(followActionCreator(data.user))

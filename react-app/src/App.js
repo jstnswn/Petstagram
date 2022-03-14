@@ -14,7 +14,6 @@ import { getFeedPosts } from './store/dashboard';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
-  // const [storeLoaded, setStoreLoaded] = useState(false);
   const dispatch = useDispatch();
 
   const user = useSelector(({ session }) => session.user);
@@ -22,7 +21,6 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
-      // setLoaded(true);
     })();
   }, [dispatch]);
 
