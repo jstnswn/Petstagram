@@ -42,7 +42,6 @@ const LoginForm = () => {
   const demoLogin = (e) => {
     e.preventDefault();
     let credentials = 'Mango@Voisin.com'
-    // let username = 'Mango'
     let password = 'password'
     dispatch(login(credentials, password))
   }
