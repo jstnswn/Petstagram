@@ -152,7 +152,6 @@ export const deletePost = (postId) => async dispatch => {
 
 };
 
-
 export const createCommentDashboard = (payload) => async dispatch => {
 
   const res = await fetch('/api/comments/', {
@@ -169,6 +168,25 @@ export const createCommentDashboard = (payload) => async dispatch => {
 
   if (res.ok) {
       const data = await res.json();
+
+      if (payload.user_id !== payload.user_to_id) {
+
+        const res = await fetch('/api/notifications/comments/', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            user_to_id: payload.user_to_id,
+            comment_id: data.comment.id,
+            post_id: payload.post_id,
+          })
+        })
+
+        if (!res.ok) console.log('500: Failed to create notification')
+      }
+
+
       dispatch(addComment(data));
       return data;
     } else {
@@ -185,8 +203,7 @@ export const removeCommentDashboard = (payload) => async dispatch => {
       comment_id: payload.comment_id,
       updated_comment: payload.updated_comment,
       post_id: payload.post_id,
-
-  })
+    })
   });
 
   if (res.ok){

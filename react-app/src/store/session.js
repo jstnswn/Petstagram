@@ -7,6 +7,8 @@ const UNFOLLOW = 'follow/UNFOLLOW'
 const FOLLOW = 'follow/follow'
 const SET_PROFILE_IMAGE = 'session/SET_PROFILE_IMAGE';
 
+const REMOVE_NOTIFICATIONS = 'session/REMOVE_NOTIFICATIONS'
+
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
@@ -30,6 +32,16 @@ export const followActionCreator = (user) => {    // Follow action creator
   }
 }
 
+export const removeNotifications = () => {
+  return {
+    type: REMOVE_NOTIFICATIONS
+  }
+}
+
+const initialState = {
+  user: null
+};
+
 const setProfileImage = (imageUrl) => {
   return {
     type: SET_PROFILE_IMAGE,
@@ -37,7 +49,7 @@ const setProfileImage = (imageUrl) => {
   }
 }
 
-const initialState = { user: null };
+
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -125,6 +137,22 @@ export const signUp = (username, email, password, full_name) => async (dispatch)
   }
 }
 
+// Helper Functions
+export const deleteNotifications = () => async dispatch => {
+
+  const res = await fetch('/api/notifications/all/', {
+    method: 'DELETE',
+    headers: { "Content-Type": "application/json" },
+  })
+
+  if (res.ok) {
+    dispatch(removeNotifications())
+  }
+
+  // return
+};
+
+
 export const updateProfileImage = (image) => async dispatch => {
   const formData = new FormData();
   formData.append('image', image);
@@ -168,6 +196,10 @@ export default function reducer(state = initialState, action) {
       stateCopy.user.following.push(action.user)
       return stateCopy
 
+    case REMOVE_NOTIFICATIONS:
+      stateCopy = {...state}
+      stateCopy.user.notifications = null;
+      return stateCopy;
     case SET_PROFILE_IMAGE:
       stateCopy = {...state};
       stateCopy.user.image_url = action.imageUrl;

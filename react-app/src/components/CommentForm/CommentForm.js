@@ -21,6 +21,7 @@ function CommentForm({ option, post, profileUser}) {
 
         const payload = {
             user_id: currentUser.id,
+            user_to_id: post.user.id,
             post_id: postId,
             comment,
         }
