@@ -11,7 +11,8 @@ export default function Unfollow({ user, setShowUnfollowModal, option, setUserFo
         e.preventDefault()
         dispatch(unfollow(user.id))
         setShowUnfollowModal(false)
-        if (option === 'profile-direct') {
+        // && setUserFollowing is temporary
+        if (option === 'profile-direct' && setUserFollowing) {
             setUserFollowing(prev => prev.filter(followId => followId !== user.id))
             setNumberFollowers(prev => --prev)
         }
