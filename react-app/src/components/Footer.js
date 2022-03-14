@@ -5,10 +5,6 @@ import './Footer.css'
 export default function Footer() {
     const [showAboutUs, setShowAboutUs] = useState(false)
 
-    // const toggleAboutUsDropdown = () => {
-    //     setShowAboutUs(true)
-    // }
-
     useEffect(() => {
         if (!showAboutUs) return
         const closeDropdown = (e) => {

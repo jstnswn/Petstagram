@@ -11,19 +11,15 @@ const SignUpForm = () => {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    // if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password, fullName));
       if (data) {
         setErrors(data)
-        // console.log(data)
       }
-    // }
   };
 
   const updateUsername = (e) => {
@@ -41,10 +37,6 @@ const SignUpForm = () => {
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
-
-  // const updateRepeatPassword = (e) => {
-  //   setRepeatPassword(e.target.value);
-  // };
 
   useEffect(() => {
     const emailField = document.querySelector('.email')
@@ -166,16 +158,6 @@ const SignUpForm = () => {
               required
             ></input>
           </div>
-          {/* <div>
-            <label>Repeat Password</label>
-            <input
-              type='password'
-              name='repeat_password'
-              onChange={updateRepeatPassword}
-              value={repeatPassword}
-              required={true}
-            ></input>
-          </div> */}
           {username && fullName && email && password ? (
               <button id='signup-clickable'>Sign Up</button>) : (
                 <button id='signup-unclickable' disabled>Sign Up</button>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { follow, unfollow } from '../../../store/dashboard'
+import { follow } from '../../../store/dashboard'
 import { Modal } from '../../../context/Modal';
 import Unfollow from '../../UnfollowModal/Unfollow';
 import x_btn from '../../../assets/x.png'
@@ -12,14 +12,6 @@ import './FollowerModal.css'
 export default function FollowerFormModal({ profileUser, setNumberFollowing, userFollowing, setUserFollowing, user, closeModal }) {
     const dispatch = useDispatch()
     const [showUnfollowModal, setShowUnfollowModal] = useState(null)
-    // const handleUnfollow = (e, id) => {
-    //     e.preventDefault()
-    //     dispatch(unfollow(id))
-    //     setUserFollowing(userFollowing.filter(followId => followId !== id))
-    //     if (profileUser.id === user.id) {
-    //         setNumberFollowing(prev => --prev)
-    //     }
-    // }
 
     const handleFollow = (e, follower) => {
         e.preventDefault()

@@ -17,7 +17,6 @@
 .footer-icons {
     display: flex;
     width: 100%;
-    /* padding: 10px; */
 }
 
 .footer-icons span:not(:last-child) {

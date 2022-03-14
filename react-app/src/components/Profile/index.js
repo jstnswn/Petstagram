@@ -24,9 +24,8 @@ export default function ProfilePage() {
   const [postsLoaded, setPostsLoaded] = useState(false);
   const [profileUser, setProfileUser] = useState(null);
   const [disableEdit, setDisableEdit] = useState(false);
-
   const [showEditProfileModal, setShowProfileModal] = useState(false);
-  // const openEditProfileModal = () => setShowProfileModal(true);
+
   const closeEditProfileModal = () => setShowProfileModal(false);
 
   const [showProPicModal, setShowProPicModal] = useState(false);
@@ -115,9 +114,6 @@ export default function ProfilePage() {
           <div className='top-column'>
             <div className='profile-username'>{profileUser.username}
             </div>
-            {/* {profileUser.id === user.id &&
-          <button onClick={openEditProfileModal} className='edit-profile'>Edit Profile</button>
-        } */}
 
             {!userFollowing.includes(profileUser.id) && !(profileUser.id === user.id) &&
               <button onClick={handleFollow} className='modal-follow'>Follow</button>
@@ -177,11 +173,6 @@ export default function ProfilePage() {
           <div className='bot-column'>{profileUser.full_name}</div>
         </div>
       </div>
-      {/* <nav className='profile-nav'>
-        <p>POSTS</p>
-        <p>SAVED</p>
-        <p>TAGGED</p>
-      </nav> */}
       <ProfileGrid profileUser={profileUser} setUserFollowing={setUserFollowing} setNumberFollowers={setNumberFollowers}/>
     </div>
   )

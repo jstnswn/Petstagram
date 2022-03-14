@@ -22,8 +22,6 @@ def fetch_user_by_username(username):
 
     return {'user': user.to_dict()}, 200
 
-
-
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
@@ -57,4 +55,3 @@ def update_profile_image():
     db.session.commit()
 
     return {'url': url}, 200
-

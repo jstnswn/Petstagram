@@ -72,7 +72,6 @@
 }
 
 .suggestion-follow-button {
-    /* justify-self: flex-end; */
     cursor: pointer;
     margin-left: auto;
     padding-right: 10px;

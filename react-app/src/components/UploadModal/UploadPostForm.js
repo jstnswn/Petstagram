@@ -3,9 +3,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import Dropzone from 'react-dropzone'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPost as createPostDashboard } from '../../store/dashboard';
-import { loadPost } from '../../store/profile';
+import { loadPost as loadProfilePost } from '../../store/profile';
 import dragAndDropImage from '../../assets/drag-and-drop.png'
 import './UploadPostForm.css'
+import { useLocation } from 'react-router-dom';
 
 
 export default function UploadPostForm({ closeModal }) {
@@ -16,6 +17,8 @@ export default function UploadPostForm({ closeModal }) {
   const [caption, setCaption] = useState('');
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [fileError, setFileError] = useState(false);
+  const location = useLocation()
+  console.log('loveaion", ', location)
 
   const user = useSelector(({ session }) => session.user);
   const hiddenInputRef = useRef(null);
@@ -34,10 +37,7 @@ export default function UploadPostForm({ closeModal }) {
       caption
     };
       await dispatch(createPostDashboard(payload))
-        .then((res) => dispatch(loadPost(res)))
-    // if (data) {
-    //   setErrors([data]);
-    // }
+        .then((res) => location.pathname.includes(user.username) && dispatch(loadProfilePost(res)))
     closeModal()
   };
 
@@ -89,7 +89,6 @@ export default function UploadPostForm({ closeModal }) {
           setImageUrl(null);
 
         }}></i>
-        {/* <h3></h3> */}
         <p className='next-button' onClick={() => setShowTextForm(true)}>Next</p>
       </>
     )
@@ -118,13 +117,6 @@ export default function UploadPostForm({ closeModal }) {
       // onSubmit={handleSubmit}
       >
         <img className='drag-and-drop' alt='drag and drop' src={dragAndDropImage}/>
-
-
-        {/* <FileUploader
-          handleChange={(file) => setFile(file)}
-          name='image'
-          types={fileTypes}
-        /> */}
 
         <Dropzone onDrop={(file) => setFile(file[0])}>
           {({ getRootProps, getInputProps }) => (
@@ -161,11 +153,6 @@ export default function UploadPostForm({ closeModal }) {
     )
   } else if (imageUrl && !showTextForm) {
     formContent = (
-      // <img
-      //   alt='post content'
-      //   className='upload-image view'
-      //   src={imageUrl}
-      // />
       <img alt='post content' className='upload-image view' src={imageUrl}/>
     );
   } else {
