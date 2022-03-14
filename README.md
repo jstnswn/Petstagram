@@ -81,12 +81,14 @@ Petstagram, a full-stack application inspired by Instagram, is a photo-sharing p
 ## Splash Page
 Users can log in with an existing account or sign up and create a new account. There is also a demo option so users can quickly explore the site.
 
-<img src='react-app/public/read-me-imgs/sign-up-form.png'></img>
+<img src='react-app/public/read-me-imgs/login-form.png'></img>
  - Login/Signup form placeholders shift when filling out the form.
  - Submit button doesn't allow you to click if the form isn't complete
  - Error handling for invalid email or password.
 
-<img src='react-app/public/read-me-imgs/sign-up-form2.png'></img>
+<img src='react-app/public/read-me-imgs/login-form2.png'></img>
+<img src='react-app/public/read-me-imgs/signup-form.png'></img>
+<img src='react-app/public/read-me-imgs/signup-form2.png'></img>
 ## Dashboard
 
 Once logged in, the dashboard presents the user with a feed of posts shared by those they follow. The user is then able to infinitely scroll down his feed and click on a post they would like to interact with. There is also a nav bar at the top of the dashboard that coveniently allows the user to create a post, go to their profile page, or log out.
