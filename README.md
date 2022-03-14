@@ -110,8 +110,9 @@ Once logged in, the dashboard presents the user with a feed of posts shared by t
 <img src='react-app/public/read-me-imgs/dashboard-post.png'></img> <img src='react-app/public/read-me-imgs/additional-comments.png'></img>
 
 - When you click on the comment bubble or 'View all comments' it opens the postView modal where you can see all comments
-- Here you can also leave a comment or like a post.
--
+  1. User can click on these ellipsis to unfollow this post's owner
+  2. Here you can also leave a comment or like a post and it will update here and the feed dynamically.
+  3. If you are the user that created a comment, this ellipsis will be here for you to edit or delete your comment.
 
 <img src='react-app/public/read-me-imgs/dashboard-postview-modal.png'></img>
 ## Images
