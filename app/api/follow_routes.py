@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from flask_login import current_user
-from app.models import User, Post, Comment, db, likes
+from app.models import User, Post, Comment, db, likes, FollowNotification
 
 follow_routes = Blueprint('follow', __name__)
 
@@ -16,6 +16,10 @@ def create_follow():
     followed = User.query.get(followed_id)
     followed.followers.append(follower)
 
+    # Create follow notificaiton
+    notification = FollowNotification(user_to_id=followed_id, user_from_id=follower_id)
+    db.session.add(notification)
+
     db.session.commit()
     return { 'user': followed.to_dict()}
 
@@ -30,6 +34,18 @@ def delete_follow():
     unfollowed_id = data['user_id']
     unfollowed = User.query.get(unfollowed_id)
     unfollowed.followers.remove(follower)
+
+    # Remove follow notification
+    notification = None
+    try:
+        notification = FollowNotification.query.filter(
+                        FollowNotification.user_to_id==unfollowed_id, FollowNotification.user_from_id==follower_id).one()
+
+        db.session.delete(notification)
+    except:
+        print('Notification not found')
+
+    # if (notification):
 
     db.session.commit()
     return { 'userId': unfollowed_id}

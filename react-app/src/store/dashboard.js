@@ -13,6 +13,8 @@ const ADD_COMMENT = 'feed/ADD_COMMENT';
 const DELETE_COMMENT = 'feed/DELETE_COMMENT';
 const UPDATE_COMMENT = 'feed/UPDATE_COMMENT';
 
+const CLEAN_DASHBOARD = 'feed/CLEAN_DASHBOARD';
+
 // Action Creators
 const loadPosts = (data) => {
   return {
@@ -64,8 +66,6 @@ export const updateComment = (data) => {
   };
 };
 
-
-
 export const postLikeActionCreator = (user, postId) => { // Post like action creator
   return {
     type: POST_LIKE,
@@ -81,6 +81,13 @@ export const deleteLikeActionCreator = (userId, postId)=> { // Delete like actio
     userId, postId
   };
 };
+
+export const cleanDashboard = () => {
+  return {
+    type: CLEAN_DASHBOARD
+  }
+}
+
 
 // Thunks
 export const getFeedPosts = () => async dispatch => {
@@ -152,7 +159,6 @@ export const deletePost = (postId) => async dispatch => {
 
 };
 
-
 export const createCommentDashboard = (payload) => async dispatch => {
 
   const res = await fetch('/api/comments/', {
@@ -169,6 +175,25 @@ export const createCommentDashboard = (payload) => async dispatch => {
 
   if (res.ok) {
       const data = await res.json();
+
+      if (payload.user_id !== payload.user_to_id) {
+
+        const res = await fetch('/api/notifications/comments/', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            user_to_id: payload.user_to_id,
+            comment_id: data.comment.id,
+            post_id: payload.post_id,
+          })
+        })
+
+        if (!res.ok) console.log('500: Failed to create notification')
+      }
+
+
       dispatch(addComment(data));
       return data;
     } else {
@@ -185,8 +210,7 @@ export const removeCommentDashboard = (payload) => async dispatch => {
       comment_id: payload.comment_id,
       updated_comment: payload.updated_comment,
       post_id: payload.post_id,
-
-  })
+    })
   });
 
   if (res.ok){
@@ -378,6 +402,9 @@ export default function reducer(state = initialState, action) {
       let newLikers = likers.filter(user => user.id !== parseInt(action.userId))
       stateCopy.feed.postIds[action.postId].likers = newLikers
       return stateCopy
+
+    case CLEAN_DASHBOARD:
+      return initialState;
 
     default:
       return state

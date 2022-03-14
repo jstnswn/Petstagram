@@ -80,6 +80,7 @@ const profileDeleteLikeActionCreator = (userId, postId) => { // Post like action
 
 // Thunks
 export const getProfilePosts = (userId) => async dispatch => {
+  console.log('profile thunk')
   const res = await fetch(`/api/posts/${userId}`);
 
   if (res.ok) {
@@ -150,7 +151,23 @@ export const patchPost = (payload) => async dispatch => {
 
     if (res.ok) {
         const data = await res.json();
-        console.log('data in the thunk', data)
+
+        if (payload.user_id !== payload.user_to_id) {
+          const res = await fetch('/api/notifications/comments/', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              user_to_id: payload.user_to_id,
+              comment_id: data.comment.id,
+              post_id: payload.post_id,
+            })
+          })
+
+          if (!res.ok) console.log('500: Failed to create notification')
+        }
+
         dispatch(addComment(data));
         return data;
       } else {

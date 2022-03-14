@@ -19,8 +19,9 @@ def create_like():
     post.likers.append(user)
 
     # Create notification for like
-    # notification = LikeNotification(user_from_id=user_id, user_to_id=post.user.id, post_id=post.id)
-    # db.session.add(notification)
+    if user_id != post.user.id:
+        notification = LikeNotification(user_from_id=user_id, user_to_id=post.user.id, post_id=post.id)
+        db.session.add(notification)
 
     db.session.commit()
     return {'user': user.f_to_dict()}, 200
@@ -37,11 +38,15 @@ def delete_like():
     post.likers.remove(liker_to_delete)
 
     # Delete notification if exists
-    # notification = LikeNotification.query.filter(
-    #     LikeNotification.user_from_id==user_id, LikeNotification.user_to_id==post.user.id, LikeNotification.post_id==post.id).one()
+    notification: None
 
-    # if (notification):
-    #     db.session.delete(notification)
+    try:
+        notification = LikeNotification.query.filter(
+            LikeNotification.user_from_id==user_id, LikeNotification.user_to_id==post.user.id, LikeNotification.post_id==post.id).one()
+
+        db.session.delete(notification)
+    except: print(' 🤗Notification not found')
+
 
     db.session.commit()
 

@@ -66,7 +66,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                 }
             } else {
                 dispatch(profileDeleteLike(payload))
-                dispatch(deleteLikeActionCreator(sessionUser.id, post.id))
+                if (dashboardPosts[id]) dispatch(deleteLikeActionCreator(sessionUser.id, post.id))
             }
         } else {                               // not liked yet
             const payload = {
@@ -85,7 +85,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
             }
             else {
                 dispatch(profilePostLike(payload))
-                dispatch(postLikeActionCreator(sessionUser, post.id))
+                if (dashboardPosts[id]) dispatch(postLikeActionCreator(sessionUser, post.id))
             }
         }
 
