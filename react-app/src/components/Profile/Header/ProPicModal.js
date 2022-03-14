@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
-// import { Modal } from '../../../context/Modal';
-// import UploadProPicForm from './UploadProPicForm'
+
 import './ProPicModal.css'
 import { useDispatch } from 'react-redux';
 import { updateProfileImage } from '../../../store/session';

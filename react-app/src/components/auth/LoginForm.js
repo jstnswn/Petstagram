@@ -22,21 +22,6 @@ const LoginForm = () => {
     if (data) {
       setErrors(data)
     }
-    // if (credentials.includes('@')) {
-    //   let email = emailOrUsername
-    //   let username = ''
-    //   const data = await dispatch(login(email, username, password));
-    //   if (data) {
-    //     setErrors(data);
-    //   }
-    // } else {
-    //   let email = ''
-    //   let username = credentials
-    //   const data = await dispatch(login(email, username, password))
-    //   if (data) {
-    //     setErrors(data);
-    //   }
-    // }
   };
 
   const demoLogin = (e) => {

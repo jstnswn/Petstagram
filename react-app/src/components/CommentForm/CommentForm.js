@@ -12,8 +12,6 @@ function CommentForm({ option, post, profileUser}) {
     const dashboardPosts = useSelector(({ dashboard }) => dashboard.feed.postIds)
 
     const [comment, setComment] = useState("");
-    // const [errors, setErrors] = useState([]);
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,7 +35,6 @@ function CommentForm({ option, post, profileUser}) {
             const newComment = await dispatch(createCommentProfile(payload))
             if (newComment && dashboardPosts[postId]){
                 dispatch(addComment(newComment))
-                // post.id[dashboardPosts]
             }
         }
         setComment('')

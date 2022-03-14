@@ -12,15 +12,6 @@ export default function FollowingFormModal({ profileUser, setNumberFollowing, us
     const dispatch = useDispatch()
     const [showUnfollowModal, setShowUnfollowModal] = useState(null)
 
-    // const handleUnfollow = (e, id) => {
-    //     e.preventDefault()
-    //     dispatch(unfollow(id))
-    //     setUserFollowing(userFollowing.filter(followId => followId !== id))
-    //     if (profileUser.id === user.id) {
-    //         setNumberFollowing(prev => --prev)
-    //     }
-    // }
-
     const handleFollow = (e, id) => {
         e.preventDefault()
         dispatch(follow(id))

@@ -38,9 +38,7 @@
 .notification.user-info .notification-username {
     font-size: 14px;
     padding: 2px;
-    /* border: red 1px solid; */
     color: black;
-    /* height: 23px; */
 }
 
 .notification.user-info .notification-username {
@@ -56,15 +54,10 @@
 .notification-container button {
     margin-right: -3px;
     padding: 0;
-    /* margin: 0; */
-    /* padding: 0; */
-    /* border: 1px solid red; */
-    /* color: red; */
 }
 
 .comment-notification-box {
     text-overflow: ellipsis;
-    /* max-width: 280px; */
     border: red 1px solid;
 }
 
@@ -75,11 +68,8 @@
 }
 
 .notifications-placeholder {
-    /* position: relative; */
     margin-top: auto;
     margin-bottom: auto;
     align-self: center;
-    /* border: red 1px solid; */
     font-size: 14px;
-
 }

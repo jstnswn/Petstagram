@@ -16,12 +16,6 @@ export default function FollowSuggestion({ user, setSuggestions }) {
   const toggleFollow = async () => {
     if (!followed) {
       dispatch(follow(user.id));
-
-      // setSuggestions(prev => {
-      //   const idx = prev.findIndex(suggestion => suggestion.id === user.id);
-      //   prev.splice(idx, 1);
-      //   return prev;
-      // })
       setFollowed(true);
 
     } else if (followed) {
@@ -29,9 +23,6 @@ export default function FollowSuggestion({ user, setSuggestions }) {
         .then(() => setFollowed(false))
 
       closeMenu();
-
-      // setSuggestions(prev => [...prev, ])
-
     }
   };
 

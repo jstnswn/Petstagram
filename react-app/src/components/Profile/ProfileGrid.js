@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { getProfilePostsArray } from '../../store/profile';
 import ProfileGridItem from './ProfileGridItem';
-// import PostEditForm from '../PostView/PostEditForm';
 
 export default function ProfileGrid({profileUser, setUserFollowing, setNumberFollowers}) {
   const posts = useSelector(getProfilePostsArray);

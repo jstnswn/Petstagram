@@ -48,7 +48,6 @@ export default function ProfileGridItem({ post, idx , profileUser, setUserFollow
 
             {showOverlay && (
                 <div className='grid-item-overlay'>
-                    {/* dkfadjsfl */}
                     <i className='fas fa-heart overlay icon'></i><span className='overlay'>{likes}</span>
                     <i className='fas fa-comment overlay icon'></i><span className='overalay'>{comments}</span>
                 </div>

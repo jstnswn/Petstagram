@@ -16,7 +16,6 @@
 }
 
 .upload-post-form {
-    /* justify-self: center; */
     display: flex;
     flex-direction: column;
     padding: 27px 0px;
@@ -143,19 +142,6 @@
 .upload-post-form section div input {
     display: block;
 }
-
-/* .sc-bdvvtL.iciELI,
-.PvQvl,
-.ref-test {
-    height: 755px;
-    max-width: 755px;
-    width: 755px;
-    opacity: 0;
-    position: absolute;
-    z-index: 1;
-    cursor: default;
-} */
-
 
 .drop-zone {
     border: red 1px solid;

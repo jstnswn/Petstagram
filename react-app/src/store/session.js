@@ -70,8 +70,6 @@ export const authenticate = () => async (dispatch) => {
 }
 
 export const login = (credentials, password) => async (dispatch) => {
-  // console.log('email:', email)
-  // console.log('username:', username)
   const response = await fetch('/api/auth/login', {
     method: 'POST',
     headers: {
@@ -151,8 +149,6 @@ export const deleteNotifications = () => async dispatch => {
   if (res.ok) {
     dispatch(removeNotifications())
   }
-
-  // return
 };
 
 

@@ -6,8 +6,6 @@ import { postLike, deleteLike, postLikeActionCreator, deleteLikeActionCreator } 
 import CommentForm from '../CommentForm/CommentForm';
 import CommentMenuModal from '../CommentMenu';
 import './SideContainer.css'
-// import { postLike, deleteLike } from '../../store/dashboard';
-// import DeleteComment from '../DeleteComment/DeleteComment';
 
 function SideContainer({ post, closeMenu, closePostView, option, profileUser }) {
 
@@ -148,7 +146,6 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                 </>
                     : null}
             </ul>
-            {/* <div className="footer-icons"> */}
             <div>
                 <span id='profile-like-button'>
                     {isLiked ?
@@ -156,15 +153,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                         : <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
                     }
                 </span>
-                {/* <span>
-                    <i className='fa-regular fa-comment post-icon'></i>
-                </span> */}
-                {/* <span>
-                    <i className='fa-regular fa-paper-plane post-icon'></i>
-                </span>
-                <span>
-                    <i className='fa-regular fa-bookmark post-icon'></i>
-                </span> */}
+
             </div>
             {likesCount > 0 ? <div id='profile-likes-number' className='footer-likes'>{likesCountRender}</div> : null}
 

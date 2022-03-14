@@ -12,11 +12,8 @@ import './PostFooter.css';
 export default function PostFooter({ post, option}) {
   const sessionUser = useSelector(state => state?.session?.user)
   const dispatch = useDispatch()
-  // const history = useHistory()
-
 
   let isLiked = post.likers.map(user => user.id).includes(sessionUser.id)
-  // console.log(isLiked)
   const [showModal, setShowModal] = useState(false);// test
 
   const onClick = async e => {
@@ -30,14 +27,12 @@ export default function PostFooter({ post, option}) {
         postId: post.id
       }
       dispatch(deleteLike(payload))
-      // const data = await dispatch(deleteLike(payload))
     } else {
       const payload = {
         userId: sessionUser.id,
         postId: post.id
       }
       dispatch(postLike(payload))
-      // const data = await dispatch(postLike(payload))
     }
 
     console.log('inside event listener',isLiked)
@@ -68,7 +63,6 @@ export default function PostFooter({ post, option}) {
 
   return (
     <div className='post-footer'>
-      {/* <div>{post.id}</div> */}
         <div className='footer-icons'>
         <span>
           {isLiked ?
@@ -84,12 +78,6 @@ export default function PostFooter({ post, option}) {
                         <PostView post={post} option='feed' />
                     </Modal>
                 )}
-        {/* <span>
-          <i className='fa-regular fa-paper-plane post-icon'></i>
-        </span> */}
-        {/* <span>
-          <i className='fa-regular fa-bookmark post-icon'></i>
-        </span> */}
       </div>
       {likesCount > 0 ? <div className='footer-likes'>{likesCountRender}</div> : null}
       <div className='comment-container'>

@@ -7,7 +7,6 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
   const dispatch = useDispatch();
   const [caption, setCaption] = useState(post.caption);
   const [disableSubmit, setDisableSubmit] = useState(false);
-  // const [errors, setErrors] = useState(false);
 
   const feed = useSelector(({ dashboard }) => dashboard.feed);
   const feedPost = feed.postIds[post.id];
@@ -30,17 +29,13 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
 
     const payload = { postId: post.id, caption };
 
-    // let data;
-
     if (option === 'profile') {
       dispatch(updateProfilePost(payload));
-      // data = await dispatch(updateProfilePost(payload));
 
       if (feedPost) dispatch(updatePost(post.id, caption))
 
     } else if (option === 'feed') {
       dispatch(updateDashboardPost(payload))
-      // data = await dispatch(updateDashboardPost(post.id, caption))
     }
 
     closeEdit()
@@ -51,7 +46,6 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
 
      <div id='post-form-container' className='final-form'>
       <div className='upload-post header'>
-        {/* <i className='fal fa-arrow-left' onClick={() => setShowTextForm(false)}></i> */}
         <h3>Edit Post</h3>
         <p
           className={`next-button `}
@@ -82,7 +76,6 @@ export default function PostEditForm({ post, closeEdit, closeMenu, option }) {
           </div>
           <textarea
             className='comment-input'
-            // placeholder='Write a caption...'
             ref={inputFocus}
             value={caption}
             onChange={e => setCaption(e.target.value)}

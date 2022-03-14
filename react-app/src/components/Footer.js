@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from 'react'
-// import { NavLink } from 'react-router-dom'
 import './Footer.css'
 
 export default function Footer() {
     const [showAboutUs, setShowAboutUs] = useState(false)
-
-    // const toggleAboutUsDropdown = () => {
-    //     setShowAboutUs(true)
-    // }
 
     useEffect(() => {
         if (!showAboutUs) return

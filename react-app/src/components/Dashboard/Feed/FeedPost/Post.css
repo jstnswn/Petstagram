@@ -67,12 +67,10 @@
 
 .post-header i {
     font-size: 20px;
-    /* margin-right: 20px; */
 }
 
 .post-footer {
     max-height: 300px;
-    /* max-height: 221px; */
     max-height:15%;
 
     width: 100%;

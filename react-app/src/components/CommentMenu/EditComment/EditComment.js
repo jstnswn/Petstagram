@@ -57,7 +57,6 @@ export default function EditComment({ option, hideForm, post, commentId, comment
   return (
     <div id='post-form-container' className='final-form'>
       <div className='upload-post header'>
-        {/* <i className='fal fa-arrow-left' onClick={() => setShowTextForm(false)}></i> */}
         <h3>Edit Comment</h3>
         {prevComment ? (
           <p

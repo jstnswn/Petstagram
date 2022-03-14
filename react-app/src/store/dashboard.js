@@ -97,7 +97,6 @@ export const getFeedPosts = () => async dispatch => {
     const data = await res.json();
     dispatch(loadPosts(data));
   } else {
-    // const errors = await res.json();
   }
 };
 

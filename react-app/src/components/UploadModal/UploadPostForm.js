@@ -35,9 +35,6 @@ export default function UploadPostForm({ closeModal }) {
     };
       await dispatch(createPostDashboard(payload))
         .then((res) => dispatch(loadPost(res)))
-    // if (data) {
-    //   setErrors([data]);
-    // }
     closeModal()
   };
 
@@ -89,7 +86,6 @@ export default function UploadPostForm({ closeModal }) {
           setImageUrl(null);
 
         }}></i>
-        {/* <h3></h3> */}
         <p className='next-button' onClick={() => setShowTextForm(true)}>Next</p>
       </>
     )
@@ -115,16 +111,10 @@ export default function UploadPostForm({ closeModal }) {
     formContent = (
       <form
         className='upload-post-form form'
-      // onSubmit={handleSubmit}
       >
         <img className='drag-and-drop' alt='drag and drop' src={dragAndDropImage}/>
 
 
-        {/* <FileUploader
-          handleChange={(file) => setFile(file)}
-          name='image'
-          types={fileTypes}
-        /> */}
 
         <Dropzone onDrop={(file) => setFile(file[0])}>
           {({ getRootProps, getInputProps }) => (
@@ -161,11 +151,6 @@ export default function UploadPostForm({ closeModal }) {
     )
   } else if (imageUrl && !showTextForm) {
     formContent = (
-      // <img
-      //   alt='post content'
-      //   className='upload-image view'
-      //   src={imageUrl}
-      // />
       <img alt='post content' className='upload-image view' src={imageUrl}/>
     );
   } else {

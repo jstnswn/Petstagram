@@ -9,7 +9,6 @@
 .profile-header {
     display:flex;
     flex-direction: row;
-    /* justify-content: center; */
     align-items: center;
     border-bottom: var(--border-gray) 1px solid;
     width: 100%;
