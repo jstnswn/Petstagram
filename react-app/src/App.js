@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     if (!user) setLoaded(false);
     (async() => {
-      if (user) {
+      if (user?.username) {
         await dispatch(getFeedPosts())
         setLoaded(true);
       }
