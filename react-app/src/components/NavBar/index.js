@@ -4,7 +4,7 @@ import ProfileButton from './ProfileButton'
 import './NavBar.css';
 import UploadModal from '../UploadModal';
 import petstagram from '../../assets/petstagram.png'
-import LikesDropdown from './LikesDropdown';
+import Notifications from './Notifications';
 
 
 export default function NavBar() {
@@ -18,7 +18,7 @@ export default function NavBar() {
           <i className='far fa-home-alt home-icon'></i>
         </NavLink>
         <UploadModal />
-        <LikesDropdown />
+        <Notifications />
         <ProfileButton />
       </div>
     </nav>

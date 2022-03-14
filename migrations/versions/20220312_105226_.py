@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4494e280a6a0
+Revision ID: 25496a34e329
 Revises: 
-Create Date: 2022-03-10 10:18:58.131456
+Create Date: 2022-03-12 10:52:26.564270
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4494e280a6a0'
+revision = '25496a34e329'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,6 +26,14 @@ def upgrade():
     sa.Column('image_url', sa.String(length=255), nullable=True),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('follow_notifications',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_to_id', sa.Integer(), nullable=False),
+    sa.Column('user_from_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['user_from_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_to_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('follows',
@@ -59,7 +67,6 @@ def upgrade():
     sa.Column('user_from_id', sa.Integer(), nullable=False),
     sa.Column('user_to_id', sa.Integer(), nullable=False),
     sa.Column('post_id', sa.Integer(), nullable=False),
-    sa.Column('is_checked', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
     sa.ForeignKeyConstraint(['user_from_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['user_to_id'], ['users.id'], ),
@@ -74,11 +81,14 @@ def upgrade():
     )
     op.create_table('comment_notifications',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('user_to_id', sa.Integer(), nullable=False),
+    sa.Column('user_from_id', sa.Integer(), nullable=False),
     sa.Column('comment_id', sa.Integer(), nullable=False),
-    sa.Column('is_checked', sa.Boolean(), nullable=True),
+    sa.Column('post_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['comment_id'], ['comments.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['post_id'], ['posts.id'], ),
+    sa.ForeignKeyConstraint(['user_from_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['user_to_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
@@ -92,5 +102,6 @@ def downgrade():
     op.drop_table('comments')
     op.drop_table('posts')
     op.drop_table('follows')
+    op.drop_table('follow_notifications')
     op.drop_table('users')
     # ### end Alembic commands ###

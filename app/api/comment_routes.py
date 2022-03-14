@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import current_user
-from app.models import Comment, db
+from app.models import Comment, db, CommentNotification, Post
 from app.forms.comment_form import CommentForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
@@ -28,7 +28,6 @@ def create_comment():
             post_id = data["post_id"],
             comment = data["comment"],
             created_at = now,
-
         )
 
         db.session.add(comment)

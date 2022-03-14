@@ -89,6 +89,22 @@ Users can log in with an existing account or sign up and create a new account. T
 <img src='react-app/public/read-me-imgs/login-form2.png'></img>
 <img src='react-app/public/read-me-imgs/signup-form.png'></img>
 <img src='react-app/public/read-me-imgs/signup-form2.png'></img>
+
+## Navbar
+
+Whenever a user is logged in they will be able to see the Navbar on any page. They will be able to navigate to their home feed, post an image, check notifications, or go to their profile page.
+
+- On the navbar the user can navigate to various parts of the site.
+  1. User can click on the logo or the house button to navigate to their feed.
+  2. User can click here to create a post.
+  3. User can click the heart to see notifications. It will be red if the user has notifications.
+  4. User can click the profile image for a dropdown that allows you to navigate to their profile page or logout.
+
+<img src='react-app/public/read-me-imgs/navbar.png'></img>
+
+- Opening the notifications dropdown will show any new likes, follows, and comments made on users posts. When closing the notification dropdown, all notifications will be deleted.
+
+<img src='react-app/public/read-me-imgs/notifications.png'></img>
 ## Dashboard
 
 Once logged in, the dashboard presents the user with a feed of posts shared by those they follow. The user is then able to infinitely scroll down his feed and click on a post they would like to interact with. There is also a nav bar at the top of the dashboard that coveniently allows the user to create a post, go to their profile page, or log out.
@@ -103,7 +119,7 @@ Once logged in, the dashboard presents the user with a feed of posts shared by t
 <img src='react-app/public/read-me-imgs/suggested-follows.png'></img>
 
 - On each dashboard post you can:
-  1. Click the ellipsis to open a modal that has an unfollow option.
+  1. Click the ellipsis to open a modal that has an unfollow option. If you unfollow someone their post will stay on your feed until refresh and you will be given the option to follow that person again.
   2. Click on the owner of the post to visit their profile.
   3. Click on the heart to like a post which dynamically changes the color aswell as the like count.
   4. Click the comment bubble to view all comments.
@@ -123,6 +139,21 @@ Clicking on the upload icon in the nav bar will open up a modal form, where the 
 
 Once a post is created, the user can both edit and delete their post.
 
+- When creating a post, user can click 'Select from computer' button to choose a file from their local machine.
+
+<img src='react-app/public/read-me-imgs/create-post.png'></img>
+
+- User can also just drag and drop an image and it will give you a preview.
+
+<img src='react-app/public/read-me-imgs/create-post-img.png'></img>
+
+- When clicking next, user can then add a caption to their image before posting.
+
+<img src='react-app/public/read-me-imgs/create-post-caption.png'></img>
+
+- After creating a post, it will show up on your feed and you can click the ellipsis to edit or delete that post.
+- If you refresh the page the post will disappear because your own posts are not part of your feed.
+<img src='react-app/public/read-me-imgs/delete-edit-post.png'></img>
 ## Comments
 
 Upon clicking on a post, the user is able to read/write comments as well as delete/edit their own individual comment.
@@ -134,3 +165,12 @@ A user is able to like/dislike any image in their feed, including their own.
 ## Follows
 
 On the dashboard, a user is able to unfollow any users they are currently following. On any profile page, the logged in user can click and view a list of followers/following specific to the profile page user. There, the logged in user has the option to follow or unfollow anyone on that list.
+
+
+## User Profile Page
+
+On the profile page, if it is the user's profile they can change their profile image. On any profile page, they can see the profile users followers and who the profile user is following. Here they can also view details of any post and view all of the post's comments.
+
+- 
+
+<img src='react-app/public/read-me-imgs/profile-page.png'></img>

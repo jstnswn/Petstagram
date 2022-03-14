@@ -17,6 +17,7 @@ class Post(db.Model):
     comments = db.relationship('Comment', back_populates='post', cascade='all, delete-orphan')
     likers = db.relationship('User', back_populates='liked_posts', secondary=likes)
     like_notifications = db.relationship('LikeNotification', back_populates='post', cascade='all, delete-orphan')
+    comment_notifications = db.relationship('CommentNotification', back_populates='post', cascade='all, delete-orphan')
 
     @staticmethod
     def get_posts_by_following(current_user_id):
@@ -26,6 +27,12 @@ class Post(db.Model):
         posts = Post.query.filter(Post.user_id.in_(following_ids)).all()
 
         return [post.to_dict() for post in posts]
+
+    def n_to_dict(self):
+        return {
+            'id': self.id,
+            'image_url': self.image_url,
+        }
 
     def to_dict(self):
         return {

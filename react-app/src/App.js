@@ -34,16 +34,7 @@ function App() {
       }
     })()
   }, [user, dispatch])
-  useEffect(() => {
-    if (!user) return;
 
-    // dispatch(getNotifications())
-
-  }, [user])
-
-  if (!loaded) {
-    return null;
-  }
 
   return (
     <BrowserRouter>

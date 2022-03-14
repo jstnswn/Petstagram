@@ -10,7 +10,6 @@ from .notifications import undo_like_notifications
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
 
-
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():
@@ -18,7 +17,6 @@ def seed():
     seed_posts()
     seed_comments()
     # Add other seed functions here
-
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
