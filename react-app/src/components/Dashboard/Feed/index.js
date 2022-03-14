@@ -44,7 +44,7 @@ export default function Feed() {
           style={{ overflow: 'hidden' }}
         >
           {posts.map((post, idx) => (
-            <FeedPost key={idx} post={post} />
+            <FeedPost key={idx} post={post} setPosts={setPosts}/>
           ))}
         </InfiniteScroll>
       </div>

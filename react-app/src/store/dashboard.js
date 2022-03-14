@@ -38,7 +38,7 @@ export const updatePost = (postId, caption) => {
   };
 };
 
-const removePost = (postId) => {
+export const removePost = (postId) => {
   return {
     type: REMOVE_POST,
     postId
@@ -366,7 +366,9 @@ export default function reducer(state = initialState, action) {
       idx = postsOrder.findIndex(id => id === action.postId);
 
       postsOrder.splice(idx, 1);
-      delete stateCopy.feed[action.postId]
+      delete stateCopy.feed.postIds[action.postId]
+
+      console.log("action", action.postId)
       return stateCopy;
 
     case ADD_COMMENT:
