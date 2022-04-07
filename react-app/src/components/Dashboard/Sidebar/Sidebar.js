@@ -35,7 +35,34 @@ export default function Sidebar() {
           <FollowSuggestion key={idx} user={user} setSuggestions={setSuggestions} />
         ))}
       </div>
-
+      <section className='sidebar-footer'>
+        <ul>
+          {/* <li>Developers:</li> */}
+          <li>
+            <a href='https://www.linkedin.com/in/chris-young-96453917/' target='_blank' rel="noopener noreferrer">Chris Young</a>
+          </li>
+          <li className='spacing-dot'>.</li>
+          <li>
+            <a href='https://www.linkedin.com/in/djlee777/' target='_blank' rel="noopener noreferrer">David Lee</a>
+          </li>
+          <li className='spacing-dot'>.</li>
+          <li>
+            <a href='https://www.linkedin.com/in/justin-chau-1123a9142/' target='_blank' rel="noopener noreferrer">Justin Chau</a>
+          </li>
+          {/* <li className='spacing-dot'>.</li> */}
+          <li>
+            <a href='https://www.linkedin.com/in/jstnswn/' target='_blank' rel="noopener noreferrer">Justin Sweeney</a>
+          </li>
+          <li className='spacing-dot'>.</li>
+          <li>
+            <a href='https://www.linkedin.com/in/srdanvorkapic/' target='_blank' rel="noopener noreferrer">Srdan Vorkapic</a>
+          </li>
+          <li className='placeholder'>
+            Placeholder
+          </li>
+        </ul>
+        <p>© 2022 ALL RIGHTS RESERVED</p>
+      </section>
     </div>
   )
 }
