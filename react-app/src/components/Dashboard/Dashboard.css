@@ -105,3 +105,49 @@
 .side-user-info .full-name {
     color: #8E8E8E;
 }
+
+.sidebar-footer {
+    font-size: 12px;
+    color: #C7C7C7;
+}
+
+.sidebar-footer p {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.sidebar-footer a {
+    color: #C7C7C7;
+    /* margin-right: 5px; */
+}
+
+.sidebar-footer i {
+    color: #C7C7C7;
+    margin: 3px;
+}
+
+.sidebar-footer ul {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.sidebar-footer li.spacing-dot {
+    /* height: 13px; */
+    /* list-style-type: disc; */
+    /* vertical-align: center; */
+    margin-top: -4px;
+}
+
+.sidebar-footer li.placeholder {
+    opacity: 0;
+    /* color: orange; */
+}
+
+
+
+/* .sidebar-footer li:after {
+    content: "· ";
+    font-size: 16px;
+} */
