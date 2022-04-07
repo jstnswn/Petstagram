@@ -39,15 +39,12 @@
     width: 73px;
     border: 1px solid rgb(219,219,219);
     border-radius: 4px;
-}
-
-#profile-unfollow-btn:hover {
     cursor: pointer;
 }
 
-
 .grid-item-container {
     position: relative;
+    cursor: pointer;
 }
 
 .profile-grid-image {
@@ -58,10 +55,8 @@
 }
 .grid-item-overlay {
     position: absolute;
-    /* margin: 12px; */
     top: 0;
     margin: 12px;
-    /* left: 0; */
     height: 293px;
     width: 293px;
     padding: 100px;
@@ -89,6 +84,7 @@
 .profile-header-pic-container {
     width: 291px;
     display: flex;
+    cursor: pointer;
     justify-content: center;
     align-items: center;
     margin: 0 30px 0 0 ;

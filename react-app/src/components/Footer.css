@@ -19,6 +19,7 @@
 
 #footer-bottom {
     display: flex;
+    position: relative;
 }
 
 #about-us-dropdown {
@@ -33,14 +34,16 @@
     margin: 0px 20px 0px 5px;
 }
 
-.names {
+.names, .names > a {
     padding: 3px 0px;
+    color: white;
 }
 
 #about-us-list, .names > a:visited {
     position: absolute;
+    top: 20px;
+    left: -50px;
     background-color: rgb(94, 94, 94);
     border-radius: 5px;
-    color: white;
     padding: 5px 20px;
 }
