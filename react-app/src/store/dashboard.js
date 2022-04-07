@@ -280,7 +280,8 @@ export const follow = payload => async dispatch => {
   const data = await res.json()
 
   if (res.ok) {
-    dispatch(followActionCreator(data.user))
+    await dispatch(followActionCreator(data.user))
+    await dispatch(getFeedPosts())
   } else {
     throw res
   }

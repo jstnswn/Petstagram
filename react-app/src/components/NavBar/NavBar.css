@@ -1,17 +1,24 @@
-#nav-bar {
-    height: 60px;
+#nav-bar-container {
     width: 100vw;
+    border: 1px solid var(--border-gray);
+    background-color: white;
+    height: 60px;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+}
+
+#nav-bar {
+    /* width: 100vw; */
+    width: 908px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 30px;
-    background-color: white;
-    border: 1px solid var(--border-gray);
-    position: fixed;
-    top: 0;
-    z-index: 1;
+    padding: 5px 0px;
+    /* border: red 1px solid; */
 }
-
 
 #nav-bar .nav-dropdown {
     position: absolute;
@@ -67,42 +74,42 @@
     justify-content: center;
     align-items: center;
     border-radius: 6px;
-    padding-top: 1px;
-    height: 22px;
-    width: 22px;
+    /* padding-top: 1.8px; */
+    height: 24px;
+    width: 24px;
     margin-bottom: 2px;
 }
 
 .profile-button-container {
     position: relative;
-    height: 24px;
-    width: 24px;
+    height: 25px;
+    width: 25px;
     justify-content: center;
     align-items: center;
 }
 
 .nav-bar.right-section > * {
-    margin: 0 12px;
+    margin: 0 15px;
     cursor: pointer;
 }
 
 #nav-bar .upload-button {
-    font-size: 17px;
+    font-size: 19px;
 }
 
 .likes-dropdown-container .like-icon {
-    font-size: 23px;
+    font-size: 25px;
 }
 
 
 #nav-bar .home-icon-container .home-icon {
-    font-size: 23px;
+    font-size: 25px;
     color: black;
 }
 
 .profile-button {
-    height: 24px;
-    width: 24px;
+    height: 27px;
+    width: 27px;
     object-fit: cover;
     border-radius: 50%;
     cursor: pointer;
