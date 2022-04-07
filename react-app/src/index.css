@@ -41,3 +41,7 @@ button:hover {
     color: rgb(237,73,86);
     font-size: 14px;
 }
+
+.fa-ellipsis {
+    cursor: pointer;
+}
