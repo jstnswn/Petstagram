@@ -39,7 +39,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
 
         if (pastSecond <= 60 && pastMinute === 0 && pastHour === 0 && pastDay === 0) return `< 1m`;
         if (pastMinute <= 60 && pastHour === 0 && pastDay === 0) return `${pastMinute}m`;
-        if (pastHour <= 60 && pastDay === 0) return `${pastHour-4}h`;
+        if (pastHour <= 60 && pastDay === 0) return `${pastHour - 4}h`;
         if (pastDay >= 2 || pastHour > 24) return `${pastDay}d`;
 
     }
@@ -61,7 +61,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
             } else if (option === 'profile' && sessionUser.username === profileUser.username) {
                 const deletedLike = await dispatch(profileDeleteLike(payload))
 
-                if(deletedLike && dashboardPosts[id]){
+                if (deletedLike && dashboardPosts[id]) {
                     dispatch(deleteLikeActionCreator(sessionUser.id, post.id))
                 }
             } else {
@@ -77,11 +77,11 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                 dispatch(postLike(payload))
             } else if (option === 'profile' && sessionUser.username === profileUser.username) {
 
-                   const addedLike = await dispatch(profilePostLike(payload))
+                const addedLike = await dispatch(profilePostLike(payload))
 
-                   if(addedLike && dashboardPosts[id]){
-                       dispatch(postLike(payload))
-                   }
+                if (addedLike && dashboardPosts[id]) {
+                    dispatch(postLike(payload))
+                }
             }
             else {
                 dispatch(profilePostLike(payload))
@@ -113,64 +113,67 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
 
 
     return (
-        <div className="post-view-comments">
-            <ul>
-                <li>
-                    <div className="caption-shell">
-                        <div>
-                            <img className="post-view-user-img" src={post.user.image_url} alt='profile'></img>
-                        </div>
-                        <div>
-                            <NavLink to={`/${post.user.username}`} onClick={closePostView}>{post.user.username}</NavLink>
-                            <span>{post.caption}</span>
-                        </div>
-                    </div>
-                </li>
-
-                {commentsArr.length !== 0 ? <>
-                    {reverseArr.map((comment) =>
-                        <li key={comment.id} className='whole-comment' >
-                            <div className="comment-shell">
-                                <img className="post-view-user-img" src={comment.user.image_url} alt='profile'></img>
-                                <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
-                                <span id='comment-itself'>{comment.comment}</span>
+        <>
+            <div className="post-view-comments">
+                <ul>
+                    <li>
+                        <div className="caption-shell">
+                            <div>
+                                <img className="post-view-user-img" src={post.user.image_url} alt='profile'></img>
                             </div>
-                            <div className='time-and-menu'>
-                                <div className='time-passed'>{timePassed(Date.parse(new Date().toLocaleString()) - Date.parse(comment?.created_at))}</div>
-                                {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id} /> : <i id='ghost' className='far fa-ellipsis-h post-view' />}
-
+                            <div>
+                                <NavLink to={`/${post.user.username}`} onClick={closePostView}>{post.user.username}</NavLink>
+                                <span>{post.caption}</span>
                             </div>
-                        </li>
+                        </div>
+                    </li>
 
-                    )}
-                </>
-                    : null}
-            </ul>
-            {/* <div className="footer-icons"> */}
-            <div>
-                <span id='profile-like-button'>
-                    {isLiked ?
-                        <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
-                        : <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
-                    }
-                </span>
-                {/* <span>
+                    {commentsArr.length !== 0 ? <>
+                        {reverseArr.map((comment) =>
+                            <li key={comment.id} className='whole-comment' >
+                                <div className="comment-shell">
+                                    <img className="post-view-user-img" src={comment.user.image_url} alt='profile'></img>
+                                    <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
+                                    <span id='comment-itself'>{comment.comment}</span>
+                                </div>
+                                <div className='time-and-menu'>
+                                    {/* <div className='time-passed'>{timePassed(Date.parse(new Date().toLocaleString()) - Date.parse(comment?.created_at))}</div> */}
+                                    <div className='comment-ellipsis'>
+                                        {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id} /> : <i id='ghost' className='far fa-ellipsis-h post-view' />}
+                                    </div>
+
+                                </div>
+                            </li>
+
+                        )}
+                    </>
+                        : null}
+                </ul>
+                {/* <div className="footer-icons"> */}
+                <div>
+                    <span id='profile-like-button'>
+                        {isLiked ?
+                            <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
+                            : <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
+                        }
+                    </span>
+                    {/* <span>
                     <i className='fa-regular fa-comment post-icon'></i>
                 </span> */}
-                {/* <span>
+                    {/* <span>
                     <i className='fa-regular fa-paper-plane post-icon'></i>
                 </span>
                 <span>
                     <i className='fa-regular fa-bookmark post-icon'></i>
                 </span> */}
-            </div>
-            {likesCount > 0 ? <div id='profile-likes-number' className='footer-likes'>{likesCountRender}</div> : null}
+                </div>
+                {likesCount > 0 ? <div id='profile-likes-number' className='footer-likes'>{likesCountRender}</div> : null}
 
-            <div>
-                <CommentForm profileUser={profileUser} option={option} post={post} />
             </div>
-        </div>
-
+            <div className='comment-form-within-side-container'>
+                <CommentForm  secondOption={'side-container'} profileUser={profileUser} option={option} post={post} />
+            </div>
+        </>
     )
 
 }
