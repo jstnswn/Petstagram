@@ -17,6 +17,7 @@
     margin-top: 10px;
     background: transparent;
     margin-left: 10px;
+    height:100%;
 }
 
 .comment-form-textarea::-webkit-scrollbar {
@@ -30,7 +31,9 @@
 
 .comment-form-container{
     display:flex;
+    justify-content: flex-end;
     /* height:400px; */
+    /* height:100%; */
 }
 
 .comment-form-container-profile {
@@ -56,3 +59,7 @@
     line-height: 18px;
     pointer-events: none;
 }
+
+/* .comment-form-whole-div {
+    height:100%
+} */

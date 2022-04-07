@@ -64,7 +64,9 @@
 }
 
 .time-and-menu{
-    align-items: center;
+    display:flex;
+    justify-content: flex-end;
+    width:100%;
     /* justify-content: space-between; */
     /* width: 315px; */
 }
@@ -96,3 +98,10 @@
 #comment-itself {
     overflow-wrap: break-word;
 }
+
+.comment-ellipsis {
+    padding-top:17px;
+    margin-right:17px;
+}
+
+

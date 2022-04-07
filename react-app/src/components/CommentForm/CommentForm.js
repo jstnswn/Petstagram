@@ -5,7 +5,7 @@ import { createCommentDashboard } from "../../store/dashboard";
 import { createCommentProfile } from "../../store/profile";
 import { addComment } from "../../store/dashboard";
 
-function CommentForm({ option, post, profileUser}) {
+function CommentForm({ option, post, profileUser, secondOption}) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector(state => state.session.user);
@@ -43,7 +43,7 @@ function CommentForm({ option, post, profileUser}) {
 
     return (
 
-        <div>
+        <div className="comment-form-whole-div">
 
             <form onSubmit={handleSubmit}>
                 <div className="comment-form-container">
@@ -52,7 +52,7 @@ function CommentForm({ option, post, profileUser}) {
                         id={post.id}
                         className="comment-form-textarea"
                         cols="80"
-                        // rows='10'
+                        rows={secondOption === 'side-container' ? '7' : '2' }
                         placeholder="Add a comment..."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
