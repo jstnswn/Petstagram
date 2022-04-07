@@ -51,7 +51,8 @@ function CommentForm({ option, post, profileUser}) {
                         name="comment"
                         id={post.id}
                         className="comment-form-textarea"
-                        cols="74"
+                        cols="80"
+                        // rows='10'
                         placeholder="Add a comment..."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}

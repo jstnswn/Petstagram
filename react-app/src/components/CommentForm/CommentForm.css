@@ -13,18 +13,24 @@
 .comment-form-textarea{
     border:none;
     resize:none;
+    outline: none;
     margin-top: 10px;
     background: transparent;
+    margin-left: 10px;
+}
+
+.comment-form-textarea::-webkit-scrollbar {
+    display:none;
 }
 
 .comment-form-textarea:focus{
     overflow: hidden;
     outline:none;
-
 }
 
 .comment-form-container{
     display:flex;
+    /* height:400px; */
 }
 
 .comment-form-container-profile {

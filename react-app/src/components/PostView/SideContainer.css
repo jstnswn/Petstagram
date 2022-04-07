@@ -19,7 +19,7 @@
 .comment-shell{
     display:flex;
     margin-top:16px;
-    margin-right:16px;
+    /* margin-right:16px; */
     margin-bottom:16px;
 
 }
@@ -64,12 +64,9 @@
 }
 
 .time-and-menu{
-    display:flex;
     align-items: center;
-    justify-content: space-between;
-    padding-bottom:5px;
-    padding-left:103px;
-    width: 315px;
+    /* justify-content: space-between; */
+    /* width: 315px; */
 }
 
 .time-and-menu #ghost{
@@ -90,4 +87,12 @@
 #profile-likes-number{
     padding-left: 10px;
     padding-top: 10px;
+}
+
+.whole-comment {
+    display:flex;
+}
+
+#comment-itself {
+    overflow-wrap: break-word;
 }
