@@ -8,8 +8,10 @@
 
 
 .post-view-user-img{
-    height: 32px;
-    width: 32px;
+    min-height: 32px;
+    max-height:32px;
+    min-width: 32px;
+    max-width:32px;
     border-radius: 50%;
     margin-right:12px;
     object-fit:cover;
@@ -66,7 +68,8 @@
 .time-and-menu{
     display:flex;
     justify-content: flex-end;
-    width:100%;
+    margin-right:-15px;
+    /* width:100%; */
     /* justify-content: space-between; */
     /* width: 315px; */
 }
@@ -96,12 +99,19 @@
 }
 
 #comment-itself {
-    overflow-wrap: break-word;
+    word-break: break-word;
+    /* overflow-wrap: break-word; */
+    max-width:270px;
 }
 
 .comment-ellipsis {
-    padding-top:17px;
+    padding-top:18px;
     margin-right:17px;
 }
 
 
+.comment-and-ellipsis-parent{
+    display:flex;
+    justify-content: space-between;
+    max-width: 372px;
+}
