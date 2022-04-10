@@ -24,6 +24,12 @@
 .comment2{
     display:flex;
     font-size:14px;
+    white-space:normal;
+}
+
+.comment1-div,
+.comment2-div{
+    word-break:break-word;
 }
 
 .comment1 a,
