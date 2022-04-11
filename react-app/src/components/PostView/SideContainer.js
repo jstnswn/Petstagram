@@ -130,12 +130,14 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
 
                     {commentsArr.length !== 0 ? <>
                         {reverseArr.map((comment) =>
-                            <li key={comment.id} className='whole-comment' >
-                                <div className="comment-shell">
-                                    <img className="post-view-user-img" src={comment.user.image_url} alt='profile'></img>
-                                    <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
-                                    <span id='comment-itself'>{comment.comment}</span>
-                                </div>
+                            <div className='comment-and-ellipsis-parent'>
+                                <li key={comment.id} className='whole-comment' >
+                                    <div className="comment-shell">
+                                        <img className="post-view-user-img" src={comment.user.image_url} alt='profile'></img>
+                                        <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
+                                        <span id='comment-itself'>{comment.comment}</span>
+                                    </div>
+                                </li>
                                 <div className='time-and-menu'>
                                     {/* <div className='time-passed'>{timePassed(Date.parse(new Date().toLocaleString()) - Date.parse(comment?.created_at))}</div> */}
                                     <div className='comment-ellipsis'>
@@ -143,7 +145,8 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                                     </div>
 
                                 </div>
-                            </li>
+
+                            </div>
 
                         )}
                     </>
@@ -171,7 +174,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
 
             </div>
             <div className='comment-form-within-side-container'>
-                <CommentForm  secondOption={'side-container'} profileUser={profileUser} option={option} post={post} />
+                <CommentForm secondOption={'side-container'} profileUser={profileUser} option={option} post={post} />
             </div>
         </>
     )
