@@ -121,9 +121,9 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                             <div>
                                 <img className="post-view-user-img" src={post.user.image_url} alt='profile'></img>
                             </div>
-                            <div>
+                            <div className='caption-box'>
                                 <NavLink to={`/${post.user.username}`} onClick={closePostView}>{post.user.username}</NavLink>
-                                <span>{post.caption}</span>
+                                <span className='post-caption'>{post.caption}</span>
                             </div>
                         </div>
                     </li>
@@ -133,9 +133,13 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                             <div className='comment-and-ellipsis-parent'>
                                 <li key={comment.id} className='whole-comment' >
                                     <div className="comment-shell">
-                                        <img className="post-view-user-img" src={comment.user.image_url} alt='profile'></img>
-                                        <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
-                                        <span id='comment-itself'>{comment.comment}</span>
+                                        <div>
+                                            <img className="post-view-user-img" src={comment.user.image_url} alt='profile'></img>
+                                        </div>
+                                        <div>
+                                            <NavLink to={`/${comment.user.username}`} onClick={closePostView}>{comment.user.username}</NavLink>
+                                            <span id='comment-itself'>{comment.comment}</span>
+                                        </div>
                                     </div>
                                 </li>
                                 <div className='time-and-menu'>
