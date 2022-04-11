@@ -176,7 +176,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                             : <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
                         }
                     </span>
-                    <div>
+                    <div style={{fontSize:'14px'}}>
                         {likesCount > 0 ? <div id='profile-likes-number' className='footer-likes'>{likesCountRender}</div> : null}
                     </div>
                 </div>

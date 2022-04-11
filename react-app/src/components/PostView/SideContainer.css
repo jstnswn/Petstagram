@@ -56,7 +56,8 @@
 
 .post-view-comments ul{
     overflow:scroll;
-    height:525px;
+    /* height:525px; */
+    height: 100%;
     padding-left:15px;
 }
 
@@ -137,7 +138,7 @@
 }
 
 .comment-form-within-side-container {
-    justify-self: end;
+    /* justify-self: end; */
     /* border: 1px solid blue; */
-    padding-right: 13px;
+    margin-right: 13px;
 }
