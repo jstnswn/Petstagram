@@ -22,9 +22,9 @@
 }
 
 .post-view-side-container {
-    /* display: flex;
-    flex-direction: column; */
-    /* justify-content: space-between; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
     z-index: 1;

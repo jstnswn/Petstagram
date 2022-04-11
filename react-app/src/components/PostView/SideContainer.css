@@ -3,15 +3,9 @@
 .post-view-comments{
     display:flex;
     flex-direction: column;
-<<<<<<< HEAD
     height: 70%;
-=======
-
     font-size: 14px;
-
-    max-height:100%;
     width: 100%;
->>>>>>> main
 }
 
 
@@ -133,7 +127,6 @@
 .comment-and-ellipsis-parent{
     display:flex;
     justify-content: space-between;
-<<<<<<< HEAD
     max-width: 372px;
 }
 
@@ -144,9 +137,7 @@
 }
 
 .comment-form-within-side-container {
-    justify-self: flex-end;
-=======
-
+    justify-self: end;
+    /* border: 1px solid blue; */
     padding-right: 13px;
->>>>>>> main
 }

@@ -157,6 +157,18 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                         : null}
                 </ul>
                 {/* <div className="footer-icons"> */}
+                    {/* <span>
+                    <i className='fa-regular fa-comment post-icon'></i>
+                </span> */}
+                    {/* <span>
+                    <i className='fa-regular fa-paper-plane post-icon'></i>
+                    </span>
+                    <span>
+                    <i className='fa-regular fa-bookmark post-icon'></i>
+                </span> */}
+
+            </div>
+            <div className='comment-form-within-side-container'>
                 <div id='side-container-likes'>
                     <span id='profile-like-button'>
                         {isLiked ?
@@ -167,19 +179,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                     <div>
                         {likesCount > 0 ? <div id='profile-likes-number' className='footer-likes'>{likesCountRender}</div> : null}
                     </div>
-                    {/* <span>
-                    <i className='fa-regular fa-comment post-icon'></i>
-                </span> */}
-                    {/* <span>
-                    <i className='fa-regular fa-paper-plane post-icon'></i>
-                </span>
-                <span>
-                    <i className='fa-regular fa-bookmark post-icon'></i>
-                </span> */}
                 </div>
-
-            </div>
-            <div className='comment-form-within-side-container'>
                 <CommentForm secondOption={'side-container'} profileUser={profileUser} option={option} post={post} />
             </div>
         </>
