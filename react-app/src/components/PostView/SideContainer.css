@@ -3,7 +3,7 @@
 .post-view-comments{
     display:flex;
     flex-direction: column;
-    height:600px;
+    height: 70%;
 }
 
 
@@ -114,4 +114,14 @@
     display:flex;
     justify-content: space-between;
     max-width: 372px;
+}
+
+#side-container-likes {
+    padding: 15px 0px;
+    border-top: 1px solid rgb(222, 222, 222);
+    border-bottom: 1px solid rgb(222, 222, 222); ;
+}
+
+.comment-form-within-side-container {
+    justify-self: flex-end;
 }

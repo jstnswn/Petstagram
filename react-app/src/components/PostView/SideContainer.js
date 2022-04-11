@@ -153,13 +153,16 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                         : null}
                 </ul>
                 {/* <div className="footer-icons"> */}
-                <div>
+                <div id='side-container-likes'>
                     <span id='profile-like-button'>
                         {isLiked ?
                             <i className='fa-solid fa-heart post-icon red' onClick={onClick}></i>
                             : <i className='fa-regular fa-heart post-icon' onClick={onClick}></i>
                         }
                     </span>
+                    <div>
+                        {likesCount > 0 ? <div id='profile-likes-number' className='footer-likes'>{likesCountRender}</div> : null}
+                    </div>
                     {/* <span>
                     <i className='fa-regular fa-comment post-icon'></i>
                 </span> */}
@@ -170,7 +173,6 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                     <i className='fa-regular fa-bookmark post-icon'></i>
                 </span> */}
                 </div>
-                {likesCount > 0 ? <div id='profile-likes-number' className='footer-likes'>{likesCountRender}</div> : null}
 
             </div>
             <div className='comment-form-within-side-container'>
