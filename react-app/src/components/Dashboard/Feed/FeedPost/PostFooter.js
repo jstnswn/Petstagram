@@ -87,12 +87,7 @@ export default function PostFooter({ post, option}) {
               {post.user.username}
             </ NavLink>
           </span>
-          {post.caption.length > 60? 
-          post.caption.slice(0,60) + "..."
-          :
-          post.caption
-          }
-          {/* {post.caption} */}
+          {post.caption}
         </p>
         <ViewComments post={post}/>
       </div>
