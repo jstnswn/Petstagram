@@ -63,7 +63,7 @@
 .comment-notification-box {
     text-overflow: ellipsis;
     /* max-width: 280px; */
-    border: red 1px solid;
+    
 }
 
 .comment-notification {

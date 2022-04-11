@@ -32,7 +32,7 @@
     /* word-break:break-word; */
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nonwrap;
+    white-space: nowrap;
 }
 
 .comment1 a,
