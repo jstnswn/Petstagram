@@ -61,7 +61,9 @@ span i {
     font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
-    white-space: nonwrap;
+    white-space: nowrap;
+    height: 17px;
+    display: block;
 }
 
 #like {
