@@ -86,7 +86,13 @@ export default function PostFooter({ post, option}) {
             <NavLink to={`/${post.user.username}`} id='dashboard-caption-username'>
               {post.user.username}
             </ NavLink>
-          </span>{post.caption}
+          </span>
+          {post.caption.length > 60? 
+          post.caption.slice(0,60) + "..."
+          :
+          post.caption
+          }
+          {/* {post.caption} */}
         </p>
         <ViewComments post={post}/>
       </div>
