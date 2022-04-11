@@ -3,7 +3,15 @@
 .post-view-comments{
     display:flex;
     flex-direction: column;
+<<<<<<< HEAD
     height: 70%;
+=======
+
+    font-size: 14px;
+
+    max-height:100%;
+    width: 100%;
+>>>>>>> main
 }
 
 
@@ -20,18 +28,35 @@
 
 .comment-shell{
     display:flex;
-    margin-top:16px;
-    /* margin-right:16px; */
-    margin-bottom:16px;
+    /* margin-top:16px; */
+
+
+    margin-bottom:26px;
 
 }
 
 .caption-shell{
     display:flex;
-    margin-top:16px;
+    /* margin-top:16px; */
     margin-right:16px;
-    margin-bottom:16px;
-    padding-bottom:21px;
+    margin-bottom:26px;
+    margin-right: 10px;
+
+    width: 291px;
+
+    /* border: green 4px solid; */
+
+
+
+    /* padding-bottom:21px; */
+}
+
+.caption-shell .caption-box {
+    width: 100%;
+}
+
+.caption-shell .post-caption {
+    overflow-wrap: break-word;
 }
 
 
@@ -69,9 +94,6 @@
     display:flex;
     justify-content: flex-end;
     margin-right:-15px;
-    /* width:100%; */
-    /* justify-content: space-between; */
-    /* width: 315px; */
 }
 
 .time-and-menu #ghost{
@@ -100,19 +122,18 @@
 
 #comment-itself {
     word-break: break-word;
-    /* overflow-wrap: break-word; */
-    max-width:270px;
+    padding: 0;
 }
 
 .comment-ellipsis {
-    padding-top:18px;
-    margin-right:17px;
+    margin-right: 22px;
 }
 
 
 .comment-and-ellipsis-parent{
     display:flex;
     justify-content: space-between;
+<<<<<<< HEAD
     max-width: 372px;
 }
 
@@ -124,4 +145,8 @@
 
 .comment-form-within-side-container {
     justify-self: flex-end;
+=======
+
+    padding-right: 13px;
+>>>>>>> main
 }
