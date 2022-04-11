@@ -3,10 +3,8 @@
 .post-view-comments{
     display:flex;
     flex-direction: column;
-
+    height: 70%;
     font-size: 14px;
-
-    max-height:100%;
     width: 100%;
 }
 
@@ -58,7 +56,8 @@
 
 .post-view-comments ul{
     overflow:scroll;
-    height:525px;
+    /* height:525px; */
+    height: 100%;
     padding-left:15px;
 }
 
@@ -129,6 +128,17 @@
 .comment-and-ellipsis-parent{
     display:flex;
     justify-content: space-between;
+    max-width: 372px;
+}
 
-    padding-right: 13px;
+#side-container-likes {
+    padding: 15px 0px;
+    border-top: 1px solid rgb(222, 222, 222);
+    border-bottom: 1px solid rgb(222, 222, 222); ;
+}
+
+.comment-form-within-side-container {
+    /* justify-self: end; */
+    /* border: 1px solid blue; */
+    margin-right: 13px;
 }

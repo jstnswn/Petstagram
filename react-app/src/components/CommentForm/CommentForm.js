@@ -52,7 +52,7 @@ function CommentForm({ option, post, profileUser, secondOption}) {
                         id={post.id}
                         className="comment-form-textarea"
                         cols="80"
-                        rows={secondOption === 'side-container' ? '7' : '2' }
+                        // rows={secondOption === 'side-container' ? '7' : '2' }
                         placeholder="Add a comment..."
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
