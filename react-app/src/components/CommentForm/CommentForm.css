@@ -23,14 +23,16 @@
     width: 100%;
 }
 
-.comment-form-textarea::-webkit-scrollbar {
-    /* display:none; */
-}
 
 .comment-form-textarea:focus{
     overflow-y: scroll;
     outline:none;
+
 }
+/* 
+.comment-form-textarea::-webkit-scrollbar {
+} */
+
 
 .comment-form-container{
     display:flex;

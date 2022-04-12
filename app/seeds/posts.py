@@ -370,7 +370,7 @@ def seed_posts():
         Post(
             user_id=11,
             caption="No makeup shot",
-            image_url='http://ig-clone-bucket.s3.amazonaws.com/seeds/11aa51b2521644fab881ec4cc6ba19be.jpg',
+            image_url='https://ig-clone-bucket.s3.us-east-2.amazonaws.com/seeds/d3d8f25d74a53f2c553f245748558818.jpeg',
         ),
          Post(
             user_id=2,
