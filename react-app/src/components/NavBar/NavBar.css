@@ -137,9 +137,18 @@
     align-items: center;
 }
 
-.profile-button-container ul li:hover {
+.profile-button-container ul li:first-child:hover {
     background-color: var(--highlight-gray);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
+
+.profile-button-container ul li:last-child:hover {
+    background-color: var(--highlight-gray);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
 
 .profile-button-container ul li a {
     color: black;
