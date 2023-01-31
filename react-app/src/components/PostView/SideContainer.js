@@ -145,7 +145,7 @@ function SideContainer({ post, closeMenu, closePostView, option, profileUser }) 
                                 <div className='time-and-menu'>
                                     {/* <div className='time-passed'>{timePassed(Date.parse(new Date().toLocaleString()) - Date.parse(comment?.created_at))}</div> */}
                                     <div className='comment-ellipsis'>
-                                        {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id} /> : <i id='ghost' className='far fa-ellipsis-h post-view' />}
+                                        {comment.user.id === sessionUser.id ? <CommentMenuModal profileUser={profileUser} option={option} comment={comment.comment} post={post} commentId={comment.id} /> : <i id='ghost' className='far fa-solid fa-ellipsis post-view' />}
                                     </div>
 
                                 </div>
