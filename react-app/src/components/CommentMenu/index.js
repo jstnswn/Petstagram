@@ -11,7 +11,7 @@ function CommentMenuModal({ commentId, post, comment, option, profileUser}) {
 
     return (
         <div>
-            <i onClick={() => setShowModal(true)} className='far fa-ellipsis-h post-view'/>
+            <i onClick={() => setShowModal(true)} className='far fa-solid fa-ellipsis post-view'/>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <CommentMenu profileUser={profileUser} option={option} comment={comment} post={post} hideForm={hideForm} commentId={commentId}/>

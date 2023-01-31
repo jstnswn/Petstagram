@@ -11,7 +11,7 @@ export default function NavDropdown() {
   return (
     <ul className='nav-dropdown'>
       <li className='profile-btn' onClick={() => profileRef.current.click()}>
-        <Link ref={profileRef} to={`/${user.username}`}><span className='fal fa-user-circle dropdown icon'></span>Profile</Link>
+        <Link ref={profileRef} to={`/${user.username}`}><span className='fa-regular fa-circle-user dropdown icon'></span>Profile</Link>
       </li>
       <li className='logout-btn-container' onClick={() => logoutRef.current.click()}>
         <LogoutButton logoutRef={logoutRef}/>

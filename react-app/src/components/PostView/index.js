@@ -49,7 +49,7 @@ export default function PostView({ post, option, closePostView, profileUser, set
               {headerInfo}
             </div>
           </div>
-          <i className='far fa-ellipsis-h post-view'
+          <i className='far fa-solid fa-ellipsis post-view'
             onClick={openMenu}
           />
         </div>

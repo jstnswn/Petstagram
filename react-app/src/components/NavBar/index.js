@@ -16,7 +16,8 @@ export default function NavBar() {
         </NavLink>
         <div className='nav-bar right-section'>
           <NavLink to='/' className='home-icon-container'>
-            <i className='far fa-home-alt home-icon'></i>
+            <i class="fa-solid fa-house home-icon"></i>
+            {/* <i className='far fa-home-alt home-icon'></i> */}
           </NavLink>
           <UploadModal />
           <Notifications />
